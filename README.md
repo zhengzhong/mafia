@@ -1,4 +1,5 @@
-mafia
+Mafia
 =====
 
-mafia the party game
+Mafia the party game.
+
