@@ -23,7 +23,7 @@
 
 + (UIViewController *)controllerForTab
 {
-    return [[[self alloc] initForTab] autorelease];
+    return [[[[self class] alloc] initForTab] autorelease];
 }
 
 
