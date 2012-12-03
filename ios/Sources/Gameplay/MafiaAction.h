@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-11-22.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 
 @class MafiaPlayer;
@@ -37,6 +42,13 @@
 @end // MafiaAction
 
 
+@interface MafiaAssassinAction : MafiaAction
+
+@property (assign, nonatomic) BOOL isChanceUsed;
+
+@end // MafiaAssassinAction
+
+
 @interface MafiaGuardianAction : MafiaAction
 
 @end // MafiaGuardianAction
@@ -60,4 +72,9 @@
 @interface MafiaTraitorAction : MafiaAction
 
 @end // MafiaTraitorAction
+
+
+@interface MafiaUndercoverAction : MafiaAction
+
+@end // MafiaUndercoverAction
 

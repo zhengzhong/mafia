@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-11-22.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import "MafiaRole.h"
 
 @implementation MafiaRole
@@ -53,6 +58,28 @@
 }
 
 
++ (MafiaRole *)assassin
+{
+    static MafiaRole *Assassin = nil;
+    if (Assassin == nil)
+    {
+        Assassin = [[self alloc] initWithName:@"Assassin" alignment:-3];
+    }
+    return Assassin;
+}
+
+
++ (MafiaRole *)guardian;
+{
+    static MafiaRole *Guardian = nil;
+    if (Guardian == nil)
+    {
+        Guardian = [[self alloc] initWithName:@"Guardian" alignment:1];
+    }
+    return Guardian;
+}
+
+
 + (MafiaRole *)killer
 {
     static MafiaRole *Killer = nil;
@@ -86,17 +113,6 @@
 }
 
 
-+ (MafiaRole *)guardian;
-{
-    static MafiaRole *Guardian = nil;
-    if (Guardian == nil)
-    {
-        Guardian = [[self alloc] initWithName:@"Guardian" alignment:1];
-    }
-    return Guardian;
-}
-
-
 + (MafiaRole *)traitor
 {
     static MafiaRole *Traitor = nil;
@@ -105,6 +121,17 @@
         Traitor = [[self alloc] initWithName:@"Traitor" alignment:-2];
     }
     return Traitor;
+}
+
+
++ (MafiaRole *)undercover
+{
+    static MafiaRole *Undercover = nil;
+    if (Undercover == nil)
+    {
+        Undercover = [[self alloc] initWithName:@"Undercover" alignment:-3];
+    }
+    return Undercover;
 }
 
 

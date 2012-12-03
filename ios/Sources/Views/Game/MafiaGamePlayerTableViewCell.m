@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-12-03.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import "MafiaGamePlayerTableViewCell.h"
 
 #import "../../Gameplay/MafiaGameplay.h"
@@ -26,7 +31,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

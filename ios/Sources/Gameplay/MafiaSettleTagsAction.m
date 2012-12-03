@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-11-22.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import "MafiaSettleTagsAction.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
@@ -5,6 +10,8 @@
 
 
 @interface MafiaSettleTagsAction ()
+
+- (NSArray *)settleAssassinTag;
 
 - (NSArray *)settleGuardianTag;
 
@@ -83,6 +90,7 @@
 - (NSArray *)settleTags
 {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
+    [messages addObjectsFromArray:[self settleAssassinTag]];
     [messages addObjectsFromArray:[self settleGuardianTag]];
     [messages addObjectsFromArray:[self settleKillerTag]];
     [messages addObjectsFromArray:[self settleDoctorTag]];
@@ -92,6 +100,34 @@
 
 
 #pragma mark - Private methods
+
+
+- (NSArray *)settleAssassinTag
+{
+    NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
+    // If a player is assassined, he's definitely killed.
+    BOOL isGuardianKilled = NO;
+    for (MafiaPlayer *assassinedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole assassin]])
+    {
+        [messages addObject:[NSString stringWithFormat:@"%@ was assassined.", assassinedPlayer]];
+        [assassinedPlayer markDead];
+        if (assassinedPlayer.role == [MafiaRole guardian])
+        {
+            isGuardianKilled = YES;
+        }
+    }
+    // If guardian is assassined, the guarded player is also dead.
+    // Note: when settling assassin tag, guardian tag has not yet been settled.
+    if (isGuardianKilled)
+    {
+        for (MafiaPlayer *guardedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]])
+        {
+            [messages addObject:[NSString stringWithFormat:@"%@ was guarded and was dead with guardian.", guardedPlayer]];
+            [guardedPlayer markDead];
+        }
+    }
+    return messages;
+}
 
 
 - (NSArray *)settleGuardianTag
@@ -164,11 +200,16 @@
 - (NSArray *)settleKillerTag
 {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
-    // If a player is shot, he's killed unless he's healt.
+    // If a player is shot, he's killed unless his role is assassin or he's healt.
     BOOL isGuardianKilled = NO;
     for (MafiaPlayer *shotPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole killer]])
     {
-        if ([shotPlayer isSelectedByRole:[MafiaRole doctor]])
+        if (shotPlayer.role == [MafiaRole assassin])
+        {
+            [messages addObject:[NSString stringWithFormat:@"%@ dodged the bullet from killer.", shotPlayer]];
+            [shotPlayer unselectFromRole:[MafiaRole killer]];
+        }
+        else if ([shotPlayer isSelectedByRole:[MafiaRole doctor]])
         {
             [messages addObject:[NSString stringWithFormat:@"%@ was shot but healt.", shotPlayer]];
             [shotPlayer unselectFromRole:[MafiaRole killer]];
@@ -185,6 +226,7 @@
         }
     }
     // If guardian is killed, the guarded player is also dead.
+    // Note: when settling killer tag, guardian tag has already been settled.
     if (isGuardianKilled)
     {
         for (MafiaPlayer *player in [self.playerList alivePlayers])
@@ -234,6 +276,7 @@
     {
         [player unselectFromRole:[MafiaRole detective]];
         [player unselectFromRole:[MafiaRole traitor]];
+        [player unselectFromRole:[MafiaRole undercover]];
     }
     return [NSArray arrayWithObjects:nil];
 }

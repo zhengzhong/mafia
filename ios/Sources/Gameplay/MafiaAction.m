@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-11-22.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import "MafiaAction.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
@@ -101,6 +106,7 @@
 - (void)executeOnPlayer:(MafiaPlayer *)player
 {
     NSAssert(!self.isExecuted, @"%@ is already executed.", self);
+    NSAssert([self isPlayerSelectable:player], @"%@ cannot select %@.", [self role], player);
     [player selectByRole:[self role]];
     self.isExecuted = YES;
 }
@@ -114,6 +120,52 @@
 
 @end // MafiaAction
 
+
+@implementation MafiaAssassinAction : MafiaAction
+
+
+@synthesize isChanceUsed = _isChanceUsed;
+
+
+- (id)initWithNumberOfActors:(NSInteger)numberOfActors playerList:(MafiaPlayerList *)playerList
+{
+    if (self = [super initWithNumberOfActors:numberOfActors playerList:playerList])
+    {
+        _isChanceUsed = NO;
+    }
+    return self;
+}
+
+
+- (MafiaRole *)role
+{
+    return [MafiaRole assassin];
+}
+
+
+- (void)executeOnPlayer:(MafiaPlayer *)player
+{
+    NSAssert(!self.isChanceUsed, @"Assassin has already used his chance and cannot execute again.");
+    [super executeOnPlayer:player];
+    self.isChanceUsed = YES;
+}
+
+
+- (NSArray *)endAction
+{
+    // Assassin becomes a killer after using his chance to shoot.
+    if (self.isChanceUsed)
+    {
+        for (MafiaPlayer *assassin in [self actors])
+        {
+            assassin.role = [MafiaRole killer];
+        }
+    }
+    return [NSArray arrayWithObjects:nil];
+}
+
+
+@end // MafiaAssassinAction
 
 
 @implementation MafiaGuardianAction
@@ -192,4 +244,22 @@
 
 
 @end // MafiaTraitorAction
+
+
+@implementation MafiaUndercoverAction : MafiaAction
+
+
+- (MafiaRole *)role
+{
+    return [MafiaRole undercover];
+}
+
+
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
+{
+    return (player.role != [self role]);
+}
+
+
+@end // MafiaUndercoverAction
 

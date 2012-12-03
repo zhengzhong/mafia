@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-11-22.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 
 @interface MafiaRole : NSObject
@@ -11,15 +16,19 @@
 
 + (MafiaRole *)civilian;
 
++ (MafiaRole *)assassin;
+
++ (MafiaRole *)guardian;
+
 + (MafiaRole *)killer;
 
 + (MafiaRole *)detective;
 
 + (MafiaRole *)doctor;
 
-+ (MafiaRole *)guardian;
-
 + (MafiaRole *)traitor;
+
++ (MafiaRole *)undercover;
 
 @end // MafiaRole
 

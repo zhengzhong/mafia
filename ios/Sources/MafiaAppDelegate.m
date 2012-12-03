@@ -1,6 +1,11 @@
+//
+//  Created by ZHENG Zhong on 2012-11-22.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import "MafiaAppDelegate.h"
 
-//#import "Views/Game/MafiaGameController.h"
+#import "Views/Game/MafiaGameSetupController.h"
 #import "Views/Game/MafiaGamePlayController.h"
 
 
@@ -19,34 +24,18 @@
 }
 
 
-/*
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    UIViewController *gameController = [[[MafiaGameController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    self.rootController = [[[UINavigationController alloc] initWithRootViewController:gameController] autorelease];
-    self.window.rootViewController = self.rootController;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
-}
-*/
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.rootController = [[[UITabBarController alloc] init] autorelease];
     self.rootController.viewControllers = [NSArray arrayWithObjects:
-                                           [MafiaGamePlayController controllerForTab],
+                                           [MafiaGameSetupController controllerForTab],
                                            nil];
     self.window.rootViewController = self.rootController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
-
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -62,15 +51,18 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
+
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

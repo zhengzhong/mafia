@@ -1,3 +1,8 @@
+//
+//  Created by ZHENG Zhong on 2012-12-03.
+//  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
+//
+
 #import "MafiaGamePlayController.h"
 #import "MafiaGamePlayerTableViewCell.h"
 
@@ -13,7 +18,6 @@
 
 
 @synthesize dayNightImageView = _dayNightImageView;
-@synthesize roundLabel = _roundLabel;
 @synthesize actionLabel = _actionLabel;
 @synthesize playersTableView = _playersTableView;
 
@@ -21,16 +25,15 @@
 @synthesize selectedPlayers = _selectedPlayers;
 
 
-+ (UIViewController *)controllerForTab
++ (UIViewController *)controllerWithGameSetup:(MafiaGameSetup *)gameSetup
 {
-    return [[[self alloc] initForTab] autorelease];
+    return [[[self alloc] initWithGameSetup:gameSetup] autorelease];
 }
 
 
 - (void)dealloc
 {
     [_dayNightImageView release];
-    [_roundLabel release];
     [_actionLabel release];
     [_playersTableView release];
     [_game release];
@@ -39,25 +42,13 @@
 }
 
 
-- (id)initForTab
+- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup
 {
-    if (self = [self initWithNibName:@"MafiaGamePlayController" bundle:nil])
+    if (self = [super initWithNibName:@"MafiaGamePlayController" bundle:nil])
     {
-        self.title = @"Game";
-        self.tabBarItem.image = [UIImage imageNamed:@"GameIcon.png"]; // TODO:
-    }
-    return self;
-}
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
-    {
-        NSArray *playerNames = [NSArray arrayWithObjects:
-                                @"雯雯", @"狼尼", @"小何", @"大叔", @"青青", @"老妖", nil];
-        _game = [[MafiaGame alloc] initWithPlayerNames:playerNames isTwoHanded:YES];
+        _game = [[MafiaGame alloc] initWithGameSetup:gameSetup];
         _selectedPlayers = [[NSMutableArray alloc] initWithCapacity:2];
+        self.title = @"Game";
     }
     return self;
 }
@@ -66,8 +57,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // TODO: Can't this be done in XIB?
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"game_background.png"]];
+    [self.navigationItem setHidesBackButton:YES animated:YES];
     [self.game reset];
     [self reloadData];
 }
@@ -97,12 +87,12 @@
     }
     if (self.game.winner)
     {
-        self.roundLabel.text = @"Game Over";
+        self.title = @"Game Over";
         self.actionLabel.text = [NSString stringWithFormat:@"%@ Wins!", self.game.winner];
     }
     else
     {
-        self.roundLabel.text = [NSString stringWithFormat:@"Round %d", self.game.round];
+        self.title = [NSString stringWithFormat:@"Game: Round %d", self.game.round];
         if (currentAction.isAssigned)
         {
             self.actionLabel.text = [NSString stringWithFormat:@"%@:", currentAction];
@@ -169,45 +159,6 @@
     return 52;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Table view delegate
 
@@ -249,6 +200,20 @@
         [self.selectedPlayers removeObjectAtIndex:0];
     }
     [self reloadData];
+}
+
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    MafiaPlayer *selectedPlayer = [self.game.playerList playerAtIndex:indexPath.row];
+    // TODO: push player detail controller.
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Player Details"
+                                                    message:[NSString stringWithFormat:@"You selected player: %@", selectedPlayer]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Won't happen again"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 
@@ -317,9 +282,19 @@
 }
 
 
+- (IBAction)playerAccessoryButtonTapped:(id)sender
+{
+    UIButton *accessoryButton = (UIButton *) sender;
+    UITableViewCell *cell = (UITableViewCell *) accessoryButton.superview;
+    NSIndexPath *indexPath = [self.playersTableView indexPathForCell:cell];
+    [self tableView:self.playersTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+}
+
+
 #pragma mark - Private methods
 
 
+// TODO: fix this for assassin (who can select 0 or 1 player).
 - (NSInteger)numberOfChoicesForActon:(MafiaAction *)action
 {
     if (!action.isAssigned)
