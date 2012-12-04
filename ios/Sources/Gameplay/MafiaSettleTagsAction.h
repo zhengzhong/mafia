@@ -14,7 +14,7 @@
 
 + (id)actionWithPlayerList:(MafiaPlayerList *)playerList;
 
-- (NSArray *)settleTags;
+- (MafiaInformation *)settleTags;
 
 @end // MafiaSettleTagsAction
 

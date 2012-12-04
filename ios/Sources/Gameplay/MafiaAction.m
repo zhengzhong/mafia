@@ -4,6 +4,7 @@
 //
 
 #import "MafiaAction.h"
+#import "MafiaInformation.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
@@ -112,9 +113,9 @@
 }
 
 
-- (NSArray *)endAction
+- (MafiaInformation *)endAction
 {
-    return [NSArray arrayWithObjects:nil];
+    return nil;
 }
 
 
@@ -151,7 +152,7 @@
 }
 
 
-- (NSArray *)endAction
+- (MafiaInformation *)endAction
 {
     // Assassin becomes a killer after using his chance to shoot.
     if (self.isChanceUsed)
@@ -161,7 +162,7 @@
             assassin.role = [MafiaRole killer];
         }
     }
-    return [NSArray arrayWithObjects:nil];
+    return nil;
 }
 
 
@@ -213,6 +214,21 @@
 }
 
 
+- (MafiaInformation *)endAction
+{
+    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:[self role]];
+    BOOL isPositive = NO;
+    for (MafiaPlayer *player in introspectedPlayers)
+    {
+        if (player.role == [MafiaRole killer])
+        {
+            isPositive = YES;
+        }
+    }
+    return [MafiaInformation thumbInformationWithIndicator:isPositive];
+}
+
+
 @end // MafiaDetectiveAction
 
 
@@ -243,6 +259,21 @@
 }
 
 
+- (MafiaInformation *)endAction
+{
+    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:[self role]];
+    BOOL isPositive = NO;
+    for (MafiaPlayer *player in introspectedPlayers)
+    {
+        if (player.role == [MafiaRole killer] || player.role == [MafiaRole assassin])
+        {
+            isPositive = YES;
+        }
+    }
+    return [MafiaInformation thumbInformationWithIndicator:isPositive];
+}
+
+
 @end // MafiaTraitorAction
 
 
@@ -258,6 +289,21 @@
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player
 {
     return (player.role != [self role]);
+}
+
+
+- (MafiaInformation *)endAction
+{
+    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:[self role]];
+    BOOL isPositive = NO;
+    for (MafiaPlayer *player in introspectedPlayers)
+    {
+        if (player.role == [MafiaRole killer] || player.role == [MafiaRole assassin])
+        {
+            isPositive = YES;
+        }
+    }
+    return [MafiaInformation thumbInformationWithIndicator:isPositive];
 }
 
 

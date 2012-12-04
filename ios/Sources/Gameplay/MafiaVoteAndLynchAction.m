@@ -4,6 +4,7 @@
 //
 
 #import "MafiaVoteAndLynchAction.h"
+#import "MafiaInformation.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 
@@ -60,32 +61,32 @@
 }
 
 
-- (NSArray *)endAction
+- (MafiaInformation *)endAction
 {
     return [self settleVoteAndLynch];
 }
 
 
-- (NSArray *)settleVoteAndLynch
+- (MafiaInformation *)settleVoteAndLynch
 {
-    NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
+    MafiaInformation *information = [MafiaInformation announcementInformation];
     for (MafiaPlayer *player in [self.playerList alivePlayers])
     {
         if (player.isVoted)
         {
             if (player.isJustGuarded)
             {
-                [messages addObject:[NSString stringWithFormat:@"%@ was voted but guarded.", player]];
+                information.message = [NSString stringWithFormat:@"%@ was voted but guarded.", player.name];
                 player.isVoted = NO;
             }
             else
             {
-                [messages addObject:[NSString stringWithFormat:@"%@ was voted and lynched.", player]];
+                information.message = [NSString stringWithFormat:@"%@ was voted and lynched.", player.name];
                 [player markDead];
             }
         }
     }
-    return messages;
+    return information;
 }
 
 

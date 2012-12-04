@@ -5,6 +5,7 @@
 
 #import "MafiaGamePlayController.h"
 #import "MafiaGamePlayerTableViewCell.h"
+#import "MafiaGameInformationController.h"
 
 #import "../../Gameplay/MafiaGameplay.h"
 
@@ -20,7 +21,7 @@
 @synthesize dayNightImageView = _dayNightImageView;
 @synthesize actionLabel = _actionLabel;
 @synthesize playersTableView = _playersTableView;
-
+@synthesize informationController = _informationController;
 @synthesize game = _game;
 @synthesize selectedPlayers = _selectedPlayers;
 
@@ -36,6 +37,7 @@
     [_dayNightImageView release];
     [_actionLabel release];
     [_playersTableView release];
+    [_informationController release];
     [_game release];
     [_selectedPlayers release];
     [super dealloc];
@@ -46,6 +48,7 @@
 {
     if (self = [super initWithNibName:@"MafiaGamePlayController" bundle:nil])
     {
+        _informationController = [[MafiaGameInformationController alloc] initWithDelegate:self];
         _game = [[MafiaGame alloc] initWithGameSetup:gameSetup];
         _selectedPlayers = [[NSMutableArray alloc] initWithCapacity:2];
         self.title = @"Game";
@@ -234,7 +237,7 @@
     if ([self.selectedPlayers count] == numberOfChoices)
     {
         // Assign role to player(s) or execute the current action.
-        NSArray *messages = nil;
+        MafiaInformation *information = nil;
         if (!currentAction.isAssigned)
         {
             [currentAction assignRoleToPlayers:self.selectedPlayers];
@@ -249,22 +252,15 @@
                     [currentAction executeOnPlayer:player];
                 }
             }
-            messages = [currentAction endAction];
+            information = [currentAction endAction];
             [self.game continueToNextAction];
         }
         // Clear the selected players.
         [self.selectedPlayers removeAllObjects];
-        // Display alert as necessary.
-        if (messages != nil && [messages count] > 0)
+        // Display information as necessary.
+        if (information != nil)
         {
-            NSString *messageString = [messages componentsJoinedByString:@"\n"];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Messages"
-                                                            message:messageString
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            [alert release];
+            [self.informationController presentInformation:information inSuperview:self.view];
         }
     }
     else
@@ -288,6 +284,15 @@
     UITableViewCell *cell = (UITableViewCell *) accessoryButton.superview;
     NSIndexPath *indexPath = [self.playersTableView indexPathForCell:cell];
     [self tableView:self.playersTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+}
+
+
+#pragma mark - MafiaGameInformationDelegate
+
+
+- (void)informationControllerDidComplete:(MafiaGameInformationController *)controller
+{
+    [self.informationController dismissInformationFromSuperview];
 }
 
 

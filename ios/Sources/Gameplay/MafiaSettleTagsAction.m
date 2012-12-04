@@ -4,6 +4,7 @@
 //
 
 #import "MafiaSettleTagsAction.h"
+#import "MafiaInformation.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
@@ -11,13 +12,13 @@
 
 @interface MafiaSettleTagsAction ()
 
-- (NSArray *)settleAssassinTag;
+- (NSArray *)settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames;
 
 - (NSArray *)settleGuardianTag;
 
-- (NSArray *)settleKillerTag;
+- (NSArray *)settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames;
 
-- (NSArray *)settleDoctorTag;
+- (NSArray *)settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames;
 
 - (NSArray *)settleIntrospectionTags;
 
@@ -81,28 +82,45 @@
 }
 
 
-- (NSArray *)endAction
+- (MafiaInformation *)endAction
 {
     return [self settleTags];
 }
 
 
-- (NSArray *)settleTags
+- (MafiaInformation *)settleTags
 {
-    NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
-    [messages addObjectsFromArray:[self settleAssassinTag]];
-    [messages addObjectsFromArray:[self settleGuardianTag]];
-    [messages addObjectsFromArray:[self settleKillerTag]];
-    [messages addObjectsFromArray:[self settleDoctorTag]];
-    [messages addObjectsFromArray:[self settleIntrospectionTags]];
-    return messages;
+    MafiaInformation *information = [MafiaInformation announcementInformation];
+    // Settle tags and collect information details.
+    NSMutableArray *deadPlayerNames = [NSMutableArray arrayWithCapacity:4];
+    [information addDetails:[self settleAssassinTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self settleGuardianTag]];
+    [information addDetails:[self settleKillerTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self settleDoctorTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self settleIntrospectionTags]];
+    // Construct information message.
+    if ([deadPlayerNames count] == 0)
+    {
+        information.message = @"Nobody was dead.";
+    }
+    else if ([deadPlayerNames count] == 1)
+    {
+        NSString *deadPlayerName = [deadPlayerNames objectAtIndex:0];
+        information.message = [NSString stringWithFormat:@"%@ was dead.", deadPlayerName];
+    }
+    else
+    {
+        NSString *deadPlayerNamesString = [deadPlayerNames componentsJoinedByString:@", "];
+        information.message = [NSString stringWithFormat:@"%@ were dead.", deadPlayerNamesString];
+    }
+    return information;
 }
 
 
 #pragma mark - Private methods
 
 
-- (NSArray *)settleAssassinTag
+- (NSArray *)settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames
 {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If a player is assassined, he's definitely killed.
@@ -111,6 +129,7 @@
     {
         [messages addObject:[NSString stringWithFormat:@"%@ was assassined.", assassinedPlayer]];
         [assassinedPlayer markDead];
+        [deadPlayerNames addObject:assassinedPlayer.name];
         if (assassinedPlayer.role == [MafiaRole guardian])
         {
             isGuardianKilled = YES;
@@ -124,6 +143,7 @@
         {
             [messages addObject:[NSString stringWithFormat:@"%@ was guarded and was dead with guardian.", guardedPlayer]];
             [guardedPlayer markDead];
+            [deadPlayerNames addObject:guardedPlayer.name];
         }
     }
     return messages;
@@ -197,7 +217,7 @@
 }
 
 
-- (NSArray *)settleKillerTag
+- (NSArray *)settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames
 {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If a player is shot, he's killed unless his role is assassin or he's healt.
@@ -219,6 +239,7 @@
         {
             [messages addObject:[NSString stringWithFormat:@"%@ was shot and killed.", shotPlayer]];
             [shotPlayer markDead];
+            [deadPlayerNames addObject:shotPlayer.name];
             if (shotPlayer.role == [MafiaRole guardian])
             {
                 isGuardianKilled = YES;
@@ -235,6 +256,7 @@
             {
                 [messages addObject:[NSString stringWithFormat:@"%@ was guarded and was dead with guardian.", player]];
                 [player markDead];
+                [deadPlayerNames addObject:player.name];
             }
         }
     }
@@ -242,7 +264,7 @@
 }
 
 
-- (NSArray *)settleDoctorTag
+- (NSArray *)settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames
 {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If player is misdiagnosed twice, he's killed.
@@ -258,6 +280,7 @@
         {
             [messages addObject:[NSString stringWithFormat:@"%@ was misdiagnosed twice and killed.", healtPlayer]];
             [healtPlayer markDead];
+            [deadPlayerNames addObject:healtPlayer.name];
         }
         else
         {

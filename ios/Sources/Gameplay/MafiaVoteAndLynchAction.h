@@ -14,7 +14,7 @@
 
 + (id)actionWithPlayerList:(MafiaPlayerList *)playerList;
 
-- (NSArray *)settleVoteAndLynch;
+- (MafiaInformation *)settleVoteAndLynch;
 
 @end // MafiaVoteAndLynchAction
 

@@ -5,17 +5,19 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MafiaGameInformationController.h"
+
 
 @class MafiaGame;
 @class MafiaGameSetup;
 
 
-@interface MafiaGamePlayController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MafiaGamePlayController : UIViewController <UITableViewDelegate, UITableViewDataSource, MafiaGameInformationDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *dayNightImageView;
 @property (retain, nonatomic) IBOutlet UILabel *actionLabel;
 @property (retain, nonatomic) IBOutlet UITableView *playersTableView;
-
+@property (retain, nonatomic) MafiaGameInformationController *informationController;
 @property (retain, nonatomic) MafiaGame *game;
 @property (retain, nonatomic) NSMutableArray *selectedPlayers;
 

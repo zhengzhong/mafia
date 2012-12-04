@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class MafiaInformation;
 @class MafiaPlayer;
 @class MafiaPlayerList;
 @class MafiaRole;
@@ -37,7 +38,7 @@
 
 - (void)executeOnPlayer:(MafiaPlayer *)player;
 
-- (NSArray *)endAction;
+- (MafiaInformation *)endAction;
 
 @end // MafiaAction
 
