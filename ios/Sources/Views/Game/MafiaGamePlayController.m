@@ -333,8 +333,9 @@
 {
     if (buttonIndex == [actionSheet destructiveButtonIndex])
     {
-        [self.game reset];
-        [self reloadData];
+        [self.navigationController popViewControllerAnimated:YES];
+        // [self.game reset];
+        // [self reloadData];
     }
 }
 
