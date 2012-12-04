@@ -12,10 +12,12 @@
 @class MafiaGameSetup;
 
 
-@interface MafiaGamePlayController : UIViewController <UITableViewDelegate, UITableViewDataSource, MafiaGameInformationDelegate>
+@interface MafiaGamePlayController : UIViewController
+<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MafiaGameInformationDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *dayNightImageView;
 @property (retain, nonatomic) IBOutlet UILabel *actionLabel;
+@property (retain, nonatomic) IBOutlet UILabel *promptLabel;
 @property (retain, nonatomic) IBOutlet UITableView *playersTableView;
 @property (retain, nonatomic) MafiaGameInformationController *informationController;
 @property (retain, nonatomic) MafiaGame *game;
@@ -27,9 +29,9 @@
 
 - (void)reloadData;
 
-- (IBAction)resetGame:(id)sender;
+- (void)confirmResetGame:(id)sender;
 
-- (IBAction)continueToNext:(id)sender;
+- (void)continueToNextAction:(id)sender;
 
 - (IBAction)playerAccessoryButtonTapped:(id)sender;
 

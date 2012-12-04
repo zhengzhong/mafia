@@ -20,6 +20,7 @@
 
 @synthesize dayNightImageView = _dayNightImageView;
 @synthesize actionLabel = _actionLabel;
+@synthesize promptLabel = _promptLabel;
 @synthesize playersTableView = _playersTableView;
 @synthesize informationController = _informationController;
 @synthesize game = _game;
@@ -36,6 +37,7 @@
 {
     [_dayNightImageView release];
     [_actionLabel release];
+    [_promptLabel release];
     [_playersTableView release];
     [_informationController release];
     [_game release];
@@ -60,6 +62,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                                   target:self
+                                   action:@selector(continueToNextAction:)];
+    self.navigationItem.rightBarButtonItem = nextButton;
+    [nextButton release];
+    UIBarButtonItem *resetButton = [[UIBarButtonItem alloc]
+                                    initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
+                                    target:self
+                                    action:@selector(confirmResetGame:)];
+    self.navigationItem.leftBarButtonItem = resetButton;
+    [resetButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
     [self.game reset];
     [self reloadData];
@@ -92,17 +106,29 @@
     {
         self.title = @"Game Over";
         self.actionLabel.text = [NSString stringWithFormat:@"%@ Wins!", self.game.winner];
+        self.promptLabel.text = nil;
     }
     else
     {
-        self.title = [NSString stringWithFormat:@"Game: Round %d", self.game.round];
+        self.title = [NSString stringWithFormat:@"Round %d", self.game.round];
         if (currentAction.isAssigned)
         {
             self.actionLabel.text = [NSString stringWithFormat:@"%@:", currentAction];
+            if ([[currentAction actors] count] == 0)
+            {
+                self.promptLabel.text = [NSString stringWithFormat:@"%@ not available.", [currentAction role]];
+            }
+            else
+            {
+                NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
+                self.promptLabel.text = [NSString stringWithFormat:@"Select %d player(s).", numberOfChoices];
+            }
         }
         else
         {
             self.actionLabel.text = [NSString stringWithFormat:@"Assign %@:", currentRole];
+            NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
+            self.promptLabel.text = [NSString stringWithFormat:@"Select %d player(s).", numberOfChoices];
         }
     }
     [self.playersTableView reloadData];
@@ -220,17 +246,24 @@
 }
 
 
-#pragma mark - IBAction methods
+#pragma mark - actions for navigation bar button items
 
 
-- (IBAction)resetGame:(id)sender
+- (void)confirmResetGame:(id)sender
 {
-    [self.game reset];
-    [self reloadData];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"Are you sure to reset game?"
+                                  delegate:self
+                                  cancelButtonTitle:@"No. Take me back."
+                                  destructiveButtonTitle:@"Yes. Reset the game!"
+                                  otherButtonTitles:nil];
+    // See: http://stackoverflow.com/questions/4447563/last-button-of-actionsheet-does-not-get-clicked
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    [actionSheet release];
 }
 
 
-- (IBAction)continueToNext:(id)sender
+- (void)continueToNextAction:(id)sender
 {
     MafiaAction *currentAction = [self.game currentAction];
     NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
@@ -278,12 +311,28 @@
 }
 
 
+#pragma mark - IBAction for cell accessory button
+
+
 - (IBAction)playerAccessoryButtonTapped:(id)sender
 {
     UIButton *accessoryButton = (UIButton *) sender;
     UITableViewCell *cell = (UITableViewCell *) accessoryButton.superview;
     NSIndexPath *indexPath = [self.playersTableView indexPathForCell:cell];
     [self tableView:self.playersTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+}
+
+
+#pragma mark - UIActionSheetDelegate (Reset Game)
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == [actionSheet destructiveButtonIndex])
+    {
+        [self.game reset];
+        [self reloadData];
+    }
 }
 
 
