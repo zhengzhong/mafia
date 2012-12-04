@@ -120,15 +120,17 @@
             }
             else
             {
-                NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
-                self.promptLabel.text = [NSString stringWithFormat:@"Select %d player(s).", numberOfChoices];
+                MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
+                NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
+                self.promptLabel.text = [NSString stringWithFormat:@"Select %@.", numberOfChoicesString];
             }
         }
         else
         {
             self.actionLabel.text = [NSString stringWithFormat:@"Assign %@:", currentRole];
-            NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
-            self.promptLabel.text = [NSString stringWithFormat:@"Select %d player(s).", numberOfChoices];
+            MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
+            NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
+            self.promptLabel.text = [NSString stringWithFormat:@"Select %@.", numberOfChoicesString];
         }
     }
     [self.playersTableView reloadData];
@@ -214,7 +216,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MafiaAction *currentAction = [self.game currentAction];
-    NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
+    MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
     MafiaPlayer *selectedPlayer = [self.game.playerList playerAtIndex:indexPath.row];
     if ([self.selectedPlayers containsObject:selectedPlayer])
     {
@@ -224,7 +226,7 @@
     {
         [self.selectedPlayers addObject:selectedPlayer];
     }
-    while ([self.selectedPlayers count] > numberOfChoices)
+    while ([self.selectedPlayers count] > numberOfChoices.maxValue)
     {
         [self.selectedPlayers removeObjectAtIndex:0];
     }
@@ -266,8 +268,8 @@
 - (void)continueToNextAction:(id)sender
 {
     MafiaAction *currentAction = [self.game currentAction];
-    NSInteger numberOfChoices = [self numberOfChoicesForActon:currentAction];
-    if ([self.selectedPlayers count] == numberOfChoices)
+    MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
+    if ([numberOfChoices isNumberInRange:[self.selectedPlayers count]])
     {
         // Assign role to player(s) or execute the current action.
         MafiaInformation *information = nil;
@@ -298,9 +300,10 @@
     }
     else
     {
-        NSString *messageString = [NSString stringWithFormat:@"You need to select %d player(s).", numberOfChoices];
+        NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
+        NSString *message = [NSString stringWithFormat:@"You must select %@", numberOfChoicesString];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Messages"
-                                                        message:messageString
+                                                        message:message
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -348,20 +351,19 @@
 #pragma mark - Private methods
 
 
-// TODO: fix this for assassin (who can select 0 or 1 player).
-- (NSInteger)numberOfChoicesForActon:(MafiaAction *)action
+- (MafiaNumberRange *)numberOfChoicesForActon:(MafiaAction *)action
 {
     if (!action.isAssigned)
     {
-        return action.numberOfActors;
+        return [MafiaNumberRange numberRangeWithSingleValue:action.numberOfActors];
     }
     else if ([action isExecutable])
     {
-        return 1;
+        return [action numberOfChoices];
     }
     else
     {
-        return 0;
+        return [MafiaNumberRange numberRangeWithSingleValue:0];
     }
 }
 

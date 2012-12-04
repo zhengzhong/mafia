@@ -5,10 +5,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MafiaAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MafiaAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UITabBarController *tabBarController;
 
-@property (strong, nonatomic) UITabBarController *rootController;
+@end // MafiaAppDelegate
 
-@end

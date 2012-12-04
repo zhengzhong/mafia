@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 @class MafiaInformation;
+@class MafiaNumberRange;
 @class MafiaPlayer;
 @class MafiaPlayerList;
 @class MafiaRole;
@@ -31,6 +32,8 @@
 - (NSArray *)actors;
 
 - (BOOL)isExecutable;
+
+- (MafiaNumberRange *)numberOfChoices;
 
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player;
 

@@ -7,6 +7,7 @@
 #import "MafiaGame.h"
 #import "MafiaGameSetup.h"
 #import "MafiaInformation.h"
+#import "MafiaNumberRange.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"

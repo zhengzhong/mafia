@@ -13,13 +13,13 @@
 
 
 @synthesize window = _window;
-@synthesize rootController = _rootController;
+@synthesize tabBarController = _tabBarController;
 
 
 - (void)dealloc
 {
     [_window release];
-    [_rootController release];
+    [_tabBarController release];
     [super dealloc];
 }
 
@@ -27,11 +27,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.rootController = [[[UITabBarController alloc] init] autorelease];
-    self.rootController.viewControllers = [NSArray arrayWithObjects:
-                                           [MafiaGameSetupController controllerForTab],
-                                           nil];
-    self.window.rootViewController = self.rootController;
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.tabBarController.delegate = self;
+    self.tabBarController.viewControllers = @[
+        [MafiaGameSetupController controllerForTab]
+    ];
+    self.window.rootViewController = self.tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -67,6 +68,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+#pragma mark - UITabBarControllerDelegate
+
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    // If user tapped a tab bar button whose associated view controller is the currently selected one, do nothing.
+    // When selected view controller is a navigation controller, this prevents it from popping to root view controller.
+    return (tabBarController.selectedViewController != viewController);
 }
 
 

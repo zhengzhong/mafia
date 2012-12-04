@@ -5,6 +5,7 @@
 
 #import "MafiaAction.h"
 #import "MafiaInformation.h"
+#import "MafiaNumberRange.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
@@ -92,6 +93,13 @@
 }
 
 
+- (MafiaNumberRange *)numberOfChoices
+{
+    // By default, in each action, 1 player can be selected.
+    return [MafiaNumberRange numberRangeWithSingleValue:1];
+}
+
+
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player
 {
     return !player.isDead;
@@ -144,6 +152,12 @@
 }
 
 
+- (MafiaNumberRange *)numberOfChoices
+{
+    return [MafiaNumberRange numberRangeWithMinValue:0 maxValue:1];
+}
+
+
 - (void)executeOnPlayer:(MafiaPlayer *)player
 {
     NSAssert(!self.isChanceUsed, @"Assassin has already used his chance and cannot execute again.");
@@ -155,14 +169,17 @@
 - (MafiaInformation *)endAction
 {
     // Assassin becomes a killer after using his chance to shoot.
+    MafiaInformation *information = nil;
     if (self.isChanceUsed)
     {
         for (MafiaPlayer *assassin in [self actors])
         {
             assassin.role = [MafiaRole killer];
         }
+        information = [MafiaInformation announcementInformation];
+        information.message = @"Assassin used his chance to shoot and became killer.";
     }
-    return nil;
+    return information;
 }
 
 

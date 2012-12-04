@@ -69,6 +69,7 @@
 		41E9ACA01660D5F6006AC42D /* MafiaGameSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E9AC9F1660D5F6006AC42D /* MafiaGameSetupController.m */; };
 		41E9ACAD166174CC006AC42D /* MafiaGameSetupAddPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E9ACAB166174CC006AC42D /* MafiaGameSetupAddPlayerController.m */; };
 		41E9ACAE166174CC006AC42D /* MafiaGameSetupAddPlayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41E9ACAC166174CC006AC42D /* MafiaGameSetupAddPlayerController.xib */; };
+		41F88FBF166E3B4100DCC050 /* MafiaNumberRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F88FBE166E3B4100DCC050 /* MafiaNumberRange.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +156,8 @@
 		41E9ACAA166174CC006AC42D /* MafiaGameSetupAddPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameSetupAddPlayerController.h; sourceTree = "<group>"; };
 		41E9ACAB166174CC006AC42D /* MafiaGameSetupAddPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameSetupAddPlayerController.m; sourceTree = "<group>"; };
 		41E9ACAC166174CC006AC42D /* MafiaGameSetupAddPlayerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MafiaGameSetupAddPlayerController.xib; sourceTree = "<group>"; };
+		41F88FBD166E3B4100DCC050 /* MafiaNumberRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaNumberRange.h; sourceTree = "<group>"; };
+		41F88FBE166E3B4100DCC050 /* MafiaNumberRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaNumberRange.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +317,8 @@
 				415CF8801660CE8B00CDB5B2 /* MafiaGameSetup.m */,
 				416E66BB166D03200062AE57 /* MafiaInformation.h */,
 				416E66BC166D03200062AE57 /* MafiaInformation.m */,
+				41F88FBD166E3B4100DCC050 /* MafiaNumberRange.h */,
+				41F88FBE166E3B4100DCC050 /* MafiaNumberRange.m */,
 				4147AF7F1657D9D000B6AE49 /* MafiaPlayer.h */,
 				4147AF801657D9D000B6AE49 /* MafiaPlayer.m */,
 				4147AF811657D9D000B6AE49 /* MafiaPlayerList.h */,
@@ -469,6 +474,7 @@
 				4197E9C9166CBA5000D01D34 /* MafiaGameSetupRoleController.m in Sources */,
 				416E66BD166D03210062AE57 /* MafiaInformation.m in Sources */,
 				416E66C0166D036D0062AE57 /* MafiaGameInformationController.m in Sources */,
+				41F88FBF166E3B4100DCC050 /* MafiaNumberRange.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

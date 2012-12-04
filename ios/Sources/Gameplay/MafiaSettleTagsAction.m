@@ -5,6 +5,7 @@
 
 #import "MafiaSettleTagsAction.h"
 #import "MafiaInformation.h"
+#import "MafiaNumberRange.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
@@ -60,6 +61,12 @@
 - (NSArray *)actors
 {
     return [NSArray arrayWithObjects:nil];
+}
+
+
+- (MafiaNumberRange *)numberOfChoices
+{
+    return [MafiaNumberRange numberRangeWithSingleValue:0];
 }
 
 
