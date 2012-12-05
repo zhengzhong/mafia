@@ -135,5 +135,20 @@
 }
 
 
++ (NSArray *)roles
+{
+    return @[
+        [self civilian],
+        [self assassin],
+        [self guardian],
+        [self killer],
+        [self detective],
+        [self doctor],
+        [self traitor],
+        [self undercover]
+    ];
+}
+
+
 @end // MafiaRole
 

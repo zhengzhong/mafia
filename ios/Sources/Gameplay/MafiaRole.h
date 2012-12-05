@@ -30,5 +30,7 @@
 
 + (MafiaRole *)undercover;
 
++ (NSArray *)roles;
+
 @end // MafiaRole
 

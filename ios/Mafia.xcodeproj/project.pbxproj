@@ -71,6 +71,9 @@
 		41B3250B166F571500E9D509 /* MafiaHTMLPageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250A166F571500E9D509 /* MafiaHTMLPageController.xib */; };
 		41B3250F166F579E00E9D509 /* gameplay.zh.html in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250D166F579E00E9D509 /* gameplay.zh.html */; };
 		41B32510166F579E00E9D509 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250E166F579E00E9D509 /* style.css */; };
+		41B32513166F5FE600E9D509 /* MafiaGamePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B32512166F5FE600E9D509 /* MafiaGamePlayerController.m */; };
+		41B32515166F70C700E9D509 /* is_dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B32514166F70C700E9D509 /* is_dead.png */; };
+		41B32518166F7F0200E9D509 /* MafiaGamePlayerRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B32517166F7F0200E9D509 /* MafiaGamePlayerRoleController.m */; };
 		41B5A623166E120B009F8CAE /* information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B5A622166E120B009F8CAE /* information_background.png */; };
 		41E9AC9C1660D542006AC42D /* tag_assassin.png in Resources */ = {isa = PBXBuildFile; fileRef = 41E9AC9B1660D542006AC42D /* tag_assassin.png */; };
 		41E9ACA01660D5F6006AC42D /* MafiaGameSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E9AC9F1660D5F6006AC42D /* MafiaGameSetupController.m */; };
@@ -166,6 +169,11 @@
 		41B3250A166F571500E9D509 /* MafiaHTMLPageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MafiaHTMLPageController.xib; sourceTree = "<group>"; };
 		41B3250D166F579E00E9D509 /* gameplay.zh.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = gameplay.zh.html; sourceTree = "<group>"; };
 		41B3250E166F579E00E9D509 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		41B32511166F5FE600E9D509 /* MafiaGamePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGamePlayerController.h; sourceTree = "<group>"; };
+		41B32512166F5FE600E9D509 /* MafiaGamePlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGamePlayerController.m; sourceTree = "<group>"; };
+		41B32514166F70C700E9D509 /* is_dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_dead.png; sourceTree = "<group>"; };
+		41B32516166F7F0200E9D509 /* MafiaGamePlayerRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGamePlayerRoleController.h; sourceTree = "<group>"; };
+		41B32517166F7F0200E9D509 /* MafiaGamePlayerRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGamePlayerRoleController.m; sourceTree = "<group>"; };
 		41B5A622166E120B009F8CAE /* information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_background.png; sourceTree = "<group>"; };
 		41E9AC9B1660D542006AC42D /* tag_assassin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_assassin.png; sourceTree = "<group>"; };
 		41E9AC9E1660D5F6006AC42D /* MafiaGameSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameSetupController.h; sourceTree = "<group>"; };
@@ -209,6 +217,10 @@
 				415CF836165D6B8B00CDB5B2 /* MafiaGamePlayerTableViewCell.h */,
 				415CF837165D6B8B00CDB5B2 /* MafiaGamePlayerTableViewCell.m */,
 				415CF838165D6B8B00CDB5B2 /* MafiaGamePlayerTableViewCell.xib */,
+				41B32511166F5FE600E9D509 /* MafiaGamePlayerController.h */,
+				41B32512166F5FE600E9D509 /* MafiaGamePlayerController.m */,
+				41B32516166F7F0200E9D509 /* MafiaGamePlayerRoleController.h */,
+				41B32517166F7F0200E9D509 /* MafiaGamePlayerRoleController.m */,
 				416E66BE166D036C0062AE57 /* MafiaGameInformationController.h */,
 				416E66BF166D036D0062AE57 /* MafiaGameInformationController.m */,
 				416E66C1166D03F60062AE57 /* MafiaGameInformationController.xib */,
@@ -226,6 +238,7 @@
 				41B5A622166E120B009F8CAE /* information_background.png */,
 				416E66CF166D2C610062AE57 /* information_negative.png */,
 				416E66D0166D2C610062AE57 /* information_positive.png */,
+				41B32514166F70C700E9D509 /* is_dead.png */,
 				415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */,
 				415CF841165D6EBA00CDB5B2 /* is_misdiagnosed.png */,
 				415CF842165D6EBA00CDB5B2 /* is_unguardable.png */,
@@ -493,6 +506,7 @@
 				41B3250B166F571500E9D509 /* MafiaHTMLPageController.xib in Resources */,
 				41B3250F166F579E00E9D509 /* gameplay.zh.html in Resources */,
 				41B32510166F579E00E9D509 /* style.css in Resources */,
+				41B32515166F70C700E9D509 /* is_dead.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +539,8 @@
 				41B32501166F4BE900E9D509 /* MafiaHTMLPageController.m in Sources */,
 				41B32504166F4CFC00E9D509 /* MafiaGuideController.m in Sources */,
 				41B32507166F4FFF00E9D509 /* MafiaHTMLPage.m in Sources */,
+				41B32513166F5FE600E9D509 /* MafiaGamePlayerController.m in Sources */,
+				41B32518166F7F0200E9D509 /* MafiaGamePlayerRoleController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

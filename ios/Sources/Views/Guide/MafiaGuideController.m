@@ -8,11 +8,6 @@
 #import "MafiaHTMLPageController.h"
 
 
-@interface MafiaGuideController ()
-
-@end
-
-
 @implementation MafiaGuideController
 
 

@@ -5,6 +5,7 @@
 
 #import "MafiaGamePlayController.h"
 #import "MafiaGamePlayerTableViewCell.h"
+#import "MafiaGamePlayerController.h"
 #import "MafiaGameInformationController.h"
 
 #import "../../Gameplay/MafiaGameplay.h"
@@ -244,15 +245,9 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    MafiaPlayer *selectedPlayer = [self.game.playerList playerAtIndex:indexPath.row];
-    // TODO: push player detail controller.
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Player Details"
-                                                    message:[NSString stringWithFormat:@"You selected player: %@", selectedPlayer]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Won't happen again"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
+    MafiaGamePlayerController *playerController = [MafiaGamePlayerController controllerWithPlayer:player delegate:self];
+    [self.navigationController pushViewController:playerController animated:YES];
 }
 
 
@@ -327,9 +322,17 @@
 
 - (IBAction)playerAccessoryButtonTapped:(id)sender
 {
+    // Find out the indexPath of the cell within which the accessory button is tapped.
+    // To find the container cell, go through the view hierarchy until MafiaGamePlayerTableViewCell.
     UIButton *accessoryButton = (UIButton *) sender;
-    UITableViewCell *cell = (UITableViewCell *) accessoryButton.superview;
-    NSIndexPath *indexPath = [self.playersTableView indexPathForCell:cell];
+    UIView *superview = accessoryButton.superview;
+    while (superview != nil && ![superview isKindOfClass:[MafiaGamePlayerTableViewCell class]])
+    {
+        superview = superview.superview;
+    }
+    NSAssert([superview isKindOfClass:[MafiaGamePlayerTableViewCell class]], @"Unable to find container cell for accessory button.");
+    MafiaGamePlayerTableViewCell *containerCell = (MafiaGamePlayerTableViewCell *) superview;
+    NSIndexPath *indexPath = [self.playersTableView indexPathForCell:containerCell];
     [self tableView:self.playersTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
 }
 
@@ -342,9 +345,17 @@
     if (buttonIndex == [actionSheet destructiveButtonIndex])
     {
         [self.navigationController popViewControllerAnimated:YES];
-        // [self.game reset];
-        // [self reloadData];
     }
+}
+
+
+#pragma mark - MafiaGamePlayerControllerDelegate
+
+
+- (void)playerController:(MafiaGamePlayerController *)controller didCompleteWithPlayer:(MafiaPlayer *)player
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self reloadData];
 }
 
 

@@ -5,6 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MafiaGamePlayerController.h"
 #import "MafiaGameInformationController.h"
 
 
@@ -13,7 +14,7 @@
 
 
 @interface MafiaGamePlayController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MafiaGameInformationDelegate>
+<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MafiaGamePlayerControllerDelegate, MafiaGameInformationDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *dayNightImageView;
 @property (retain, nonatomic) IBOutlet UILabel *actionLabel;
