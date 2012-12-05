@@ -327,8 +327,8 @@
 		41857F701652DAAB00EE800D /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				4197E9CB166CC89800D01D34 /* Icons */,
 				415CF83D165D6E9700CDB5B2 /* Game */,
+				4197E9CB166CC89800D01D34 /* Icons */,
 				4147AF961657DD6F00B6AE49 /* Default-568h@2x.png */,
 				4147AF971657DD6F00B6AE49 /* Default.png */,
 				4147AF981657DD6F00B6AE49 /* Default@2x.png */,

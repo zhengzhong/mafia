@@ -23,41 +23,42 @@
         <ul class="unstyled">
           <li>
             <img class="left" src="role_civilian.png" alt="Civilian"/>
-            <p><em>村民（若干）</em>没有任何特殊能力。他们夜晚睡去，天明醒来，然后参与讨论，并和其他人一起投票决定私刑处死一位疑犯。</p>
+            <p><em>村民（若干）</em>没有任何特殊能力。他们夜晚睡去，天明醒来，然后参与讨论，并和其他人一起投票 <img src="is_voted.png" alt="Vote"/> 决定私刑处死一位疑犯。</p>
           </li>
           <li>
             <img class="left" src="role_killer.png" alt="Killer"/>
-            <p><em>杀手（1~4位）</em>在夜晚集体醒来，共同刺杀一位玩家。杀手如果刺杀的是刺客，则行动无效。</p>
+            <p><em>杀手（1~4位）</em>在夜晚集体醒来，共同刺杀 <img src="tag_killer.png" alt="Shoot"/> 一位玩家。杀手如果刺杀的是刺客，则行动无效。</p>
           </li>
           <li>
             <img class="left" src="role_detective.png" alt="Detective"/>
-            <p><em>侦探（1~4位）</em>在夜晚集体醒来，共同验证一位玩家是否是杀手。如果刺客尚未采取行动，那么侦探无法验出他的身份。</p>
+            <p><em>侦探（1~4位）</em>在夜晚集体醒来，共同验证 <img src="tag_detective.png" alt="Introspect"/> 一位玩家是否是杀手。如果刺客尚未采取行动，那么侦探无法验出他的身份。</p>
           </li>
           <li>
             <img class="left" src="role_guardian.png" alt="Guardian"/>
-            <p><em>保镖（1位）</em>每夜可以选择一位玩家进行保护。被保护的玩家不会被杀手杀死，也无法接受医生的救治。但保镖无法保护被刺客刺杀的玩家。</p>
+            <p><em>保镖（1位）</em>每夜可以选择一位玩家进行保护 <img src="tag_guardian.png" alt="Guard"/> 。被保护的玩家不会被杀手杀死，也无法接受医生的救治。但保镖无法保护被刺客刺杀的玩家。</p>
             <p>如果保镖被杀手或刺客刺杀身亡，则被保护的玩家也会一同死去。</p>
             <p>如果保镖保护的是杀手中的任何一人，则杀手的行动无效，除非杀手刺杀的是保镖（在这种情况下，保镖和被保护的杀手同时死亡）。</p>
             <p>如果保镖保护的是医生，则医生的行动无效。</p>
-            <p>如果保镖连续两个回合保护的是同一个玩家，则在剩下的回合里保镖都不能再保护这位玩家。</p>
+            <p>如果保镖连续两个回合保护的是同一个玩家，则在剩下的回合里保镖都不能再保护这位玩家 <img src="is_unguardable.png" alt="Unguardable"/> 。</p>
+            <p>被保镖保护的玩家 <img src="is_just_guarded.png" alt="Just Guarded"/> 如果在当轮的白天阶段获得的票数最多，则免于私刑。</p>
           </li>
           <li>
             <img class="left" src="role_doctor.png" alt="Doctor"/>
-            <p><em>医生（1位）</em>每夜选择一位玩家进行救治。如果当夜这位玩家被杀手刺杀，则他不会死亡。如果当夜这位玩家没有被杀手刺杀，则他被判定为误诊。累计被误诊两次的玩家会死亡。</p>
+            <p><em>医生（1位）</em>每夜选择一位玩家进行救治 <img src="tag_doctor.png" alt="Heal"/> 。如果当夜这位玩家被杀手刺杀，则他不会死亡。如果当夜这位玩家没有被杀手刺杀，则他被判定为误诊 <img src="is_misdiagnosed.png" alt="Misdiagnosed"/> 。累计被误诊两次的玩家会死亡。</p>
             <p>医生无法救治被刺客刺杀的玩家。</p>
           </li>
           <li>
             <img class="left" src="role_traitor.png" alt="Traitor"/>
-            <p><em>叛徒（1位）</em>每夜验证一位玩家是否是杀手。叛徒的任务是在白天混淆视听，保护杀手不被私刑处死，帮助杀手取得游戏胜利。</p>
+            <p><em>叛徒（1位）</em>每夜验证 <img src="tag_traitor.png" alt="Introspect"/> 一位玩家是否是杀手。叛徒的任务是在白天混淆视听，保护杀手不被私刑处死，帮助杀手取得游戏胜利。</p>
           </li>
           <li>
             <img class="left" src="role_assassin.png" alt="Assassin"/>
-            <p><em>刺客（1位）</em>只有一次行动机会。他在夜晚醒来，选择刺杀一位玩家或暂不采取行动。如果刺客刺杀了一位玩家，则这位玩家一定会身亡，保镖的保护或医生的救治均无效。刺客一旦采取了行动将立刻变身为杀手，并在杀手回合和杀手一同醒来进行刺杀。</p>
+            <p><em>刺客（1位）</em>只有一次行动机会。他在夜晚醒来，选择刺杀 <img src="tag_assassin.png" alt="Assassin"/> 一位玩家或暂不采取行动。如果刺客刺杀了一位玩家，则这位玩家一定会身亡，保镖的保护或医生的救治均无效。刺客一旦采取了行动将立刻变身为杀手，并在杀手回合和杀手一同醒来进行刺杀。</p>
             <p>刺客在行动之前不会被杀手刺杀身亡，也无法被侦探验证。但刺客可以被卧底验证。</p>
           </li>
           <li>
             <img class="left" src="role_undercover.png" alt="Undercover"/>
-            <p><em>卧底（1位）</em>每夜验证一位玩家是否是杀手或者刺客。刺客即使尚未行动也会被卧底验出（但卧底并不知道验出的是杀手还是刺客）。</p>
+            <p><em>卧底（1位）</em>每夜验证 <img src="tag_undercover.png" alt="Introspect"/> 一位玩家是否是杀手或者刺客。刺客即使尚未行动也会被卧底验出（但卧底并不知道验出的是杀手还是刺客）。</p>
           </li>
         </ul>
       </section>
