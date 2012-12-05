@@ -8,11 +8,6 @@
 #import "../../Gameplay/MafiaGameplay.h"
 
 
-@interface MafiaGamePlayerRoleController ()
-
-@end
-
-
 @implementation MafiaGamePlayerRoleController
 
 

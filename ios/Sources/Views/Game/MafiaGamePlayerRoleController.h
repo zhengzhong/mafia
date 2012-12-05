@@ -5,6 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @class MafiaRole;
 @class MafiaGamePlayerRoleController;
 
