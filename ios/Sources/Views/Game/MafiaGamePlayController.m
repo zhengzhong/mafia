@@ -163,6 +163,24 @@
     }
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
     [cell refreshWithPlayer:player];
+    return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 52;
+}
+
+
+#pragma mark - Table view delegate
+
+
+// Note: Setting backgrund color of a cell must be done in this delegate method.
+// See: http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewCell_Class/Reference/Reference.html
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
     UIColor *backgroundColor = nil;
     if ([self.selectedPlayers containsObject:player])
     {
@@ -180,18 +198,8 @@
     {
         backgroundColor = [UIColor whiteColor];
     }
-    cell.contentView.backgroundColor = backgroundColor;
-    return cell;
+    cell.backgroundColor = backgroundColor;
 }
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 52;
-}
-
-
-#pragma mark - Table view delegate
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath

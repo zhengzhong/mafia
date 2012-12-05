@@ -6,7 +6,7 @@
 #import "MafiaAppDelegate.h"
 
 #import "Views/Game/MafiaGameSetupController.h"
-#import "Views/Game/MafiaGamePlayController.h"
+#import "Views/Guide/MafiaGuideController.h"
 
 
 @implementation MafiaAppDelegate
@@ -30,7 +30,8 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.delegate = self;
     self.tabBarController.viewControllers = @[
-        [MafiaGameSetupController controllerForTab]
+        [MafiaGameSetupController controllerForTab],
+        [MafiaGuideController controllerForTab]
     ];
     self.window.rootViewController = self.tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
