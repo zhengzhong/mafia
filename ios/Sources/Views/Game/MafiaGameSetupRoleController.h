@@ -10,7 +10,7 @@
 @class MafiaGameSetupRoleController;
 
 
-@protocol MafiaGameSetupRoleDelegate <NSObject>
+@protocol MafiaGameSetupRoleControllerDelegate <NSObject>
 
 - (void)roleController:(MafiaGameSetupRoleController *)controller didSelectValue:(NSInteger)value forRole:(MafiaRole *)role;
 
@@ -23,19 +23,19 @@
 @property (readonly, assign, nonatomic) NSInteger minValue;
 @property (readonly, assign, nonatomic) NSInteger maxValue;
 @property (assign, nonatomic) NSInteger value;
-@property (readonly, assign, nonatomic) id<MafiaGameSetupRoleDelegate> delegate;
+@property (readonly, assign, nonatomic) id<MafiaGameSetupRoleControllerDelegate> delegate;
 
 + (id)controllerWithRole:(MafiaRole *)role
                 minValue:(NSInteger)minValue
                 maxValue:(NSInteger)maxValue
                    value:(NSInteger)value
-                delegate:(id<MafiaGameSetupRoleDelegate>)delegate;
+                delegate:(id<MafiaGameSetupRoleControllerDelegate>)delegate;
 
 - (id)initWithRole:(MafiaRole *)role
           minValue:(NSInteger)minValue
           maxValue:(NSInteger)maxValue
              value:(NSInteger)value
-          delegate:(id<MafiaGameSetupRoleDelegate>)delegate;
+          delegate:(id<MafiaGameSetupRoleControllerDelegate>)delegate;
 
 - (void)doneTapped:(id)sender;
 

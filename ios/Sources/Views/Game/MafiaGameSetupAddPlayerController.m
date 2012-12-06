@@ -5,9 +5,6 @@
 
 #import "MafiaGameSetupAddPlayerController.h"
 
-@interface MafiaGameSetupAddPlayerController ()
-
-@end
 
 @implementation MafiaGameSetupAddPlayerController
 
@@ -16,7 +13,7 @@
 @synthesize delegate = _delegate;
 
 
-+ (id)controllerWithDelegate:(id<MafiaGameSetupAddPlayerDelegate>)delegate
++ (id)controllerWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate
 {
     return [[[self alloc] initWithDelegate:delegate] autorelease];
 }
@@ -29,7 +26,7 @@
 }
 
 
-- (id)initWithDelegate:(id)delegate
+- (id)initWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate
 {
     self = [super initWithNibName:@"MafiaGameSetupAddPlayerController" bundle:nil];
     if (self = [super initWithNibName:@"MafiaGameSetupAddPlayerController" bundle:nil])
@@ -74,11 +71,60 @@
 }
 
 
-- (void)doneTapped:(id)sender
+#pragma mark - IBAction
+
+
+- (IBAction)doneTapped:(id)sender
 {
     [self.delegate addPlayerController:self didAddPlayer:self.playerNameField.text];
 }
 
 
-@end
+- (IBAction)showContactPicker:(id)sender
+{
+    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    peoplePicker.peoplePickerDelegate = self;
+    [self presentModalViewController:peoplePicker animated:YES];
+    [peoplePicker release];
+}
+
+
+- (IBAction)backgroundTapped:(id)sender
+{
+    [self.playerNameField resignFirstResponder];
+}
+
+
+#pragma mark - ABPeoplePickerNavigationControllerDelegate
+
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+{
+    NSString *firstName = (NSString *) ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    NSString *lastName = (NSString *) ABRecordCopyValue(person, kABPersonLastNameProperty);
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@", (firstName != nil ? firstName : @""), (lastName != nil ? lastName : @"")];
+    self.playerNameField.text = [fullName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [self dismissModalViewControllerAnimated:YES];
+    return NO;
+}
+
+
+// The people picker is always dismissed when the user selects a person. Thus this method will never be called.
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+{
+    return NO;
+}
+
+
+@end // MafiaGameSetupAddPlayerController
 

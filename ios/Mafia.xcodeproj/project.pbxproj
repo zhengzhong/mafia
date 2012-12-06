@@ -56,6 +56,8 @@
 		416E66D1166D2C610062AE57 /* information_announcement.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66CE166D2C610062AE57 /* information_announcement.png */; };
 		416E66D2166D2C610062AE57 /* information_negative.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66CF166D2C610062AE57 /* information_negative.png */; };
 		416E66D3166D2C610062AE57 /* information_positive.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66D0166D2C610062AE57 /* information_positive.png */; };
+		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
+		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
 		41857F471652D5A600EE800D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
 		41857F491652D5A600EE800D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F481652D5A600EE800D /* Foundation.framework */; };
 		41857F4B1652D5A600EE800D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F4A1652D5A600EE800D /* CoreGraphics.framework */; };
@@ -145,6 +147,8 @@
 		416E66CE166D2C610062AE57 /* information_announcement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_announcement.png; sourceTree = "<group>"; };
 		416E66CF166D2C610062AE57 /* information_negative.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_negative.png; sourceTree = "<group>"; };
 		416E66D0166D2C610062AE57 /* information_positive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_positive.png; sourceTree = "<group>"; };
+		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		41857F421652D5A600EE800D /* Mafia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mafia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41857F461652D5A600EE800D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		41857F481652D5A600EE800D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,9 +194,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41857F471652D5A600EE800D /* UIKit.framework in Frameworks */,
-				41857F491652D5A600EE800D /* Foundation.framework in Frameworks */,
+				417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */,
+				417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */,
 				41857F4B1652D5A600EE800D /* CoreGraphics.framework in Frameworks */,
+				41857F491652D5A600EE800D /* Foundation.framework in Frameworks */,
+				41857F471652D5A600EE800D /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,9 +292,11 @@
 		41857F451652D5A600EE800D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				41857F461652D5A600EE800D /* UIKit.framework */,
-				41857F481652D5A600EE800D /* Foundation.framework */,
+				417F09131670ECA100F44475 /* AddressBook.framework */,
+				417F09141670ECA100F44475 /* AddressBookUI.framework */,
 				41857F4A1652D5A600EE800D /* CoreGraphics.framework */,
+				41857F481652D5A600EE800D /* Foundation.framework */,
+				41857F461652D5A600EE800D /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

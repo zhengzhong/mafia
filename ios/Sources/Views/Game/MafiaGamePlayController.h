@@ -14,7 +14,7 @@
 
 
 @interface MafiaGamePlayController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MafiaGamePlayerControllerDelegate, MafiaGameInformationDelegate>
+<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MafiaGamePlayerControllerDelegate, MafiaGameInformationControllerDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *dayNightImageView;
 @property (retain, nonatomic) IBOutlet UILabel *actionLabel;

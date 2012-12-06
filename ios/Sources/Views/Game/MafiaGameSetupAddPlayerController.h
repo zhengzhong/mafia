@@ -4,30 +4,35 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 
 @class MafiaGameSetupAddPlayerController;
 
 
-@protocol MafiaGameSetupAddPlayerDelegate <NSObject>
+@protocol MafiaGameSetupAddPlayerControllerDelegate <NSObject>
 
 - (void)addPlayerController:(MafiaGameSetupAddPlayerController *)controller didAddPlayer:(NSString *)name;
 
-@end // MafiaGameSetupAddPlayerDelegate
+@end // MafiaGameSetupAddPlayerControllerDelegate
 
 
-@interface MafiaGameSetupAddPlayerController : UIViewController
+@interface MafiaGameSetupAddPlayerController : UIViewController <ABPeoplePickerNavigationControllerDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *playerNameField;
-@property (readonly, assign, nonatomic) id<MafiaGameSetupAddPlayerDelegate> delegate;
+@property (readonly, assign, nonatomic) id<MafiaGameSetupAddPlayerControllerDelegate> delegate;
 
-+ (id)controllerWithDelegate:(id<MafiaGameSetupAddPlayerDelegate>)delegate;
++ (id)controllerWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate;
 
-- (id)initWithDelegate:(id<MafiaGameSetupAddPlayerDelegate>)delegate;
+- (id)initWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate;
 
 - (void)cancelTapped:(id)sender;
 
-- (void)doneTapped:(id)sender;
+- (IBAction)doneTapped:(id)sender;
+
+- (IBAction)showContactPicker:(id)sender;
+
+- (IBAction)backgroundTapped:(id)sender;
 
 @end // MafiaGameSetupAddPlayerController
 

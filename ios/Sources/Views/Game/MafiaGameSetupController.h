@@ -12,7 +12,7 @@
 @class MafiaGameSetup;
 
 
-@interface MafiaGameSetupController : UITableViewController <MafiaGameSetupPlayersDelegate, MafiaGameSetupRoleDelegate>
+@interface MafiaGameSetupController : UITableViewController <MafiaGameSetupPlayersControllerDelegate, MafiaGameSetupRoleControllerDelegate>
 
 @property (readonly, retain, nonatomic) MafiaGameSetup *gameSetup;
 

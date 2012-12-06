@@ -17,12 +17,6 @@ enum MafiaGameSetupPlayersSections
 };
 
 
-@interface MafiaGameSetupPlayersController ()
-
-@end
-
-
-
 @implementation MafiaGameSetupPlayersController
 
 
@@ -32,7 +26,7 @@ enum MafiaGameSetupPlayersSections
 @synthesize doneButton = _doneButton;
 
 
-+ (id)controllerWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersDelegate>)delegate
++ (id)controllerWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate
 {
     return [[[self alloc] initWithGameSetup:gameSetup delegate:delegate] autorelease];
 }
@@ -47,7 +41,7 @@ enum MafiaGameSetupPlayersSections
 }
 
 
-- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersDelegate>)delegate
+- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped])
     {

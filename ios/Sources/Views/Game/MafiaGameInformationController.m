@@ -27,7 +27,7 @@
 @synthesize delegate = _delegate;
 
 
-+ (id)controllerWithDelegate:(id<MafiaGameInformationDelegate>)delegate
++ (id)controllerWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate
 {
     return [[[self alloc] initWithDelegate:delegate] autorelease];
 }
@@ -43,7 +43,7 @@
 }
 
 
-- (id)initWithDelegate:(id<MafiaGameInformationDelegate>)delegate
+- (id)initWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate
 {
     if (self = [super initWithNibName:@"MafiaGameInformationController" bundle:nil])
     {

@@ -4,6 +4,7 @@
 //
 
 #import "MafiaGameSetupRoleController.h"
+
 #import "../../Gameplay/MafiaGameplay.h"
 
 
@@ -21,7 +22,7 @@
                 minValue:(NSInteger)minValue
                 maxValue:(NSInteger)maxValue
                    value:(NSInteger)value
-                delegate:(id<MafiaGameSetupRoleDelegate>)delegate
+                delegate:(id<MafiaGameSetupRoleControllerDelegate>)delegate
 {
     return [[[self alloc] initWithRole:role
                               minValue:minValue
@@ -42,7 +43,7 @@
           minValue:(NSInteger)minValue
           maxValue:(NSInteger)maxValue
              value:(NSInteger)value
-          delegate:(id<MafiaGameSetupRoleDelegate>)delegate
+          delegate:(id<MafiaGameSetupRoleControllerDelegate>)delegate
 {
     NSAssert(minValue <= value && value <= maxValue, @"Invalid minValue/maxValue/value.");
     if (self = [super initWithStyle:UITableViewStyleGrouped])

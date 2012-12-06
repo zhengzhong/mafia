@@ -12,23 +12,23 @@
 @class MafiaGameSetupPlayersController;
 
 
-@protocol MafiaGameSetupPlayersDelegate <NSObject>
+@protocol MafiaGameSetupPlayersControllerDelegate <NSObject>
 
 - (void)playersControllerDidComplete:(MafiaGameSetupPlayersController *)controller;
 
-@end // MafiaGameSetupPlayersDelegate
+@end // MafiaGameSetupPlayersControllerDelegate
 
 
-@interface MafiaGameSetupPlayersController : UITableViewController <MafiaGameSetupAddPlayerDelegate>
+@interface MafiaGameSetupPlayersController : UITableViewController <MafiaGameSetupAddPlayerControllerDelegate>
 
 @property (readonly, retain, nonatomic) MafiaGameSetup *gameSetup;
-@property (readonly, assign, nonatomic) id<MafiaGameSetupPlayersDelegate> delegate;
+@property (readonly, assign, nonatomic) id<MafiaGameSetupPlayersControllerDelegate> delegate;
 @property (retain, nonatomic) UIBarButtonItem *editButton;
 @property (retain, nonatomic) UIBarButtonItem *doneButton;
 
-+ (id)controllerWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersDelegate>)delegate;
++ (id)controllerWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate;
 
-- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersDelegate>)delegate;
+- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate;
 
 - (void)editTapped:(id)sender;
 

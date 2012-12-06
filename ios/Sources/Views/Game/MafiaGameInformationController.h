@@ -9,11 +9,11 @@
 @class MafiaGameInformationController;
 
 
-@protocol MafiaGameInformationDelegate <NSObject>
+@protocol MafiaGameInformationControllerDelegate <NSObject>
 
 - (void)informationControllerDidComplete:(MafiaGameInformationController *)controller;
 
-@end // MafiaGameInformationDelegate
+@end // MafiaGameInformationControllerDelegate
 
 
 @interface MafiaGameInformationController : UIViewController
@@ -22,11 +22,11 @@
 @property (retain, nonatomic) IBOutlet UILabel *messageLabel;
 @property (retain, nonatomic) IBOutlet UILabel *detailsLabel;
 @property (retain, nonatomic) MafiaInformation *information;
-@property (readonly, assign, nonatomic) id<MafiaGameInformationDelegate> delegate;
+@property (readonly, assign, nonatomic) id<MafiaGameInformationControllerDelegate> delegate;
 
-+ (id)controllerWithDelegate:(id<MafiaGameInformationDelegate>)delegate;
++ (id)controllerWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate;
 
-- (id)initWithDelegate:(id<MafiaGameInformationDelegate>)delegate;
+- (id)initWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate;
 - (void)presentInformation:(MafiaInformation *)information inSuperview:(UIView *)superview;
 - (void)dismissInformationFromSuperview;
 
