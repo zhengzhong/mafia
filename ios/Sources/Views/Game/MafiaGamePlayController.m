@@ -115,15 +115,19 @@
         if (currentAction.isAssigned)
         {
             self.actionLabel.text = [NSString stringWithFormat:@"%@:", currentAction];
-            if ([[currentAction actors] count] == 0)
+            if ([currentAction isExecutable])
+            {
+                MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
+                NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
+                self.promptLabel.text = [NSString stringWithFormat:@"Select %@.", numberOfChoicesString];
+            }
+            else if ([currentAction role] != nil)
             {
                 self.promptLabel.text = [NSString stringWithFormat:@"%@ not available.", [currentAction role]];
             }
             else
             {
-                MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
-                NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
-                self.promptLabel.text = [NSString stringWithFormat:@"Select %@.", numberOfChoicesString];
+                self.promptLabel.text = @"Continue to next.";
             }
         }
         else
@@ -189,7 +193,7 @@
     }
     else if (player.isDead)
     {
-        backgroundColor = [UIColor colorWithRed:0.95 green:0.87 blue:0.87 alpha:1.0];
+        backgroundColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0];
     }
     else if (indexPath.row % 2 == 0)
     {

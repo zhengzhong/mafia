@@ -58,12 +58,19 @@
 		416E66D3166D2C610062AE57 /* information_positive.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66D0166D2C610062AE57 /* information_positive.png */; };
 		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
 		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
+		417F09671671001900F44475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
+		417F09681671001900F44475 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F481652D5A600EE800D /* Foundation.framework */; };
+		417F09881671069700F44475 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09871671069600F44475 /* SenTestingKit.framework */; };
 		41857F471652D5A600EE800D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
 		41857F491652D5A600EE800D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F481652D5A600EE800D /* Foundation.framework */; };
 		41857F4B1652D5A600EE800D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F4A1652D5A600EE800D /* CoreGraphics.framework */; };
 		41857F6F1652DAA200EE800D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41857F6E1652DAA200EE800D /* main.m */; };
 		41857F791652DACC00EE800D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41857F771652DACC00EE800D /* InfoPlist.strings */; };
 		41857F7F1652DB2700EE800D /* MafiaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41857F7E1652DB2700EE800D /* MafiaAppDelegate.m */; };
+		418A102116710999003D81C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A101F16710999003D81C0 /* InfoPlist.strings */; };
+		418A102816710CA5003D81C0 /* MafiaSettleTagsActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A102716710CA5003D81C0 /* MafiaSettleTagsActionTests.m */; };
+		418A102B16710D94003D81C0 /* MafiaGameplayTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A102A16710D94003D81C0 /* MafiaGameplayTestCase.m */; };
+		418A10321671F106003D81C0 /* MafiaVoteAndLynchActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A10311671F105003D81C0 /* MafiaVoteAndLynchActionTests.m */; };
 		4197E9C2166CA89C00D01D34 /* MafiaGameSetupPlayersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4197E9C1166CA89C00D01D34 /* MafiaGameSetupPlayersController.m */; };
 		4197E9C9166CBA5000D01D34 /* MafiaGameSetupRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4197E9C8166CBA5000D01D34 /* MafiaGameSetupRoleController.m */; };
 		41B32501166F4BE900E9D509 /* MafiaHTMLPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B32500166F4BE900E9D509 /* MafiaHTMLPageController.m */; };
@@ -83,6 +90,16 @@
 		41E9ACAE166174CC006AC42D /* MafiaGameSetupAddPlayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41E9ACAC166174CC006AC42D /* MafiaGameSetupAddPlayerController.xib */; };
 		41F88FBF166E3B4100DCC050 /* MafiaNumberRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F88FBE166E3B4100DCC050 /* MafiaNumberRange.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		417F09761671009700F44475 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41857F391652D5A500EE800D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41857F411652D5A600EE800D;
+			remoteInfo = Mafia;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		413FE4FA166CC93500A5356C /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
@@ -149,6 +166,8 @@
 		416E66D0166D2C610062AE57 /* information_positive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_positive.png; sourceTree = "<group>"; };
 		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		417F09641671001900F44475 /* MafiaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		417F09871671069600F44475 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		41857F421652D5A600EE800D /* Mafia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mafia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41857F461652D5A600EE800D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		41857F481652D5A600EE800D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -159,6 +178,12 @@
 		41857F781652DACC00EE800D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/Strings/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		41857F7D1652DB2700EE800D /* MafiaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAppDelegate.h; sourceTree = "<group>"; };
 		41857F7E1652DB2700EE800D /* MafiaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAppDelegate.m; sourceTree = "<group>"; };
+		418A101C16710992003D81C0 /* MafiaTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MafiaTests-Info.plist"; sourceTree = "<group>"; };
+		418A102016710999003D81C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		418A102716710CA5003D81C0 /* MafiaSettleTagsActionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaSettleTagsActionTests.m; sourceTree = "<group>"; };
+		418A102916710D94003D81C0 /* MafiaGameplayTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameplayTestCase.h; sourceTree = "<group>"; };
+		418A102A16710D94003D81C0 /* MafiaGameplayTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameplayTestCase.m; sourceTree = "<group>"; };
+		418A10311671F105003D81C0 /* MafiaVoteAndLynchActionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaVoteAndLynchActionTests.m; sourceTree = "<group>"; };
 		4197E9C0166CA89B00D01D34 /* MafiaGameSetupPlayersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameSetupPlayersController.h; sourceTree = "<group>"; };
 		4197E9C1166CA89C00D01D34 /* MafiaGameSetupPlayersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameSetupPlayersController.m; sourceTree = "<group>"; };
 		4197E9C7166CBA5000D01D34 /* MafiaGameSetupRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameSetupRoleController.h; sourceTree = "<group>"; };
@@ -190,6 +215,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		417F09601671001900F44475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				417F09881671069700F44475 /* SenTestingKit.framework in Frameworks */,
+				417F09671671001900F44475 /* UIKit.framework in Frameworks */,
+				417F09681671001900F44475 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41857F3F1652D5A600EE800D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,9 +305,28 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
+		417F098A1671076200F44475 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				418A102516710C08003D81C0 /* Gameplay */,
+				417F098E167107CA00F44475 /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		417F098E167107CA00F44475 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				418A101F16710999003D81C0 /* InfoPlist.strings */,
+				418A101C16710992003D81C0 /* MafiaTests-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		41857F371652D5A500EE800D = {
 			isa = PBXGroup;
 			children = (
+				417F098A1671076200F44475 /* Tests */,
 				41857F671652D9ED00EE800D /* Sources */,
 				41857F691652D9FF00EE800D /* Resources */,
 				41857F6A1652DA2D00EE800D /* Supporting Files */,
@@ -285,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				41857F421652D5A600EE800D /* Mafia.app */,
+				417F09641671001900F44475 /* MafiaTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,6 +351,7 @@
 				417F09141670ECA100F44475 /* AddressBookUI.framework */,
 				41857F4A1652D5A600EE800D /* CoreGraphics.framework */,
 				41857F481652D5A600EE800D /* Foundation.framework */,
+				417F09871671069600F44475 /* SenTestingKit.framework */,
 				41857F461652D5A600EE800D /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -381,6 +437,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		418A102516710C08003D81C0 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				418A102916710D94003D81C0 /* MafiaGameplayTestCase.h */,
+				418A102A16710D94003D81C0 /* MafiaGameplayTestCase.m */,
+				418A102716710CA5003D81C0 /* MafiaSettleTagsActionTests.m */,
+				418A10311671F105003D81C0 /* MafiaVoteAndLynchActionTests.m */,
+			);
+			path = Gameplay;
+			sourceTree = "<group>";
+		};
 		4197E9CB166CC89800D01D34 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +487,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		417F09631671001900F44475 /* MafiaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 417F09731671001900F44475 /* Build configuration list for PBXNativeTarget "MafiaTests" */;
+			buildPhases = (
+				417F095F1671001900F44475 /* Sources */,
+				417F09601671001900F44475 /* Frameworks */,
+				417F09611671001900F44475 /* Resources */,
+				417F09621671001900F44475 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				417F09771671009700F44475 /* PBXTargetDependency */,
+			);
+			name = MafiaTests;
+			productName = MafiaTests;
+			productReference = 417F09641671001900F44475 /* MafiaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		41857F411652D5A600EE800D /* Mafia */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41857F601652D5A600EE800D /* Build configuration list for PBXNativeTarget "Mafia" */;
@@ -460,11 +546,20 @@
 			projectRoot = "";
 			targets = (
 				41857F411652D5A600EE800D /* Mafia */,
+				417F09631671001900F44475 /* MafiaTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		417F09611671001900F44475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A102116710999003D81C0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41857F401652D5A600EE800D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -520,7 +615,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		417F09621671001900F44475 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		417F095F1671001900F44475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A102816710CA5003D81C0 /* MafiaSettleTagsActionTests.m in Sources */,
+				418A102B16710D94003D81C0 /* MafiaGameplayTestCase.m in Sources */,
+				418A10321671F106003D81C0 /* MafiaVoteAndLynchActionTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41857F3E1652D5A600EE800D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -554,6 +675,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		417F09771671009700F44475 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41857F411652D5A600EE800D /* Mafia */;
+			targetProxy = 417F09761671009700F44475 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		41857F771652DACC00EE800D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -563,9 +692,55 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		418A101F16710999003D81C0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				418A102016710999003D81C0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		417F09741671001900F44475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mafia.app/Mafia";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mafia-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Tests/MafiaTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		417F09751671001900F44475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mafia.app/Mafia";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mafia-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Tests/MafiaTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		41857F5E1652D5A600EE800D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -639,6 +814,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		417F09731671001900F44475 /* Build configuration list for PBXNativeTarget "MafiaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				417F09741671001900F44475 /* Debug */,
+				417F09751671001900F44475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41857F3C1652D5A500EE800D /* Build configuration list for PBXProject "Mafia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

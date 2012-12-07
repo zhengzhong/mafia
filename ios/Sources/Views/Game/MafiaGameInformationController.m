@@ -67,7 +67,7 @@
     NSString *categoryImageName = [NSString stringWithFormat:@"information_%@.png", self.information.category];
     self.categoryImageView.image = [UIImage imageNamed:categoryImageName];
     self.messageLabel.text = self.information.message;
-    self.detailsLabel.text = [self.information.details componentsJoinedByString:@"  "];
+    self.detailsLabel.text = [self.information.details componentsJoinedByString:@" * "];
     [self presentWithAnimations];
 }
 
