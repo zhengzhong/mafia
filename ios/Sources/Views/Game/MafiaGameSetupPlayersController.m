@@ -48,7 +48,7 @@ enum MafiaGameSetupPlayersSections
         _gameSetup = [gameSetup retain];
         _delegate = delegate;
         _editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:self action:@selector(editTapped:)];
-        _doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneTapped:)];
+        _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
         self.title = @"Players";
     }
     return self;

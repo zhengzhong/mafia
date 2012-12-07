@@ -63,10 +63,7 @@
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(doneTapped:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
     self.navigationItem.rightBarButtonItem = doneButton;
     [doneButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];

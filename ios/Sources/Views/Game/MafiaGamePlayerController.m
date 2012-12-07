@@ -120,18 +120,12 @@ enum MafiaGamePlayerStatus
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                   target:self
-                                   action:@selector(doneTapped:)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                     target:self
-                                     action:@selector(cancelTapped:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTapped:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     [cancelButton release];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    [doneButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
 }
 
@@ -273,7 +267,7 @@ enum MafiaGamePlayerStatus
     statusSwitch.on = status.value;
     [statusSwitch addTarget:self action:@selector(statusToggled:) forControlEvents:UIControlEventTouchUpInside];
     statusSwitch.tag = indexPath.row;
-    cell.accessoryView = [[UIView alloc] initWithFrame:statusSwitch.frame];
+    cell.accessoryView = [[[UIView alloc] initWithFrame:statusSwitch.frame] autorelease];
     [cell.accessoryView addSubview:statusSwitch];
     return cell;
 }

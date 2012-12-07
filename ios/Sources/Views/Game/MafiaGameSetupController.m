@@ -421,7 +421,7 @@ enum MafiaGameSetupRoleRows
     switchInCell.on = on;
     [switchInCell addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     switchInCell.tag = tag;
-    cell.accessoryView = [[UIView alloc] initWithFrame:switchInCell.frame];
+    cell.accessoryView = [[[UIView alloc] initWithFrame:switchInCell.frame] autorelease];
     [cell.accessoryView addSubview:switchInCell];
     return cell;
 }
