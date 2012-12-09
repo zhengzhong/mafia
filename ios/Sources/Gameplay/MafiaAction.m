@@ -48,7 +48,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ Action", [self role]];
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ Action", nil), [self role]];
 }
 
 
@@ -177,7 +177,7 @@
             assassin.role = [MafiaRole killer];
         }
         information = [MafiaInformation announcementInformation];
-        information.message = @"Assassin used his chance to shoot and became killer.";
+        information.message = NSLocalizedString(@"Assassin used his chance to shoot and became killer.", nil);
     }
     return information;
 }

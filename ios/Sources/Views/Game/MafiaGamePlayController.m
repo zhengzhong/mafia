@@ -54,7 +54,7 @@
         _informationController = [[MafiaGameInformationController alloc] initWithDelegate:self];
         _game = [[MafiaGame alloc] initWithGameSetup:gameSetup];
         _selectedPlayers = [[NSMutableArray alloc] initWithCapacity:2];
-        self.title = @"Game";
+        self.title = NSLocalizedString(@"Game", nil);
     }
     return self;
 }
@@ -105,37 +105,41 @@
     }
     if (self.game.winner)
     {
-        self.title = @"Game Over";
-        self.actionLabel.text = [NSString stringWithFormat:@"%@ Wins!", self.game.winner];
+        self.title = NSLocalizedString(@"Game Over", nil);
+        self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ Wins!", nil), self.game.winner];
         self.promptLabel.text = nil;
     }
     else
     {
-        self.title = [NSString stringWithFormat:@"Round %d", self.game.round];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"Round %d", nil), self.game.round];
         if (currentAction.isAssigned)
         {
-            self.actionLabel.text = [NSString stringWithFormat:@"%@:", currentAction];
+            self.actionLabel.text = [NSString stringWithFormat:@"%@", currentAction];
             if ([currentAction isExecutable])
             {
                 MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
-                NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
-                self.promptLabel.text = [NSString stringWithFormat:@"Select %@.", numberOfChoicesString];
+                NSString *numberOfChoicesString = [numberOfChoices
+                                                   formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
+                                                   pluralForm:NSLocalizedString(@"players", nil)];
+                self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
             }
-            else if ([currentAction role] != nil)
+            else if (currentRole != nil)
             {
-                self.promptLabel.text = [NSString stringWithFormat:@"%@ not available.", [currentAction role]];
+                self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ not available", nil), currentRole];
             }
             else
             {
-                self.promptLabel.text = @"Continue to next.";
+                self.promptLabel.text = NSLocalizedString(@"Continue to next", nil);
             }
         }
         else
         {
-            self.actionLabel.text = [NSString stringWithFormat:@"Assign %@:", currentRole];
+            self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assign %@", nil), currentRole];
             MafiaNumberRange *numberOfChoices = [self numberOfChoicesForActon:currentAction];
-            NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
-            self.promptLabel.text = [NSString stringWithFormat:@"Select %@.", numberOfChoicesString];
+            NSString *numberOfChoicesString = [numberOfChoices
+                                               formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
+                                               pluralForm:NSLocalizedString(@"players", nil)];
+            self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
         }
     }
     [self.playersTableView reloadData];
@@ -261,10 +265,10 @@
 - (void)confirmResetGame:(id)sender
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"Are you sure to reset game?"
+                                  initWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)
                                   delegate:self
-                                  cancelButtonTitle:@"No. Take me back."
-                                  destructiveButtonTitle:@"Yes. Reset the game!"
+                                  cancelButtonTitle:NSLocalizedString(@"No. Take me back.", nil)
+                                  destructiveButtonTitle:NSLocalizedString(@"Yes. Reset the game!", nil)
                                   otherButtonTitles:nil];
     // See: http://stackoverflow.com/questions/4447563/last-button-of-actionsheet-does-not-get-clicked
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
@@ -307,12 +311,14 @@
     }
     else
     {
-        NSString *numberOfChoicesString = [numberOfChoices formattedStringWithSingleForm:@"player"];
-        NSString *message = [NSString stringWithFormat:@"You must select %@", numberOfChoicesString];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Messages"
+        NSString *numberOfChoicesString = [numberOfChoices
+                                           formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
+                                           pluralForm:NSLocalizedString(@"players", nil)];
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Messages", nil)
                                                         message:message
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                               otherButtonTitles:nil];
         [alert show];
         [alert release];

@@ -64,12 +64,5 @@
 }
 
 
-- (NSString *)formattedStringWithSingleForm:(NSString *)singleForm
-{
-    NSString *pluralForm = [NSString stringWithFormat:@"%@s", singleForm];
-    return [self formattedStringWithSingleForm:singleForm pluralForm:pluralForm];
-}
-
-
 @end // MafiaNumberRange
 

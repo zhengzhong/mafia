@@ -18,7 +18,7 @@
 {
     MafiaGuideController *guideController = [[[self alloc] initWithTableOfContents] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:guideController] autorelease];
-    navigationController.title = @"Guide";
+    navigationController.title = NSLocalizedString(@"Guide", nil);
     navigationController.tabBarItem.image = [UIImage imageNamed:@"guide.png"];
     return navigationController;
 }
@@ -36,9 +36,9 @@
     if (self = [super initWithStyle:UITableViewStylePlain])
     {
         _tableOfContents = [[NSArray alloc] initWithObjects:
-                            [MafiaHTMLPage pageWithTitle:@"Gameplay" pageName:@"gameplay" language:@"zh"],
+                            [MafiaHTMLPage pageWithTitle:NSLocalizedString(@"Gameplay", nil) pageName:@"gameplay" language:@"zh"],
                             nil];
-        self.title = @"Guide";
+        self.title = NSLocalizedString(@"Guide", nil);
     }
     return self;
 }

@@ -20,6 +20,12 @@
 @synthesize tags = _tags;
 
 
++ (id)playerWithName:(NSString *)name
+{
+    return [[[self alloc] initWithName:name] autorelease];
+}
+
+
 - (void)dealloc
 {
     [_name release];
@@ -46,15 +52,9 @@
 }
 
 
-+ (id)playerWithName:(NSString *)name
-{
-    return [[[self alloc] initWithName:name] autorelease];
-}
-
-
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ %@", self.role, self.name];
+    return [NSString stringWithFormat:@"%@ %@", self.role.displayName, self.name];
 }
 
 

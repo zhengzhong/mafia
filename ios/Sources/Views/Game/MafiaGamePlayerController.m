@@ -103,11 +103,26 @@ enum MafiaGamePlayerStatus
         _player = [player retain];
         _role = [player.role retain];
         _statuses = [[NSArray alloc] initWithObjects:
-                     [MafiaGamePlayerStatus statusWithName:@"Dead?" imageName:@"is_dead.png" key:@"isDead" value:player.isDead],
-                     [MafiaGamePlayerStatus statusWithName:@"Misdiagnosed?" imageName:@"is_misdiagnosed.png" key:@"isMisdiagnosed" value:player.isMisdiagnosed],
-                     [MafiaGamePlayerStatus statusWithName:@"Just Guarded?" imageName:@"is_just_guarded.png" key:@"isJustGuarded" value:player.isJustGuarded],
-                     [MafiaGamePlayerStatus statusWithName:@"Unguardable?" imageName:@"is_unguardable.png" key:@"isUnguardable" value:player.isUnguardable],
-                     [MafiaGamePlayerStatus statusWithName:@"Voted?" imageName:@"is_voted.png" key:@"isVoted" value:player.isVoted],
+                     [MafiaGamePlayerStatus statusWithName:NSLocalizedString(@"Dead?", nil)
+                                                 imageName:@"is_dead.png"
+                                                       key:@"isDead"
+                                                     value:player.isDead],
+                     [MafiaGamePlayerStatus statusWithName:NSLocalizedString(@"Misdiagnosed?", nil)
+                                                 imageName:@"is_misdiagnosed.png"
+                                                       key:@"isMisdiagnosed"
+                                                     value:player.isMisdiagnosed],
+                     [MafiaGamePlayerStatus statusWithName:NSLocalizedString(@"Just Guarded?", nil)
+                                                 imageName:@"is_just_guarded.png"
+                                                       key:@"isJustGuarded"
+                                                     value:player.isJustGuarded],
+                     [MafiaGamePlayerStatus statusWithName:NSLocalizedString(@"Unguardable?", nil)
+                                                 imageName:@"is_unguardable.png"
+                                                       key:@"isUnguardable"
+                                                     value:player.isUnguardable],
+                     [MafiaGamePlayerStatus statusWithName:NSLocalizedString(@"Voted?", nil)
+                                                 imageName:@"is_voted.png"
+                                                       key:@"isVoted"
+                                                     value:player.isVoted],
                      nil];
         _delegate = delegate;
         self.title = player.name;
@@ -243,8 +258,8 @@ enum MafiaGamePlayerStatus
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", [self.role.name lowercaseString]]];
-    cell.textLabel.text = self.role.name;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
+    cell.textLabel.text = self.role.displayName;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

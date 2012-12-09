@@ -56,7 +56,7 @@ enum MafiaGameSetupRoleRows
 {
     MafiaGameSetupController *gameSetupController = [[[self alloc] initWithDefaultGameSetup] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:gameSetupController] autorelease];
-    navigationController.title = @"Game";
+    navigationController.title = NSLocalizedString(@"Game", nil);
     navigationController.tabBarItem.image = [UIImage imageNamed:@"moon.png"];
     return navigationController;
 }
@@ -81,7 +81,7 @@ enum MafiaGameSetupRoleRows
             [_gameSetup addPlayerName:playerName];
         }
         _gameSetup.isTwoHanded = YES;
-        self.title = @"Game Setup";
+        self.title = NSLocalizedString(@"Game Setup", nil);
     }
     return self;
 }
@@ -91,7 +91,7 @@ enum MafiaGameSetupRoleRows
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
-    UIBarButtonItem *startButton = [[UIBarButtonItem alloc] initWithTitle:@"Start"
+    UIBarButtonItem *startButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Start", nil)
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self
                                                                   action:@selector(startGameTapped:)];
@@ -134,7 +134,7 @@ enum MafiaGameSetupRoleRows
         {
             UITableViewCell *cell = [self tableView:tableView cellWithNumber:[self.gameSetup.playerNames count]];
             cell.imageView.image = [UIImage imageNamed:@"players.png"];
-            cell.textLabel.text = @"Players";
+            cell.textLabel.text = NSLocalizedString(@"Players", nil);
             if ([self.gameSetup.playerNames count] >= [self.gameSetup numberOfPlayersRequired])
             {
                 cell.detailTextLabel.textColor = [self darkGreenColor];
@@ -152,7 +152,7 @@ enum MafiaGameSetupRoleRows
                                              target:self
                                              action:@selector(twoHandedToggled:)];
             cell.imageView.image = [UIImage imageNamed:@"two_handed.png"];
-            cell.textLabel.text = @"Two Handed";
+            cell.textLabel.text = NSLocalizedString(@"Two Handed", nil);
             return cell;
         }
         case MafiaGameSetupRolesSection:
@@ -163,53 +163,55 @@ enum MafiaGameSetupRoleRows
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithNumber:self.gameSetup.numberOfKillers];
                     cell.imageView.image = [UIImage imageNamed:@"role_killer.png"];
-                    cell.textLabel.text = @"Number of Killers";
+                    cell.textLabel.text = NSLocalizedString(@"Number of Killers", nil);
                     return cell;
                 }
                 case MafiaGameSetupNumberOfDetectives:
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithNumber:self.gameSetup.numberOfDetectives];
                     cell.imageView.image = [UIImage imageNamed:@"role_detective.png"];
-                    cell.textLabel.text = @"Number of Detectives";
+                    cell.textLabel.text = NSLocalizedString(@"Number of Detectives", nil);
                     return cell;
                 }
                 case MafiaGameSetupHasAssassin:
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithRoleSwitch:self.gameSetup.hasAssassin atIndexPath:indexPath];
                     cell.imageView.image = [UIImage imageNamed:@"role_assassin.png"];
-                    cell.textLabel.text = @"Has Assassin";
+                    cell.textLabel.text = NSLocalizedString(@"Has Assassin", nil);
                     return cell;
                 }
                 case MafiaGameSetupHasGuardian:
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithRoleSwitch:self.gameSetup.hasGuardian atIndexPath:indexPath];
                     cell.imageView.image = [UIImage imageNamed:@"role_guardian.png"];
-                    cell.textLabel.text = @"Has Guardian";
+                    cell.textLabel.text = NSLocalizedString(@"Has Guardian", nil);
                     return cell;
                 }
                 case MafiaGameSetupHasDoctor:
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithRoleSwitch:self.gameSetup.hasDoctor atIndexPath:indexPath];
                     cell.imageView.image = [UIImage imageNamed:@"role_doctor.png"];
-                    cell.textLabel.text = @"Has Doctor";
+                    cell.textLabel.text = NSLocalizedString(@"Has Doctor", nil);
                     return cell;
                 }
                 case MafiaGameSetupHasTraitor:
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithRoleSwitch:self.gameSetup.hasTraitor atIndexPath:indexPath];
                     cell.imageView.image = [UIImage imageNamed:@"role_traitor.png"];
-                    cell.textLabel.text = @"Has Traitor";
+                    cell.textLabel.text = NSLocalizedString(@"Has Traitor", nil);
                     return cell;
                 }
                 case MafiaGameSetupHasUndercover:
                 {
                     UITableViewCell *cell = [self tableView:tableView cellWithRoleSwitch:self.gameSetup.hasUndercover atIndexPath:indexPath];
                     cell.imageView.image = [UIImage imageNamed:@"role_undercover.png"];
-                    cell.textLabel.text = @"Has Undercover";
+                    cell.textLabel.text = NSLocalizedString(@"Has Undercover", nil);
                     return cell;
                 }
                 default:
+                {
                     return nil;
+                }
             }
         }
         default:

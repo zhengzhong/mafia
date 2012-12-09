@@ -47,9 +47,9 @@ enum MafiaGameSetupPlayersSections
     {
         _gameSetup = [gameSetup retain];
         _delegate = delegate;
-        _editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:self action:@selector(editTapped:)];
+        _editButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(editTapped:)];
         _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
-        self.title = @"Players";
+        self.title = NSLocalizedString(@"Players", nil);
     }
     return self;
 }
@@ -114,7 +114,7 @@ enum MafiaGameSetupPlayersSections
     else
     {
         cell.imageView.image = [UIImage imageNamed:@"add.png"];
-        cell.textLabel.text = @"Add New Player";
+        cell.textLabel.text = NSLocalizedString(@"Add New Player", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
@@ -198,13 +198,13 @@ enum MafiaGameSetupPlayersSections
     if (self.tableView.editing)
     {
         self.navigationItem.leftBarButtonItem.style = UIBarButtonItemStyleDone;
-        self.navigationItem.leftBarButtonItem.title = @"Done";
+        self.navigationItem.leftBarButtonItem.title = NSLocalizedString(@"Done", nil);
         self.navigationItem.rightBarButtonItem = nil;
     }
     else
     {
         self.navigationItem.leftBarButtonItem.style = UIBarButtonItemStyleBordered;
-        self.navigationItem.leftBarButtonItem.title = @"Edit";
+        self.navigationItem.leftBarButtonItem.title = NSLocalizedString(@"Edit", nil);
         self.navigationItem.rightBarButtonItem = self.doneButton;
     }
 }

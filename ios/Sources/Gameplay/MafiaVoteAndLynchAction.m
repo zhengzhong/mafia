@@ -12,6 +12,12 @@
 @implementation MafiaVoteAndLynchAction
 
 
++ (id)actionWithPlayerList:(MafiaPlayerList *)playerList
+{
+    return [[[self alloc] initWithPlayerList:playerList] autorelease];
+}
+
+
 - (id)initWithPlayerList:(MafiaPlayerList *)playerList
 {
     if (self = [super initWithNumberOfActors:0 playerList:playerList])
@@ -22,15 +28,9 @@
 }
 
 
-+ (id)actionWithPlayerList:(MafiaPlayerList *)playerList
-{
-    return [[[self alloc] initWithPlayerList:playerList] autorelease];
-}
-
-
 - (NSString *)description
 {
-    return @"Vote and Lynch";
+    return NSLocalizedString(@"Vote and Lynch", nil);
 }
 
 
@@ -76,12 +76,12 @@
         {
             if (player.isJustGuarded)
             {
-                information.message = [NSString stringWithFormat:@"%@ was voted but guarded.", player.name];
+                information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted but guarded", nil), player.name];
                 player.isVoted = NO;
             }
             else
             {
-                information.message = [NSString stringWithFormat:@"%@ was voted and lynched.", player.name];
+                information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted and lynched", nil), player.name];
                 [player markDead];
             }
         }

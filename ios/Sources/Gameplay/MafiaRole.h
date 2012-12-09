@@ -8,9 +8,10 @@
 @interface MafiaRole : NSObject
 
 @property (readonly, copy, nonatomic) NSString *name;
+@property (readonly, copy, nonatomic) NSString *displayName;
 @property (readonly, assign, nonatomic) NSInteger alignment;
 
-- (id)initWithName:(NSString *)name alignment:(NSInteger)alignment;
+- (id)initWithName:(NSString *)name displayName:(NSString *)displayName alignment:(NSInteger)alignment;
 
 + (MafiaRole *)unrevealed;
 

@@ -110,26 +110,27 @@
 
 - (BOOL)checkGameOver
 {
-    if (self.round == 0)
+    NSArray *unrevealedPlayers = [self.playerList alivePlayersWithRole:[MafiaRole unrevealed]];
+    if ([unrevealedPlayers count] > 0)
     {
         return NO;
     }
     NSArray *killers = [self.playerList alivePlayersWithRole:[MafiaRole killer]];
     if ([killers count] == 0)
     {
-        self.winner = @"Civilian Alignment";
+        self.winner = NSLocalizedString(@"Civilian Alignment", nil);
         return YES;
     }
     NSArray *detectives = [self.playerList alivePlayersWithRole:[MafiaRole detective]];
     if ([detectives count] == 0)
     {
-        self.winner = @"Killer Alignment";
+        self.winner = NSLocalizedString(@"Killer Alignment", nil);
         return YES;
     }
     NSArray *alivePlayers = [self.playerList alivePlayers];
     if ([killers count] * 2 >= [alivePlayers count])
     {
-        self.winner = @"Killer Alignment";
+        self.winner = NSLocalizedString(@"Killer Alignment", nil);
         return YES;
     }
     return NO;

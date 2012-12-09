@@ -40,7 +40,7 @@
         _selectedRole = [role retain];
         _roles = [[MafiaRole roles] copy];
         _delegate = delegate;
-        self.title = role.name;
+        self.title = role.displayName;
     }
     return self;
 }
@@ -97,8 +97,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     MafiaRole *role = [self.roles objectAtIndex:indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", [role.name lowercaseString]]];
-    cell.textLabel.text = role.name;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", role.name]];
+    cell.textLabel.text = role.displayName;
     cell.accessoryType = (role == self.selectedRole ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
     return cell;
 }

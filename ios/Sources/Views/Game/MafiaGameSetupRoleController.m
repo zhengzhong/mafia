@@ -53,7 +53,7 @@
         _maxValue = maxValue;
         _value = value;
         _delegate = delegate;
-        self.title = role.name;
+        self.title = role.displayName;
     }
     return self;
 }
@@ -100,8 +100,8 @@
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", [self.role.name lowercaseString]]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ x %d", self.role.name, (self.minValue + indexPath.row)];
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ x %d", self.role.displayName, (self.minValue + indexPath.row)];
     if (indexPath.row == self.value - self.minValue)
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

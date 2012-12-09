@@ -22,7 +22,5 @@
 
 - (NSString *)formattedStringWithSingleForm:(NSString *)singleForm pluralForm:(NSString *)pluralForm;
 
-- (NSString *)formattedStringWithSingleForm:(NSString *)singleForm;
-
 @end // MafiaNumberRange
 

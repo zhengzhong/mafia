@@ -24,7 +24,7 @@
 {
     NSString *category = (indicator ? @"positive" : @"negative");
     MafiaInformation *information = [[[self alloc] initWithCategory:category] autorelease];
-    information.message = (indicator ? @"Thumb Up! Positive!" : @"Thumb Down! Negative!");
+    information.message = (indicator ? NSLocalizedString(@"Thumb Up! Positive!", nil) : NSLocalizedString(@"Thumb Down! Negative!", nil));
     return information;
 }
 

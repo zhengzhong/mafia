@@ -9,6 +9,7 @@
 @implementation MafiaGameSetupAddPlayerController
 
 
+@synthesize playerNameLabel = _playerNameLabel;
 @synthesize playerNameField = _playerNameField;
 @synthesize delegate = _delegate;
 
@@ -21,6 +22,7 @@
 
 - (void)dealloc
 {
+    [_playerNameLabel release];
     [_playerNameField release];
     [super dealloc];
 }
@@ -31,7 +33,7 @@
     if (self = [super initWithNibName:@"MafiaGameSetupAddPlayerController" bundle:nil])
     {
         _delegate = delegate;
-        self.title = @"Add Player";
+        self.title = NSLocalizedString(@"Add New Player", nil);
     }
     return self;
 }
@@ -48,6 +50,7 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     [doneButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
+    self.playerNameLabel.text = NSLocalizedString(@"Name", nil);
 }
 
 

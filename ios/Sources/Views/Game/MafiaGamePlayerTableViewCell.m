@@ -39,7 +39,7 @@
 {
     self.avatarImageView.image = [self imageForPlayer:player];
     self.nameLabel.text = player.name;
-    self.roleLabel.text = player.role.name;
+    self.roleLabel.text = player.role.displayName;
     NSInteger stateImageIndex = 0;
     if (player.isMisdiagnosed)
     {
@@ -74,7 +74,7 @@
     for (MafiaRole *taggedByRole in player.tags)
     {
         UIImageView *tagImageView = [self.tagImageCollection objectAtIndex:tagImageIndex];
-        NSString *imageName = [NSString stringWithFormat:@"tag_%@.png", [taggedByRole.name lowercaseString]];
+        NSString *imageName = [NSString stringWithFormat:@"tag_%@.png", taggedByRole.name];
         tagImageView.image = [UIImage imageNamed:imageName];
         ++tagImageIndex;
     }
@@ -95,7 +95,7 @@
     }
     else
     {
-        imageName = [NSString stringWithFormat:@"role_%@.png", [player.role.name lowercaseString]];
+        imageName = [NSString stringWithFormat:@"role_%@.png", player.role.name];
     }
     return [UIImage imageNamed:imageName];
 }

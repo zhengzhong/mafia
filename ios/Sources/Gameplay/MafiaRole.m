@@ -9,21 +9,24 @@
 
 
 @synthesize name = _name;
+@synthesize displayName = _displayName;
 @synthesize alignment = _alignment;
 
 
 - (void)dealloc
 {
     [_name release];
+    [_displayName release];
     [super dealloc];
 }
 
 
-- (id)initWithName:(NSString *)name alignment:(NSInteger)alignment
+- (id)initWithName:(NSString *)name displayName:(NSString *)displayName alignment:(NSInteger)alignment
 {
     if (self = [super init])
     {
         _name = [name copy];
+        _displayName = [displayName copy];
         _alignment = alignment;
     }
     return self;
@@ -32,7 +35,7 @@
 
 - (NSString *)description
 {
-    return self.name;
+    return self.displayName;
 }
 
 
@@ -41,7 +44,7 @@
     static MafiaRole *Unrevealed = nil;
     if (Unrevealed == nil)
     {
-        Unrevealed = [[self alloc] initWithName:@"Unrevealed" alignment:0];
+        Unrevealed = [[self alloc] initWithName:@"unrevealed" displayName:NSLocalizedString(@"Unrevealed", nil) alignment:0];
     }
     return Unrevealed;
 }
@@ -52,7 +55,7 @@
     static MafiaRole *Civilian = nil;
     if (Civilian == nil)
     {
-        Civilian = [[self alloc] initWithName:@"Civilian" alignment:1];
+        Civilian = [[self alloc] initWithName:@"civilian" displayName:NSLocalizedString(@"Civilian", nil) alignment:1];
     }
     return Civilian;
 }
@@ -63,7 +66,7 @@
     static MafiaRole *Assassin = nil;
     if (Assassin == nil)
     {
-        Assassin = [[self alloc] initWithName:@"Assassin" alignment:-3];
+        Assassin = [[self alloc] initWithName:@"assassin" displayName:NSLocalizedString(@"Assassin", nil) alignment:-3];
     }
     return Assassin;
 }
@@ -74,7 +77,7 @@
     static MafiaRole *Guardian = nil;
     if (Guardian == nil)
     {
-        Guardian = [[self alloc] initWithName:@"Guardian" alignment:1];
+        Guardian = [[self alloc] initWithName:@"guardian" displayName:NSLocalizedString(@"Guardian", nil) alignment:1];
     }
     return Guardian;
 }
@@ -85,7 +88,7 @@
     static MafiaRole *Killer = nil;
     if (Killer == nil)
     {
-        Killer = [[self alloc] initWithName:@"Killer" alignment:-3];
+        Killer = [[self alloc] initWithName:@"killer" displayName:NSLocalizedString(@"Killer", nil) alignment:-3];
     }
     return Killer;
 }
@@ -96,7 +99,7 @@
     static MafiaRole *Detective = nil;
     if (Detective == nil)
     {
-        Detective = [[self alloc] initWithName:@"Detective" alignment:3];
+        Detective = [[self alloc] initWithName:@"detective" displayName:NSLocalizedString(@"Detective", nil) alignment:3];
     }
     return Detective;
 }
@@ -107,7 +110,7 @@
     static MafiaRole *Doctor = nil;
     if (Doctor == nil)
     {
-        Doctor = [[self alloc] initWithName:@"Doctor" alignment:1];
+        Doctor = [[self alloc] initWithName:@"doctor" displayName:NSLocalizedString(@"Doctor", nil) alignment:1];
     }
     return Doctor;
 }
@@ -118,7 +121,7 @@
     static MafiaRole *Traitor = nil;
     if (Traitor == nil)
     {
-        Traitor = [[self alloc] initWithName:@"Traitor" alignment:-2];
+        Traitor = [[self alloc] initWithName:@"traitor" displayName:NSLocalizedString(@"Traitor", nil) alignment:-2];
     }
     return Traitor;
 }
@@ -129,7 +132,7 @@
     static MafiaRole *Undercover = nil;
     if (Undercover == nil)
     {
-        Undercover = [[self alloc] initWithName:@"Undercover" alignment:-3];
+        Undercover = [[self alloc] initWithName:@"undercover" displayName:NSLocalizedString(@"Undercover", nil) alignment:-3];
     }
     return Undercover;
 }

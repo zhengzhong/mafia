@@ -29,6 +29,12 @@
 @implementation MafiaSettleTagsAction
 
 
++ (id)actionWithPlayerList:(MafiaPlayerList *)playerList
+{
+    return [[[self alloc] initWithPlayerList:playerList] autorelease];
+}
+
+
 - (id)initWithPlayerList:(MafiaPlayerList *)playerList
 {
     if (self = [super initWithNumberOfActors:0 playerList:playerList])
@@ -39,15 +45,9 @@
 }
 
 
-+ (id)actionWithPlayerList:(MafiaPlayerList *)playerList
-{
-    return [[[self alloc] initWithPlayerList:playerList] autorelease];
-}
-
-
 - (NSString *)description
 {
-    return @"Settle Tags";
+    return NSLocalizedString(@"Settle Tags", nil);
 }
 
 
@@ -108,17 +108,17 @@
     // Construct information message.
     if ([deadPlayerNames count] == 0)
     {
-        information.message = @"Nobody was dead.";
+        information.message = NSLocalizedString(@"Nobody was dead", nil);
     }
     else if ([deadPlayerNames count] == 1)
     {
         NSString *deadPlayerName = [deadPlayerNames objectAtIndex:0];
-        information.message = [NSString stringWithFormat:@"%@ was dead.", deadPlayerName];
+        information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was dead", nil), deadPlayerName];
     }
     else
     {
         NSString *deadPlayerNamesString = [deadPlayerNames componentsJoinedByString:@", "];
-        information.message = [NSString stringWithFormat:@"%@ were dead.", deadPlayerNamesString];
+        information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ were dead", nil), deadPlayerNamesString];
     }
     return information;
 }
@@ -134,7 +134,7 @@
     BOOL isGuardianKilled = NO;
     for (MafiaPlayer *assassinedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole assassin]])
     {
-        [messages addObject:[NSString stringWithFormat:@"%@ was assassined.", assassinedPlayer]];
+        [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was assassined", nil), assassinedPlayer]];
         [assassinedPlayer markDead];
         [deadPlayerNames addObject:assassinedPlayer.name];
         if (assassinedPlayer.role == [MafiaRole guardian])
@@ -148,7 +148,7 @@
     {
         for (MafiaPlayer *guardedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]])
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was guarded and was dead with guardian.", guardedPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), guardedPlayer]];
             [guardedPlayer markDead];
             [deadPlayerNames addObject:guardedPlayer.name];
         }
@@ -170,19 +170,19 @@
             {
                 if (shotPlayer.role != [MafiaRole guardian])
                 {
-                    [messages addObject:[NSString stringWithFormat:@"%@ was guarded and failed to shoot.", guardedPlayer]];
+                    [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to shoot", nil), guardedPlayer]];
                     [shotPlayer unselectFromRole:[MafiaRole killer]];
                 }
                 else
                 {
-                    [messages addObject:[NSString stringWithFormat:@"%@ was guarded and %@ was shot.", guardedPlayer, shotPlayer]];
+                    [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%1$@ was guarded and %2$@ was shot", nil), guardedPlayer, shotPlayer]];
                 }
             }
         }
         else if (guardedPlayer.role == [MafiaRole doctor])
         {
             // If doctor is guarded, nobody can be healt.
-            [messages addObject:[NSString stringWithFormat:@"%@ was guarded and failed to heal.", guardedPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to heal", nil), guardedPlayer]];
             for (MafiaPlayer *healtPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]])
             {
                 [healtPlayer unselectFromRole:[MafiaRole doctor]];
@@ -192,12 +192,12 @@
         // Exception: if guardian is guarded, he can still be shot.
         if ([guardedPlayer isSelectedByRole:[MafiaRole doctor]])
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was guarded and could not be healt.", guardedPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be healt", nil), guardedPlayer]];
             [guardedPlayer unselectFromRole:[MafiaRole doctor]];
         }
         if ([guardedPlayer isSelectedByRole:[MafiaRole killer]] && guardedPlayer.role != [MafiaRole guardian])
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was guarded and could not be shot.", guardedPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be shot", nil), guardedPlayer]];
             [guardedPlayer unselectFromRole:[MafiaRole killer]];
         }
     }
@@ -208,7 +208,7 @@
         {
             if (player.isJustGuarded)
             {
-                [messages addObject:[NSString stringWithFormat:@"%@ was guarded twice continuously and became unguardable.", player]];
+                [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded twice continuously and became unguardable", nil), player]];
                 player.isUnguardable = YES;
             }
             player.isJustGuarded = YES;
@@ -233,18 +233,18 @@
     {
         if (shotPlayer.role == [MafiaRole assassin])
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ dodged the bullet from killer.", shotPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ dodged the bullet from killer", nil), shotPlayer]];
             [shotPlayer unselectFromRole:[MafiaRole killer]];
         }
         else if ([shotPlayer isSelectedByRole:[MafiaRole doctor]])
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was shot but healt.", shotPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot but healt", nil), shotPlayer]];
             [shotPlayer unselectFromRole:[MafiaRole killer]];
             [shotPlayer unselectFromRole:[MafiaRole doctor]];
         }
         else
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was shot and killed.", shotPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot and killed", nil), shotPlayer]];
             [shotPlayer markDead];
             [deadPlayerNames addObject:shotPlayer.name];
             if (shotPlayer.role == [MafiaRole guardian])
@@ -261,7 +261,7 @@
         {
             if (player.isJustGuarded)
             {
-                [messages addObject:[NSString stringWithFormat:@"%@ was guarded and was dead with guardian.", player]];
+                [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), player]];
                 [player markDead];
                 [deadPlayerNames addObject:player.name];
             }
@@ -279,19 +279,19 @@
     {
         if ([healtPlayer isSelectedByRole:[MafiaRole killer]])
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was shot but healt.", healtPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot but healt", nil), healtPlayer]];
             [healtPlayer unselectFromRole:[MafiaRole killer]];
             [healtPlayer unselectFromRole:[MafiaRole doctor]];
         }
         else if (healtPlayer.isMisdiagnosed)
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was misdiagnosed twice and killed.", healtPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed twice and killed", nil), healtPlayer]];
             [healtPlayer markDead];
             [deadPlayerNames addObject:healtPlayer.name];
         }
         else
         {
-            [messages addObject:[NSString stringWithFormat:@"%@ was misdiagnosed.", healtPlayer]];
+            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed", nil), healtPlayer]];
             healtPlayer.isMisdiagnosed = YES;
             [healtPlayer unselectFromRole:[MafiaRole doctor]];
         }
