@@ -1,0 +1,34 @@
+{
+    "round": {{ game.round }},
+    "is_over": {{ game.is_over|yesno:'true,false' }},
+    "current_action":
+        {% with engine.get_current_action as action %}
+            {% if action %}
+                {
+                    "name": "{{ action.name }}",
+                    "role": {% if action.role %} "{{ action.role }}" {% else %} null {% endif %}
+                }
+            {% else %}
+                null
+            {% endif %}
+        {% endwith %} ,
+    "players": [
+        {% for player in game.player_set.all %}
+            {
+                "pk": {{ player.pk }},
+                "user": "{{ player.user }}",
+                "hand_side": "{{ player.hand_side }}",
+                "is_host": {{ player.is_host|yesno:'true,false' }},
+                "role": "{{ player.role }}",
+                "tags": [
+                    {% for tag in player.get_tags %}
+                        "{{ tag }}"{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                "is_out": {{ player.is_out|yesno:'true,false' }}
+            }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ],
+    "update_date": "{{ game.update_date|date:'c' }}",
+    "timestamp": {{ timestamp }}
+}

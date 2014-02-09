@@ -1,0 +1,60 @@
+{% extends "mafia/base.html" %}
+
+
+{% block head_title %} Host a New Game {% endblock %}
+
+
+{% block header %}
+  <h1>Host</h1>
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <form action="{% url mafia-game-host %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% comment %}
+        <div class="form-group {{ form.name.errors|yesno:'has-error,' }}">
+          {{ form.name|bootstrap_form_label }}
+          <div class="input-thin">{{ form.name|bootstrap_form_control }}</div>
+        </div>
+        <div class="form-group {{ form.is_two_handed.errors|yesno:'has-error,' }}">
+          {{ form.is_two_handed|bootstrap_form_control }}
+        </div>
+        <div class="form-group {{ form.num_killers.errors|yesno:'has-error,' }}">
+          {{ form.num_killers|bootstrap_form_label }}
+          <div class="input-thin">{{ form.num_killers|bootstrap_form_control }}</div>
+        </div>
+        <div class="form-group {{ form.num_detectives.errors|yesno:'has-error,' }}">
+          {{ form.num_detectives|bootstrap_form_label }}
+          <div class="input-thin">{{ form.num_detectives|bootstrap_form_control }}</div>
+        </div>
+        <div class="form-group {{ form.has_guardian.errors|yesno:'has-error,' }}">
+          {{ form.has_guardian|bootstrap_form_control }}
+        </div>
+        <div class="form-group {{ form.has_doctor.errors|yesno:'has-error,' }}">
+          {{ form.has_doctor|bootstrap_form_control }}
+        </div>
+        <div class="form-group {{ form.has_traitor.errors|yesno:'has-error,' }}">
+          {{ form.has_traitor|bootstrap_form_control }}
+        </div>
+        {% if form.username %}
+          <div class="form-group {{ form.username.errors|yesno:'has-error,' }}">
+            {{ form.username|bootstrap_form_label }}
+            <div class="input-thin">{{ form.username|bootstrap_form_control }}</div>
+          </div>
+        {% endif %}
+        {% endcomment %}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Host</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+{% endblock %}

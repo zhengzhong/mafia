@@ -1,0 +1,302 @@
+{% extends "mafia/base.html" %}
+
+
+{% block head_title %} {{ game.name }} (Variant: {{ game.variant }}) {% endblock %}
+
+
+{% block head_extras %}
+
+  <link href="{{ STATIC_URL }}bower_components/iCheck/skins/square/square.css" rel="stylesheet" type="text/css"/>
+  <link href="{{ STATIC_URL }}bower_components/iCheck/skins/square/green.css" rel="stylesheet" type="text/css"/>
+  <script src="{{ STATIC_URL }}bower_components/iCheck/iCheck.min.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/Swipe/swipe.js"></script>
+
+  <style type="text/css">
+
+    .swipe {
+      overflow: hidden;
+      visibility: hidden;
+      position: relative;
+    }
+    .swipe-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .swipe-wrap > div {
+      float:left;
+      width:100%;
+      position: relative;
+    }
+
+    .player-out {
+      border-color: #d43f3a;
+    }
+    .player-actor {
+      border-color: #5cb85c;
+    }
+
+    .player.panel .panel-body {
+      height: 160px;
+      overflow: hidden;
+    }
+
+    .player.panel .panel-footer {
+      height: 40px;
+      overflow: hidden;
+    }
+
+    .player .tags .label {
+      margin-right: 10px;
+    }
+
+  </style>
+
+{% endblock %}
+
+
+{% block header %}
+  <h1>{{ game.name }} (Variant: {{ game.variant }})</h1>
+{% endblock %}
+
+
+{% block content %}
+
+  <div>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#game" data-toggle="tab">Game</a></li>
+      <li><a href="#logs" data-toggle="tab">Logs</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <div id="game" class="tab-pane fade in active">
+
+        <section id="game-over" style="display: none;">
+          <div class="alert alert-warning">
+            <span class="glyphicon glyphicon-info-sign"></span> Game is over.
+          </div>
+        </section>
+
+        <!-- Game State ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <div class="row">
+          <div class="col-md-8">
+            <p>
+              <strong>Game State:</strong>
+              {% if game.is_ongoing %}
+                <span class="text-success">Ongoing ... <span id="heartbeat-indicator"></span></span>
+              {% elif game.is_over %}
+                <span class="text-danger">Game Over.</span>
+              {% else %}
+                <span class="text-muted">Not started yet.</span>
+              {% endif %}
+            </p>
+          </div>
+          <div class="col-md-4" style="text-align: right;">
+            {% if game.is_ongoing %}
+              <button id="error-indicator" class="btn btn-danger btn-xs" style="display: none;" type="button" disabled="disabled">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+              </button>
+              <span>
+                <a id="start-updating-button" class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="return startUpdating();">
+                  <span class="glyphicon glyphicon-play"></span>
+                </a>
+                <a id="stop-updating-button" class="btn btn-xs btn-danger" style="display: none;" href="javascript:void(0);" onclick="return stopUpdating();">
+                  <span class="glyphicon glyphicon-pause"></span>
+                </a>
+              </span>
+            {% endif %}
+            <a class="btn btn-xs btn-default" href="{{ game.get_absolute_url }}">
+              <span class="glyphicon glyphicon-refresh"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Game Action Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        {% if game.is_ongoing %}
+
+        <form id="game-action-form" class="form-horizontal" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
+
+          <input type="hidden" name="action" value="execute"/>
+
+          <div class="alert alert-info">
+            <p><strong><span id="game-round">Round ?</span> - <span id="game-action"></span></strong></p>
+            <p>Select one or more targets below...</p>
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Magic (Wizard only, optional):</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="text" name="magic" placeholder="Black / White"/>
+              </div>
+              <div class="col-sm-4">
+                <button class="btn btn-primary" type="submit">Execute Action</button>
+                <span class="done text-success glyphicon glyphicon-ok-sign" style="display: none;"></span>
+              </div>
+            </div>
+          </div>
+
+          <section>
+            <div id="players" class="row">
+              {% for player in game.player_set.all %}
+                <div class="col-md-3">
+                  <div id="player-{{ player.pk }}" class="player panel panel-default" data-pk="{{ player.pk }}">
+                    <div class="panel-heading">
+                      <span class="player-role pull-right label label-default">{{ player.role }}</span>
+                      <span>{{ player.user }} : {{ player.hand_side }}</span>
+                    </div>
+                    <div class="panel-body">
+                      <div class="tags"></div>
+                    </div>
+                    <div class="panel-footer" style="text-align: right;">
+                      <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+
+        </form>
+
+        {% endif %}
+
+        <form class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="start"/>
+          <div class="alert alert-danger">
+            <div class="form-group"><button class="btn btn-danger" type="submit">(Re)Start the game!</button></div>
+          </div>
+        </form>
+
+      </div>
+
+      <div id="logs" class="tab-pane fade">
+        <ul class="list-unstyled">
+          {% for log in game.log_set.all %}
+            <li><code>{{ log }}</code></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}
+
+
+{% block bottom_extras %}
+
+  <script type="text/javascript">//<![CDATA[
+
+    var timestamp = 0;
+    var updater = null;
+
+    function updateGame() {
+      $.ajax({
+        url: '{% url mafia-game-play pk=game.pk %}',
+        type: 'get'
+      }).done(function(game) {
+
+        $('#error-indicator').hide();
+        $('#heartbeat-indicator').text(game.update_date).show().delay(250).fadeOut();
+        if (game.timestamp <= timestamp) {
+          return;
+        }
+
+        timestamp = game.timestamp;
+        if (game.is_over) {
+          $('#game-over').show();
+        } else {
+          $('#game-over').hide();
+        }
+        $('#game-round').text('Round ' + game.round);
+        var currentAction = 'N/A';
+        var currentRole = 'N/A';
+        if (game.current_action != null) {
+          currentAction = game.current_action.name;
+          currentRole = game.current_action.role;
+        }
+        $('#game-action').text(currentAction + ' [' + currentRole + ']');
+
+        for (var i = 0; i < game.players.length; i++) {
+          var player = game.players[i];
+          var playerElement = $('#player-' + player.pk);
+          $('.player-role', playerElement).text(player.role);
+          if (player.is_out) {
+            playerElement.addClass('player-out');
+          } else if (player.role == currentRole) {
+            playerElement.addClass('player-actor');
+          } else {
+            playerElement.removeClass('player-actor');
+          }
+          var tagsElement = $('.tags', playerElement).empty();
+          for (var j = 0; j < player.tags.length; j++) {
+            $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(tagsElement);
+          }
+        }
+
+        if (game.is_over) {
+          stopUpdating();
+        }
+
+      }).fail(function() {
+
+        $('#error-indicator').show();
+
+      });
+    }
+
+    function startUpdating() {
+      $('#start-updating-button').hide();
+      $('#stop-updating-button').show();
+      timestamp = 0;
+      updater = setInterval(updateGame, 2000);
+      return false;
+    }
+
+    function stopUpdating() {
+      $('#stop-updating-button').hide();
+      $('#start-updating-button').show();
+      if (updater != null) {
+        clearInterval(updater);
+      }
+      timestamp = 0;
+      updater = null;
+      return false;
+    }
+
+    function executeAction() {
+      var form = $('#game-action-form');
+      $('.done', form).hide();
+      $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: form.serialize()
+      }).done(function(data) {
+        $('.done', form).show().delay(250).fadeOut();
+        $('input[name="target_pk[]"]', form).iCheck('uncheck');
+      }).fail(function(data) {
+        alert('failed:');
+        $('.done', form).hide();
+      });
+      return false;
+    }
+
+    $(function() {
+
+      $('input[name="target_pk[]"]').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+        increaseArea: '20%' // optional
+      });
+
+      startUpdating();
+
+    });
+
+  //]]></script>
+
+{% endblock %}
+
