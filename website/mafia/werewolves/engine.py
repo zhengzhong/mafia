@@ -19,7 +19,7 @@ class WerewolvesEngine(Engine):
     def get_role_list_on_stage(self):
         return (
             [Role.WEREWOLF] * 2
-            + [Role.PROPHET, Role.HUNTER, Role.WIZARD, Role.GIRL, Role.CUPID]
+            + [Role.GUARDIAN, Role.PROPHET, Role.HUNTER, Role.WIZARD, Role.CUPID]
         )
 
     def get_alignment(self, role1, role2):
@@ -38,11 +38,3 @@ class WerewolvesEngine(Engine):
         if len(werewolf_list) * 2 >= len(active_player_list):
             logger.info('Werewolves killed too many people: werewolves win!')
             self.game.is_over = True
-
-    def start_game(self, force=False):
-        super(WerewolvesEngine, self).start_game(force=force)
-        # Randomly assign mayor to a player.
-        player_list = list(self.game.player_set.all())
-        random.shuffle(player_list)
-        player_list[0].add_tag(Tag.MAYOR)
-        player_list[0].save()

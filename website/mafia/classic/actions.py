@@ -77,6 +77,7 @@ class SettleTags(Action):
 class VoteAndLynch(Action):
 
     role = None
+    tag = Tag.LYNCHED
 
     def is_executable_by(self, player):
         return player.is_host
@@ -85,8 +86,7 @@ class VoteAndLynch(Action):
         if target.has_tag(Tag.GUARDED):
             text = '%s was voted but exempted.' % target
         else:
-            target.is_out = True
-            target.save()
+            target.mark_out(self.tag)
             text = '%s was voted and lynched.' % target
         result.log_public(text)
 

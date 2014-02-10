@@ -29,6 +29,10 @@
             }{% if not forloop.last %},{% endif %}
         {% endfor %}
     ],
-    "update_date": "{{ game.update_date|date:'c' }}",
-    "timestamp": {{ timestamp }}
+    "possible_target_pk_list": [
+        {% for target in engine.get_possible_target_list %}
+            {{ target.pk }} {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ],
+    "update_date": "{{ game.update_date|date:'c' }}"
 }

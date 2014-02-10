@@ -69,15 +69,13 @@ class Shot(Rule):
             shot.remove_tag(Tag.CURED)
         else:
             result.log_private('%s was shot and killed.' % shot)
-            shot.is_out = True
-            shot.save()
+            shot.mark_out(self.tag)
             result.add_out_player(shot)
             # If guardian is killed, the player he guarded is also killed.
             if shot.role == Role.GUARDIAN:
                 for guarded in self.filter_players_by_tag(players, Tag.GUARDED):
                     result.log_private('%s was guarded and was dead with guardian.' % guarded)
-                    guarded.is_out = True
-                    guarded.save()
+                    guarded.mark_out(Tag.GUARDED)
                     result.add_out_player(guarded)
 
 
@@ -93,8 +91,7 @@ class Cured(Rule):
             cured.remove_tag(Tag.SHOT)
         elif cured.has_tag(Tag.MISDIAGNOSED):
             result.log_private('%s was misdiagnosed twice and killed.' % cured)
-            cured.is_out = True
-            cured.save()
+            cured.mark_out(Tag.MISDIAGNOSED)
             result.add_out_player(cured)
         else:
             result.log_private('%s was misdiagnosed.' % cured)

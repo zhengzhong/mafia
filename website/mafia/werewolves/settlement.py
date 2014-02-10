@@ -21,8 +21,7 @@ class Rule(object):
                 lovers = self.filter_players_by_tag(players, Tag.LOVER)
                 for lover in lovers:
                     result.log_private('%s was dead with his lover %s.' % (lover, out_player))
-                    lover.is_out = True
-                    lover.save()
+                    lover.mark_out(Tag.LOVER)
                     result.add_out_player(lover)
                 break
 
@@ -31,6 +30,22 @@ class Rule(object):
 
     def settle_tagged_player(self, tagged_player, players, result):
         raise NotImplementedError()
+
+
+class Guarded(Rule):
+
+    tag = Tag.GUARDED
+
+    def settle_tagged_player(self, tagged_player, players, result):
+        guarded = tagged_player
+        # If a player is guarded, he cannot be killed by werewolves.
+        if guarded.has_tag(Tag.BITTEN):
+            result.log_private('%s was bitten but guarded.' % guarded)
+            guarded.remove_tag(Tag.BITTEN)
+        # Mark guarded player as unguardable.
+        guarded.remove_tag(Tag.GUARDED)
+        guarded.add_tag(Tag.UNGUARDABLE)
+        result.log_private('%s was guarded and became unguardable.' % guarded)
 
 
 class Bitten(Rule):
@@ -45,8 +60,7 @@ class Bitten(Rule):
             bitten.remove_tag(Tag.BITTEN)
         else:
             result.log_private('%s was bitten and killed.' % bitten)
-            bitten.is_out = True
-            bitten.save()
+            bitten.mark_out(self.tag)
             result.add_out_player(bitten)
 
 
@@ -57,9 +71,8 @@ class Poisoned(Rule):
     def settle_tagged_player(self, tagged_player, players, result):
         poisoned = tagged_player
         result.log_private('%s was poisoned to death.' % poisoned)
-        poisoned.is_out = True
-        poisoned.save()
+        poisoned.mark_out(self.tag)
         result.add_out_player(poisoned)
 
 
-RULES = (Bitten(), Poisoned())
+RULES = (Guarded(), Bitten(), Poisoned())

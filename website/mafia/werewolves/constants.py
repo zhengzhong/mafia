@@ -8,23 +8,23 @@ class Role(object):
 
     CIVILIAN = 'Civilian'
     THIEF = 'Thief'
+    CUPID = 'Cupid'
+    GUARDIAN = 'Guardian'
     WEREWOLF = 'Werewolf'
     PROPHET = 'Prophet'
-    HUNTER = 'Hunter'
     WIZARD = 'Wizard'
-    GIRL = 'Girl'
-    CUPID = 'Cupid'
+    HUNTER = 'Hunter'
 
     ALIGNMENTS = {
         '': 0,
-        THIEF: +1,
         CIVILIAN: +1,
+        THIEF: +1,
+        CUPID: +1,
+        GUARDIAN: +1,
         WEREWOLF: -3,
         PROPHET: +3,
-        HUNTER: +1,
         WIZARD: +1,
-        GIRL: +1,
-        CUPID: +1,
+        HUNTER: +1,
     }
 
     @classmethod
@@ -41,7 +41,11 @@ class Tag(object):
 
     MAYOR = 'mayor'
     LOVER = 'lover'
+    GUARDED = 'guarded'
+    UNGUARDABLE = 'unguardable'
     BITTEN = 'bitten'
     INVESTIGATED = 'investigated'
     CURED = 'cured'
     POISONED = 'poisoned'
+    SHOT_BY_HUNTER = 'shot_by_hunter'
+    LYNCHED = 'lynched'

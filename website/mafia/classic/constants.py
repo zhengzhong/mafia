@@ -43,3 +43,4 @@ class Tag(object):
     CURED = 'cured'
     MISDIAGNOSED = 'misdiagnosed'
     CONTACTED_BY_TRAITOR = 'contacted_by_traitor'
+    LYNCHED = 'lynched'

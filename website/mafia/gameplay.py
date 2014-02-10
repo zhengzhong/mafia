@@ -237,6 +237,16 @@ class Engine(object):
             return None
         return self.action_list.current()
 
+    def get_possible_target_list(self):
+        current_action = self.get_current_action()
+        if current_action is None:
+            return []
+        else:
+            return [
+                player for player in self.game.player_set.all()
+                if current_action.is_executable_on(player)
+            ]
+
     def start_game(self, force=False):
         # Check if game can be started.
         if not force:

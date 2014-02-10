@@ -1,0 +1,99 @@
+
+.player-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.player-wrapper .padding {
+  margin-top: 100%;  /* keep 1:1 aspect ratio */
+}
+
+.player-wrapper .player {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.player .player-heading,
+.player .player-body,
+.player .player-footer {
+  padding: 10px;
+}
+
+.player .player-heading {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.player .player-heading h4 {
+  font-size: 125%;
+}
+
+.player .player-heading p {
+  margin-bottom: 4px;
+}
+
+.player .player-body {
+
+}
+
+.player .player-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+}
+
+
+
+
+
+
+
+
+.player-out {
+  border-color: #d9534f;
+}
+
+.player-out .player-heading {
+  background-color: #d9534f;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0)
+  );
+  background-size: 40px 40px;
+  color: #ffffff;
+}
+
+.player-actor {
+  border-color: #5cb85c;
+}
+
+.player.panel .panel-body {
+  height: 160px;
+  overflow: hidden;
+}
+
+.player.panel .panel-footer {
+  height: 40px;
+  overflow: hidden;
+}
+
+.player .tags .label {
+  margin: 2px;
+  display: inline-block;
+}
+

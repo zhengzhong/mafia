@@ -40,6 +40,19 @@ class CupidAction(Action):
         return not target.is_out and target.role != self.role
 
 
+class GuardianAction(Action):
+
+    role = Role.GUARDIAN
+    tag = Tag.GUARDED
+    is_optional = True
+
+    def get_min_max_num_targets(self):
+        return 0, 1
+
+    def is_executable_on(self, target):
+        return not target.is_out and not target.has_tag(Tag.UNGUARDABLE)
+
+
 class WerewolfAction(Action):
 
     role = Role.WEREWOLF
@@ -55,7 +68,7 @@ class ProphetAction(Action):
         return target.role != self.role
 
     def get_answer(self, target):
-        return target.role
+        return 'YES' if target.role == Role.WEREWOLF else 'NO'
 
 
 class WizardAction(Action):
@@ -81,6 +94,9 @@ class WizardAction(Action):
         if self.is_white_magic_used and self.is_black_magic_used:
             return False
         return not player.is_out and player.role == self.role
+
+    def is_executable_on(self, target):
+        return not target.is_out and not target.role == self.role
 
     def do_execute(self, players, target, options, result):
         magic = options['magic']
@@ -119,16 +135,29 @@ class SettleTags(Action):
             rule.settle(players, result)
 
 
-class VoteAndLynch(Action):
+class ElectMayor(Action):
 
     role = None
+    tag = Tag.MAYOR
 
     def is_executable_by(self, player):
         return player.is_host
 
     def do_execute(self, players, target, options, result):
-        target.is_out = True
-        target.save()
+        target.add_tag(self.tag)
+        result.log_public('%s was elected as mayor' % target)
+
+
+class VoteAndLynch(Action):
+
+    role = None
+    tag = Tag.LYNCHED
+
+    def is_executable_by(self, player):
+        return player.is_host
+
+    def do_execute(self, players, target, options, result):
+        target.mark_out(self.tag)
         result.log_public('%s was voted and lynched.' % target)
         result.add_out_player(target)
 
@@ -139,24 +168,22 @@ class MayorAction(Action):
     tag = Tag.MAYOR
 
     def is_executable_by(self, player):
-        # TODO: is_out in the current round.
         return player.is_out and player.has_tag(Tag.MAYOR)
 
 
 class HunterAction(Action):
 
     role = Role.HUNTER
+    tag = Tag.SHOT_BY_HUNTER
 
     def get_min_max_num_targets(self):
         return 0, 1
 
     def is_executable_by(self, player):
-        # TODO: is_out in the current round.
         return player.is_out and player.role == self.role
 
     def do_execute(self, players, target, options, result):
-        target.is_out = True
-        target.save()
+        target.mark_out(self.tag)
         result.log_public('%s shot %s' % (self.role, target))
         result.add_out_player(target)
 
@@ -165,28 +192,30 @@ class WerewolvesActionList(ActionList):
 
     initial_action_classes = (
         CupidAction,
+        GuardianAction,
         WerewolfAction,
         ProphetAction,
         WizardAction,
         SettleTags,
+        ElectMayor,
         VoteAndLynch,
     )
 
     action_classes = initial_action_classes + (MayorAction, HunterAction)
 
     def move_to_next(self, result, players):
-        if isinstance(self[self.index], (CupidAction, MayorAction, HunterAction)):
+        if isinstance(self[self.index], (CupidAction, ElectMayor, MayorAction, HunterAction)):
             self.pop(self.index)
         else:
-            is_hunter_out = False
-            is_mayor_out = False
+            is_hunter_action_enabled = False
+            is_mayor_action_enabled = False
             for out_player in result.out_players:
-                if out_player.role == Role.HUNTER:
-                    is_hunter_out = True
+                if out_player.role == Role.HUNTER and out_player.out_tag != Tag.POISONED:
+                    is_hunter_action_enabled = True
                 if out_player.has_tag(Tag.MAYOR):
-                    is_mayor_out = True
-            if is_hunter_out:
+                    is_mayor_action_enabled = True
+            if is_hunter_action_enabled:
                 self.insert(self.index + 1, HunterAction())
-            if is_mayor_out:
+            if is_mayor_action_enabled:
                 self.insert(self.index + 1, MayorAction())
             super(WerewolvesActionList, self).move_to_next(result, players)

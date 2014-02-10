@@ -5,52 +5,11 @@
 
 
 {% block head_extras %}
-
+  <link href="{{ STATIC_URL }}mafia/css/mafia.css" rel="stylesheet" type="text/css"/>
   <link href="{{ STATIC_URL }}bower_components/iCheck/skins/square/square.css" rel="stylesheet" type="text/css"/>
   <link href="{{ STATIC_URL }}bower_components/iCheck/skins/square/green.css" rel="stylesheet" type="text/css"/>
   <script src="{{ STATIC_URL }}bower_components/iCheck/iCheck.min.js"></script>
   <script src="{{ STATIC_URL }}bower_components/Swipe/swipe.js"></script>
-
-  <style type="text/css">
-
-    .swipe {
-      overflow: hidden;
-      visibility: hidden;
-      position: relative;
-    }
-    .swipe-wrap {
-      overflow: hidden;
-      position: relative;
-    }
-    .swipe-wrap > div {
-      float:left;
-      width:100%;
-      position: relative;
-    }
-
-    .player-out {
-      border-color: #d43f3a;
-    }
-    .player-actor {
-      border-color: #5cb85c;
-    }
-
-    .player.panel .panel-body {
-      height: 160px;
-      overflow: hidden;
-    }
-
-    .player.panel .panel-footer {
-      height: 40px;
-      overflow: hidden;
-    }
-
-    .player .tags .label {
-      margin-right: 10px;
-    }
-
-  </style>
-
 {% endblock %}
 
 
@@ -140,16 +99,22 @@
             <div id="players" class="row">
               {% for player in game.player_set.all %}
                 <div class="col-md-3">
-                  <div id="player-{{ player.pk }}" class="player panel panel-default" data-pk="{{ player.pk }}">
-                    <div class="panel-heading">
-                      <span class="player-role pull-right label label-default">{{ player.role }}</span>
-                      <span>{{ player.user }} : {{ player.hand_side }}</span>
-                    </div>
-                    <div class="panel-body">
-                      <div class="tags"></div>
-                    </div>
-                    <div class="panel-footer" style="text-align: right;">
-                      <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
+                  <div id="player-{{ player.pk }}" class="player-wrapper">
+                    <div class="padding"></div>
+                    <div class="player">
+                      <div class="player-heading media">
+                        <img class="media-object pull-left" src="http://placehold.it/48x48" alt="{{ player }}"/>
+                        <div class="media-body">
+                          <h4 class="media-heading">{{ player.user }} [{{ player.hand_side }}]</h4>
+                          <p><span class="player-role label label-default">{{ player.role }}</span></p>
+                        </div>
+                      </div>
+                      <div class="player-body">
+                        <div class="tags"></div>
+                      </div>
+                      <div class="player-footer">
+                        <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -201,11 +166,11 @@
 
         $('#error-indicator').hide();
         $('#heartbeat-indicator').text(game.update_date).show().delay(250).fadeOut();
-        if (game.timestamp <= timestamp) {
+        if (game.update_date == timestamp) {
           return;
         }
 
-        timestamp = game.timestamp;
+        timestamp = game.update_date;
         if (game.is_over) {
           $('#game-over').show();
         } else {
@@ -223,6 +188,7 @@
         for (var i = 0; i < game.players.length; i++) {
           var player = game.players[i];
           var playerElement = $('#player-' + player.pk);
+          // Update player information...
           $('.player-role', playerElement).text(player.role);
           if (player.is_out) {
             playerElement.addClass('player-out');
@@ -231,9 +197,18 @@
           } else {
             playerElement.removeClass('player-actor');
           }
+          // Update player tags...
           var tagsElement = $('.tags', playerElement).empty();
           for (var j = 0; j < player.tags.length; j++) {
             $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(tagsElement);
+          }
+          // Update player checkbox...
+          var targetCheckbox = $('input[name="target_pk[]"]', playerElement);
+          targetCheckbox.iCheck('uncheck');
+          if (game.possible_target_pk_list.indexOf(player.pk) != -1) {
+            targetCheckbox.iCheck('enable');
+          } else {
+            targetCheckbox.iCheck('disable');
           }
         }
 
@@ -243,7 +218,7 @@
 
       }).fail(function() {
 
-        $('#error-indicator').show();
+        $('#error-indicator').show().delay(250).fadeOut();
 
       });
     }

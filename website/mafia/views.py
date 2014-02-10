@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime
 import json
 import logging
 
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, CreateView, DetailView
-from django.utils.timezone import make_aware, get_default_timezone
 from django.contrib.auth.models import User
 
 from mafia.models import Game, Player
@@ -88,10 +86,7 @@ class GamePlayView(DetailView, _UserMixin):
 
     def get_context_data(self, **kwargs):
         context_data = super(GamePlayView, self).get_context_data(**kwargs)
-        engine = self.get_engine()
-        epoch = make_aware(datetime.datetime.utcfromtimestamp(0), get_default_timezone())
-        timestamp = (engine.game.update_date - epoch).total_seconds()
-        context_data.update({'engine': engine, 'timestamp': timestamp})
+        context_data['engine'] = self.get_engine()
         return context_data
 
     def render_to_response(self, context, **response_kwargs):

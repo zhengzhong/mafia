@@ -140,7 +140,7 @@ class Player(models.Model):
     is_host = models.BooleanField(default=False)
     role = models.CharField(max_length=20, blank=True)
     tags_json = models.TextField(blank=True)
-    is_out = models.BooleanField(default=False)
+    out_tag = models.CharField(max_length=20, blank=True)
     join_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -157,6 +157,10 @@ class Player(models.Model):
             return queryset.get()
         else:
             return None
+
+    @property
+    def is_out(self):
+        return self.out_tag != ''
 
     def __unicode__(self):
         return u'%s:%s (%s)' % (self.user, self.hand_side, self.role)
@@ -186,10 +190,14 @@ class Player(models.Model):
         if save:
             self.save()
 
+    def mark_out(self, out_tag):
+        self.out_tag = out_tag
+        self.add_tag(out_tag, save=True)
+
     def reset(self):
         self.role = ''
         self.tags_json = ''
-        self.is_out = False
+        self.out_tag = ''
 
 
 class GameLog(models.Model):
