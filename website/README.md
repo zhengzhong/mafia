@@ -1,6 +1,16 @@
+Mafia Online
+=============
+
+
+Requirements
+-------------
+
+* [Django 1.4+](https://www.djangoproject.com/)
 
 
 Run Locally
 ------------
 
-    $ dev_appserver.py . --log_level=debug --datastore_path=[path-to-database-file]
+    $ python manage.py syncdb --noinput
+    $ python manage.py loaddata mafia_users
+    $ python manage.py runserver
