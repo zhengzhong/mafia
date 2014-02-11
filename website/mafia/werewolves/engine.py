@@ -18,8 +18,12 @@ class WerewolvesEngine(Engine):
 
     def get_role_list_on_stage(self):
         return (
-            [Role.WEREWOLF] * 2
-            + [Role.GUARDIAN, Role.PROPHET, Role.HUNTER, Role.WIZARD, Role.CUPID]
+            [Role.WEREWOLF] * self.game.config['num_werewolves'] + [Role.PROPHET]
+            + [Role.THIEF] * (1 if self.game.config['has_thief'] else 0)
+            + [Role.CUPID] * (1 if self.game.config['has_cupid'] else 0)
+            + [Role.PROTECTOR] * (1 if self.game.config['has_protector'] else 0)
+            + [Role.WIZARD] * (1 if self.game.config['has_wizard'] else 0)
+            + [Role.HUNTER] * (1 if self.game.config['has_hunter'] else 0)
         )
 
     def get_alignment(self, role1, role2):

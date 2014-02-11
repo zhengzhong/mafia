@@ -16,7 +16,10 @@
         {% for player in game.player_set.all %}
             {
                 "pk": {{ player.pk }},
-                "user": "{{ player.user }}",
+                "user": {
+                    "username": "{{ player.username }}",
+                    "gravatar_url": "{{ player.gravatar_url }}"
+                },
                 "hand_side": "{{ player.hand_side }}",
                 "is_host": {{ player.is_host|yesno:'true,false' }},
                 "role": "{{ player.role }}",

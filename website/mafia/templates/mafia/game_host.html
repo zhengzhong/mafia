@@ -13,46 +13,77 @@
 
   <div class="row">
 
-    <div class="col-md-8">
-      <form action="{% url mafia-game-host %}" method="post">
+    <div class="col-md-6">
+
+      <form id="game-host-form" class="form-horizontal" action="{% url mafia-game-host %}" method="post">
+
         {% csrf_token %}
-        {{ form.as_p }}
-        {% comment %}
-        <div class="form-group {{ form.name.errors|yesno:'has-error,' }}">
-          {{ form.name|bootstrap_form_label }}
-          <div class="input-thin">{{ form.name|bootstrap_form_control }}</div>
-        </div>
-        <div class="form-group {{ form.is_two_handed.errors|yesno:'has-error,' }}">
-          {{ form.is_two_handed|bootstrap_form_control }}
-        </div>
-        <div class="form-group {{ form.num_killers.errors|yesno:'has-error,' }}">
-          {{ form.num_killers|bootstrap_form_label }}
-          <div class="input-thin">{{ form.num_killers|bootstrap_form_control }}</div>
-        </div>
-        <div class="form-group {{ form.num_detectives.errors|yesno:'has-error,' }}">
-          {{ form.num_detectives|bootstrap_form_label }}
-          <div class="input-thin">{{ form.num_detectives|bootstrap_form_control }}</div>
-        </div>
-        <div class="form-group {{ form.has_guardian.errors|yesno:'has-error,' }}">
-          {{ form.has_guardian|bootstrap_form_control }}
-        </div>
-        <div class="form-group {{ form.has_doctor.errors|yesno:'has-error,' }}">
-          {{ form.has_doctor|bootstrap_form_control }}
-        </div>
-        <div class="form-group {{ form.has_traitor.errors|yesno:'has-error,' }}">
-          {{ form.has_traitor|bootstrap_form_control }}
-        </div>
-        {% if form.username %}
-          <div class="form-group {{ form.username.errors|yesno:'has-error,' }}">
-            {{ form.username|bootstrap_form_label }}
-            <div class="input-thin">{{ form.username|bootstrap_form_control }}</div>
+
+        {% for field, is_checkbox in form.get_basic_fields %}
+          <div class="form-group {% if field.errors %}has-error{% endif %}">
+            {% if is_checkbox %}
+              <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox"><label>{{ field }} {{ field.label }}</label></div>
+              </div>
+            {% else %}
+              <label class="col-sm-4 control-label">{{ field.label }}</label>
+              <div class="col-sm-8">{{ field }}</div>
+            {% endif %}
           </div>
-        {% endif %}
-        {% endcomment %}
+        {% endfor %}
+
+        <fieldset id="classic-fields" style="display: none;">
+          <legend>Classic Settings</legend>
+          {% for field, is_checkbox in form.get_classic_fields %}
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+              {% if is_checkbox %}
+                <div class="col-sm-offset-4 col-sm-8">
+                  <div class="checkbox"><label>{{ field }} {{ field.label }}</label></div>
+                </div>
+              {% else %}
+                <label class="col-sm-4 control-label">{{ field.label }}</label>
+                <div class="col-sm-8">{{ field }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </fieldset>
+
+        <fieldset id="werewolves-fields" style="display: none;">
+          <legend>Werewolves Settings</legend>
+          {% for field, is_checkbox in form.get_werewolves_fields %}
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+              {% if is_checkbox %}
+                <div class="col-sm-offset-4 col-sm-8">
+                  <div class="checkbox"><label>{{ field }} {{ field.label }}</label></div>
+                </div>
+              {% else %}
+                <label class="col-sm-4 control-label">{{ field.label }}</label>
+                <div class="col-sm-8">{{ field }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </fieldset>
+
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Host</button>
+          <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-primary">Host</button>
+          </div>
         </div>
+
       </form>
+
+      <script type="text/javascript">//<![CDATA[
+        $(function() {
+          var variantInput = $('#game-host-form :input[name="variant"]');
+          $('#' + variantInput.val() + '-fields').show();
+          variantInput.change(function() {
+            $('#classic-fields').hide();
+            $('#werewolves-fields').hide();
+            $('#' + $(this).val() + '-fields').show();
+          });
+        });
+      //]]></script>
+
     </div>
 
   </div>

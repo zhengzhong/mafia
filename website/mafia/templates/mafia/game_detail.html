@@ -6,10 +6,6 @@
 
 {% block head_extras %}
   <link href="{{ STATIC_URL }}mafia/css/mafia.css" rel="stylesheet" type="text/css"/>
-  <link href="{{ STATIC_URL }}bower_components/iCheck/skins/square/square.css" rel="stylesheet" type="text/css"/>
-  <link href="{{ STATIC_URL }}bower_components/iCheck/skins/square/green.css" rel="stylesheet" type="text/css"/>
-  <script src="{{ STATIC_URL }}bower_components/iCheck/iCheck.min.js"></script>
-  <script src="{{ STATIC_URL }}bower_components/Swipe/swipe.js"></script>
 {% endblock %}
 
 
@@ -58,10 +54,10 @@
                 <span class="glyphicon glyphicon-exclamation-sign"></span>
               </button>
               <span>
-                <a id="start-updating-button" class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="return startUpdating();">
+                <a id="start-updating-button" class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="return startHeartbeat();">
                   <span class="glyphicon glyphicon-play"></span>
                 </a>
-                <a id="stop-updating-button" class="btn btn-xs btn-danger" style="display: none;" href="javascript:void(0);" onclick="return stopUpdating();">
+                <a id="stop-updating-button" class="btn btn-xs btn-danger" style="display: none;" href="javascript:void(0);" onclick="return stopHeartbeat();">
                   <span class="glyphicon glyphicon-pause"></span>
                 </a>
               </span>
@@ -99,22 +95,26 @@
             <div id="players" class="row">
               {% for player in game.player_set.all %}
                 <div class="col-md-3">
-                  <div id="player-{{ player.pk }}" class="player-wrapper">
-                    <div class="padding"></div>
-                    <div class="player">
-                      <div class="player-heading media">
-                        <img class="media-object pull-left" src="http://placehold.it/48x48" alt="{{ player }}"/>
-                        <div class="media-body">
-                          <h4 class="media-heading">{{ player.user }} [{{ player.hand_side }}]</h4>
-                          <p><span class="player-role label label-default">{{ player.role }}</span></p>
-                        </div>
+                  <div id="player-{{ player.pk }}" class="player">
+                    <div class="player-heading">
+                      <img class="img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
+                      <h4>{{ player }}</h4>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="player-body">
+                      <div class="player-role">
+                        <a href="javascript:void(0);" onclick="return togglePlayerSelect({{ player.pk }});">
+                          <img class="img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
+                        </a>
                       </div>
-                      <div class="player-body">
+                      <div class="player-details">
+                        <div><span class="role label label-primary"></span></div>
                         <div class="tags"></div>
                       </div>
-                      <div class="player-footer">
-                        <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
-                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div style="display: none;">
+                      <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
                     </div>
                   </div>
                 </div>
@@ -155,90 +155,85 @@
 
   <script type="text/javascript">//<![CDATA[
 
-    var timestamp = 0;
-    var updater = null;
+    var updateTimestamp = null;
+    var heartbeatId = null;
 
-    function updateGame() {
-      $.ajax({
-        url: '{% url mafia-game-play pk=game.pk %}',
-        type: 'get'
-      }).done(function(game) {
-
-        $('#error-indicator').hide();
-        $('#heartbeat-indicator').text(game.update_date).show().delay(250).fadeOut();
-        if (game.update_date == timestamp) {
-          return;
-        }
-
-        timestamp = game.update_date;
-        if (game.is_over) {
-          $('#game-over').show();
-        } else {
-          $('#game-over').hide();
-        }
-        $('#game-round').text('Round ' + game.round);
-        var currentAction = 'N/A';
-        var currentRole = 'N/A';
-        if (game.current_action != null) {
-          currentAction = game.current_action.name;
-          currentRole = game.current_action.role;
-        }
-        $('#game-action').text(currentAction + ' [' + currentRole + ']');
-
-        for (var i = 0; i < game.players.length; i++) {
-          var player = game.players[i];
-          var playerElement = $('#player-' + player.pk);
-          // Update player information...
-          $('.player-role', playerElement).text(player.role);
-          if (player.is_out) {
-            playerElement.addClass('player-out');
-          } else if (player.role == currentRole) {
-            playerElement.addClass('player-actor');
-          } else {
-            playerElement.removeClass('player-actor');
-          }
-          // Update player tags...
-          var tagsElement = $('.tags', playerElement).empty();
-          for (var j = 0; j < player.tags.length; j++) {
-            $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(tagsElement);
-          }
-          // Update player checkbox...
-          var targetCheckbox = $('input[name="target_pk[]"]', playerElement);
-          targetCheckbox.iCheck('uncheck');
-          if (game.possible_target_pk_list.indexOf(player.pk) != -1) {
-            targetCheckbox.iCheck('enable');
-          } else {
-            targetCheckbox.iCheck('disable');
-          }
-        }
-
-        if (game.is_over) {
-          stopUpdating();
-        }
-
-      }).fail(function() {
-
-        $('#error-indicator').show().delay(250).fadeOut();
-
+    function uncheckPlayers() {
+      $('.player').each(function() {
+        $('input[name="target_pk[]"]', this).prop('checked', false);
+        $(this).removeClass('player-selected');
       });
     }
 
-    function startUpdating() {
-      $('#start-updating-button').hide();
-      $('#stop-updating-button').show();
-      timestamp = 0;
-      updater = setInterval(updateGame, 2000);
+    function togglePlayerSelect(playerPK) {
+      var element = $('#player-' + playerPK);
+      var checkbox = $('input[name="target_pk[]"]', element);
+      var isChecked = element.hasClass('player-selectable') && !checkbox.prop('checked');
+      checkbox.prop('checked', isChecked);
+      element.toggleClass('player-selected', checkbox.prop('checked'));
       return false;
     }
 
-    function stopUpdating() {
+    function updateGameState(game) {
+        $('#game-over').toggle(game.is_over);
+        $('#game-round').text('Round ' + game.round);
+        if (game.current_action != null) {
+          $('#game-action').text(game.current_action.name);
+        }
+    }
+
+    function updatePlayer(player, isSelectable) {
+      var element = $('#player-' + player.pk);
+      // Update player information...
+      $('.role', element).text(player.role);
+      element.toggleClass('player-out', player.is_out);
+      element.toggleClass('player-selectable', isSelectable);
+      // Update player tags...
+      var tagsElement = $('.tags', element).empty();
+      for (var j = 0; j < player.tags.length; j++) {
+        $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(tagsElement);
+      }
+    }
+
+    function heartbeat() {
+      $.ajax({
+        url: '{% url mafia-game-heartbeat pk=game.pk %}',
+        type: 'get'
+      }).done(function(game) {
+        $('#error-indicator').hide();
+        $('#heartbeat-indicator').text(game.update_date).show().delay(250).fadeOut();
+        if (game.update_date != updateTimestamp) {
+          updateTimestamp = game.update_date;
+          updateGameState(game);
+          for (var i = 0; i < game.players.length; i++) {
+            var player = game.players[i];
+            var isSelectable = (game.possible_target_pk_list.indexOf(player.pk) != -1);
+            updatePlayer(player, isSelectable);
+          }
+        }
+        if (game.is_over) {
+          stopHeartbeat();
+        }
+      }).fail(function() {
+        $('#error-indicator').show().delay(250).fadeOut();
+      });
+    }
+
+    function startHeartbeat() {
+      $('#start-updating-button').hide();
+      $('#stop-updating-button').show();
+      updateTimestamp = null;
+      heartbeatId = setInterval(heartbeat, 2000);
+      return false;
+    }
+
+    function stopHeartbeat() {
       $('#stop-updating-button').hide();
       $('#start-updating-button').show();
-      if (updater != null) {
-        clearInterval(updater);
+      if (heartbeatId != null) {
+        clearInterval(heartbeatId);
       }
-      timestamp = 0;
-      updater = null;
+      heartbeatId = null;
       return false;
     }
 
@@ -251,7 +246,8 @@
         data: form.serialize()
       }).done(function(data) {
         $('.done', form).show().delay(250).fadeOut();
-        $('input[name="target_pk[]"]', form).iCheck('uncheck');
+        uncheckPlayers();
+        //TODO:$('input[name="target_pk[]"]', form).iCheck('uncheck');
       }).fail(function(data) {
         alert('failed:');
         $('.done', form).hide();
@@ -259,17 +255,11 @@
       return false;
     }
 
-    $(function() {
-
-      $('input[name="target_pk[]"]').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green',
-        increaseArea: '20%' // optional
+    {% if game.is_ongoing %}
+      $(function() {
+        startHeartbeat();
       });
-
-      startUpdating();
-
-    });
+    {% endif %}
 
   //]]></script>
 

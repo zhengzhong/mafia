@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import hashlib
 import json
 import logging
+import urllib
 
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 
 logger = logging.getLogger(__name__)
@@ -39,7 +42,7 @@ class Game(models.Model):
 
     name = models.CharField(_('Game Name'), max_length=100)
     is_two_handed = models.BooleanField(_('Two-Handed'), default=True)
-    variant = models.CharField(_('Variant'), max_length=20, choices=VARIANT_CHOICES)
+    variant = models.CharField(_('Variant'), max_length=20, choices=VARIANT_CHOICES, default=VARIANT_CLASSIC)
     config_json = models.TextField(blank=True)
     context_json = models.TextField(blank=True)
     round = models.PositiveIntegerField(default=0)
@@ -124,19 +127,17 @@ class PlayerManager(models.Manager):
 
 class Player(models.Model):
 
-    HAND_SIDE_NA = ''
     HAND_SIDE_LEFT = 'left'
     HAND_SIDE_RIGHT = 'right'
 
     HAND_SIDE_CHOICES = (
-        (HAND_SIDE_NA, HAND_SIDE_NA),
         (HAND_SIDE_LEFT, HAND_SIDE_LEFT),
         (HAND_SIDE_RIGHT, HAND_SIDE_RIGHT),
     )
 
     game = models.ForeignKey(Game)
-    user = models.CharField(max_length=20)
-    hand_side = models.CharField(max_length=10, choices=HAND_SIDE_CHOICES)
+    user = models.ForeignKey(User)
+    hand_side = models.CharField(max_length=10, choices=HAND_SIDE_CHOICES, blank=True)
     is_host = models.BooleanField(default=False)
     role = models.CharField(max_length=20, blank=True)
     tags_json = models.TextField(blank=True)
@@ -148,6 +149,16 @@ class Player(models.Model):
         unique_together = ('game', 'user', 'hand_side')
 
     objects = PlayerManager()
+
+    @property
+    def username(self):
+        return self.user.username
+
+    @property
+    def gravatar_url(self):
+        email_md5 = hashlib.md5(self.user.email.lower()).hexdigest().lower()
+        params = urllib.urlencode({'s': 48, 'd': 'retro'})
+        return 'http://www.gravatar.com/avatar/%s?%s' % (email_md5, params)
 
     @property
     def twin(self):
@@ -163,7 +174,10 @@ class Player(models.Model):
         return self.out_tag != ''
 
     def __unicode__(self):
-        return u'%s:%s (%s)' % (self.user, self.hand_side, self.role)
+        if self.hand_side:
+            return '%s [%s]' % (self.user, self.hand_side)
+        else:
+            return unicode(self.user)
 
     def get_tags(self):
         if not self.tags_json:

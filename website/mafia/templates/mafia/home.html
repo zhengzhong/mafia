@@ -32,46 +32,6 @@
       </tbody>
     </table>
 
-    {% comment %}
-    <script type="text/javascript">//<![CDATA[
-
-      $('#user-rating').raty({
-        path: '{{ STATIC_URL }}bower_components/raty/lib/img',
-        {% if user_rating %}
-          score: {{ user_rating.score }},
-        {% endif %}
-        cancel: true,
-        cancelPlace: 'right',
-        click: function(score, event) {
-          $('#rating-form input[name="score"]').val(score != null ? score : 0);
-          if (score == null) {
-            updateRating();
-          } else {
-            $('#rating-comment-modal').modal('show');
-          }
-        }
-      });
-
-      function joinGame(joinUrl) {
-        var form = $('#rating-form');
-        var options = {
-          type: 'post',
-          url: joinUrl,
-          data: form.serialize(),
-          success: function(data) {
-            $('#rating-comment-modal').modal('hide');
-          },
-          error: function(xhr, status, exc) {
-            $('#rating-comment-modal').modal('hide');
-          }
-        };
-        $.ajax(options);
-        return false;
-      }
-
-    //]]></script>
-    {% endcomment %}
-
   {% else %}
 
     <div class="alert alert-warning">

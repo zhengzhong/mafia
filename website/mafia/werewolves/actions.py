@@ -40,17 +40,17 @@ class CupidAction(Action):
         return not target.is_out and target.role != self.role
 
 
-class GuardianAction(Action):
+class ProtectorAction(Action):
 
-    role = Role.GUARDIAN
-    tag = Tag.GUARDED
+    role = Role.PROTECTOR
+    tag = Tag.PROTECTED
     is_optional = True
 
     def get_min_max_num_targets(self):
         return 0, 1
 
     def is_executable_on(self, target):
-        return not target.is_out and not target.has_tag(Tag.UNGUARDABLE)
+        return not target.is_out and not target.has_tag(Tag.UNPROTECTABLE)
 
 
 class WerewolfAction(Action):
@@ -192,7 +192,7 @@ class WerewolvesActionList(ActionList):
 
     initial_action_classes = (
         CupidAction,
-        GuardianAction,
+        ProtectorAction,
         WerewolfAction,
         ProphetAction,
         WizardAction,

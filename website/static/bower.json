@@ -13,8 +13,6 @@
   ],
   "dependencies": {
     "html5shiv": "~3.7.0",
-    "iCheck": "~1.0.1",
-    "jquery": "~1.9",
-    "Swipe": "master"
+    "jquery": "~1.9"
   }
 }
