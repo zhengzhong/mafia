@@ -69,6 +69,14 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
     template_name = 'mafia/game_detail.html'
 
 
+class MafiaGameStartView(_MafiaGameEngineDetailView):
+
+    def post(self, request, *args, **kwargs):
+        engine = self.get_engine()
+        engine.start_game(force=True)
+        return HttpResponseRedirect(engine.game.get_absolute_url())
+
+
 class MafiaGameHeartbeatView(_MafiaGameEngineDetailView):
 
     template_name = 'mafia/game_detail.json'
@@ -80,21 +88,10 @@ class MafiaGameHeartbeatView(_MafiaGameEngineDetailView):
 
 class MafiaGamePlayView(_MafiaGameEngineDetailView):
 
-    template_name = 'mafia/game_detail.json'
-
     def post(self, request, *args, **kwargs):
         engine = self.get_engine()
-        action = request.POST.get('action', '')
-        if action == 'start':
-            message = engine.start_game(force=True)
-        elif action == 'execute':
-            targets = Player.objects.filter(pk__in=request.POST.getlist('target_pk[]'))
-            options = {'magic': request.POST.get('magic', '').lower()}  # TODO: hard-coded!
-            message = engine.execute_action(targets, options)
-        else:
-            message = 'Unknown action %s' % action
+        targets = Player.objects.filter(pk__in=request.POST.getlist('target_pk[]'))
+        options = {'magic': request.POST.get('magic', '').lower()}  # TODO: hard-coded!
+        message = engine.execute_action(targets, options)
         result = {'message': message}
-        if request.is_ajax():
-            return HttpResponse(json.dumps(result, ensure_ascii=False), mimetype='application/json')
-        else:
-            return HttpResponseRedirect(engine.game.get_absolute_url())
+        return HttpResponse(json.dumps(result, ensure_ascii=False), mimetype='application/json')

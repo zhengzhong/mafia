@@ -232,6 +232,9 @@ class Engine(object):
         num_roles = len(self.get_role_list_on_stage())
         return int(1.5 * num_roles), 3 * num_roles
 
+    def get_num_unused_players(self):
+        return 0
+
     def get_current_action(self):
         if not self.game.is_ongoing:
             return None
@@ -254,6 +257,7 @@ class Engine(object):
                 raise GameError('Cannot start game %s: game is over.' % self.game)
             if self.game.round > 0:
                 raise GameError('Cannot start game %s: game is already started.' % self.game)
+        self.game.ensure_unused_players(self.get_num_unused_players())
         min_num_players, max_num_players = self.get_min_max_num_players()
         player_list = list(self.game.player_set.all())
         if not (min_num_players <= len(player_list) <= max_num_players):

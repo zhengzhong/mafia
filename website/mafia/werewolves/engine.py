@@ -32,6 +32,12 @@ class WerewolvesEngine(Engine):
     def get_civilian_role(self):
         return Role.CIVILIAN
 
+    def get_num_unused_players(self):
+        if self.game.config['has_thief']:
+            return 2
+        else:
+            return 0
+
     def update_game_over(self):
         player_list = self.game.player_set.all()
         active_player_list = [player for player in player_list if not player.is_out]

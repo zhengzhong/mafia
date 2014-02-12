@@ -74,8 +74,6 @@
 
         <form id="game-action-form" class="form-horizontal" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
-          <input type="hidden" name="action" value="execute"/>
-
           <div class="alert alert-info">
             <p><strong><span id="game-round">Round ?</span> - <span id="game-action"></span></strong></p>
             <p>Select one or more targets below...</p>
@@ -129,9 +127,8 @@
 
         {% endif %}
 
-        <form class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post">
+        <form class="form-inline" action="{% url mafia-game-start pk=game.pk %}" method="post">
           {% csrf_token %}
-          <input type="hidden" name="action" value="start"/>
           <div class="alert alert-danger">
             <div class="form-group"><button class="btn btn-danger" type="submit">(Re)Start the game!</button></div>
           </div>

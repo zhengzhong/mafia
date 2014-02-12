@@ -17,15 +17,22 @@ class ThiefAction(Action):
         return 0, 1
 
     def is_executable_on(self, target):
-        return not target.is_out and target.role != self.role
+        return target.is_unused
 
     def execute_with_result(self, players, targets, options, result):
+        thief = next(player for player in players if player.role == self.role)
         if targets:
-            thief = next(player for player in players if player.role == self.role)
             target = targets[0]
             thief.role, target.role = target.role, thief.role
             thief.save()
             target.save()
+        else:
+            unused_players = [p for p in players if p.is_unused]
+            unused_werewolves = [p for p in unsed_players if p.role == Role.WEREWOLF]
+            if unused_players == unused_werewolves:
+                unused_werewolf = unused_werewolves[0]
+                thief.role, unused_werewolf.role = unused_werewolf.role, thief.role
+        if thief.role != self.role:
             result.log('%s changed role to %s' % (self.role, thief.role), visibility=self.role)
         else:
             result.log('%s did not change the role.' % self.role, visibility=self.role)
@@ -201,6 +208,7 @@ class HunterAction(Action):
 class WerewolvesActionList(ActionList):
 
     initial_action_classes = (
+        ThiefAction,
         CupidAction,
         ProtectorAction,
         WerewolfAction,
@@ -214,7 +222,7 @@ class WerewolvesActionList(ActionList):
     action_classes = initial_action_classes + (MayorAction, HunterAction)
 
     def move_to_next(self, result, players):
-        if isinstance(self[self.index], (CupidAction, ElectMayor, MayorAction, HunterAction)):
+        if isinstance(self[self.index], (ThiefAction, CupidAction, ElectMayor, MayorAction, HunterAction)):
             self.pop(self.index)
         else:
             is_hunter_action_enabled = False

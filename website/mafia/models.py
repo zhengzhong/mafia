@@ -98,6 +98,17 @@ class Game(models.Model):
             self.context_json = json.dumps(self._context, ensure_ascii=False)
         super(Game, self).save(*args, **kwargs)
 
+    def ensure_unused_players(self, num_unused_players):
+        current_unused_players = self.player_set.filter(user=None)
+        delta = num_unused_players - current_unused_players.count()
+        if delta > 0:
+            for i in range(0, delta):
+                player = Player(game=self, user=None)
+                player.save()
+        elif delta < 0:
+            for i in range(0, -delta):
+                current_unused_players[i].delete()
+
     def log_action_result(self, result):
         for message in result.messages:
             GameLog.objects.create(
@@ -136,7 +147,7 @@ class Player(models.Model):
     )
 
     game = models.ForeignKey(Game)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, blank=True, null=True)
     hand_side = models.CharField(max_length=10, choices=HAND_SIDE_CHOICES, blank=True)
     is_host = models.BooleanField(default=False)
     role = models.CharField(max_length=20, blank=True)
@@ -152,13 +163,16 @@ class Player(models.Model):
 
     @property
     def username(self):
-        return self.user.username
+        return self.user.username if self.user else 'Unused'
 
     @property
     def gravatar_url(self):
-        email_md5 = hashlib.md5(self.user.email.lower()).hexdigest().lower()
-        params = urllib.urlencode({'s': 48, 'd': 'retro'})
-        return 'http://www.gravatar.com/avatar/%s?%s' % (email_md5, params)
+        if self.user:
+            email_md5 = hashlib.md5(self.user.email.lower()).hexdigest().lower()
+            params = urllib.urlencode({'s': 48, 'd': 'retro'})
+            return 'http://www.gravatar.com/avatar/%s?%s' % (email_md5, params)
+        else:
+            return 'http://placehold.it/48x48'
 
     @property
     def twin(self):
@@ -170,14 +184,18 @@ class Player(models.Model):
             return None
 
     @property
+    def is_unused(self):
+        return self.user is None
+
+    @property
     def is_out(self):
-        return self.out_tag != ''
+        return self.is_unused or self.out_tag != ''
 
     def __unicode__(self):
+        string = unicode(self.user) if self.user else 'Unused'
         if self.hand_side:
-            return '%s [%s]' % (self.user, self.hand_side)
-        else:
-            return unicode(self.user)
+            string += ' [%s]' % self.hand_side
+        return string
 
     def get_tags(self):
         if not self.tags_json:
