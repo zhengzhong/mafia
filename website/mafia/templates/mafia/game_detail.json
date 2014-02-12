@@ -6,7 +6,16 @@
             {% if action %}
                 {
                     "name": "{{ action.name }}",
-                    "role": {% if action.role %} "{{ action.role }}" {% else %} null {% endif %}
+                    "role": {% if action.role %} "{{ action.role }}" {% else %} null {% endif %},
+                    "options": {
+                        {% for name, values in action.get_option_choices.items %}
+                            "{{ name }}": [
+                                {% for value in values %}
+                                    "{{ value }}" {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            ] {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    }
                 }
             {% else %}
                 null

@@ -19,12 +19,16 @@ class ThiefAction(Action):
     def is_executable_on(self, target):
         return not target.is_out and target.role != self.role
 
-    def do_execute(self, players, target, options, result):
-        thief = next(player for player in players if player.role == self.role)
-        thief.role = target.role
-        thief.save()
-        #result.log(text, visibility=self.role)
-        pass
+    def execute_with_result(self, players, targets, options, result):
+        if targets:
+            thief = next(player for player in players if player.role == self.role)
+            target = targets[0]
+            thief.role, target.role = target.role, thief.role
+            thief.save()
+            target.save()
+            result.log('%s changed role to %s' % (self.role, thief.role), visibility=self.role)
+        else:
+            result.log('%s did not change the role.' % self.role, visibility=self.role)
 
 
 class CupidAction(Action):
@@ -76,6 +80,10 @@ class WizardAction(Action):
     role = Role.WIZARD
     is_optional = True
 
+    MAGIC_OPTION = 'magic'
+    MAGIC_WHITE = 'white'
+    MAGIC_BLACK = 'black'
+
     def __init__(self, is_white_magic_used=False, is_black_magic_used=False):
         super(WizardAction, self).__init__()
         self.is_white_magic_used = is_white_magic_used
@@ -88,7 +96,10 @@ class WizardAction(Action):
         }
 
     def get_min_max_num_targets(self):
-        return 0, 1
+        if self.is_white_magic_used and self.is_black_magic_used:
+            return 0, 0
+        else:
+            return 0, 1
 
     def is_executable_by(self, player):
         if self.is_white_magic_used and self.is_black_magic_used:
@@ -98,23 +109,19 @@ class WizardAction(Action):
     def is_executable_on(self, target):
         return not target.is_out and not target.role == self.role
 
-    def do_execute(self, players, target, options, result):
-        magic = options['magic']
-        if magic == 'white' and not self.is_white_magic_used:
-            target.add_tag(Tag.CURED)
+    def get_option_choices(self):
+        return {self.MAGIC_OPTION: [self.MAGIC_WHITE, self.MAGIC_BLACK]}
+
+    def get_tag(self, options):
+        magic = options.get(self.MAGIC_OPTION, None)
+        if magic == self.MAGIC_WHITE and not self.is_white_magic_used:
             self.is_white_magic_used = True
-            text = '%s cured %s' % (self.role, target)
-        elif magic == 'black' and not self.is_black_magic_used:
-            target.add_tag(Tag.POISONED)
+            return Tag.CURED
+        elif magic == self.MAGIC_BLACK and not self.is_black_magic_used:
             self.is_black_magic_used = True
-            text = '%s poisoned %s' % (self.role, target)
+            return Tag.POISONED
         else:
             raise GameError('Invalid magic option for wizard: %s' % magic)
-        result.log(text, visibility=self.role)
-
-    def post_execute(self, players, options, result):
-        if not self.is_white_magic_used and not self.is_black_magic_used:
-            result.log('%s did not take any action.' % self.role, visibility=self.role)
 
 
 class SettleTags(Action):
@@ -130,7 +137,7 @@ class SettleTags(Action):
     def is_executable_on(self, target):
         return False
 
-    def post_execute(self, players, options, result):
+    def execute_with_result(self, players, targets, options, result):
         for rule in RULES:
             rule.settle(players, result)
 
@@ -143,9 +150,9 @@ class ElectMayor(Action):
     def is_executable_by(self, player):
         return player.is_host
 
-    def do_execute(self, players, target, options, result):
-        target.add_tag(self.tag)
-        result.log_public('%s was elected as mayor' % target)
+    def execute_with_result(self, players, targets, options, result):
+        targets[0].add_tag(self.tag)
+        result.log_public('%s was elected as mayor' % targets[0])
 
 
 class VoteAndLynch(Action):
@@ -156,10 +163,11 @@ class VoteAndLynch(Action):
     def is_executable_by(self, player):
         return player.is_host
 
-    def do_execute(self, players, target, options, result):
-        target.mark_out(self.tag)
-        result.log_public('%s was voted and lynched.' % target)
-        result.add_out_player(target)
+    def execute_with_result(self, players, targets, options, result):
+        for target in targets:
+            target.mark_out(self.tag)
+            result.log_public('%s was voted and lynched.' % target)
+            result.add_out_player(target)
 
 
 class MayorAction(Action):
@@ -182,10 +190,12 @@ class HunterAction(Action):
     def is_executable_by(self, player):
         return player.is_out and player.role == self.role
 
-    def do_execute(self, players, target, options, result):
-        target.mark_out(self.tag)
-        result.log_public('%s shot %s' % (self.role, target))
-        result.add_out_player(target)
+    def execute_with_result(self, players, targets, options, result):
+        for target in targets:
+            target = targets[0]
+            target.mark_out(self.tag)
+            result.log_public('%s shot %s' % (self.role, target))
+            result.add_out_player(target)
 
 
 class WerewolvesActionList(ActionList):

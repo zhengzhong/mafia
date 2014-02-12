@@ -110,40 +110,40 @@ class Action(object):
                 raise GameError('%s is not executable on %s.' % (self.name, target))
         # Execute this action.
         result = ActionResult(self.name)
-        self.pre_execute(players, options, result)
-        for target in targets:
-            self.do_execute(players, target, options, result)
-        self.post_execute(players, options, result)
+        self.execute_with_result(players, targets, options, result)
         return result
 
-    def pre_execute(self, players, options, result):
+    def execute_with_result(self, players, targets, options, result):
         """
-        This method is called before the action is executed on any players.
+        Executes this action and fills the result. By default, this method adds the action tag
+        to all the target players (tag should not be None).
         """
-        pass
+        if not targets:
+            result.log('%s did not select anyone' % self.role, visibility=self.role)
+        else:
+            tag = self.get_tag(options)
+            if not tag:
+                raise GameError('Tag is undefined for %s.' % self.name)
+            for target in targets:
+                target.add_tag(tag)
+                text = '%s tagged %s with %s' % (self.role, target, tag)
+                answer = self.get_answer(target)
+                if answer is not None:
+                    text += ': %s' % answer
+                result.log(text, visibility=self.role)
 
-    def do_execute(self, players, target, options, result):
+    def get_option_choices(self):
+        return {}
+
+    def get_tag(self, options):
         """
-        This method is called to execute the action on the given target player.
-        By default, it adds the action tag to the target player (tag should not be None).
+        Returns the action tag to be added on targets. This method is called only when there's
+        at least one target. By default, it returns the ``tag`` class attribute.
         """
-        if self.tag is None:
-            raise GameError('Tag is undefined for %s.' % self.name)
-        target.add_tag(self.tag)
-        text = '%s selected %s' % (self.role, target)
-        answer = self.get_answer(target)
-        if answer is not None:
-            text += ': %s' % answer
-        result.log(text, visibility=self.role)
+        return self.tag
 
     def get_answer(self, target):
         return None
-
-    def post_execute(self, players, options, result):
-        """
-        This method is called after the action is executed on all target players.
-        """
-        pass
 
 
 class ActionList(list):
