@@ -32,20 +32,20 @@ class Rule(object):
         raise NotImplementedError()
 
 
-class Protected(Rule):
+class Guarded(Rule):
 
-    tag = Tag.PROTECTED
+    tag = Tag.GUARDED
 
     def settle_tagged_player(self, tagged_player, players, result):
-        protected = tagged_player
-        # If a player is protected, he cannot be killed by werewolves.
-        if protected.has_tag(Tag.BITTEN):
-            result.log_private('%s was bitten but protected.' % protected)
-            protected.remove_tag(Tag.BITTEN)
-        # Mark protected player as unprotectable.
-        protected.remove_tag(Tag.PROTECTED)
-        protected.add_tag(Tag.UNPROTECTABLE)
-        result.log_private('%s was protected and became unprotectable.' % protected)
+        guarded = tagged_player
+        # If a player is guarded, he cannot be killed by werewolves.
+        if guarded.has_tag(Tag.BITTEN):
+            result.log_private('%s was bitten but guarded.' % guarded)
+            guarded.remove_tag(Tag.BITTEN)
+        # Mark guarded player as unguardable.
+        guarded.remove_tag(Tag.GUARDED)
+        guarded.add_tag(Tag.UNGUARDABLE)
+        result.log_private('%s was guarded and became unguardable.' % guarded)
 
 
 class Bitten(Rule):
@@ -75,4 +75,4 @@ class Poisoned(Rule):
         result.add_out_player(poisoned)
 
 
-RULES = (Protected(), Bitten(), Poisoned())
+RULES = (Guarded(), Bitten(), Poisoned())

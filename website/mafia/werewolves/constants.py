@@ -9,9 +9,9 @@ class Role(object):
     CIVILIAN = 'Civilian'
     THIEF = 'Thief'
     CUPID = 'Cupid'
-    PROTECTOR = 'Protector'
+    BODYGUARD = 'Bodyguard'
     WEREWOLF = 'Werewolf'
-    PROPHET = 'Prophet'
+    PSYCHIC = 'Psychic'
     WIZARD = 'Wizard'
     HUNTER = 'Hunter'
 
@@ -20,9 +20,9 @@ class Role(object):
         CIVILIAN: +1,
         THIEF: +1,
         CUPID: +1,
-        PROTECTOR: +1,
+        BODYGUARD: +1,
         WEREWOLF: -3,
-        PROPHET: +3,
+        PSYCHIC: +3,
         WIZARD: +1,
         HUNTER: +1,
     }
@@ -41,10 +41,10 @@ class Tag(object):
 
     MAYOR = 'mayor'
     LOVER = 'lover'
-    PROTECTED = 'protected'
-    UNPROTECTABLE = 'unprotectable'
+    GUARDED = 'guarded'
+    UNGUARDABLE = 'unguardable'
     BITTEN = 'bitten'
-    INVESTIGATED = 'investigated'
+    MINDREAD = 'mindread'
     CURED = 'cured'
     POISONED = 'poisoned'
     SHOT_BY_HUNTER = 'shot_by_hunter'

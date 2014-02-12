@@ -23,7 +23,7 @@ class GameForm(forms.ModelForm):
     num_werewolves = forms.IntegerField(initial=2, min_value=2, max_value=5)
     has_thief = forms.BooleanField(initial=False, required=False)
     has_cupid = forms.BooleanField(initial=True, required=False)
-    has_protector = forms.BooleanField(initial=True, required=False)
+    has_bodyguard = forms.BooleanField(initial=True, required=False)
     has_wizard = forms.BooleanField(initial=True, required=False)
     has_hunter = forms.BooleanField(initial=True, required=False)
 
@@ -34,7 +34,7 @@ class GameForm(forms.ModelForm):
     )
 
     WEREWOLVES_FIELD_NAMES = (
-        'num_werewolves', 'has_thief', 'has_cupid', 'has_protector', 'has_wizard', 'has_hunter'
+        'num_werewolves', 'has_thief', 'has_cupid', 'has_bodyguard', 'has_wizard', 'has_hunter'
     )
 
     def __init__(self, *args, **kwargs):
