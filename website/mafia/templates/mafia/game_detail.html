@@ -1,7 +1,7 @@
 {% extends "mafia/base.html" %}
 
 
-{% block head_title %} {{ game.name }} (Variant: {{ game.variant }}) {% endblock %}
+{% block head_title %} {{ game.name }} ({{ game.variant }}) {% endblock %}
 
 
 {% block head_extras %}
@@ -10,7 +10,7 @@
 
 
 {% block header %}
-  <h1>{{ game.name }} (Variant: {{ game.variant }})</h1>
+  <h1>{{ game.name }} ({{ game.variant }})</h1>
 {% endblock %}
 
 
@@ -33,97 +33,73 @@
           </div>
         </section>
 
-        <!-- Game State ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-        <div class="row">
-          <div class="col-md-8">
-            <p>
-              <strong>Game State:</strong>
-              {% if game.is_ongoing %}
-                <span class="text-success">Ongoing ... <span id="heartbeat-indicator"></span></span>
-              {% elif game.is_over %}
-                <span class="text-danger">Game Over.</span>
-              {% else %}
-                <span class="text-muted">Not started yet.</span>
-              {% endif %}
-            </p>
-          </div>
-          <div class="col-md-4" style="text-align: right;">
-            {% if game.is_ongoing %}
-              <button id="error-indicator" class="btn btn-danger btn-xs" style="display: none;" type="button" disabled="disabled">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>
-              </button>
-              <span>
-                <a id="start-updating-button" class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="return startHeartbeat();">
-                  <span class="glyphicon glyphicon-play"></span>
-                </a>
-                <a id="stop-updating-button" class="btn btn-xs btn-danger" style="display: none;" href="javascript:void(0);" onclick="return stopHeartbeat();">
-                  <span class="glyphicon glyphicon-pause"></span>
-                </a>
-              </span>
-            {% endif %}
-            <a class="btn btn-xs btn-default" href="{{ game.get_absolute_url }}">
-              <span class="glyphicon glyphicon-refresh"></span>
-            </a>
-          </div>
-        </div>
-
         <!-- Game Action Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
         {% if game.is_ongoing %}
 
-        <form id="game-action-form" class="form-horizontal" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
+        <form id="game-action-form" class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
-          <div id="game-timer" class="game-timer">--</div>
-          <div class="alert alert-info">
-            <p><strong><span id="game-round">Round ?</span> - <span id="game-action"></span></strong></p>
-            <p>Select one or more targets below...</p>
-            <div class="form-group">
-              <label class="col-sm-4 control-label">Magic (Wizard only, optional):</label>
-              <div class="col-sm-4">
-                <input class="form-control" type="text" name="magic" placeholder="Black / White"/>
+          <div>
+            <div class="pull-right well" style="text-align: center;">
+              <div id="game-action" class="text-muted">[Action]</div>
+              <div id="game-timer" class="game-timer">--</div>
+              <div>
+                <a class="btn btn-sm btn-default" href="{{ game.get_absolute_url }}">
+                  <span class="glyphicon glyphicon-refresh"></span> Refresh
+                </a>
+                <a id="start-updating-button" class="btn btn-sm btn-primary" href="javascript:void(0);" onclick="return startHeartbeat();">
+                  <span class="glyphicon glyphicon-play"></span> Start
+                </a>
+                <a id="stop-updating-button" class="btn btn-sm btn-danger" style="display: none;" href="javascript:void(0);" onclick="return stopHeartbeat();">
+                  <span class="glyphicon glyphicon-pause"></span> Pause
+                </a>
               </div>
-              <div class="col-sm-4">
+            </div>
+            <h2 id="game-round">Round ?</h2>
+            <div>
+              <p>Select one or more targets below...</p>
+              <div class="form-group">
+                <input class="form-control" type="text" name="magic" placeholder="Magic: Black / White"/>
+              </div>
+              <div class="form-group">
                 <button class="btn btn-primary" type="submit">Execute Action</button>
                 <span class="done text-success glyphicon glyphicon-ok-sign" style="display: none;"></span>
               </div>
             </div>
+            <div class="clearfix"></div>
           </div>
-          <div class="clearfix"></div>
 
-          <section>
-            <div id="players" class="row">
-              {% for player in game.player_set.all %}
-                <div class="col-md-3">
-                  <div id="player-{{ player.pk }}" class="player">
-                    <div class="player-heading">
-                      <img class="img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
-                      <h4>{{ player }}</h4>
-                      <div class="clearfix"></div>
+          <div id="players" class="row">
+            {% for player in game.player_set.all %}
+              <div class="col-md-3">
+                <div id="player-{{ player.pk }}" class="player">
+                  <div class="player-heading">
+                    <img class="img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
+                    <h4>{{ player }}</h4>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="player-body">
+                    <div class="player-role">
+                      <a href="javascript:void(0);" onclick="return togglePlayerSelect({{ player.pk }});">
+                        <img class="img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
+                      </a>
+                      {% if request.user == player.user %}
+                        <span class="label label-success">YOU</span>
+                      {% endif %}
                     </div>
-                    <div class="player-body">
-                      <div class="player-role">
-                        <a href="javascript:void(0);" onclick="return togglePlayerSelect({{ player.pk }});">
-                          <img class="img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
-                        </a>
-                        {% if request.user == player.user %}
-                          <span class="label label-success">YOU</span>
-                        {% endif %}
-                      </div>
-                      <div class="player-details">
-                        <div><span class="role label label-primary"></span></div>
-                        <div class="tags"></div>
-                      </div>
-                      <div class="clearfix"></div>
+                    <div class="player-details">
+                      <div><span class="role label label-primary"></span></div>
+                      <div class="tags"></div>
                     </div>
-                    <div style="display: none;">
-                      <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
-                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div style="display: none;">
+                    <input type="checkbox" name="target_pk[]" value="{{ player.pk }}"/>
                   </div>
                 </div>
-              {% endfor %}
-            </div>
-          </section>
+              </div>
+            {% endfor %}
+          </div>
 
         </form>
 
@@ -202,9 +178,7 @@
         url: '{% url mafia-game-heartbeat pk=game.pk %}',
         type: 'get'
       }).done(function(game) {
-        $('#error-indicator').hide();
-        $('#heartbeat-indicator').text(game.update_date).show().delay(250).fadeOut();
-        $('#game-timer').text(game.elapsed_seconds_since_last_update);
+        $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
         if (game.update_date != updateTimestamp) {
           updateTimestamp = game.update_date;
           updateGameState(game);
@@ -218,7 +192,7 @@
           stopHeartbeat();
         }
       }).fail(function() {
-        $('#error-indicator').show().delay(250).fadeOut();
+        $('#game-timer').removeClass('text-success').addClass('text-danger').text('ERR');
       });
     }
 
