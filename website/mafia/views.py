@@ -79,11 +79,10 @@ class MafiaGameStartView(_MafiaGameEngineDetailView):
 
 class MafiaGameHeartbeatView(_MafiaGameEngineDetailView):
 
-    template_name = 'mafia/game_detail.json'
-
-    def render_to_response(self, context, **response_kwargs):
-        response_kwargs['mimetype'] = 'application/json'
-        return super(MafiaGameHeartbeatView, self).render_to_response(context, **response_kwargs)
+    def get(self, request, *args, **kwargs):
+        engine = self.get_engine()
+        json_dict = engine.get_json_dict()
+        return HttpResponse(json.dumps(json_dict, ensure_ascii=False), mimetype='application/json')
 
 
 class MafiaGamePlayView(_MafiaGameEngineDetailView):

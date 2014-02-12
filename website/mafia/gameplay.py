@@ -145,6 +145,13 @@ class Action(object):
     def get_answer(self, target):
         return None
 
+    def get_json_dict(self):
+        return {
+            'name': self.name,
+            'role': self.role,
+            'option_choices': self.get_option_choices(),
+        }
+
 
 class ActionList(list):
 
@@ -240,16 +247,6 @@ class Engine(object):
             return None
         return self.action_list.current()
 
-    def get_possible_target_list(self):
-        current_action = self.get_current_action()
-        if current_action is None:
-            return []
-        else:
-            return [
-                player for player in self.game.player_set.all()
-                if current_action.is_executable_on(player)
-            ]
-
     def start_game(self, force=False):
         # Check if game can be started.
         if not force:
@@ -308,3 +305,39 @@ class Engine(object):
         logger.info('Saving game...')
         self.game.context = {'action_list': self.action_list.as_json_data()}
         self.game.save()
+
+    def get_json_dict(self):
+        json_dict = {
+            'round': self.game.round,
+            'is_over': self.game.is_over,
+            'update_date': self.game.update_date.isoformat(),
+        }
+        players = self.game.player_set.all()
+        player_list = []
+        for player in players:
+            player_dict = {
+                'pk': player.pk,
+                'username': player.username,
+                'hand_side': player.hand_side,
+                'is_host': player.is_host,
+                'role': player.role,
+                'tags': list(player.get_tags()),
+                'is_unused': player.is_unused,
+                'is_out': player.is_out,
+            }
+            player_list.append(player_dict)
+        json_dict['players'] = player_list
+        current_action = self.get_current_action()
+        if current_action is not None:
+            json_dict.update({
+                'current_action': current_action.get_json_dict(),
+                'possible_target_pk_list': [
+                    p.pk for p in players if current_action.is_executable_on(p)
+                ],
+            })
+        else:
+            json_dict.update({
+                'current_action': None,
+                'possible_target_pk_list': [],
+            })
+        return json_dict
