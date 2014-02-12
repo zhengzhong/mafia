@@ -74,6 +74,7 @@
 
         <form id="game-action-form" class="form-horizontal" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
+          <div id="game-timer" class="game-timer">--</div>
           <div class="alert alert-info">
             <p><strong><span id="game-round">Round ?</span> - <span id="game-action"></span></strong></p>
             <p>Select one or more targets below...</p>
@@ -88,6 +89,7 @@
               </div>
             </div>
           </div>
+          <div class="clearfix"></div>
 
           <section>
             <div id="players" class="row">
@@ -202,6 +204,7 @@
       }).done(function(game) {
         $('#error-indicator').hide();
         $('#heartbeat-indicator').text(game.update_date).show().delay(250).fadeOut();
+        $('#game-timer').text(game.elapsed_seconds_since_last_update);
         if (game.update_date != updateTimestamp) {
           updateTimestamp = game.update_date;
           updateGameState(game);

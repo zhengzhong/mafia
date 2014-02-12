@@ -334,6 +334,7 @@ class Engine(object):
             'round': self.game.round,
             'is_over': self.game.is_over,
             'update_date': self.game.update_date.isoformat(),
+            'elapsed_seconds_since_last_update': self.game.get_elapsed_seconds_since_last_update(),
         }
         players = self.game.player_set.all()
         player_list = []
