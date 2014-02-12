@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 logger = logging.getLogger(__name__)
 
 
-TABLE_PREFIX = getattr(settings, 'V5_TABLE_PREFIX', 'mafia_')
+TABLE_PREFIX = getattr(settings, 'MAFIA_TABLE_PREFIX', 'mafia_')
 
 
 class GameManager(models.Manager):
