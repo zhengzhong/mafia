@@ -68,6 +68,14 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
 
     template_name = 'mafia/game_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context_data = super(MafiaGameDetailView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated():
+            engine = self.get_engine()
+            current_players = Player.objects.filter(game=engine.game, user=self.request.user)
+            context_data['current_players'] = current_players
+        return context_data
+
 
 class MafiaGameStartView(_MafiaGameEngineDetailView):
 

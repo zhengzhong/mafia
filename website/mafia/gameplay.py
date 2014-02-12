@@ -355,6 +355,9 @@ class Engine(object):
         if current_action is not None:
             json_dict.update({
                 'current_action': current_action.get_json_dict(),
+                'actor_pk_list': [
+                    p.pk for p in players if current_action.is_executable_by(p)
+                ],
                 'possible_target_pk_list': [
                     p.pk for p in players if current_action.is_executable_on(p)
                 ],
