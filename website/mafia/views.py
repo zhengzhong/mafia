@@ -81,6 +81,7 @@ class MafiaGameHeartbeatView(_MafiaGameEngineDetailView):
 
     def get(self, request, *args, **kwargs):
         engine = self.get_engine()
+        engine.skip_action_if_not_executable()
         json_dict = engine.get_json_dict()
         return HttpResponse(json.dumps(json_dict, ensure_ascii=False), mimetype='application/json')
 

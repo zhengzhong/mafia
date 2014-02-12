@@ -12,7 +12,7 @@ class GameForm(forms.ModelForm):
 
     class Meta:
         model = Game
-        fields = ('name', 'is_two_handed', 'variant')
+        fields = ('name', 'is_two_handed', 'variant', 'delay_seconds')
 
     num_killers = forms.IntegerField(initial=2, min_value=1, max_value=3)
     num_detectives = forms.IntegerField(initial=2, min_value=1, max_value=3)
@@ -27,7 +27,7 @@ class GameForm(forms.ModelForm):
     has_wizard = forms.BooleanField(initial=True, required=False)
     has_hunter = forms.BooleanField(initial=True, required=False)
 
-    BASIC_FIELD_NAMES = ('name', 'is_two_handed', 'variant')
+    BASIC_FIELD_NAMES = ('name', 'is_two_handed', 'variant', 'delay_seconds')
 
     CLASSIC_FIELD_NAMES = (
         'num_killers', 'num_detectives', 'has_guardian', 'has_doctor', 'has_traitor'

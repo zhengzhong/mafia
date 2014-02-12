@@ -28,7 +28,7 @@ class ThiefAction(Action):
             target.save()
         else:
             unused_players = [p for p in players if p.is_unused]
-            unused_werewolves = [p for p in unsed_players if p.role == Role.WEREWOLF]
+            unused_werewolves = [p for p in unused_players if p.role == Role.WEREWOLF]
             if unused_players == unused_werewolves:
                 unused_werewolf = unused_werewolves[0]
                 thief.role, unused_werewolf.role = unused_werewolf.role, thief.role
@@ -221,7 +221,7 @@ class WerewolvesActionList(ActionList):
 
     action_classes = initial_action_classes + (MayorAction, HunterAction)
 
-    def move_to_next(self, result, players):
+    def move_to_next(self, result):
         if isinstance(self[self.index], (ThiefAction, CupidAction, ElectMayor, MayorAction, HunterAction)):
             self.pop(self.index)
         else:
@@ -236,4 +236,4 @@ class WerewolvesActionList(ActionList):
                 self.insert(self.index + 1, HunterAction())
             if is_mayor_action_enabled:
                 self.insert(self.index + 1, MayorAction())
-            super(WerewolvesActionList, self).move_to_next(result, players)
+            super(WerewolvesActionList, self).move_to_next(result)

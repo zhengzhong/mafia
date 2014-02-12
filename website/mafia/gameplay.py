@@ -145,6 +145,18 @@ class Action(object):
     def get_answer(self, target):
         return None
 
+    def skip(self, players):
+        """
+        Skips this action. Only non-executable action can be skipped.
+        """
+        # Perform some checks before skipping this action.
+        if self.is_executable(players):
+            raise GameError('%s is executable thus cannot be skipped.' % self.name)
+        # Skip this action.
+        result = ActionResult(self.name)
+        result.log('Skipped', visibility=self.role)
+        return result
+
     def get_json_dict(self):
         return {
             'name': self.name,
@@ -167,13 +179,8 @@ class ActionList(list):
             raise GameError('Action index out of bound: %d' % self.index)
         return self[self.index]
 
-    def move_to_next(self, result, players):
-        for step in range(1, len(self)):
-            next_index = (self.index + step) % len(self)
-            if self[next_index].is_executable(players):
-                self.index = next_index
-                return
-        raise GameError('Cannot find index for the next executable action.')
+    def move_to_next(self, result):
+        self.index = (self.index + 1) % len(self)
 
     def as_json_data(self):
         list_data = []
@@ -286,6 +293,19 @@ class Engine(object):
         self.game.is_over = False
         self.save_game()
 
+    def skip_action_if_not_executable(self):
+        # Execute the current action and check if game is over.
+        action = self.get_current_action()
+        players = self.game.player_set.all()
+        if not action.is_executable(players):
+            elapsed_seconds = self.game.get_elapsed_seconds_since_last_update()
+            threshold = self.game.delay_seconds + random.randint(0, self.game.delay_seconds)
+            if elapsed_seconds >= threshold:
+                logger.info('Skipping %s after %d seconds...' % (action, elapsed_seconds))
+                result = action.skip(players)
+                self.move_to_next_action(result)
+                self.save_game()
+
     def execute_action(self, targets, options):
         # Execute the current action and check if game is over.
         action = self.get_current_action()
@@ -296,10 +316,13 @@ class Engine(object):
         self.update_game_over()
         # Move to next action.
         if not self.game.is_over:
-            self.action_list.move_to_next(result, players)
-            if self.action_list.index == 0:
-                self.game.round += 1
+            self.move_to_next_action(result)
         self.save_game()
+
+    def move_to_next_action(self, result):
+        self.action_list.move_to_next(result)
+        if self.action_list.index == 0:
+            self.game.round += 1
 
     def save_game(self):
         logger.info('Saving game...')

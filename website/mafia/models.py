@@ -9,6 +9,7 @@ import urllib
 
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
@@ -22,7 +23,7 @@ TABLE_PREFIX = getattr(settings, 'V5_TABLE_PREFIX', 'mafia_')
 class GameManager(models.Manager):
 
     def available_game_list(self):
-        from_create_date = datetime.datetime.now() - datetime.timedelta(hours=2)
+        from_create_date = timezone.now() - datetime.timedelta(hours=2)
         return self.get_query_set().filter(
             create_date__gte=from_create_date,
             round=0,
@@ -40,9 +41,12 @@ class Game(models.Model):
         (VARIANT_WEREWOLVES, VARIANT_WEREWOLVES),
     )
 
+    MIN_DELAY_SECONDS = 10
+
     name = models.CharField(_('Game Name'), max_length=100)
     is_two_handed = models.BooleanField(_('Two-Handed'), default=True)
     variant = models.CharField(_('Variant'), max_length=20, choices=VARIANT_CHOICES, default=VARIANT_CLASSIC)
+    delay_seconds = models.PositiveIntegerField(default=MIN_DELAY_SECONDS)
     config_json = models.TextField(blank=True)
     context_json = models.TextField(blank=True)
     round = models.PositiveIntegerField(default=0)
@@ -92,11 +96,16 @@ class Game(models.Model):
         return 'mafia-game-detail', (), {'pk': self.pk}
 
     def save(self, *args, **kwargs):
+        self.delay_seconds = max(self.delay_seconds, self.MIN_DELAY_SECONDS)
         if hasattr(self, '_config'):
             self.config_json = json.dumps(self._config, ensure_ascii=False)
         if hasattr(self, '_context'):
             self.context_json = json.dumps(self._context, ensure_ascii=False)
         super(Game, self).save(*args, **kwargs)
+
+    def get_elapsed_seconds_since_last_update(self):
+        dt = timezone.now() - self.update_date
+        return int(dt.total_seconds())
 
     def ensure_unused_players(self, num_unused_players):
         current_unused_players = self.player_set.filter(user=None)
