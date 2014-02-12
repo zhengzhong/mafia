@@ -40,10 +40,12 @@
   width: 75px;
   height: 75px;
   float: right;
+  text-align: center;
 }
 
 .player .player-body .player-role .img-thumbnail {
   border-width: 2px;
+  margin-bottom: 5px;
 }
 
 .player .player-body .player-details {

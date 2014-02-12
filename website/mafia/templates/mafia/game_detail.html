@@ -106,6 +106,9 @@
                         <a href="javascript:void(0);" onclick="return togglePlayerSelect({{ player.pk }});">
                           <img class="img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
                         </a>
+                        {% if request.user == player.user %}
+                          <span class="label label-success">YOU</span>
+                        {% endif %}
                       </div>
                       <div class="player-details">
                         <div><span class="role label label-primary"></span></div>

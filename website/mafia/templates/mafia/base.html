@@ -82,6 +82,13 @@
               <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
             </ul>
           {% endblock %}
+          <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+              <li><a href="javascript:void(0);" onclick="alert('todo');"><span class="glyphicon glyphicon-user"></span> {{ request.user }}</a></li>
+            {% else %}
+              <li><a href="javascript:void(0);" onclick="alert('todo');"><span class="glyphicon glyphicon-lock"></span> Login</a></li>            
+            {% endif %}
+          </ul>
         </nav>
       </div>
     </header>
