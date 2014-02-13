@@ -37,7 +37,7 @@
 
         {% if game.is_ongoing %}
 
-          <form id="game-action-form" class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
+          <form id="game-action-form" class="game-mode-{{ mode }} form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
             <div class="row">
               <div class="col-md-9">
@@ -76,14 +76,14 @@
                 <div class="col-md-3">
                   <div id="player-{{ player.pk }}" class="player">
                     <div class="player-heading">
-                      <img class="img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
-                      <h4>{{ player }}</h4>
+                      <img class="player-avatar img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
+                      <h4 class="player-name">{{ player }}</h4>
                       <div class="clearfix"></div>
                     </div>
                     <div class="player-body">
                       <div class="player-role">
                         <a href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});">
-                          <img class="img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
+                          <img class="player-role-card img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
                         </a>
                         <span class="player-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
                         <span class="player-checked glyphicon glyphicon-ok-sign" style="display: none;"></span>
@@ -137,6 +137,15 @@
 
   <script type="text/javascript">//<![CDATA[
 
+    var mode = '{{ mode }}';
+
+    /// For the current authenticated user, this is his corresponding player PKs.
+    var currentPlayerPKs = [
+      {% for current_player in current_players %}
+        {{ current_player.pk }} {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ];
+
     /// Timestamp of the last update, used to decide if we need to refresh players.
     var updateTimestamp = null;
 
@@ -171,13 +180,13 @@
         }
     }
 
-    function updatePlayer(player, isSelectable) {
+    function updatePlayer(player, isPossibleTarget, isCurrentUserActor) {
       var element = $('#player-' + player.pk);
-      // Update player information...
-      $('.role', element).text(player.role);
+      // Update player status...
       element.toggleClass('player-out', player.is_out);
-      element.toggleClass('player-checkable', isSelectable);
-      // Update player tags...
+      element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
+      // Update player role and tags...
+      $('.role', element).text(player.role);
       var tagsElement = $('.tags', element).empty();
       for (var j = 0; j < player.tags.length; j++) {
         $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(tagsElement);
@@ -200,8 +209,15 @@
           updateGameState(game);
           for (var i = 0; i < game.players.length; i++) {
             var player = game.players[i];
-            var isSelectable = (game.possible_target_pk_list.indexOf(player.pk) != -1);
-            updatePlayer(player, isSelectable);
+            var isPossibleTarget = (game.possible_target_pk_list.indexOf(player.pk) != -1);
+            var isCurrentUserActor = false;
+            for (var j = 0; j < currentPlayerPKs.length; j++) {
+              if (game.actor_pk_list.indexOf(currentPlayerPKs[j]) != -1) {
+                isCurrentUserActor = true;
+                break;
+              }
+            }
+            updatePlayer(player, isPossibleTarget, isCurrentUserActor);
           }
         }
         if (game.is_over) {

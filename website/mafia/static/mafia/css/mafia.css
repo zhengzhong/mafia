@@ -10,8 +10,7 @@
 }
 
 .player .player-heading,
-.player .player-body,
-.player .player-footer {
+.player .player-body {
   padding: 10px;
 }
 
@@ -22,24 +21,20 @@
   overflow: hidden;
 }
 
-.player .player-heading .img-circle {
+.player .player-body {
+  height: 120px;
+  overflow: hidden;
+}
+
+.player .player-avatar {
   width: 32px;
   height: 32px;
   float: left;
 }
 
-.player .player-heading h4 {
+.player .player-name {
   margin: 5px 5px 5px 40px;
   font-size: 125%;
-}
-
-.player .player-heading p {
-  margin-bottom: 4px;
-}
-
-.player .player-body {
-  height: 120px;
-  overflow: hidden;
 }
 
 .player .player-role {
@@ -66,13 +61,14 @@
   color: #5cb85c;
 }
 
-.player .player-role .img-thumbnail {
+.player .player-role-card {
   border-width: 2px;
   margin-bottom: 5px;
 }
 
 .player .player-details {
   margin-right: 80px;
+  display: none;
 }
 
 .player .player-details .label {
@@ -80,7 +76,11 @@
   display: inline-block;
 }
 
-.player-checkable .player-body .img-thumbnail {
+.game-mode-god .player .player-details {
+  display: block;
+}
+
+.player-checkable .player-role-card {
   border-color: #5cb85c;
 }
 

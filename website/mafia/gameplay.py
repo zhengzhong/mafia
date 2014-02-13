@@ -386,6 +386,7 @@ class Engine(object):
         else:
             json_dict.update({
                 'current_action': None,
+                'actor_pk_list': [],
                 'possible_target_pk_list': [],
             })
         return json_dict
