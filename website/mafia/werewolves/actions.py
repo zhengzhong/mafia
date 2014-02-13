@@ -7,7 +7,26 @@ from mafia.werewolves.constants import Role, Tag
 from mafia.werewolves.settlement import RULES
 
 
-class ThiefAction(Action):
+class _WerewolvesAction(Action):
+
+    def execute(self, players, targets, options):
+        result = super(_WerewolvesAction, self).execute(players, targets, options)
+        # Finally, for the 2 lovers, if any of them is out, the other is also out.
+        out_lovers = []
+        for out_player in result.out_players:
+            if out_player.has_tag(Tag.LOVER):
+                lovers = [p for p in players if not p.is_out and p.has_tag(Tag.LOVER)]
+                for lover in lovers:
+                    result.log_private('%s was dead with his lover %s.' % (lover, out_player))
+                    lover.mark_out(Tag.LOVER)
+                    out_lovers.append(lover)
+                break
+        for out_lover in out_lovers:
+            result.add_out_player(out_lover)
+        return result
+
+
+class ThiefAction(_WerewolvesAction):
 
     role = Role.THIEF
     tag = None
@@ -38,7 +57,7 @@ class ThiefAction(Action):
             result.log('%s did not change the role.' % self.role, visibility=self.role)
 
 
-class CupidAction(Action):
+class CupidAction(_WerewolvesAction):
 
     role = Role.CUPID
     tag = Tag.LOVER
@@ -51,7 +70,7 @@ class CupidAction(Action):
         return not target.is_out and target.role != self.role
 
 
-class BodyguardAction(Action):
+class BodyguardAction(_WerewolvesAction):
 
     role = Role.BODYGUARD
     tag = Tag.GUARDED
@@ -64,13 +83,13 @@ class BodyguardAction(Action):
         return not target.is_out and not target.has_tag(Tag.UNGUARDABLE)
 
 
-class WerewolfAction(Action):
+class WerewolfAction(_WerewolvesAction):
 
     role = Role.WEREWOLF
     tag = Tag.BITTEN
 
 
-class PsychicAction(Action):
+class PsychicAction(_WerewolvesAction):
 
     role = Role.PSYCHIC
     tag = Tag.MINDREAD
@@ -82,7 +101,7 @@ class PsychicAction(Action):
         return 'YES' if target.role == Role.WEREWOLF else 'NO'
 
 
-class WizardAction(Action):
+class WizardAction(_WerewolvesAction):
 
     role = Role.WIZARD
     is_optional = True
@@ -131,7 +150,7 @@ class WizardAction(Action):
             raise GameError('Invalid magic option for wizard: %s' % magic)
 
 
-class SettleTags(Action):
+class SettleTags(_WerewolvesAction):
 
     role = None
 
@@ -149,7 +168,7 @@ class SettleTags(Action):
             rule.settle(players, result)
 
 
-class ElectMayor(Action):
+class ElectMayor(_WerewolvesAction):
 
     role = None
     tag = Tag.MAYOR
@@ -162,7 +181,7 @@ class ElectMayor(Action):
         result.log_public('%s was elected as mayor' % targets[0])
 
 
-class VoteAndLynch(Action):
+class VoteAndLynch(_WerewolvesAction):
 
     role = None
     tag = Tag.LYNCHED
@@ -177,7 +196,7 @@ class VoteAndLynch(Action):
             result.add_out_player(target)
 
 
-class MayorAction(Action):
+class MayorAction(_WerewolvesAction):
 
     role = None
     tag = Tag.MAYOR
@@ -186,7 +205,7 @@ class MayorAction(Action):
         return player.is_out and player.has_tag(Tag.MAYOR)
 
 
-class HunterAction(Action):
+class HunterAction(_WerewolvesAction):
 
     role = Role.HUNTER
     tag = Tag.SHOT_BY_HUNTER

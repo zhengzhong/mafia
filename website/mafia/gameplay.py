@@ -221,6 +221,24 @@ class ActionList(list):
         return cls(actions)
 
 
+class SettlementRule(object):
+
+    tag = None
+
+    def settle(self, players, result):
+        if self.tag is None:
+            raise GameError('Tag is undefined for rule %s.' % self.__class__.__name__)
+        for player in players:
+            if not player.is_out and player.has_tag(self.tag):
+                self.settle_tagged_player(player, players, result)
+
+    def filter_players_by_tag(self, players, tag):
+        return [p for p in players if not p.is_out and p.has_tag(tag)]
+
+    def settle_tagged_player(self, tagged_player, players, result):
+        raise NotImplementedError()
+
+
 class Engine(object):
 
     action_list_class = None
@@ -294,7 +312,10 @@ class Engine(object):
         self.save_game()
 
     def skip_action_if_not_executable(self):
-        # Execute the current action and check if game is over.
+        # Check if the game is still ongoing.
+        if not self.game.is_ongoing:
+            return
+        # Skip the current action if it's not executable.
         action = self.get_current_action()
         players = self.game.player_set.all()
         if not action.is_executable(players):

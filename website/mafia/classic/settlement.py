@@ -2,28 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from mafia.exceptions import GameError
+from mafia.gameplay import SettlementRule
 from mafia.classic.constants import Role, Tag
 
 
-class Rule(object):
-
-    tag = None
-
-    def settle(self, players, result):
-        if self.tag is None:
-            raise GameError('Tag is undefined for rule %s.' % self.__class__.__name__)
-        for player in players:
-            if not player.is_out and player.has_tag(self.tag):
-                self.settle_tagged_player(player, players, result)
-
-    def filter_players_by_tag(self, players, tag):
-        return [player for player in players if not player.is_out and player.has_tag(tag)]
-
-    def settle_tagged_player(self, tagged_player, players, result):
-        raise NotImplementedError()
-
-
-class Guarded(Rule):
+class Guarded(SettlementRule):
 
     tag = Tag.GUARDED
 
@@ -56,7 +39,7 @@ class Guarded(Rule):
             guarded.add_tag(Tag.UNGUARDABLE)
 
 
-class Shot(Rule):
+class Shot(SettlementRule):
 
     tag = Tag.SHOT
 
@@ -79,7 +62,7 @@ class Shot(Rule):
                     result.add_out_player(guarded)
 
 
-class Cured(Rule):
+class Cured(SettlementRule):
 
     tag = Tag.CURED
 
