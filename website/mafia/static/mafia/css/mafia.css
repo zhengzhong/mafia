@@ -42,37 +42,46 @@
   overflow: hidden;
 }
 
-.player .player-body .player-role {
+.player .player-role {
   width: 75px;
   height: 75px;
   float: right;
   text-align: center;
+  position: relative;
 }
 
-.player .player-body .player-role .img-thumbnail {
+.player .player-role .player-disabled,
+.player .player-role .player-checked {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 120%;
+}
+
+.player .player-role .player-disabled {
+  color: #d9534f;
+}
+
+.player .player-role .player-checked {
+  color: #5cb85c;
+}
+
+.player .player-role .img-thumbnail {
   border-width: 2px;
   margin-bottom: 5px;
 }
 
-.player .player-body .player-details {
+.player .player-details {
   margin-right: 80px;
 }
 
-.player .player-body .player-details .label {
+.player .player-details .label {
   margin: 2px;
   display: inline-block;
 }
 
-.player.player-selected .img-thumbnail {
-  border-color: #5CB85C;
-}
-
-.player.player-selectable {
+.player-checkable .player-body .img-thumbnail {
   border-color: #5cb85c;
-}
-
-.player-selectable .player-body a:hover .img-thumbnail {
-  border-color: #5CB85C;
 }
 
 .player-out .player-heading {
