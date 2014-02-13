@@ -224,6 +224,7 @@ class WerewolvesActionList(ActionList):
     def move_to_next(self, result):
         if isinstance(self[self.index], (ThiefAction, CupidAction, ElectMayor, MayorAction, HunterAction)):
             self.pop(self.index)
+            self.index = self.index % len(self)
         else:
             is_hunter_action_enabled = False
             is_mayor_action_enabled = False
