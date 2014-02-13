@@ -82,19 +82,14 @@
                     </div>
                     <div class="player-body">
                       <div class="player-role">
-                        <a href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});">
-                          <img class="player-role-card img-thumbnail" src="http://placehold.it/60x60" alt="{{ player.role }}"/>
-                        </a>
-                        <span class="player-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
+                        <a class="player-card" href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});"></a>
+                        <span class="player-check-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
                         <span class="player-checked glyphicon glyphicon-ok-sign" style="display: none;"></span>
                         {% if request.user == player.user %}
                           <span class="label label-success">YOU</span>
                         {% endif %}
                       </div>
-                      <div class="player-details">
-                        <div><span class="role label label-primary"></span></div>
-                        <div class="tags"></div>
-                      </div>
+                      <div class="player-details"></div>
                       <div class="clearfix"></div>
                     </div>
                     <div style="display: none;">
@@ -167,7 +162,7 @@
         checkbox.prop('checked', isChecked);
         $('.player-checked', element).toggle(isChecked);
       } else {
-        $('.player-disabled', element).show().delay(200).fadeOut();
+        $('.player-check-disabled', element).show().delay(200).fadeOut();
       }
       return false;
     }
@@ -186,10 +181,10 @@
       element.toggleClass('player-out', player.is_out);
       element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
       // Update player role and tags...
-      $('.role', element).text(player.role);
-      var tagsElement = $('.tags', element).empty();
+      $('.player-card', element).removeClass().addClass('player-card').addClass('player-role-' + player.role.toLowerCase());
+      var detailsElement = $('.player-details', element).empty();
       for (var j = 0; j < player.tags.length; j++) {
-        $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(tagsElement);
+        $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(detailsElement);
       }
     }
 

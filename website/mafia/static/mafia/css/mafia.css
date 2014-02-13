@@ -38,22 +38,22 @@
 }
 
 .player .player-role {
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   float: right;
   text-align: center;
   position: relative;
 }
 
-.player .player-role .player-disabled,
+.player .player-role .player-check-disabled,
 .player .player-role .player-checked {
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 10px;
   font-size: 120%;
 }
 
-.player .player-role .player-disabled {
+.player .player-role .player-check-disabled {
   color: #d9534f;
 }
 
@@ -61,9 +61,14 @@
   color: #5cb85c;
 }
 
-.player .player-role-card {
-  border-width: 2px;
+.player .player-card {
+  display: inline-block;
   margin-bottom: 5px;
+  width: 60px;
+  height: 60px;
+  background: #ffffff url('http://placehold.it/60x60') no-repeat;
+  border: 2px solid #dddddd;
+  border-radius: 5px;
 }
 
 .player .player-details {
@@ -76,11 +81,7 @@
   display: inline-block;
 }
 
-.game-mode-god .player .player-details {
-  display: block;
-}
-
-.player-checkable .player-role-card {
+.player-checkable .player-card {
   border-color: #5cb85c;
 }
 
@@ -98,4 +99,14 @@
   );
   background-size: 40px 40px;
   color: #ffffff;
+}
+
+/* God mode... */
+
+.game-mode-god .player .player-details {
+  display: block;
+}
+
+.game-mode-god .player .player-role-killer {
+  background-image: url('http://placehold.it/70x70');
 }
