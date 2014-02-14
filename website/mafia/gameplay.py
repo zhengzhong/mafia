@@ -307,6 +307,7 @@ class Engine(object):
         self.action_list = self.action_list_class.create_initial(self.get_role_list_on_stage())
         # Update game state.
         logger.info('Updating game state...')
+        self.game.logs[:] = []
         self.game.round = 1
         self.game.is_over = False
         self.save_game()
@@ -324,6 +325,7 @@ class Engine(object):
             if elapsed_seconds >= threshold:
                 logger.info('Skipping %s after %d seconds...' % (action, elapsed_seconds))
                 result = action.skip(players)
+                self.game.log_action_result(result)
                 self.move_to_next_action(result)
                 self.save_game()
 
@@ -352,6 +354,7 @@ class Engine(object):
 
     def get_json_dict(self):
         json_dict = {
+            'logs': self.game.logs,
             'round': self.game.round,
             'is_over': self.game.is_over,
             'update_date': self.game.update_date.isoformat(),

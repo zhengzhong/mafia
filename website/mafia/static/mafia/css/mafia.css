@@ -22,7 +22,7 @@
 }
 
 .player .player-body {
-  height: 120px;
+  height: 160px;
   overflow: hidden;
 }
 
@@ -43,6 +43,10 @@
   float: right;
   text-align: center;
   position: relative;
+}
+
+.player .player-role .player-role-name {
+  display: none;
 }
 
 .player .player-role .player-check-disabled,
@@ -102,6 +106,10 @@
 }
 
 /* God mode... */
+
+.game-mode-god .player .player-role .player-role-name {
+  display: inline;
+}
 
 .game-mode-god .player .player-details {
   display: block;

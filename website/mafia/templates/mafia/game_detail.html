@@ -85,6 +85,7 @@
                         <a class="player-card" href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});"></a>
                         <span class="player-check-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
                         <span class="player-checked glyphicon glyphicon-ok-sign" style="display: none;"></span>
+                        <span class="player-role-name label label-default">--</span>
                         {% if request.user == player.user %}
                           <span class="label label-success">YOU</span>
                         {% endif %}
@@ -114,11 +115,24 @@
       </div>
 
       <div id="logs" class="tab-pane fade">
-        <ul class="list-unstyled">
-          {% for log in game.log_set.all %}
-            <li><code>{{ log }}</code></li>
-          {% endfor %}
-        </ul>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Round</th>
+              <th>Action</th>
+              <th>Text</th>
+              <th>Visibility</th>
+            </tr>
+          </thead>
+          <tbody id="game-logs">
+            <tr class="prototype">
+              <td class="log-round">--</td>
+              <td class="log-action-name">--</td>
+              <td class="log-text">--</td>
+              <td class="log-visibility">--</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>
@@ -138,6 +152,13 @@
     var currentPlayerPKs = [
       {% for current_player in current_players %}
         {{ current_player.pk }} {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ];
+
+    /// For the current authenticated user, this is his corresponding player roles.
+    var currentPlayerRoles = [
+      {% for current_player in current_players %}
+        '{{ current_player.role }}' {% if not forloop.last %},{% endif %}
       {% endfor %}
     ];
 
@@ -167,7 +188,26 @@
       return false;
     }
 
-    function updateGameState(game) {
+    function updateGame(game) {
+        var logsContainer = $('#game-logs');
+        var prototypeRow = $('.prototype', logsContainer);
+        logsContainer.empty();
+        for (var i = 0; i < game.logs.length; i++) {
+          var log = game.logs[i];
+          if (log.visibility != '' || mode == 'god') {
+            var row = prototypeRow.clone().removeClass('prototype');
+            $('.log-round', row).text(log.round);
+            $('.log-action-name', row).text(log.action_name);
+            if (mode == 'god' || log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1) {
+              $('.log-text', row).text(log.text);
+            } else {
+              $('.log-text', row).text('* * *');
+            }
+            $('.log-visibility', row).text(log.visibility);
+            logsContainer.append(row);
+          }
+        }
+        logsContainer.append(prototypeRow);
         $('#game-over').toggle(game.is_over);
         $('#game-round').text('Round ' + game.round);
         if (game.current_action != null) {
@@ -181,6 +221,7 @@
       element.toggleClass('player-out', player.is_out);
       element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
       // Update player role and tags...
+      $('.player-role-name', element).text(player.role);
       $('.player-card', element).removeClass().addClass('player-card').addClass('player-role-' + player.role.toLowerCase());
       var detailsElement = $('.player-details', element).empty();
       for (var j = 0; j < player.tags.length; j++) {
@@ -201,7 +242,7 @@
         $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
         if (game.update_date != updateTimestamp) {
           updateTimestamp = game.update_date;
-          updateGameState(game);
+          updateGame(game);
           for (var i = 0; i < game.players.length; i++) {
             var player = game.players[i];
             var isPossibleTarget = (game.possible_target_pk_list.indexOf(player.pk) != -1);

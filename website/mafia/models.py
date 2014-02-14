@@ -49,6 +49,7 @@ class Game(models.Model):
     delay_seconds = models.PositiveIntegerField(default=MIN_DELAY_SECONDS)
     config_json = models.TextField(blank=True)
     context_json = models.TextField(blank=True)
+    logs_json = models.TextField(blank=True)
     round = models.PositiveIntegerField(default=0)
     is_over = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True)
@@ -88,6 +89,12 @@ class Game(models.Model):
         self._context = value
 
     @property
+    def logs(self):
+        if not hasattr(self, '_logs'):
+            self._logs = json.loads(self.logs_json or '[]')
+        return self._logs
+
+    @property
     def is_ongoing(self):
         return self.round > 0 and not self.is_over
 
@@ -101,6 +108,8 @@ class Game(models.Model):
             self.config_json = json.dumps(self._config, ensure_ascii=False)
         if hasattr(self, '_context'):
             self.context_json = json.dumps(self._context, ensure_ascii=False)
+        if hasattr(self, '_logs'):
+            self.logs_json = json.dumps(self._logs, ensure_ascii=False)
         super(Game, self).save(*args, **kwargs)
 
     def get_elapsed_seconds_since_last_update(self):
@@ -120,13 +129,13 @@ class Game(models.Model):
 
     def log_action_result(self, result):
         for message in result.messages:
-            GameLog.objects.create(
-                game=self,
-                round=self.round,
-                action_name=result.action_name,
-                text=message.text,
-                visibility=message.visibility
-            )
+            entry = {
+                'round': self.round,
+                'action_name': result.action_name,
+                'text': message.text,
+                'visibility': message.visibility
+            }
+            self.logs.append(entry)
 
 
 class PlayerManager(models.Manager):
@@ -239,26 +248,3 @@ class Player(models.Model):
         self.role = ''
         self.tags_json = ''
         self.out_tag = ''
-
-
-class GameLog(models.Model):
-
-    class Meta:
-        db_table = TABLE_PREFIX + 'gamelog'
-        ordering = ['log_date']
-
-    game = models.ForeignKey(Game, related_name='log_set')
-    round = models.PositiveIntegerField()
-    action_name = models.CharField(max_length=20)
-    text = models.CharField(max_length=240)
-    visibility = models.CharField(max_length=20, blank=True)
-    log_date = models.DateTimeField(auto_now_add=True)
-
-    def __unicode__(self):
-        return '[%s] #%02d / %s - %s [%s]' % (
-            self.game,
-            self.round,
-            self.action_name,
-            self.text,
-            self.visibility,
-        )
