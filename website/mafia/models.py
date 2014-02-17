@@ -140,7 +140,7 @@ class Game(models.Model):
 
 class PlayerManager(models.Manager):
 
-    def create_players(self, game, user, is_host):
+    def get_or_create_players(self, game, user, is_host):
         if game.is_two_handed:
             hand_side_list = [self.model.HAND_SIDE_LEFT, self.model.HAND_SIDE_RIGHT]
         else:

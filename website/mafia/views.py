@@ -4,11 +4,12 @@
 import json
 import logging
 
-from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.views.generic import TemplateView, CreateView, DetailView
-from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
+from mafia.exceptions import GameError
 from mafia.models import Game, Player
 from mafia.forms import GameForm
 from mafia.classic import ClassicEngine
@@ -33,16 +34,6 @@ class MafiaGameHostView(CreateView):
     template_name = 'mafia/game_host.html'
     model = Game
     form_class = GameForm
-
-    # DEBUG ONLY!
-    def form_valid(self, form):
-        result = super(MafiaGameHostView, self).form_valid(form)
-        game = self.object
-        users = User.objects.filter(is_active=True)[:6]
-        Player.objects.create_players(game=game, user=users[0], is_host=True)
-        for user in users[1:]:
-            Player.objects.create_players(game=game, user=user, is_host=False)
-        return result
 
 
 class _MafiaGameEngineDetailView(DetailView):
@@ -77,13 +68,57 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
             context_data['current_players'] = current_players
         return context_data
 
-
-class MafiaGameStartView(_MafiaGameEngineDetailView):
-
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         engine = self.get_engine()
+        action = request.POST.get('action')
+        handler_mappings = {
+            'join': self._join_game,
+            'quit': self._quit_game,
+            'kickoff': self._kickoff_user,
+            'reset': self._reset_game,
+            'start': self._start_game,
+        }
+        try:
+            handler = handler_mappings.get(action)
+            if not handler:
+                raise GameError('Unknown action %s.' % action)
+            handler(request, engine)
+            return HttpResponseRedirect(engine.game.get_absolute_url())
+        except GameError, exc:
+            message = 'Fail to perform action %s on game %s: %s' % (action, engine.game, exc)
+            logger.warning(message)
+            return HttpResponseBadRequest(message)
+
+    def _join_game(self, request, engine):
+        if engine.game.is_ongoing:
+            raise GameError('Cannot join game while game is ongoing.')
+        Player.objects.get_or_create_players(game=engine.game, user=request.user, is_host=False)
+
+    def _quit_game(self, request, engine):
+        if engine.game.is_ongoing:
+            raise GameError('Cannot quit game while game is ongoing.')
+        players = Player.objects.filter(game=engine.game, user=request.user)
+        for player in players:
+            player.delete()
+
+    def _kickoff_user(self, request, engine):
+        if engine.game.is_ongoing:
+            raise GameError('Cannot kickoff user while game is ongoing.')
+        if not Player.objects.filter(game=engine.game, user=request.user, is_host=True).exists():
+            raise GameError('Current user is not allowed to kickoff user.')
+        username = request.POST.get('username', '').strip()
+        if not username:
+            raise GameError('Username is not provided.')
+        players = Player.objects.filter(game=engine.game, user__username=username)
+        for player in players:
+            player.delete()
+
+    def _reset_game(self, request, engine):
+        engine.reset_game()
+
+    def _start_game(self, request, engine):
         engine.start_game(force=True)
-        return HttpResponseRedirect(engine.game.get_absolute_url())
 
 
 class MafiaGameHeartbeatView(_MafiaGameEngineDetailView):

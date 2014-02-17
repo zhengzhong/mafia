@@ -272,6 +272,13 @@ class Engine(object):
             return None
         return self.action_list.current()
 
+    def reset_game(self):
+        self.action_list = self.action_list_class()  # Reset to an empty action list.
+        self.game.logs[:] = []
+        self.game.round = 0
+        self.game.is_over = False
+        self.save_game()
+
     def start_game(self, force=False):
         # Check if game can be started.
         if not force:

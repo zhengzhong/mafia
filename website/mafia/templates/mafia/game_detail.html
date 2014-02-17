@@ -103,14 +103,45 @@
 
           </form>
 
-        {% endif %}
+          <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="reset"/>
+            <div class="alert alert-danger">
+              <div class="form-group"><button class="btn btn-danger" type="submit">Reset the game!</button></div>
+            </div>
+          </form>
 
-        <form class="form-inline" action="{% url mafia-game-start pk=game.pk %}" method="post">
-          {% csrf_token %}
-          <div class="alert alert-danger">
-            <div class="form-group"><button class="btn btn-danger" type="submit">(Re)Start the game!</button></div>
-          </div>
-        </form>
+        {% else %}
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Player</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for player in game.player_set.all %}
+                <tr>
+                  <td>{{ player }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2">
+                  <span class="text-muted">{{ game.player_set.count }} players</span>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="start"/>
+            <div class="form-group"><button class="btn btn-primary" type="submit">Start the game!</button></div>
+          </form>
+
+        {% endif %}{# game.is_ongoing #}
 
       </div>
 
