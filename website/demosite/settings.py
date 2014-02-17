@@ -6,7 +6,7 @@
 import os
 
 
-_BASE_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
+_BASE_DIR = os.path.dirname(__file__)
 
 DEBUG = True
 

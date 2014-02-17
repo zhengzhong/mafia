@@ -1,5 +1,5 @@
 .idea/
-static/bower_components/
+bower_components/
 
 *.db
 *.py[co]
