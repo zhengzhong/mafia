@@ -6,7 +6,7 @@ from mafia.gameplay import SettlementRule
 from mafia.classic.constants import Role, Tag
 
 
-class Guarded(SettlementRule):
+class SettleGuarded(SettlementRule):
 
     tag = Tag.GUARDED
 
@@ -39,7 +39,7 @@ class Guarded(SettlementRule):
             guarded.add_tag(Tag.UNGUARDABLE)
 
 
-class Shot(SettlementRule):
+class SettleShot(SettlementRule):
 
     tag = Tag.SHOT
 
@@ -62,7 +62,7 @@ class Shot(SettlementRule):
                     result.add_out_player(guarded)
 
 
-class Cured(SettlementRule):
+class SettleCured(SettlementRule):
 
     tag = Tag.CURED
 
@@ -82,4 +82,29 @@ class Cured(SettlementRule):
             cured.add_tag(Tag.MISDIAGNOSED)
 
 
-RULES = (Guarded(), Shot(), Cured())
+class ClearPreviouslyGuarded(SettlementRule):
+
+    tag = Tag.PREVIOUSLY_GUARDED
+
+    def settle_tagged_player(self, tagged_player, players, result):
+        previously_guarded = tagged_player
+        previously_guarded.remove_tag(self.tag)
+
+
+class UpdateGuardedToPreviouslyGuarded(SettlementRule):
+
+    tag = Tag.GUARDED
+
+    def settle_tagged_player(self, tagged_player, players, result):
+        guarded = tagged_player
+        guarded.remove_tag(self.tag)
+        guarded.add_tag(Tag.PREVIOUSLY_GUARDED)
+
+
+RULES = (
+    SettleGuarded(),
+    SettleShot(),
+    SettleCured(),
+    ClearPreviouslyGuarded(),
+    UpdateGuardedToPreviouslyGuarded(),
+)

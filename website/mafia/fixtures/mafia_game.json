@@ -1,0 +1,156 @@
+[
+  {
+    "pk": 1,
+    "model": "mafia.game",
+    "fields": {
+      "name": "ClassicGameTest",
+      "delay_seconds": 10,
+      "variant": "classic",
+      "is_two_handed": true,
+      "is_over": false,
+      "round": 0,
+      "create_date": "2014-02-14T00:00:00.000Z",
+      "update_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": true,
+      "user": 11,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": true,
+      "user": 11,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "user": 12,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "user": 12,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Detective",
+      "user": 13,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Detective",
+      "user": 13,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Guardian",
+      "user": 14,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Doctor",
+      "user": 14,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Traitor",
+      "user": 15,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Civilian",
+      "user": 15,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Civilian",
+      "user": 16,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "is_host": false,
+      "role": "Civilian",
+      "user": 16,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  }
+]

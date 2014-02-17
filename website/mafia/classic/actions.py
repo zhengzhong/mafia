@@ -85,21 +85,13 @@ class VoteAndLynch(Action):
     def execute_with_result(self, players, targets, options, result):
         # Check each target to see if he should be lynched or exempted.
         for target in targets:
-            if target.has_tag(Tag.GUARDED):
+            if target.has_tag(Tag.PREVIOUSLY_GUARDED):
                 text = '%s was voted but exempted.' % target
             else:
                 target.mark_out(self.tag)
+                result.add_out_player(target)
                 text = '%s was voted and lynched.' % target
             result.log_public(text)
-        # Remove previous PREVIOUSLY_GUARDED tag.
-        for player in players:
-            if player.has_tag(Tag.PREVIOUSLY_GUARDED):
-                player.remove_tag(Tag.PREVIOUSLY_GUARDED)
-        # Update the GUARDED tag to PREVIOUSLY_GUARDED.
-        for player in players:
-            if player.has_tag(Tag.GUARDED):
-                player.remove_tag(Tag.GUARDED)
-                player.add_tag(Tag.PREVIOUSLY_GUARDED)
 
 
 class ClassicActionList(ActionList):

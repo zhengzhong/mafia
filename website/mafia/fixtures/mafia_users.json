@@ -1,6 +1,6 @@
 [
   {
-    "pk": null,
+    "pk": 11,
     "model": "auth.user",
     "fields": {
       "username": "Tintin",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "pk": null,
+    "pk": 12,
     "model": "auth.user",
     "fields": {
       "username": "Snowy",
@@ -36,7 +36,7 @@
     }
   },
   {
-    "pk": null,
+    "pk": 13,
     "model": "auth.user",
     "fields": {
       "username": "Haddock",
@@ -54,7 +54,7 @@
     }
   },
   {
-    "pk": null,
+    "pk": 14,
     "model": "auth.user",
     "fields": {
       "username": "Calculus",
@@ -72,7 +72,7 @@
     }
   },
   {
-    "pk": null,
+    "pk": 15,
     "model": "auth.user",
     "fields": {
       "username": "Thomson",
@@ -90,7 +90,7 @@
     }
   },
   {
-    "pk": null,
+    "pk": 16,
     "model": "auth.user",
     "fields": {
       "username": "Thompson",
