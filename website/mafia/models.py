@@ -20,17 +20,6 @@ logger = logging.getLogger(__name__)
 TABLE_PREFIX = getattr(settings, 'MAFIA_TABLE_PREFIX', 'mafia_')
 
 
-class GameManager(models.Manager):
-
-    def available_game_list(self):
-        from_create_date = timezone.now() - datetime.timedelta(hours=2)
-        return self.get_query_set().filter(
-            create_date__gte=from_create_date,
-            round=0,
-            is_over=False
-        )
-
-
 class Game(models.Model):
 
     VARIANT_CLASSIC = 'classic'
@@ -58,8 +47,6 @@ class Game(models.Model):
     class Meta:
         db_table = TABLE_PREFIX + 'game'
         ordering = ['-create_date']
-
-    objects = GameManager()
 
     def __unicode__(self):
         return self.name
@@ -248,3 +235,15 @@ class Player(models.Model):
         self.role = ''
         self.tags_json = ''
         self.out_tag = ''
+
+
+class Players(list):
+
+    def __init__(self, game, user):
+        super(Players, self).__init__(Player.objects.filter(game=game, user=user))
+
+    def is_host(self):
+        for player in self:
+            if player.is_host:
+                return True
+        return False

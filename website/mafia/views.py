@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import datetime
 import json
 import logging
 
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.views.generic import TemplateView, CreateView, DetailView
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 from mafia.exceptions import GameError
-from mafia.models import Game, Player
+from mafia.models import Game, Player, Players
 from mafia.forms import GameForm
 from mafia.classic import ClassicEngine
 from mafia.werewolves import WerewolvesEngine
@@ -25,7 +27,8 @@ class MafiaHomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(MafiaHomeView, self).get_context_data(**kwargs)
-        context_data['available_game_list'] = Game.objects.available_game_list()
+        since_date = timezone.now() - datetime.timedelta(days=1)
+        context_data['recent_game_list'] = Game.objects.filter(update_date__gte=since_date)
         return context_data
 
 
@@ -42,7 +45,10 @@ class _MafiaGameEngineDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super(_MafiaGameEngineDetailView, self).get_context_data(**kwargs)
-        context_data['engine'] = self.get_engine()
+        context_data.update({
+            'engine': self.get_engine(),
+            'current_players': self.get_current_players(),
+        })
         return context_data
 
     def get_engine(self):
@@ -54,6 +60,12 @@ class _MafiaGameEngineDetailView(DetailView):
                 self._engine = ClassicEngine(game)
         return self._engine
 
+    def get_current_players(self):
+        if not hasattr(self, '_current_players'):
+            engine = self.get_engine()
+            self._current_players = Players(engine.game, self.request.user)
+        return self._current_players
+
 
 class MafiaGameDetailView(_MafiaGameEngineDetailView):
 
@@ -62,10 +74,6 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
     def get_context_data(self, **kwargs):
         context_data = super(MafiaGameDetailView, self).get_context_data(**kwargs)
         context_data['mode'] = self.request.GET.get('mode', None)
-        if self.request.user.is_authenticated():
-            engine = self.get_engine()
-            current_players = Player.objects.filter(game=engine.game, user=self.request.user)
-            context_data['current_players'] = current_players
         return context_data
 
     @method_decorator(login_required)
@@ -98,19 +106,22 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
     def _quit_game(self, request, engine):
         if engine.game.is_ongoing:
             raise GameError('Cannot quit game while game is ongoing.')
-        players = Player.objects.filter(game=engine.game, user=request.user)
-        for player in players:
+        for player in self.get_current_players():
             player.delete()
 
     def _kickoff_user(self, request, engine):
         if engine.game.is_ongoing:
             raise GameError('Cannot kickoff user while game is ongoing.')
-        if not Player.objects.filter(game=engine.game, user=request.user, is_host=True).exists():
+        if not self.get_current_players().is_host():
             raise GameError('Current user is not allowed to kickoff user.')
         username = request.POST.get('username', '').strip()
         if not username:
             raise GameError('Username is not provided.')
-        players = Player.objects.filter(game=engine.game, user__username=username)
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise GameError('User %s does not exist.' % username)
+        players = Players(engine.game, user)
         for player in players:
             player.delete()
 

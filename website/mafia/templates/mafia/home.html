@@ -1,6 +1,9 @@
 {% extends "mafia/base.html" %}
 
 
+{% load humanize %}
+
+
 {% block head_title %} Mafia {% endblock %}
 
 
@@ -11,7 +14,7 @@
 
 {% block content %}
 
-  {% if available_game_list %}
+  {% if recent_game_list %}
 
     <table class="table">
       <thead>
@@ -19,12 +22,19 @@
           <th>Game</th>
           <th>Variant</th>
           <th>Players</th>
+          <th>Created</th>
+          <th>Updated</th>
         </tr>
       </thead>
       <tbody>
-        {% for game in available_game_list %}
+        {% for game in recent_game_list %}
           <tr>
-            <td><a href="{{ game.get_absolute_url }}">{{ game }}</a></td>
+            <td>
+              <a href="{{ game.get_absolute_url }}">{{ game }}</a>
+              {% if game.is_ongoing %}
+                <span class="text-muted">(ongoing)</span>
+              {% endif %}
+            </td>
             <td>
               <span class="label label-primary">{{ game.variant }}</span>
               {% if game.is_two_handed %}
@@ -32,6 +42,8 @@
               {% endif %}
             </td>
             <td><span class="badge">{{ game.player_set.count }}</span></td>
+            <td>{{ game.create_date|naturaltime }}</td>
+            <td>{{ game.update_date|naturaltime }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -40,7 +52,7 @@
   {% else %}
 
     <div class="alert alert-warning">
-      <span class="glyphicon glyphicon-exclamation-sign"></span> No game avaialble.
+      <span class="glyphicon glyphicon-exclamation-sign"></span> No games since yesterday.
     </div>
 
   {% endif %}
