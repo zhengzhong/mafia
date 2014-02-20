@@ -17,6 +17,7 @@ section {
 
 #content {
   min-height: 500px;
+  padding-bottom: 40px;
 }
 
 #footer-wrapper {

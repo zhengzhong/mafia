@@ -1,6 +1,9 @@
 {% extends "mafia/base.html" %}
 
 
+{% load humanize %}
+
+
 {% block head_title %} {{ game.name }} ({{ game.variant }}) {% endblock %}
 
 
@@ -82,7 +85,9 @@
                     </div>
                     <div class="player-body">
                       <div class="player-role">
-                        <a class="player-card" href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});"></a>
+                        <a href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});">
+                          <img class="player-card img-thumbnail" src="http://placehold.it/60x60" alt="Player Card"/>
+                        </a>
                         <span class="player-check-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
                         <span class="player-checked glyphicon glyphicon-ok-sign" style="display: none;"></span>
                         <span class="player-role-name label label-default">--</span>
@@ -117,29 +122,55 @@
             <thead>
               <tr>
                 <th>Player</th>
+                <th>Joined...</th>
               </tr>
             </thead>
             <tbody>
               {% for player in game.player_set.all %}
                 <tr>
-                  <td>{{ player }}</td>
+                  <td>
+                    {% if player.user %}
+                      {{ player.user }}
+                    {% else %}
+                      <span class="text-muted">Unused</span>
+                    {% endif %}
+                    {% if player.hand_side %}
+                      <span class="label label-default">{{ player.hand_side }}</span>
+                    {% endif %}
+                    {% if player.is_host %}
+                      <span class="label label-success">host</span>
+                    {% endif %}
+                  </td>
+                  <td>{{ player.join_date|naturaltime }}</td>
                 </tr>
               {% endfor %}
             </tbody>
             <tfoot>
               <tr>
                 <td colspan="2">
-                  <span class="text-muted">{{ game.player_set.count }} players</span>
+                  <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ game.player_set.count }} players</span>
                 </td>
               </tr>
             </tfoot>
           </table>
 
-          <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="start"/>
-            <div class="form-group"><button class="btn btn-primary" type="submit">Start the game!</button></div>
-          </form>
+          {% if not current_players %}
+
+            <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="join"/>
+              <div class="form-group"><button class="btn btn-success" type="submit">Join this game!</button></div>
+            </form>
+
+          {% else %}
+
+            <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="start"/>
+              <div class="form-group"><button class="btn btn-primary" type="submit">Start the game!</button></div>
+            </form>
+
+          {% endif %}
 
         {% endif %}{# game.is_ongoing #}
 
@@ -251,9 +282,17 @@
       // Update player status...
       element.toggleClass('player-out', player.is_out);
       element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
-      // Update player role and tags...
-      $('.player-role-name', element).text(player.role);
-      $('.player-card', element).removeClass().addClass('player-card').addClass('player-role-' + player.role.toLowerCase());
+      // Update player role...
+      if (currentPlayerRoles.indexOf(player.role) != -1 || mode == 'god') {
+        // The player to update has the same role as the current player, or we are in god mode.
+        $('.player-role-name', element).text(player.role);
+        $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');
+      } else {
+        // The player to update has a different role from the current player.
+        $('.player-role-name', element).text('--');
+        $('.player-card', element).attr('src', 'http://placehold.it/60x60');
+      }
+      // Update player tags...
       var detailsElement = $('.player-details', element).empty();
       for (var j = 0; j < player.tags.length; j++) {
         $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(detailsElement);

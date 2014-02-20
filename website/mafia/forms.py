@@ -4,6 +4,7 @@
 import json
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 from mafia.models import Game, Player
@@ -15,7 +16,7 @@ class GameForm(forms.ModelForm):
         model = Game
         fields = ('name', 'is_two_handed', 'variant', 'delay_seconds')
 
-    add_test_players = forms.BooleanField(initial=False, required=False)
+    add_test_players = forms.BooleanField(label=_('Add test players (debug mode)'), initial=False, required=False)
 
     num_killers = forms.IntegerField(initial=2, min_value=1, max_value=3)
     num_detectives = forms.IntegerField(initial=2, min_value=1, max_value=3)

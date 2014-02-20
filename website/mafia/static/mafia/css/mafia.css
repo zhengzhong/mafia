@@ -38,15 +38,11 @@
 }
 
 .player .player-role {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   float: right;
   text-align: center;
   position: relative;
-}
-
-.player .player-role .player-role-name {
-  display: none;
 }
 
 .player .player-role .player-check-disabled,
@@ -66,13 +62,10 @@
 }
 
 .player .player-card {
-  display: inline-block;
   margin-bottom: 5px;
-  width: 60px;
-  height: 60px;
-  background: #ffffff url('http://placehold.it/60x60') no-repeat;
-  border: 2px solid #dddddd;
-  border-radius: 5px;
+  border-width: 2px;
+  min-width: 60px;
+  min-height: 60px;
 }
 
 .player .player-details {
@@ -106,10 +99,6 @@
 }
 
 /* God mode... */
-
-.game-mode-god .player .player-role .player-role-name {
-  display: inline;
-}
 
 .game-mode-god .player .player-details {
   display: block;

@@ -17,16 +17,21 @@
       <thead>
         <tr>
           <th>Game</th>
-          <th>Hoster</th>
-          <th>Join</th>
+          <th>Variant</th>
+          <th>Players</th>
         </tr>
       </thead>
       <tbody>
         {% for game in available_game_list %}
           <tr>
             <td><a href="{{ game.get_absolute_url }}">{{ game }}</a></td>
-            <td><a href="{{ game.hoster.profile.get_absolute_url }}">{{ game.hoster.profile }}</a></td>
-            <td><a class="btn btn-xs btn-primary" href="{% url mafia-game-join pk=game.pk %}">Join</a></td>
+            <td>
+              <span class="label label-primary">{{ game.variant }}</span>
+              {% if game.is_two_handed %}
+                <span class="label label-default">two-handed</span></span>
+              {% endif %}
+            </td>
+            <td><span class="badge">{{ game.player_set.count }}</span></td>
           </tr>
         {% endfor %}
       </tbody>
