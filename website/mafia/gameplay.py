@@ -158,10 +158,13 @@ class Action(object):
         return result
 
     def get_json_dict(self):
+        min_num_targets, max_num_targets = self.get_min_max_num_targets()
         return {
             'name': self.name,
             'role': self.role,
             'option_choices': self.get_option_choices(),
+            'min_num_targets': min_num_targets,
+            'max_num_targets': max_num_targets,
         }
 
 

@@ -78,6 +78,14 @@
   display: inline-block;
 }
 
+.player .player-tag {
+  margin-right: 5px;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: #ffffff url('http://placehold.it/32x32') no-repeat;
+}
+
 .player-checkable .player-card {
   border-color: #5cb85c;
 }

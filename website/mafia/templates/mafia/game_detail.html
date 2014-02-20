@@ -13,67 +13,107 @@
 
 
 {% block header %}
+
+  <div class="pull-right">
+    <form action="{{ game.get_absolute_url }}" method="post">
+      {% csrf_token %}
+      {% if game.is_ongoing and current_players.is_host %}
+        <!-- Reset the game -->
+        <input type="hidden" name="action" value="reset"/>
+        <button class="btn btn-danger" type="submit">
+          <span class="glyphicon glyphicon-repeat"></span> Reset
+        </button>
+      {% elif not game.is_ongoing and not current_players %}
+        <!-- Join the game -->
+        <input type="hidden" name="action" value="join"/>
+        <button class="btn btn-success" type="submit">
+          <span class="glyphicon glyphicon-log-in"></span> Join
+        </button>
+      {% elif not game.is_ongoing and current_players.is_host %}
+        <!-- Start the game -->
+        <input type="hidden" name="action" value="start"/>
+        <button class="btn btn-primary" type="submit">
+          <span class="glyphicon glyphicon-play-circle"></span> Start
+        </button>
+      {% endif %}
+    </form>
+  </div>
   <h1>{{ game.name }} ({{ game.variant }})</h1>
+  <div class="clearfix"></div>
+  <hr/>
+
 {% endblock %}
 
 
 {% block content %}
 
-  <div>
+  {% if game.is_ongoing %}
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#game" data-toggle="tab">Game</a></li>
-      <li><a href="#logs" data-toggle="tab">Logs</a></li>
-    </ul>
+    <div class="game-mode-{{ mode }}">
 
-    <div class="tab-content">
+      <form id="game-action-form" class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
-      <div id="game" class="tab-pane fade in active">
+        <!-- game over alert ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-        <section id="game-over" style="display: none;">
-          <div class="alert alert-warning">
-            <span class="glyphicon glyphicon-info-sign"></span> Game is over.
-          </div>
-        </section>
+        <div id="game-over" class="alert alert-warning" style="display: none;">
+          <span class="glyphicon glyphicon-info-sign"></span> Game is over.
+        </div>
 
-        <!-- Game Action Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- heading ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-        {% if game.is_ongoing %}
-
-          <form id="game-action-form" class="game-mode-{{ mode }} form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
-
-            <div class="row">
-              <div class="col-md-9">
-                <h2 id="game-round">Round ?</h2>
-                <div>
-                  <p>Select one or more targets below...</p>
-                  <div class="form-group">
-                    <input class="form-control" type="text" name="magic" placeholder="Magic: Black / White"/>
-                  </div>
-                  <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Execute <span id="game-action">Action</span></button>
-                    <span class="done text-success glyphicon glyphicon-ok-sign" style="display: none;"></span>
-                  </div>
-                </div>
+        <div class="row">
+          <div class="col-md-9">
+            <h2><span id="game-round">Round ?</span> <small id="action-name">Action</small></h2>
+            <div class="alert alert-info">
+              <div class="form-group">
+                <span class="glyphicon glyphicon-info-sign"></span> Select <strong id="action-num-targets"></strong> target(s)
               </div>
-              <div class="col-md-3">
-                <div class="well" style="text-align: center;">
-                  <div id="game-timer" class="game-timer">--</div>
-                  <div>
-                    <a class="btn btn-sm btn-default" href="javascript:void(0);" onclick="return refresh();">
-                      <span class="glyphicon glyphicon-refresh"></span> Refresh
-                    </a>
-                    <a id="start-heartbeat-button" class="btn btn-sm btn-primary" style="display: none;" href="javascript:void(0);" onclick="return startHeartbeat();">
-                      <span class="glyphicon glyphicon-play"></span> Start
-                    </a>
-                    <a id="pause-heartbeat-button" class="btn btn-sm btn-danger" style="display: none;" href="javascript:void(0);" onclick="return pauseHeartbeat();">
-                      <span class="glyphicon glyphicon-pause"></span> Pause
-                    </a>
-                  </div>
-                </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="magic" placeholder="Magic: Black / White"/>
+              </div>
+              <div class="form-group">
+                <button id="action-execute-button" class="btn btn-primary" type="submit">Execute</button>
+                <span class="done text-success glyphicon glyphicon-ok-sign" style="display: none;"></span>
               </div>
             </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well" style="text-align: center;">
+              <div class="small">
+                {% if mode == 'god' %}
+                  <a href="{{ game.get_absolute_url }}">Normal Mode</a> | <strong class="text-muted">God Mode</strong>
+                {% else %}
+                  <strong class="text-muted">Normal Mode</strong> | <a href="{{ game.get_absolute_url }}?mode=god">God Mode</a>
+                {% endif %}
+              </div>
+              <div id="game-timer" class="game-timer">--</div>
+              <div>
+                <a class="btn btn-sm btn-default" href="javascript:void(0);" onclick="return refresh();">
+                  <span class="glyphicon glyphicon-refresh"></span> Refresh
+                </a>
+                <a id="start-heartbeat-button" class="btn btn-sm btn-primary" style="display: none;" href="javascript:void(0);" onclick="return startHeartbeat();">
+                  <span class="glyphicon glyphicon-play"></span> Start
+                </a>
+                <a id="pause-heartbeat-button" class="btn btn-sm btn-danger" style="display: none;" href="javascript:void(0);" onclick="return pauseHeartbeat();">
+                  <span class="glyphicon glyphicon-pause"></span> Pause
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- tabs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#players" data-toggle="tab">Players</a></li>
+          <li><a href="#logs" data-toggle="tab">Logs</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+          <!-- players ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+          <div id="players" class="tab-pane fade in active">
             <div class="row">
               {% for player in game.player_set.all %}
                 <div class="col-md-3">
@@ -105,217 +145,205 @@
                 </div>
               {% endfor %}
             </div>
+          </div>
 
-          </form>
+          <!-- logs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-          <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="reset"/>
-            <div class="alert alert-danger">
-              <div class="form-group"><button class="btn btn-danger" type="submit">Reset the game!</button></div>
-            </div>
-          </form>
-
-        {% else %}
-
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Player</th>
-                <th>Joined...</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for player in game.player_set.all %}
+          <div id="logs" class="tab-pane fade">
+            <table class="table">
+              <thead>
                 <tr>
-                  <td>
-                    {% if player.user %}
-                      {{ player.user }}
-                    {% else %}
-                      <span class="text-muted">Unused</span>
-                    {% endif %}
-                    {% if player.hand_side %}
-                      <span class="label label-default">{{ player.hand_side }}</span>
-                    {% endif %}
-                    {% if player.is_host %}
-                      <span class="label label-success">host</span>
-                    {% endif %}
-                  </td>
-                  <td>{{ player.join_date|naturaltime }}</td>
+                  <th>Round</th>
+                  <th>Action</th>
+                  <th>Text</th>
+                  <th>Visibility</th>
                 </tr>
-              {% endfor %}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2">
-                  <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ game.player_set.count }} players</span>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              </thead>
+              <tbody id="game-logs">
+                <tr class="prototype">
+                  <td class="log-round">--</td>
+                  <td class="log-action-name">--</td>
+                  <td class="log-text">--</td>
+                  <td class="log-visibility">--</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          {% if not current_players %}
+        </div>
 
-            <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
-              {% csrf_token %}
-              <input type="hidden" name="action" value="join"/>
-              <div class="form-group"><button class="btn btn-success" type="submit">Join this game!</button></div>
-            </form>
-
-          {% else %}
-
-            <form class="form-inline" action="{{ game.get_absolute_url }}" method="post">
-              {% csrf_token %}
-              <input type="hidden" name="action" value="start"/>
-              <div class="form-group"><button class="btn btn-primary" type="submit">Start the game!</button></div>
-            </form>
-
-          {% endif %}
-
-        {% endif %}{# game.is_ongoing #}
-
-      </div>
-
-      <div id="logs" class="tab-pane fade">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Round</th>
-              <th>Action</th>
-              <th>Text</th>
-              <th>Visibility</th>
-            </tr>
-          </thead>
-          <tbody id="game-logs">
-            <tr class="prototype">
-              <td class="log-round">--</td>
-              <td class="log-action-name">--</td>
-              <td class="log-text">--</td>
-              <td class="log-visibility">--</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      </form>
 
     </div>
 
-  </div>
+  {% endif %}{# game.is_ongoing #}
+
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+  {% if not game.is_ongoing %}
+
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Joined...</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in game.player_set.all %}
+            <tr>
+              <td>
+                {% if player.user %}
+                  {{ player.user }}
+                {% else %}
+                  <span class="text-muted">Unused</span>
+                {% endif %}
+                {% if player.hand_side %}
+                  <span class="label label-default">{{ player.hand_side }}</span>
+                {% endif %}
+                {% if player.is_host %}
+                  <span class="label label-success">host</span>
+                {% endif %}
+              </td>
+              <td>{{ player.join_date|naturaltime }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">
+              <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ game.player_set.count }} players</span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  {% endif %}{# not game.is_ongoing #}
 
 {% endblock %}
 
 
 {% block bottom_extras %}
 
-  <script type="text/javascript">//<![CDATA[
+  {% if game.is_ongoing %}
 
-    var mode = '{{ mode }}';
+    <script type="text/javascript">//<![CDATA[
 
-    /// For the current authenticated user, this is his corresponding player PKs.
-    var currentPlayerPKs = [
-      {% for current_player in current_players %}
-        {{ current_player.pk }} {% if not forloop.last %},{% endif %}
-      {% endfor %}
-    ];
+      var mode = '{{ mode }}';
 
-    /// For the current authenticated user, this is his corresponding player roles.
-    var currentPlayerRoles = [
-      {% for current_player in current_players %}
-        '{{ current_player.role }}' {% if not forloop.last %},{% endif %}
-      {% endfor %}
-    ];
+      /// For the current authenticated user, this is his corresponding player PKs.
+      var currentPlayerPKs = [
+        {% for current_player in current_players %}
+          {{ current_player.pk }} {% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ];
 
-    /// Timestamp of the last update, used to decide if we need to refresh players.
-    var updateTimestamp = null;
+      /// For the current authenticated user, this is his corresponding player roles.
+      var currentPlayerRoles = [
+        {% for current_player in current_players %}
+          '{{ current_player.role }}' {% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ];
 
-    /// Game heartbeat ID returned by setInterval(), used in clearInterval().
-    var heartbeatId = null;
+      /// Timestamp of the last update, used to decide if we need to refresh players.
+      var updateTimestamp = null;
 
-    function uncheckPlayers() {
-      $('.player').each(function() {
-        $('input[name="target_pk[]"]', this).prop('checked', false);
-        $('.player-checked', this).hide();
-      });
-    }
+      /// Game heartbeat ID returned by setInterval(), used in clearInterval().
+      var heartbeatId = null;
 
-    function togglePlayerCheckbox(playerPK) {
-      var element = $('#player-' + playerPK);
-      if (element.hasClass('player-checkable')) {
-        var checkbox = $('input[name="target_pk[]"]', element);
-        var isChecked = !checkbox.prop('checked');
-        checkbox.prop('checked', isChecked);
-        $('.player-checked', element).toggle(isChecked);
-      } else {
-        $('.player-check-disabled', element).show().delay(200).fadeOut();
+      function uncheckPlayers() {
+        $('.player').each(function() {
+          $('input[name="target_pk[]"]', this).prop('checked', false);
+          $('.player-checked', this).hide();
+        });
       }
-      return false;
-    }
 
-    function updateGame(game) {
-        var logsContainer = $('#game-logs');
-        var prototypeRow = $('.prototype', logsContainer);
-        logsContainer.empty();
-        for (var i = 0; i < game.logs.length; i++) {
-          var log = game.logs[i];
-          if (log.visibility != '' || mode == 'god') {
-            var row = prototypeRow.clone().removeClass('prototype');
-            $('.log-round', row).text(log.round);
-            $('.log-action-name', row).text(log.action_name);
-            if (mode == 'god' || log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1) {
-              $('.log-text', row).text(log.text);
-            } else {
-              $('.log-text', row).text('* * *');
+      function togglePlayerCheckbox(playerPK) {
+        var element = $('#player-' + playerPK);
+        if (element.hasClass('player-checkable')) {
+          var checkbox = $('input[name="target_pk[]"]', element);
+          var isChecked = !checkbox.prop('checked');
+          checkbox.prop('checked', isChecked);
+          $('.player-checked', element).toggle(isChecked);
+        } else {
+          $('.player-check-disabled', element).show().delay(200).fadeOut();
+        }
+        return false;
+      }
+
+      function updateGame(game, isCurrentUserActor) {
+          var logsContainer = $('#game-logs');
+          var prototypeRow = $('.prototype', logsContainer);
+          logsContainer.empty();
+          for (var i = 0; i < game.logs.length; i++) {
+            var log = game.logs[i];
+            if (log.visibility != '' || mode == 'god') {
+              var row = prototypeRow.clone().removeClass('prototype');
+              $('.log-round', row).text(log.round);
+              $('.log-action-name', row).text(log.action_name);
+              if (mode == 'god' || log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1) {
+                $('.log-text', row).text(log.text);
+              } else {
+                $('.log-text', row).text('* * *');
+              }
+              $('.log-visibility', row).text(log.visibility);
+              logsContainer.append(row);
             }
-            $('.log-visibility', row).text(log.visibility);
-            logsContainer.append(row);
           }
-        }
-        logsContainer.append(prototypeRow);
-        $('#game-over').toggle(game.is_over);
-        $('#game-round').text('Round ' + game.round);
-        if (game.current_action != null) {
-          $('#game-action').text(game.current_action.name);
-        }
-    }
-
-    function updatePlayer(player, isPossibleTarget, isCurrentUserActor) {
-      var element = $('#player-' + player.pk);
-      // Update player status...
-      element.toggleClass('player-out', player.is_out);
-      element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
-      // Update player role...
-      if (currentPlayerRoles.indexOf(player.role) != -1 || mode == 'god') {
-        // The player to update has the same role as the current player, or we are in god mode.
-        $('.player-role-name', element).text(player.role);
-        $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');
-      } else {
-        // The player to update has a different role from the current player.
-        $('.player-role-name', element).text('--');
-        $('.player-card', element).attr('src', 'http://placehold.it/60x60');
+          logsContainer.append(prototypeRow);
+          $('#game-over').toggle(game.is_over);
+          $('#game-round').text('Round ' + game.round);
+          if (game.current_action != null) {
+            $('#action-name').text(game.current_action.name);
+            var numTargets = game.current_action.min_num_targets;
+            if (numTargets < game.current_action.max_num_targets) {
+              numTargets = numTargets + ' - ' + game.current_action.max_num_targets;
+            }
+            $('#action-num-targets').text(numTargets);
+          }
+          $('#action-execute-button').prop('disabled', !isCurrentUserActor && mode != 'god');
       }
-      // Update player tags...
-      var detailsElement = $('.player-details', element).empty();
-      for (var j = 0; j < player.tags.length; j++) {
-        $('<span class="label label-default"></span>').text(player.tags[j]).appendTo(detailsElement);
+
+      function updatePlayer(player, isPossibleTarget, isCurrentUserActor) {
+        var element = $('#player-' + player.pk);
+        // Update player status...
+        element.toggleClass('player-out', player.is_out);
+        element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
+        // Update player role...
+        if (currentPlayerRoles.indexOf(player.role) != -1 || mode == 'god') {
+          // The player to update has the same role as the current player, or we are in god mode.
+          $('.player-role-name', element).text(player.role);
+          // $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');  // TODO: enable this!
+          $('.player-card', element).attr('src', 'http://placehold.it/60x60');  // TODO: remove this!
+        } else {
+          // The player to update has a different role from the current player.
+          $('.player-role-name', element).text('--');
+          $('.player-card', element).attr('src', 'http://placehold.it/60x60');  // TODO: use face-down image!
+        }
+        // Update player tags...
+        var detailsElement = $('.player-details', element).empty();
+        for (var i = 0; i < player.tags.length; i++) {
+          $('<span class="player-tag"></span>').addClass('player-tag-' + player.tags[i].toLowerCase()).appendTo(detailsElement);
+          // $('<span class="label label-default"></span>').text(player.tags[i]).appendTo(detailsElement); // TODO: debug.
+        }
       }
-    }
 
-    function refresh() {
-      heartbeat();
-      return false;
-    }
+      function refresh() {
+        heartbeat();
+        return false;
+      }
 
-    function heartbeat() {
-      $.ajax({
-        url: '{% url mafia-game-heartbeat pk=game.pk %}',
-        type: 'get'
-      }).done(function(game) {
-        $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
-        if (game.update_date != updateTimestamp) {
-          updateTimestamp = game.update_date;
-          updateGame(game);
-          for (var i = 0; i < game.players.length; i++) {
-            var player = game.players[i];
-            var isPossibleTarget = (game.possible_target_pk_list.indexOf(player.pk) != -1);
+      function heartbeat() {
+        $.ajax({
+          url: '{% url mafia-game-heartbeat pk=game.pk %}',
+          type: 'get'
+        }).done(function(game) {
+          $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
+          if (game.update_date != updateTimestamp) {
+            updateTimestamp = game.update_date;
+            // Check if the current user is actor of the current action.
             var isCurrentUserActor = false;
             for (var j = 0; j < currentPlayerPKs.length; j++) {
               if (game.actor_pk_list.indexOf(currentPlayerPKs[j]) != -1) {
@@ -323,62 +351,68 @@
                 break;
               }
             }
-            updatePlayer(player, isPossibleTarget, isCurrentUserActor);
+            updateGame(game, isCurrentUserActor);
+            for (var i = 0; i < game.players.length; i++) {
+              var player = game.players[i];
+              var isPossibleTarget = (game.possible_target_pk_list.indexOf(player.pk) != -1);
+              updatePlayer(player, isPossibleTarget, isCurrentUserActor);
+            }
           }
-        }
-        if (game.is_over) {
-          pauseHeartbeat();
-        }
-      }).fail(function() {
-        $('#game-timer').removeClass('text-success').addClass('text-danger').text('ERR');
-      });
-    }
-
-    function startHeartbeat() {
-      $('#start-heartbeat-button').hide();
-      $('#pause-heartbeat-button').show();
-      updateTimestamp = null;
-      heartbeatId = setInterval(heartbeat, 2000);
-      return false;
-    }
-
-    function pauseHeartbeat() {
-      $('#pause-heartbeat-button').hide();
-      $('#start-heartbeat-button').show();
-      if (heartbeatId != null) {
-        clearInterval(heartbeatId);
+          if (game.is_over) {
+            pauseHeartbeat();
+          }
+        }).fail(function() {
+          $('#game-timer').removeClass('text-success').addClass('text-danger').text('ERR');
+        });
       }
-      heartbeatId = null;
-      return false;
-    }
 
-    function executeAction() {
-      var form = $('#game-action-form');
-      $('.done', form).hide();
-      $.ajax({
-        url: form.attr('action'),
-        type: form.attr('method'),
-        data: form.serialize()
-      }).done(function(data) {
-        $('.done', form).show().delay(200).fadeOut();
-        uncheckPlayers();
-      }).fail(function(data) {
-        alert('failed:');
+      function startHeartbeat() {
+        $('#start-heartbeat-button').hide();
+        $('#pause-heartbeat-button').show();
+        updateTimestamp = null;
+        heartbeatId = setInterval(heartbeat, 2000);
+        return false;
+      }
+
+      function pauseHeartbeat() {
+        $('#pause-heartbeat-button').hide();
+        $('#start-heartbeat-button').show();
+        if (heartbeatId != null) {
+          clearInterval(heartbeatId);
+        }
+        heartbeatId = null;
+        return false;
+      }
+
+      function executeAction() {
+        var form = $('#game-action-form');
         $('.done', form).hide();
-      }).always(function() {
-        refresh();
-      });
-      return false;
-    }
+        $.ajax({
+          url: form.attr('action'),
+          type: form.attr('method'),
+          data: form.serialize()
+        }).done(function(data) {
+          $('.done', form).show().delay(200).fadeOut();
+          uncheckPlayers();
+        }).fail(function(data) {
+          alert('failed:');
+          $('.done', form).hide();
+        }).always(function() {
+          refresh();
+        });
+        return false;
+      }
 
-    {% if game.is_ongoing %}
-      $(function() {
-        pauseHeartbeat();
-        refresh();
-      });
-    {% endif %}
+      {% if game.is_ongoing %}
+        $(function() {
+          pauseHeartbeat();
+          refresh();
+        });
+      {% endif %}
 
-  //]]></script>
+    //]]></script>
+
+  {% endif %}{# game.is_ongoing #}
 
 {% endblock %}
 
