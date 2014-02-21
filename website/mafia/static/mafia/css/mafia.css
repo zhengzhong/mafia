@@ -1,7 +1,20 @@
+
 .game-timer {
   padding: 10px;
   text-align: center;
   font: normal bold 240% Consolas,"Courier New",monospace;
+}
+
+.action-option, .action-option:hover, .action-option:focus {
+  text-decoration: none;
+}
+
+.action-option img {
+  border: 2px solid #dddddd;
+}
+
+.action-option.action-option-checked img {
+  border-color: #5cb85c;
 }
 
 .player {
@@ -46,7 +59,7 @@
 }
 
 .player .player-role .player-check-disabled,
-.player .player-role .player-checked {
+.player .player-role .player-checkmark {
   position: absolute;
   top: 5px;
   right: 10px;
@@ -57,7 +70,7 @@
   color: #d9534f;
 }
 
-.player .player-role .player-checked {
+.player .player-role .player-checkmark {
   color: #5cb85c;
 }
 

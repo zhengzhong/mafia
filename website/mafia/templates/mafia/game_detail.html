@@ -69,7 +69,8 @@
                 <span class="glyphicon glyphicon-info-sign"></span> Select <strong id="action-num-targets"></strong> target(s)
               </div>
               <div class="form-group">
-                <input class="form-control" type="text" name="magic" placeholder="Magic: Black / White"/>
+                <input type="hidden" name="option" value=""/>
+                <span id="action-options"></span>
               </div>
               <div class="form-group">
                 <button id="action-execute-button" class="btn btn-primary" type="submit">Execute</button>
@@ -129,7 +130,7 @@
                           <img class="player-card img-thumbnail" src="http://placehold.it/60x60" alt="Player Card"/>
                         </a>
                         <span class="player-check-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
-                        <span class="player-checked glyphicon glyphicon-ok-sign" style="display: none;"></span>
+                        <span class="player-checkmark glyphicon glyphicon-ok-sign" style="display: none;"></span>
                         <span class="player-role-name label label-default">--</span>
                         {% if request.user == player.user %}
                           <span class="label label-success">YOU</span>
@@ -253,65 +254,97 @@
       /// Game heartbeat ID returned by setInterval(), used in clearInterval().
       var heartbeatId = null;
 
-      function uncheckPlayers() {
-        $('.player').each(function() {
-          $('input[name="target_pk[]"]', this).prop('checked', false);
-          $('.player-checked', this).hide();
-        });
-      }
-
       function togglePlayerCheckbox(playerPK) {
         var element = $('#player-' + playerPK);
         if (element.hasClass('player-checkable')) {
           var checkbox = $('input[name="target_pk[]"]', element);
           var isChecked = !checkbox.prop('checked');
           checkbox.prop('checked', isChecked);
-          $('.player-checked', element).toggle(isChecked);
+          $('.player-checkmark', element).toggle(isChecked);
         } else {
           $('.player-check-disabled', element).show().delay(200).fadeOut();
         }
         return false;
       }
 
-      function updateGame(game, isCurrentUserActor) {
-          var logsContainer = $('#game-logs');
-          var prototypeRow = $('.prototype', logsContainer);
-          logsContainer.empty();
-          for (var i = 0; i < game.logs.length; i++) {
-            var log = game.logs[i];
-            if (log.visibility != '' || mode == 'god') {
-              var row = prototypeRow.clone().removeClass('prototype');
-              $('.log-round', row).text(log.round);
-              $('.log-action-name', row).text(log.action_name);
-              if (mode == 'god' || log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1) {
-                $('.log-text', row).text(log.text);
-              } else {
-                $('.log-text', row).text('* * *');
-              }
-              $('.log-visibility', row).text(log.visibility);
-              logsContainer.append(row);
+      function updateActionOptions(options) {
+        console.log('Creating action options (' + options.length + ' options)');
+        $('#game-action-form input[name="option"]').val('');
+        var optionsContainer = $('#action-options').empty();
+        for (var i = 0; i < options.length; i++) {
+          var option = options[i];
+          var optionImageURL = 'http://placehold.it/32x32';  // TODO:
+          var optionLink = $('<a class="action-option" href="javascript:void(0);"></a>')
+              .attr('data-option', option)
+              .append($('<img/>').attr('src', optionImageURL).attr('alt', option));
+          optionLink.click(function() {
+            var optionInput = $('#game-action-form input[name="option"]');
+            var selectedOption = $(this).attr('data-option');
+            console.log('User selected action option: ' + selectedOption + ' / previous: ' + optionInput.val());
+            $('a.action-option').removeClass('action-option-checked');
+            if (optionInput.val() == selectedOption) {
+              console.log('Turning off option: ' + selectedOption);
+              optionInput.val('');
+            } else {
+              console.log('Turning on option: ' + selectedOption);
+              optionInput.val(selectedOption);
+              $(this).addClass('action-option-checked');
             }
+            return false;
+          });
+          optionsContainer.append(optionLink);
+        }
+      }
+
+      function updateGame(game, isCurrentUserActor) {
+        // Update game logs.
+        var logsContainer = $('#game-logs');
+        var prototypeRow = $('.prototype', logsContainer);
+        logsContainer.empty();
+        for (var i = 0; i < game.logs.length; i++) {
+          var log = game.logs[i];
+          if (log.visibility != '' || mode == 'god') {
+            var row = prototypeRow.clone().removeClass('prototype');
+            $('.log-round', row).text(log.round);
+            $('.log-action-name', row).text(log.action_name);
+            if (mode == 'god' || log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1) {
+              $('.log-text', row).text(log.text);
+            } else {
+              $('.log-text', row).text('* * *');
+            }
+            $('.log-visibility', row).text(log.visibility);
+            logsContainer.append(row);
           }
-          logsContainer.append(prototypeRow);
-          $('#game-over').toggle(game.is_over);
-          $('#game-round').text('Round ' + game.round);
-          if (game.current_action != null) {
-            $('#action-name').text(game.current_action.name);
+        }
+        logsContainer.append(prototypeRow);
+        // Update game state.
+        $('#game-over').toggle(game.is_over);
+        $('#game-round').text('Round ' + game.round);
+        // Update information about the current action.
+        if (game.current_action != null) {
+          $('#action-name').text(game.current_action.name);
+          if (isCurrentUserActor || mode == 'god') {
             var numTargets = game.current_action.min_num_targets;
             if (numTargets < game.current_action.max_num_targets) {
               numTargets = numTargets + ' - ' + game.current_action.max_num_targets;
             }
             $('#action-num-targets').text(numTargets);
+            updateActionOptions(game.current_action.option_choices);
+            $('#action-execute-button').prop('disabled', false);
+          } else {
+            $('#action-num-targets').text('?');
+            updateActionOptions([]);
+            $('#action-execute-button').prop('disabled', true);
           }
-          $('#action-execute-button').prop('disabled', !isCurrentUserActor && mode != 'god');
+        }
       }
 
       function updatePlayer(player, isPossibleTarget, isCurrentUserActor) {
         var element = $('#player-' + player.pk);
-        // Update player status...
+        // Update player status.
         element.toggleClass('player-out', player.is_out);
         element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
-        // Update player role...
+        // Update player role.
         if (currentPlayerRoles.indexOf(player.role) != -1 || mode == 'god') {
           // The player to update has the same role as the current player, or we are in god mode.
           $('.player-role-name', element).text(player.role);
@@ -322,7 +355,7 @@
           $('.player-role-name', element).text('--');
           $('.player-card', element).attr('src', 'http://placehold.it/60x60');  // TODO: use face-down image!
         }
-        // Update player tags...
+        // Update player tags.
         var detailsElement = $('.player-details', element).empty();
         for (var i = 0; i < player.tags.length; i++) {
           $('<span class="player-tag"></span>').addClass('player-tag-' + player.tags[i].toLowerCase()).appendTo(detailsElement);
@@ -393,7 +426,10 @@
           data: form.serialize()
         }).done(function(data) {
           $('.done', form).show().delay(200).fadeOut();
-          uncheckPlayers();
+          $('.player').each(function() {
+            $('input[name="target_pk[]"]', this).prop('checked', false);
+            $('.player-checkmark', this).hide();
+          });
         }).fail(function(data) {
           alert('failed:');
           $('.done', form).hide();
@@ -403,12 +439,10 @@
         return false;
       }
 
-      {% if game.is_ongoing %}
-        $(function() {
-          pauseHeartbeat();
-          refresh();
-        });
-      {% endif %}
+      $(function() {
+        pauseHeartbeat();
+        refresh();
+      });
 
     //]]></script>
 

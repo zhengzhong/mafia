@@ -94,7 +94,7 @@ class Action(object):
         """
         return not target.is_out
 
-    def execute(self, players, targets, options):
+    def execute(self, players, targets, option):
         """
         Executes this action.
         """
@@ -110,10 +110,10 @@ class Action(object):
                 raise GameError('%s is not executable on %s.' % (self.name, target))
         # Execute this action.
         result = ActionResult(self.name)
-        self.execute_with_result(players, targets, options, result)
+        self.execute_with_result(players, targets, option, result)
         return result
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         """
         Executes this action and fills the result. By default, this method adds the action tag
         to all the target players (tag should not be None).
@@ -121,7 +121,7 @@ class Action(object):
         if not targets:
             result.log('%s did not select anyone' % self.role, visibility=self.role)
         else:
-            tag = self.get_tag(options)
+            tag = self.get_tag(option)
             if not tag:
                 raise GameError('Tag is undefined for %s.' % self.name)
             for target in targets:
@@ -133,9 +133,9 @@ class Action(object):
                 result.log(text, visibility=self.role)
 
     def get_option_choices(self):
-        return {}
+        return []
 
-    def get_tag(self, options):
+    def get_tag(self, option):
         """
         Returns the action tag to be added on targets. This method is called only when there's
         at least one target. By default, it returns the ``tag`` class attribute.
@@ -339,12 +339,12 @@ class Engine(object):
                 self.move_to_next_action(result)
                 self.save_game()
 
-    def execute_action(self, targets, options):
+    def execute_action(self, targets, option=None):
         # Execute the current action and check if game is over.
         action = self.get_current_action()
         players = self.game.player_set.all()
         logger.info('About to execute %s...' % action)
-        result = action.execute(players, targets, options)
+        result = action.execute(players, targets, option)
         self.game.log_action_result(result)
         self.update_game_over()
         # Move to next action.

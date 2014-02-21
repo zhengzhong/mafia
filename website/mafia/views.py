@@ -146,7 +146,7 @@ class MafiaGamePlayView(_MafiaGameEngineDetailView):
     def post(self, request, *args, **kwargs):
         engine = self.get_engine()
         targets = Player.objects.filter(pk__in=request.POST.getlist('target_pk[]'))
-        options = {'magic': request.POST.get('magic', '').lower()}  # TODO: hard-coded!
-        message = engine.execute_action(targets, options)
+        option = request.POST.get('option')
+        message = engine.execute_action(targets, option)
         result = {'message': message}
         return HttpResponse(json.dumps(result, ensure_ascii=False), mimetype='application/json')

@@ -9,8 +9,8 @@ from mafia.werewolves.settlement import RULES
 
 class _WerewolvesAction(Action):
 
-    def execute(self, players, targets, options):
-        result = super(_WerewolvesAction, self).execute(players, targets, options)
+    def execute(self, players, targets, option):
+        result = super(_WerewolvesAction, self).execute(players, targets, option)
         # Finally, for the 2 lovers, if any of them is out, the other is also out.
         out_lovers = []
         for out_player in result.out_players:
@@ -38,7 +38,7 @@ class ThiefAction(_WerewolvesAction):
     def is_executable_on(self, target):
         return target.is_unused
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         thief = next(player for player in players if player.role == self.role)
         if targets:
             target = targets[0]
@@ -106,29 +106,28 @@ class WizardAction(_WerewolvesAction):
     role = Role.WIZARD
     is_optional = True
 
-    MAGIC_OPTION = 'magic'
-    MAGIC_WHITE = 'white'
-    MAGIC_BLACK = 'black'
+    OPTION_CURE = 'cure'
+    OPTION_POISON = 'poison'
 
-    def __init__(self, is_white_magic_used=False, is_black_magic_used=False):
+    def __init__(self, is_cure_used=False, is_poison_used=False, **kwargs):
         super(WizardAction, self).__init__()
-        self.is_white_magic_used = is_white_magic_used
-        self.is_black_magic_used = is_black_magic_used
+        self.is_cure_used = is_cure_used
+        self.is_poison_used = is_poison_used
 
     def get_data(self):
         return {
-            'is_white_magic_used': self.is_white_magic_used,
-            'is_black_magic_used': self.is_black_magic_used,
+            'is_cure_used': self.is_cure_used,
+            'is_poison_used': self.is_poison_used,
         }
 
     def get_min_max_num_targets(self):
-        if self.is_white_magic_used and self.is_black_magic_used:
+        if self.is_cure_used and self.is_poison_used:
             return 0, 0
         else:
             return 0, 1
 
     def is_executable_by(self, player):
-        if self.is_white_magic_used and self.is_black_magic_used:
+        if self.is_cure_used and self.is_poison_used:
             return False
         return not player.is_out and player.role == self.role
 
@@ -136,18 +135,22 @@ class WizardAction(_WerewolvesAction):
         return not target.is_out and not target.role == self.role
 
     def get_option_choices(self):
-        return {self.MAGIC_OPTION: [self.MAGIC_WHITE, self.MAGIC_BLACK]}
+        choices = []
+        if not self.is_cure_used:
+            choices.append(self.OPTION_CURE)
+        if not self.is_poison_used:
+            choices.append(self.OPTION_POISON)
+        return choices
 
-    def get_tag(self, options):
-        magic = options.get(self.MAGIC_OPTION, None)
-        if magic == self.MAGIC_WHITE and not self.is_white_magic_used:
-            self.is_white_magic_used = True
+    def get_tag(self, option):
+        if option == self.OPTION_CURE and not self.is_cure_used:
+            self.is_cure_used = True
             return Tag.CURED
-        elif magic == self.MAGIC_BLACK and not self.is_black_magic_used:
-            self.is_black_magic_used = True
+        elif option == self.OPTION_POISON and not self.is_poison_used:
+            self.is_poison_used = True
             return Tag.POISONED
         else:
-            raise GameError('Invalid magic option for wizard: %s' % magic)
+            raise GameError('Invalid option for wizard: %s' % option)
 
 
 class SettleTags(_WerewolvesAction):
@@ -163,7 +166,7 @@ class SettleTags(_WerewolvesAction):
     def is_executable_on(self, target):
         return False
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         for rule in RULES:
             rule.settle(players, result)
 
@@ -176,7 +179,7 @@ class ElectMayor(_WerewolvesAction):
     def is_executable_by(self, player):
         return player.is_host
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         targets[0].add_tag(self.tag)
         result.log_public('%s was elected as mayor' % targets[0])
 
@@ -189,7 +192,7 @@ class VoteAndLynch(_WerewolvesAction):
     def is_executable_by(self, player):
         return player.is_host
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         for target in targets:
             target.mark_out(self.tag)
             result.log_public('%s was voted and lynched.' % target)
@@ -216,7 +219,7 @@ class HunterAction(_WerewolvesAction):
     def is_executable_by(self, player):
         return player.is_out and player.role == self.role
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         for target in targets:
             target = targets[0]
             target.mark_out(self.tag)

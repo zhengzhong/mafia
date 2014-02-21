@@ -69,7 +69,7 @@ class SettleTags(Action):
     def is_executable_on(self, target):
         return False
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         for rule in RULES:
             rule.settle(players, result)
 
@@ -82,7 +82,7 @@ class VoteAndLynch(Action):
     def is_executable_by(self, player):
         return player.is_host
 
-    def execute_with_result(self, players, targets, options, result):
+    def execute_with_result(self, players, targets, option, result):
         # Check each target to see if he should be lynched or exempted.
         for target in targets:
             if target.has_tag(Tag.PREVIOUSLY_GUARDED):
