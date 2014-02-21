@@ -38,6 +38,15 @@ class MafiaGameHostView(CreateView):
     model = Game
     form_class = GameForm
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MafiaGameHostView, self).dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        form_kwargs = super(MafiaGameHostView, self).get_form_kwargs()
+        form_kwargs['host'] = self.request.user
+        return form_kwargs
+
 
 class _MafiaGameEngineDetailView(DetailView):
 
@@ -147,6 +156,10 @@ class MafiaGamePlayView(_MafiaGameEngineDetailView):
         engine = self.get_engine()
         targets = Player.objects.filter(pk__in=request.POST.getlist('target_pk[]'))
         option = request.POST.get('option')
-        message = engine.execute_action(targets, option)
-        result = {'message': message}
-        return HttpResponse(json.dumps(result, ensure_ascii=False), mimetype='application/json')
+        try:
+            engine.execute_action(targets, option)
+            return HttpResponse('success', mimetype='text/plain')
+        except GameError, exc:
+            message = unicode(exc)
+            logger.warning('Failed to execute action: %s' % message)
+            return HttpResponseBadRequest(message, mimetype='text/plain')

@@ -41,8 +41,9 @@ class GameForm(forms.ModelForm):
         'num_werewolves', 'has_thief', 'has_cupid', 'has_bodyguard', 'has_wizard', 'has_hunter',
     )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, host=None, *args, **kwargs):
         super(GameForm, self).__init__(*args, **kwargs)
+        self._host = host
         # Patch CSS class for Twitter Bootstrap.
         for field in self.fields.values():
             if not isinstance(field.widget, forms.CheckboxInput):
@@ -66,7 +67,7 @@ class GameForm(forms.ModelForm):
             for name in names
         ]
 
-    def save(self, *args, **kwargs):
+    def save(self):
         game = super(GameForm, self).save(commit=False)
         config_field_names = {
             Game.VARIANT_CLASSIC: self.CLASSIC_FIELD_NAMES,
@@ -75,9 +76,10 @@ class GameForm(forms.ModelForm):
         config = dict((k, v) for k, v in self.cleaned_data.items() if k in config_field_names)
         game.config_json = json.dumps(config)
         game.save()
+        Player.objects.get_or_create_players(game=game, user=self._host, is_host=True)
         if self.cleaned_data['add_test_players']:
-            users = User.objects.filter(is_active=True)[:6]
-            Player.objects.get_or_create_players(game=game, user=users[0], is_host=True)
-            for user in users[1:]:
+            num_test_users = 5 if game.is_two_handed else 10
+            test_users = User.objects.filter(is_active=True)[:num_test_users]
+            for user in test_users:
                 Player.objects.get_or_create_players(game=game, user=user, is_host=False)
         return game

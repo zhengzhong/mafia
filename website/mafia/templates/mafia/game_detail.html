@@ -430,8 +430,8 @@
             $('input[name="target_pk[]"]', this).prop('checked', false);
             $('.player-checkmark', this).hide();
           });
-        }).fail(function(data) {
-          alert('failed:');
+        }).fail(function(xhr) {
+          alert(xhr.responseText);
           $('.done', form).hide();
         }).always(function() {
           refresh();
