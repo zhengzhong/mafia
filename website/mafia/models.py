@@ -240,7 +240,11 @@ class Player(models.Model):
 class Players(list):
 
     def __init__(self, game, user):
-        super(Players, self).__init__(Player.objects.filter(game=game, user=user))
+        if user is not None and user.is_anonymous():
+            player_list = []
+        else:
+            player_list = Player.objects.filter(game=game, user=user)
+        super(Players, self).__init__(player_list)
 
     def is_host(self):
         for player in self:
