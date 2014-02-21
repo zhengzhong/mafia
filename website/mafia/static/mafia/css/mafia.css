@@ -1,3 +1,4 @@
+/* * * * * * * * * * Stylesheet for Mafia * * * * * * * * * */
 
 .game-timer {
   padding: 10px;
@@ -6,11 +7,9 @@
 }
 
 .action-option, .action-option:hover, .action-option:focus {
+  margin-right: 5px;
   text-decoration: none;
-}
-
-.action-option img {
-  border: 2px solid #dddddd;
+  outline: none;
 }
 
 .action-option.action-option-checked img {
@@ -56,6 +55,11 @@
   float: right;
   text-align: center;
   position: relative;
+}
+
+.player .player-role a, .player .player-role a:hover, .player .player-role a:focus {
+  text-decoration: none;
+  outline: none;
 }
 
 .player .player-role .player-check-disabled,

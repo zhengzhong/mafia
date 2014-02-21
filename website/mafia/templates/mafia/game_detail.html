@@ -63,18 +63,22 @@
 
         <div class="row">
           <div class="col-md-9">
-            <h2><span id="game-round">Round ?</span> <small id="action-name">Action</small></h2>
-            <div class="alert alert-info">
-              <div class="form-group">
-                <span class="glyphicon glyphicon-info-sign"></span> Select <strong id="action-num-targets"></strong> target(s)
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <strong id="game-round">Round ?</strong> <span id="action-name">Action</span>
               </div>
-              <div class="form-group">
-                <input type="hidden" name="option" value=""/>
-                <span id="action-options"></span>
-              </div>
-              <div class="form-group">
-                <button id="action-execute-button" class="btn btn-primary" type="submit">Execute</button>
-                <span class="done text-success glyphicon glyphicon-ok-sign" style="display: none;"></span>
+              <div class="panel-body">
+                <div class="form-group">
+                  <span class="glyphicon glyphicon-info-sign"></span> Select <strong id="action-num-targets"></strong> target(s)
+                </div>
+                <div class="form-group">
+                  <input type="hidden" name="option" value=""/>
+                  <span id="action-options"></span>
+                </div>
+                <div class="form-group">
+                  <button id="action-execute-button" class="btn btn-primary" type="submit">Execute</button>
+                  <span class="done text-success glyphicon glyphicon-ok-sign" style="display: none;"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -89,13 +93,13 @@
               </div>
               <div id="game-timer" class="game-timer">--</div>
               <div>
-                <a class="btn btn-sm btn-default" href="javascript:void(0);" onclick="return refresh();">
+                <a class="btn btn-sm btn-default" href="javascript:void(0);" onclick="refresh();">
                   <span class="glyphicon glyphicon-refresh"></span> Refresh
                 </a>
-                <a id="start-heartbeat-button" class="btn btn-sm btn-primary" style="display: none;" href="javascript:void(0);" onclick="return startHeartbeat();">
+                <a id="start-heartbeat-button" class="btn btn-sm btn-primary" style="display: none;" href="javascript:void(0);" onclick="startHeartbeat();">
                   <span class="glyphicon glyphicon-play"></span> Start
                 </a>
-                <a id="pause-heartbeat-button" class="btn btn-sm btn-danger" style="display: none;" href="javascript:void(0);" onclick="return pauseHeartbeat();">
+                <a id="pause-heartbeat-button" class="btn btn-sm btn-danger" style="display: none;" href="javascript:void(0);" onclick="pauseHeartbeat();">
                   <span class="glyphicon glyphicon-pause"></span> Pause
                 </a>
               </div>
@@ -126,7 +130,7 @@
                     </div>
                     <div class="player-body">
                       <div class="player-role">
-                        <a href="javascript:void(0);" onclick="return togglePlayerCheckbox({{ player.pk }});">
+                        <a href="javascript:void(0);" onclick="togglePlayerCheckbox({{ player.pk }});">
                           <img class="player-card img-thumbnail" src="http://placehold.it/60x60" alt="Player Card"/>
                         </a>
                         <span class="player-check-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
@@ -268,25 +272,23 @@
       }
 
       function updateActionOptions(options) {
-        console.log('Creating action options (' + options.length + ' options)');
         $('#game-action-form input[name="option"]').val('');
         var optionsContainer = $('#action-options').empty();
         for (var i = 0; i < options.length; i++) {
           var option = options[i];
-          var optionImageURL = 'http://placehold.it/32x32';  // TODO:
+          var optionImage = $('<img class="img-thumbnail"/>')
+              .attr('src', 'http://placehold.it/32x32')  // TODO:
+              .attr('alt', option);
           var optionLink = $('<a class="action-option" href="javascript:void(0);"></a>')
               .attr('data-option', option)
-              .append($('<img/>').attr('src', optionImageURL).attr('alt', option));
+              .append(optionImage);
           optionLink.click(function() {
             var optionInput = $('#game-action-form input[name="option"]');
             var selectedOption = $(this).attr('data-option');
-            console.log('User selected action option: ' + selectedOption + ' / previous: ' + optionInput.val());
             $('a.action-option').removeClass('action-option-checked');
             if (optionInput.val() == selectedOption) {
-              console.log('Turning off option: ' + selectedOption);
               optionInput.val('');
             } else {
-              console.log('Turning on option: ' + selectedOption);
               optionInput.val(selectedOption);
               $(this).addClass('action-option-checked');
             }
@@ -369,34 +371,33 @@
       }
 
       function heartbeat() {
-        $.ajax({
-          url: '{% url mafia-game-heartbeat pk=game.pk %}',
-          type: 'get'
-        }).done(function(game) {
-          $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
-          if (game.update_date != updateTimestamp) {
-            updateTimestamp = game.update_date;
-            // Check if the current user is actor of the current action.
-            var isCurrentUserActor = false;
-            for (var j = 0; j < currentPlayerPKs.length; j++) {
-              if (game.actor_pk_list.indexOf(currentPlayerPKs[j]) != -1) {
-                isCurrentUserActor = true;
-                break;
+        $.get('{% url mafia-game-heartbeat pk=game.pk %}')
+            .done(function(game) {
+              $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
+              if (game.update_date != updateTimestamp) {
+                updateTimestamp = game.update_date;
+                // Check if the current user is actor of the current action.
+                var isCurrentUserActor = false;
+                for (var j = 0; j < currentPlayerPKs.length; j++) {
+                  if (game.actor_pk_list.indexOf(currentPlayerPKs[j]) != -1) {
+                    isCurrentUserActor = true;
+                    break;
+                  }
+                }
+                updateGame(game, isCurrentUserActor);
+                for (var i = 0; i < game.players.length; i++) {
+                  var player = game.players[i];
+                  var isPossibleTarget = (game.possible_target_pk_list.indexOf(player.pk) != -1);
+                  updatePlayer(player, isPossibleTarget, isCurrentUserActor);
+                }
               }
-            }
-            updateGame(game, isCurrentUserActor);
-            for (var i = 0; i < game.players.length; i++) {
-              var player = game.players[i];
-              var isPossibleTarget = (game.possible_target_pk_list.indexOf(player.pk) != -1);
-              updatePlayer(player, isPossibleTarget, isCurrentUserActor);
-            }
-          }
-          if (game.is_over) {
-            pauseHeartbeat();
-          }
-        }).fail(function() {
-          $('#game-timer').removeClass('text-success').addClass('text-danger').text('ERR');
-        });
+              if (game.is_over) {
+                pauseHeartbeat();
+              }
+            })
+            .fail(function() {
+              $('#game-timer').removeClass('text-success').addClass('text-danger').text('ERR');
+            });
       }
 
       function startHeartbeat() {
