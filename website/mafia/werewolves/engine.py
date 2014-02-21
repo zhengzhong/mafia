@@ -39,8 +39,7 @@ class WerewolvesEngine(Engine):
             return 0
 
     def update_game_over(self):
-        player_list = self.game.player_set.all()
-        active_player_list = [player for player in player_list if not player.is_out]
+        active_player_list = [player for player in self.player_list if not player.is_out]
         werewolf_list = [player for player in active_player_list if player.role == Role.WEREWOLF]
         if not werewolf_list:
             logger.info('All werewolves were dead: civilians win!')

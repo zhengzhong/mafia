@@ -25,16 +25,28 @@
         </button>
       {% elif not game.is_ongoing and not current_players %}
         <!-- Join the game -->
-        <input type="hidden" name="action" value="join"/>
-        <button class="btn btn-success" type="submit">
-          <span class="glyphicon glyphicon-log-in"></span> Join
-        </button>
+        {% if engine.is_joinable %}
+          <input type="hidden" name="action" value="join"/>
+          <button class="btn btn-success" type="submit">
+            <span class="glyphicon glyphicon-log-in"></span> Join
+          </button>
+        {% else %}
+          <button class="btn btn-success" disabled="disabled">
+            <span class="glyphicon glyphicon-log-in"></span> Join
+          </button>
+        {% endif %}
       {% elif not game.is_ongoing and current_players.is_host %}
         <!-- Start the game -->
-        <input type="hidden" name="action" value="start"/>
-        <button class="btn btn-primary" type="submit">
-          <span class="glyphicon glyphicon-play-circle"></span> Start
-        </button>
+        {% if engine.is_startable %}
+          <input type="hidden" name="action" value="start"/>
+          <button class="btn btn-primary" type="submit">
+            <span class="glyphicon glyphicon-play-circle"></span> Start
+          </button>
+        {% else %}
+          <button class="btn btn-primary" disabled="disabled">
+            <span class="glyphicon glyphicon-play-circle"></span> Start
+          </button>
+        {% endif %}
       {% endif %}
     </form>
   </div>
@@ -120,7 +132,7 @@
 
           <div id="players" class="tab-pane fade in active">
             <div class="row">
-              {% for player in game.player_set.all %}
+              {% for player in engine.player_list %}
                 <div class="col-md-3">
                   <div id="player-{{ player.pk }}" class="player">
                     <div class="player-heading">
@@ -192,11 +204,12 @@
         <thead>
           <tr>
             <th>Player</th>
+            <th>Username</th>
             <th>Joined...</th>
           </tr>
         </thead>
         <tbody>
-          {% for player in game.player_set.all %}
+          {% for player in engine.player_list %}
             <tr>
               <td>
                 {% if player.user %}
@@ -211,6 +224,13 @@
                   <span class="label label-success">host</span>
                 {% endif %}
               </td>
+              <td>
+                {% if player.user %}
+                  <code>{{ player.user.username }}</code>
+                {% else %}
+                  <span class="text-muted">NA</span>
+                {% endif %}
+              </td>
               <td>{{ player.join_date|naturaltime }}</td>
             </tr>
           {% endfor %}
@@ -218,7 +238,7 @@
         <tfoot>
           <tr>
             <td colspan="2">
-              <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ game.player_set.count }} players</span>
+              <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ engine.player_list|length }} players</span>
             </td>
           </tr>
         </tfoot>

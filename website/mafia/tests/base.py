@@ -50,19 +50,18 @@ class MafiaTestCase(TestCase):
         self.game.save()
         self.engine = self.settings[self.variant]['engine'](self.game)
         self.engine.start_game(force=True)
-        self.players = list(self.game.player_set.all())
 
     def get_player(self, role):
-        return next(p for p in self.players if p.role == role)
+        return next(p for p in self.engine.player_list if p.role == role)
 
     def execute_action_for_role(self, role, target):
         action = next(a for a in self.engine.action_list if a.role == role)
-        return action.execute(self.players, [target], None)
+        return action.execute(self.engine.player_list, [target], None)
 
     def settle_tags(self):
         action = next(a for a in self.engine.action_list if a.name == 'SettleTags')
-        return action.execute(self.players, [], None)
+        return action.execute(self.engine.player_list, [], None)
 
     def vote(self, target):
         action = next(a for a in self.engine.action_list if a.name == 'VoteAndLynch')
-        return action.execute(self.players, [target], None)
+        return action.execute(self.engine.player_list, [target], None)
