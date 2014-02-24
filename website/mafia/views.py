@@ -10,6 +10,7 @@ from django.views.generic import TemplateView, CreateView, DetailView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from mafia.exceptions import GameError
 from mafia.models import Game, Player, Players
@@ -101,7 +102,10 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
             if not handler:
                 raise GameError('Unknown action %s.' % action)
             handler(request, engine)
-            return HttpResponseRedirect(engine.game.get_absolute_url())
+            if request.is_ajax():
+                return HttpResponse('success', mimetype='text/plain')
+            else:
+                return HttpResponseRedirect(engine.game.get_absolute_url())
         except GameError, exc:
             message = 'Fail to perform action %s on game %s: %s' % (action, engine.game, exc)
             logger.warning(message)
@@ -120,8 +124,6 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
     def _kickoff_user(self, request, engine):
         if engine.game.is_ongoing:
             raise GameError('Cannot kickoff user while game is ongoing.')
-        if not self.get_current_players().is_host():
-            raise GameError('Current user is not allowed to kickoff user.')
         username = request.POST.get('username', '').strip()
         if not username:
             raise GameError('Username is not provided.')

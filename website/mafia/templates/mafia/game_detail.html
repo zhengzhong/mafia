@@ -15,36 +15,33 @@
 {% block header %}
 
   <div class="pull-right" style="text-align: center;">
-    <form action="{{ game.get_absolute_url }}" method="post">
-      {% csrf_token %}
+    <div>
       {% if game.is_ongoing %}
         {% if current_players.is_host or is_god_mode %}
-          <!-- Reset the game -->
-          <input type="hidden" name="action" value="reset"/>
-          <button class="btn btn-sm btn-danger" type="submit">
+          <a class="btn btn-sm btn-danger" href="javascript:void(0);" onclick="performGameAction('reset');">
             <span class="glyphicon glyphicon-repeat"></span> Reset
-          </button>
+          </a>
         {% endif %}
       {% else %}
-        {% if not current_players %}
-          {% if engine.is_joinable %}
-            <!-- Join the game -->
-            <input type="hidden" name="action" value="join"/>
-            <button class="btn btn-sm btn-success" type="submit">
-              <span class="glyphicon glyphicon-log-in"></span> Join
-            </button>
-          {% endif %}
-        {% elif current_players.is_host or is_god_mode %}
+        {% if not current_players and engine.is_joinable %}
+          <a class="btn btn-sm btn-success" href="javascript:void(0);" onclick="performGameAction('join');">
+            <span class="glyphicon glyphicon-log-in"></span> Join
+          </a>
+        {% endif %}
+        {% if current_players %}
+          <a class="btn btn-sm btn-danger" href="javascript:void(0);" onclick="performGameAction('quit');">
+            <span class="glyphicon glyphicon-log-out"></span> Quit
+          </a>
+        {% endif %}
+        {% if current_players.is_host or is_god_mode %}
           {% if engine.is_startable %}
-            <!-- Start the game -->
-            <input type="hidden" name="action" value="start"/>
-            <button class="btn btn-sm btn-primary" type="submit">
+            <a class="btn btn-sm btn-success" href="javascript:void(0);" onclick="performGameAction('start');">
               <span class="glyphicon glyphicon-play-circle"></span> Start
-            </button>
+            </a>
           {% endif %}
         {% endif %}
       {% endif %}
-    </form>
+    </div>
     <div>
       <span class="label label-default">{{ engine.get_game_state }}</span>
       {% if is_god_mode %}
@@ -210,6 +207,7 @@
             <th>Player</th>
             <th>Username</th>
             <th>Joined...</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -236,12 +234,19 @@
                 {% endif %}
               </td>
               <td>{{ player.join_date|naturaltime }}</td>
+              <td>
+                {% if current_players.is_host or is_god_mode %}
+                  <a class="btn btn-xs btn-danger" href="javascript:void(0);" onclick="performGameAction('kickoff', '{{ player.user.username }}');">
+                    <span class="glyphicon glyphicon-log-out"></span> Kickoff
+                  </a>
+                {% endif %}
+              </td>
             </tr>
           {% endfor %}
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="2">
+            <td colspan="4">
               <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ game.player_list|length }} players</span>
             </td>
           </tr>
@@ -255,6 +260,22 @@
 
 
 {% block bottom_extras %}
+
+  <script type="text/javascript">//<![CDATA[
+
+    //! Performs game action: join, quit, kickoff (username), reset, start.
+    function performGameAction(action, username) {
+      username = (typeof username !== 'undefined' ? username : null);
+      $.post('{{ game.get_absolute_url }}', {action: action, username: username})
+          .done(function(data) {
+            location.reload();
+          })
+          .fail(function(xhr) {
+            alert(xhr.responseText);
+          });
+    }
+
+  //]]></script>
 
   {% if game.is_ongoing %}
 

@@ -302,34 +302,26 @@ class Engine(object):
         return self.action_list.current()
 
     def reset_game(self):
-        # Clear host flag.
-        for player in self.game.player_list:
-            player.is_host = False
-            player.save()
-        # Reset to an empty action list.
+        self.game.reset()
         self.action_list = self.action_list_class()
-        # Reset game.
-        self.game.logs[:] = []
-        self.game.round = 0
-        self.game.is_over = False
         self.save_game()
 
     def start_game(self, force=False):
         # Check if game can be started.
-        if not force:
-            if self.game.is_over:
-                raise GameError('Cannot start game %s: game is over.' % self.game)
-            if self.game.round > 0:
-                raise GameError('Cannot start game %s: game is already started.' % self.game)
+        if self.game.is_ongoing and not force:
+            raise GameError('Cannot start game %s: game is ongoing.' % self.game)
+        # Reset the game.
+        logger.info('Resetting game...')
+        self.reset_game()
         self.game.ensure_unused_players(self.get_num_unused_players())
         min_num_players, max_num_players = self.get_min_max_num_players()
-        if not (min_num_players <= len(self.game.player_list) <= max_num_players):
+        num_players = len(self.game.player_list)
+        if not (min_num_players <= num_players <= max_num_players):
             raise GameError('Cannot start game %s: there are %d players but requires [%d, %d].'
-                            % (self.game, len(self.game.player_list), min_num_players, max_num_players))
-        # Now start the game by randomly assigning roles to players.
+                            % (self.game, num_players, min_num_players, max_num_players))
+        # Assign roles to players randomly.
         player_list = list(self.game.player_list)
         logger.info('Assigning roles to players...')
-        [player.reset() for player in player_list]
         random.shuffle(player_list)
         for role in self.get_role_list_on_stage():
             assigned_player = None
@@ -349,7 +341,6 @@ class Engine(object):
         self.action_list = self.action_list_class.create_initial(self.get_role_list_on_stage())
         # Update game state.
         logger.info('Updating game state...')
-        self.game.logs[:] = []
         self.game.round = 1
         self.game.is_over = False
         self.save_game()

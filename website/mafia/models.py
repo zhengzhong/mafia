@@ -59,9 +59,12 @@ class Game(models.Model):
 
     @config.setter
     def config(self, value):
-        if not isinstance(value, dict):
-            raise ValueError('Game.config must be a dict.')
-        self._config = value
+        if not value:
+            self._config = {}
+        else:
+            if not isinstance(value, dict):
+                raise ValueError('Game.config must be a dict.')
+            self._config = value
 
     @property
     def context(self):
@@ -71,15 +74,27 @@ class Game(models.Model):
 
     @context.setter
     def context(self, value):
-        if not isinstance(value, dict):
-            raise ValueError('Game.context must be a dict.')
-        self._context = value
+        if not value:
+            self._context = {}
+        else:
+            if not isinstance(value, dict):
+                raise ValueError('Game.context must be a dict.')
+            self._context = value
 
     @property
     def logs(self):
         if not hasattr(self, '_logs'):
             self._logs = json.loads(self.logs_json or '[]')
         return self._logs
+
+    @logs.setter
+    def logs(self, value):
+        if not value:
+            self._logs = []
+        else:
+            if not isinstance(value, list):
+                raise ValueError('Game.logs must be a list.')
+            self._logs = value
 
     @property
     def is_ongoing(self):
@@ -159,6 +174,21 @@ class Game(models.Model):
                 for i in range(0, -delta):
                     current_unused_players[i].delete()
             self._load_player_list(refresh=True)
+
+    def reset(self):
+        # Remove unused players; reset ordinary players.
+        for player in self.player_list:
+            if player.is_unused:
+                player.delete()
+            else:
+                player.reset()
+        self._load_player_list(refresh=True)
+        # Reset game.
+        self.context = None
+        self.logs = None
+        self.round = 0
+        self.is_over = False
+        self.save()
 
     def log_action_result(self, result):
         for message in result.messages:
@@ -260,9 +290,11 @@ class Player(models.Model):
         self.add_tag(out_tag, save=True)
 
     def reset(self):
+        self.is_host = False
         self.role = ''
         self.tags_json = ''
         self.out_tag = ''
+        self.save()
 
 
 class Players(list):
