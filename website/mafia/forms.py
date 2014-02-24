@@ -76,10 +76,10 @@ class GameForm(forms.ModelForm):
         config = dict((k, v) for k, v in self.cleaned_data.items() if k in config_field_names)
         game.config_json = json.dumps(config)
         game.save()
-        Player.objects.get_or_create_players(game=game, user=self._host, is_host=True)
+        game.add_players(self._host)
         if self.cleaned_data['add_test_players']:
             num_test_users = 5 if game.is_two_handed else 10
             test_users = User.objects.filter(is_active=True)[:num_test_users]
             for user in test_users:
-                Player.objects.get_or_create_players(game=game, user=user, is_host=False)
+                game.add_players(user)
         return game

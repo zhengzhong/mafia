@@ -3,10 +3,10 @@
 
 from mafia.models import Game
 from mafia.classic.constants import Role, Tag
-from mafia.tests.base import MafiaTestCase
+from mafia.tests.base import BaseMafiaEngineStartedTestCase
 
 
-class MafiaClassicTest(MafiaTestCase):
+class MafiaClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
 
     variant = Game.VARIANT_CLASSIC
 

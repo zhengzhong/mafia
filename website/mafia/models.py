@@ -85,6 +85,15 @@ class Game(models.Model):
     def is_ongoing(self):
         return self.round > 0 and not self.is_over
 
+    def _load_player_list(self, refresh):
+        if not hasattr(self, '_player_list') or refresh:
+            self._player_list = list(self.player_set.all())
+        return self._player_list
+
+    @property
+    def player_list(self):
+        return self._load_player_list(refresh=False)
+
     @models.permalink
     def get_absolute_url(self):
         return 'mafia-game-detail', (), {'pk': self.pk}
@@ -103,16 +112,53 @@ class Game(models.Model):
         dt = timezone.now() - self.update_date
         return int(dt.total_seconds())
 
+    def add_players(self, user):
+        if self.is_two_handed:
+            hand_side_list = [Player.HAND_SIDE_LEFT, Player.HAND_SIDE_RIGHT]
+        else:
+            hand_side_list = [Player.HAND_SIDE_NA]
+        player_list = []
+        for hand_side in hand_side_list:
+            player, __ = Player.objects.get_or_create(game=self, user=user, hand_side=hand_side)
+            player_list.append(player)
+        self._load_player_list(refresh=True)
+        self.ensure_host()
+        return player_list
+
+    def remove_players(self, user):
+        for player in self.player_list:
+            if player.user == user:
+                player.delete()
+        self._load_player_list(refresh=True)
+        self.ensure_host()
+
+    def ensure_host(self):
+        for out_host in [p for p in self.player_list if p.is_host and p.is_out]:
+            out_host.is_host = False
+            out_host.save()
+        host_candidates = [p for p in self.player_list if p.user is not None and not p.is_out]
+        if next((p for p in host_candidates if p.is_host), None) is not None:
+            return True
+        elif host_candidates:
+            new_host = host_candidates[0]
+            new_host.is_host = True
+            new_host.save()
+            return True
+        else:
+            return False
+
     def ensure_unused_players(self, num_unused_players):
-        current_unused_players = self.player_set.filter(user=None)
-        delta = num_unused_players - current_unused_players.count()
-        if delta > 0:
-            for i in range(0, delta):
-                player = Player(game=self, user=None)
-                player.save()
-        elif delta < 0:
-            for i in range(0, -delta):
-                current_unused_players[i].delete()
+        current_unused_players = [p for p in self.player_list if p.user is None]
+        delta = num_unused_players - len(current_unused_players)
+        if delta != 0:
+            if delta > 0:
+                for i in range(0, delta):
+                    player = Player(game=self, user=None)
+                    player.save()
+            elif delta < 0:
+                for i in range(0, -delta):
+                    current_unused_players[i].delete()
+            self._load_player_list(refresh=True)
 
     def log_action_result(self, result):
         for message in result.messages:
@@ -123,22 +169,6 @@ class Game(models.Model):
                 'visibility': message.visibility
             }
             self.logs.append(entry)
-
-
-class PlayerManager(models.Manager):
-
-    def get_or_create_players(self, game, user, is_host):
-        if game.is_two_handed:
-            hand_side_list = [self.model.HAND_SIDE_LEFT, self.model.HAND_SIDE_RIGHT]
-        else:
-            hand_side_list = [self.model.HAND_SIDE_NA]
-        player_list = []
-        for hand_side in hand_side_list:
-            player, __ = self.get_or_create(game=game, user=user, hand_side=hand_side)
-            player.is_host = is_host
-            player.save()
-            player_list.append(player)
-        return player_list
 
 
 class Player(models.Model):
@@ -163,8 +193,6 @@ class Player(models.Model):
     class Meta:
         db_table = TABLE_PREFIX + 'player'
         unique_together = ('game', 'user', 'hand_side')
-
-    objects = PlayerManager()
 
     @property
     def username(self):

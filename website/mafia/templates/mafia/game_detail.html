@@ -132,12 +132,15 @@
 
           <div id="players" class="tab-pane fade in active">
             <div class="row">
-              {% for player in engine.player_list %}
+              {% for player in game.player_list %}
                 <div class="col-md-3">
                   <div id="player-{{ player.pk }}" class="player">
                     <div class="player-heading">
                       <img class="player-avatar img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
-                      <h4 class="player-name">{{ player }}</h4>
+                      <h4>
+                        {{ player }}
+                        <small class="player-host" style="display: none;"><span class="glyphicon glyphicon-star"></span></small>
+                      </h4>
                       <div class="clearfix"></div>
                     </div>
                     <div class="player-body">
@@ -209,7 +212,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for player in engine.player_list %}
+          {% for player in game.player_list %}
             <tr>
               <td>
                 {% if player.user %}
@@ -238,7 +241,7 @@
         <tfoot>
           <tr>
             <td colspan="2">
-              <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ engine.player_list|length }} players</span>
+              <span class="text-muted"><span class="glyphicon glyphicon-user"></span> {{ game.player_list|length }} players</span>
             </td>
           </tr>
         </tfoot>
@@ -366,6 +369,7 @@
         // Update player status.
         element.toggleClass('player-out', player.is_out);
         element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
+        $('.player-host', element).toggle(player.is_host);
         // Update player role.
         if (currentPlayerRoles.indexOf(player.role) != -1 || mode == 'god') {
           // The player to update has the same role as the current player, or we are in god mode.

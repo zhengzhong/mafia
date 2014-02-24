@@ -110,13 +110,12 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
     def _join_game(self, request, engine):
         if engine.game.is_ongoing:
             raise GameError('Cannot join game while game is ongoing.')
-        Player.objects.get_or_create_players(game=engine.game, user=request.user, is_host=False)
+        engine.game.add_players(request.user)
 
     def _quit_game(self, request, engine):
         if engine.game.is_ongoing:
             raise GameError('Cannot quit game while game is ongoing.')
-        for player in self.get_current_players():
-            player.delete()
+        engine.game.remove_players(request.user)
 
     def _kickoff_user(self, request, engine):
         if engine.game.is_ongoing:
@@ -130,9 +129,7 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             raise GameError('User %s does not exist.' % username)
-        players = Players(engine.game, user)
-        for player in players:
-            player.delete()
+        engine.game.remove_players(user)
 
     def _reset_game(self, request, engine):
         engine.reset_game()

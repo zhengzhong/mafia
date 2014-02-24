@@ -18,7 +18,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": true,
       "user": 11,
       "hand_side": "left",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -29,7 +28,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": true,
       "user": 11,
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -40,7 +38,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
       "user": 12,
       "hand_side": "left",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -51,7 +48,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
       "user": 12,
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -62,8 +58,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Detective",
       "user": 13,
       "hand_side": "left",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -74,8 +68,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Detective",
       "user": 13,
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -86,8 +78,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Guardian",
       "user": 14,
       "hand_side": "left",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -98,8 +88,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Doctor",
       "user": 14,
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -110,8 +98,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Traitor",
       "user": 15,
       "hand_side": "left",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -122,8 +108,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Civilian",
       "user": 15,
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -134,8 +118,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Civilian",
       "user": 16,
       "hand_side": "left",
       "join_date": "2014-02-14T00:00:00.000Z"
@@ -146,8 +128,6 @@
     "model": "mafia.player",
     "fields": {
       "game": 1,
-      "is_host": false,
-      "role": "Civilian",
       "user": 16,
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"

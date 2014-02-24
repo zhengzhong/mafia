@@ -44,7 +44,7 @@
   float: left;
 }
 
-.player .player-name {
+.player h4 {
   margin: 5px 5px 5px 40px;
   font-size: 125%;
 }

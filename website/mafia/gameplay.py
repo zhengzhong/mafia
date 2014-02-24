@@ -249,7 +249,6 @@ class Engine(object):
     def __init__(self, game):
         assert issubclass(self.action_list_class, ActionList)
         self.game = game
-        self.player_list = list(self.game.player_set.all())
         self.action_list = self.action_list_class.load_json_data(game.context.get('action_list'))
 
     def get_role_list_on_stage(self):
@@ -275,17 +274,13 @@ class Engine(object):
         if self.game.is_ongoing or self.game.is_over:
             return False
         __, max_num_players = self.get_min_max_num_players()
-        return len(self.player_list) < max_num_players
+        return len(self.game.player_list) < max_num_players
 
     def is_startable(self):
         if self.game.is_ongoing or self.game.is_over:
             return False
         min_num_players, max_num_players = self.get_min_max_num_players()
-        return min_num_players <= len(self.player_list) <= max_num_players
-
-    def ensure_unused_players(self):
-        self.game.ensure_unused_players(self.get_num_unused_players())
-        self.player_list = list(self.game.player_set.all())
+        return min_num_players <= len(self.game.player_list) <= max_num_players
 
     def get_current_action(self):
         if not self.game.is_ongoing:
@@ -306,13 +301,13 @@ class Engine(object):
                 raise GameError('Cannot start game %s: game is over.' % self.game)
             if self.game.round > 0:
                 raise GameError('Cannot start game %s: game is already started.' % self.game)
-        self.ensure_unused_players()
+        self.game.ensure_unused_players(self.get_num_unused_players())
         min_num_players, max_num_players = self.get_min_max_num_players()
-        if not (min_num_players <= len(self.player_list) <= max_num_players):
+        if not (min_num_players <= len(self.game.player_list) <= max_num_players):
             raise GameError('Cannot start game %s: there are %d players but requires [%d, %d].'
-                            % (self.game, len(self.player_list), min_num_players, max_num_players))
+                            % (self.game, len(self.game.player_list), min_num_players, max_num_players))
         # Now start the game by randomly assigning roles to players.
-        player_list = list(self.player_list)
+        player_list = list(self.game.player_list)
         logger.info('Assigning roles to players...')
         [player.reset() for player in player_list]
         random.shuffle(player_list)
@@ -345,12 +340,12 @@ class Engine(object):
             return
         # Skip the current action if it's not executable.
         action = self.get_current_action()
-        if not action.is_executable(self.player_list):
+        if not action.is_executable(self.game.player_list):
             elapsed_seconds = self.game.get_elapsed_seconds_since_last_update()
             threshold = self.game.delay_seconds + random.randint(0, self.game.delay_seconds)
             if elapsed_seconds >= threshold:
                 logger.info('Skipping %s after %d seconds...' % (action, elapsed_seconds))
-                result = action.skip(self.player_list)
+                result = action.skip(self.game.player_list)
                 self.game.log_action_result(result)
                 self.move_to_next_action(result)
                 self.save_game()
@@ -359,7 +354,7 @@ class Engine(object):
         # Execute the current action and check if game is over.
         action = self.get_current_action()
         logger.info('About to execute %s...' % action)
-        result = action.execute(self.player_list, targets, option)
+        result = action.execute(self.game.player_list, targets, option)
         self.game.log_action_result(result)
         self.update_game_over()
         # Move to next action.
@@ -375,6 +370,7 @@ class Engine(object):
     def save_game(self):
         logger.info('Saving game...')
         self.game.context = {'action_list': self.action_list.as_json_data()}
+        self.game.ensure_host()
         self.game.save()
 
     def get_json_dict(self):
@@ -386,7 +382,7 @@ class Engine(object):
             'elapsed_seconds_since_last_update': self.game.get_elapsed_seconds_since_last_update(),
         }
         player_dict_list = []
-        for player in self.player_list:
+        for player in self.game.player_list:
             player_dict = {
                 'pk': player.pk,
                 'username': player.username,
@@ -404,10 +400,10 @@ class Engine(object):
             json_dict.update({
                 'current_action': current_action.get_json_dict(),
                 'actor_pk_list': [
-                    p.pk for p in self.player_list if current_action.is_executable_by(p)
+                    p.pk for p in self.game.player_list if current_action.is_executable_by(p)
                 ],
                 'possible_target_pk_list': [
-                    p.pk for p in self.player_list if current_action.is_executable_on(p)
+                    p.pk for p in self.game.player_list if current_action.is_executable_on(p)
                 ],
             })
         else:
