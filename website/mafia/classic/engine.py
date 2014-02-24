@@ -31,15 +31,15 @@ class ClassicEngine(Engine):
         return Role.CIVILIAN
 
     def update_game_over(self):
-        active_player_list = [player for player in self.game.player_list if not player.is_out]
-        killer_list = [player for player in active_player_list if player.role == Role.KILLER]
-        if not killer_list:
+        active_player_list = [p for p in self.game.player_list if not p.is_out]
+        active_killer_list = [p for p in active_player_list if p.role == Role.KILLER]
+        if not active_killer_list:
             logger.info('All killers were dead: civlians win!')
             self.game.is_over = True
-        detective_list = [player for player in active_player_list if player.role == Role.DETECTIVE]
-        if not detective_list:
+        active_detective_list = [p for p in active_player_list if p.role == Role.DETECTIVE]
+        if not active_detective_list:
             logger.info('All detectives were dead: killers win!')
             self.game.is_over = True
-        if len(killer_list) * 2 >= len(active_player_list):
+        if len(active_killer_list) * 2 >= len(active_player_list):
             logger.info('Killers killed too many people: killers win!')
             self.game.is_over = True

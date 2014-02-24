@@ -270,6 +270,20 @@ class Engine(object):
     def get_num_unused_players(self):
         return 0
 
+    def get_game_state(self):
+        if self.game.is_over:
+            return 'Game Over'
+        if self.game.is_ongoing:
+            return 'Ongoing'
+        min_num_players, max_num_players = self.get_min_max_num_players()
+        num_players = len(self.game.player_list)
+        if num_players < min_num_players:
+            return 'Waiting for Players'
+        elif num_players < max_num_players:
+            return 'Ready / Waiting for Players'
+        else:
+            return 'Ready'
+
     def is_joinable(self):
         if self.game.is_ongoing or self.game.is_over:
             return False
@@ -288,7 +302,13 @@ class Engine(object):
         return self.action_list.current()
 
     def reset_game(self):
-        self.action_list = self.action_list_class()  # Reset to an empty action list.
+        # Clear host flag.
+        for player in self.game.player_list:
+            player.is_host = False
+            player.save()
+        # Reset to an empty action list.
+        self.action_list = self.action_list_class()
+        # Reset game.
         self.game.logs[:] = []
         self.game.round = 0
         self.game.is_over = False

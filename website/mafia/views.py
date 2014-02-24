@@ -82,7 +82,7 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super(MafiaGameDetailView, self).get_context_data(**kwargs)
-        context_data['mode'] = self.request.GET.get('mode', None)
+        context_data['is_god_mode'] = (self.request.GET.get('mode', None) == 'god')
         return context_data
 
     @method_decorator(login_required)
@@ -151,7 +151,8 @@ class MafiaGamePlayView(_MafiaGameEngineDetailView):
 
     def post(self, request, *args, **kwargs):
         engine = self.get_engine()
-        targets = Player.objects.filter(pk__in=request.POST.getlist('target_pk[]'))
+        target_pk_list = [int(target_pk) for target_pk in request.POST.getlist('target_pk[]')]
+        targets = [p for p in engine.game.player_list if p.pk in target_pk_list]
         option = request.POST.get('option')
         try:
             engine.execute_action(targets, option)

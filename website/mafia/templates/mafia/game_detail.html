@@ -14,45 +14,46 @@
 
 {% block header %}
 
-  <div class="pull-right">
+  <div class="pull-right" style="text-align: center;">
     <form action="{{ game.get_absolute_url }}" method="post">
       {% csrf_token %}
-      {% if game.is_ongoing and current_players.is_host %}
-        <!-- Reset the game -->
-        <input type="hidden" name="action" value="reset"/>
-        <button class="btn btn-danger" type="submit">
-          <span class="glyphicon glyphicon-repeat"></span> Reset
-        </button>
-      {% elif not game.is_ongoing and not current_players %}
-        <!-- Join the game -->
-        {% if engine.is_joinable %}
-          <input type="hidden" name="action" value="join"/>
-          <button class="btn btn-success" type="submit">
-            <span class="glyphicon glyphicon-log-in"></span> Join
-          </button>
-        {% else %}
-          <button class="btn btn-success" disabled="disabled">
-            <span class="glyphicon glyphicon-log-in"></span> Join
+      {% if game.is_ongoing %}
+        {% if current_players.is_host or is_god_mode %}
+          <!-- Reset the game -->
+          <input type="hidden" name="action" value="reset"/>
+          <button class="btn btn-sm btn-danger" type="submit">
+            <span class="glyphicon glyphicon-repeat"></span> Reset
           </button>
         {% endif %}
-      {% elif not game.is_ongoing and current_players.is_host %}
-        <!-- Start the game -->
-        {% if engine.is_startable %}
-          <input type="hidden" name="action" value="start"/>
-          <button class="btn btn-primary" type="submit">
-            <span class="glyphicon glyphicon-play-circle"></span> Start
-          </button>
-        {% else %}
-          <button class="btn btn-primary" disabled="disabled">
-            <span class="glyphicon glyphicon-play-circle"></span> Start
-          </button>
+      {% else %}
+        {% if not current_players %}
+          {% if engine.is_joinable %}
+            <!-- Join the game -->
+            <input type="hidden" name="action" value="join"/>
+            <button class="btn btn-sm btn-success" type="submit">
+              <span class="glyphicon glyphicon-log-in"></span> Join
+            </button>
+          {% endif %}
+        {% elif current_players.is_host or is_god_mode %}
+          {% if engine.is_startable %}
+            <!-- Start the game -->
+            <input type="hidden" name="action" value="start"/>
+            <button class="btn btn-sm btn-primary" type="submit">
+              <span class="glyphicon glyphicon-play-circle"></span> Start
+            </button>
+          {% endif %}
         {% endif %}
       {% endif %}
     </form>
+    <div>
+      <span class="label label-default">{{ engine.get_game_state }}</span>
+      {% if is_god_mode %}
+        <span class="label label-success">God Mode</span>
+      {% endif %}
+    </div>
   </div>
   <h1>{{ game.name }} ({{ game.variant }})</h1>
   <div class="clearfix"></div>
-  <hr/>
 
 {% endblock %}
 
@@ -61,7 +62,7 @@
 
   {% if game.is_ongoing %}
 
-    <div class="game-mode-{{ mode }}">
+    <div class="game-mode-{{ is_god_mode|yesno:'god,normal' }}">
 
       <form id="game-action-form" class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
@@ -97,7 +98,7 @@
           <div class="col-md-3">
             <div class="well" style="text-align: center;">
               <div class="small">
-                {% if mode == 'god' %}
+                {% if is_god_mode %}
                   <a href="{{ game.get_absolute_url }}">Normal Mode</a> | <strong class="text-muted">God Mode</strong>
                 {% else %}
                   <strong class="text-muted">Normal Mode</strong> | <a href="{{ game.get_absolute_url }}?mode=god">God Mode</a>
@@ -259,7 +260,7 @@
 
     <script type="text/javascript">//<![CDATA[
 
-      var mode = '{{ mode }}';
+      var isGodMode = {{ is_god_mode|yesno:'true,false' }};
 
       /// For the current authenticated user, this is his corresponding player PKs.
       var currentPlayerPKs = [
@@ -328,11 +329,11 @@
         logsContainer.empty();
         for (var i = 0; i < game.logs.length; i++) {
           var log = game.logs[i];
-          if (log.visibility != '' || mode == 'god') {
+          if (log.visibility != '' || isGodMode) {
             var row = prototypeRow.clone().removeClass('prototype');
             $('.log-round', row).text(log.round);
             $('.log-action-name', row).text(log.action_name);
-            if (mode == 'god' || log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1) {
+            if (log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1 || isGodMode) {
               $('.log-text', row).text(log.text);
             } else {
               $('.log-text', row).text('* * *');
@@ -348,7 +349,7 @@
         // Update information about the current action.
         if (game.current_action != null) {
           $('#action-name').text(game.current_action.name);
-          if (isCurrentUserActor || mode == 'god') {
+          if (isCurrentUserActor || isGodMode) {
             var numTargets = game.current_action.min_num_targets;
             if (numTargets < game.current_action.max_num_targets) {
               numTargets = numTargets + ' - ' + game.current_action.max_num_targets;
@@ -368,10 +369,10 @@
         var element = $('#player-' + player.pk);
         // Update player status.
         element.toggleClass('player-out', player.is_out);
-        element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || mode == 'god'));
+        element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || isGodMode));
         $('.player-host', element).toggle(player.is_host);
         // Update player role.
-        if (currentPlayerRoles.indexOf(player.role) != -1 || mode == 'god') {
+        if (currentPlayerRoles.indexOf(player.role) != -1 || isGodMode) {
           // The player to update has the same role as the current player, or we are in god mode.
           $('.player-role-name', element).text(player.role);
           // $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');  // TODO: enable this!
