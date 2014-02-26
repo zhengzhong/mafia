@@ -21,9 +21,13 @@ class WerewolvesEngine(Engine):
             [Role.WEREWOLF] * self.game.config['num_werewolves'] + [Role.PSYCHIC]
             + [Role.THIEF] * (1 if self.game.config['has_thief'] else 0)
             + [Role.CUPID] * (1 if self.game.config['has_cupid'] else 0)
-            + [Role.BODYGUARD] * (1 if self.game.config['has_bodyguard'] else 0)
             + [Role.WIZARD] * (1 if self.game.config['has_wizard'] else 0)
             + [Role.HUNTER] * (1 if self.game.config['has_hunter'] else 0)
+            + [Role.BODYGUARD] * (1 if self.game.config['has_bodyguard'] else 0)
+            + [Role.IDIOT] * (1 if self.game.config['has_idiot'] else 0)
+            + [Role.SENIOR] * (1 if self.game.config['has_senior'] else 0)
+            + [Role.SCAPEGOAT] * (1 if self.game.config['has_scapegoat'] else 0)
+            + [Role.FLUTE_PLAYER] * (1 if self.game.config['has_flute_player'] else 0)
         )
 
     def get_alignment(self, role1, role2):

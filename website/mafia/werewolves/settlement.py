@@ -3,7 +3,7 @@
 
 from mafia.exceptions import GameError
 from mafia.gameplay import SettlementRule
-from mafia.werewolves.constants import Tag
+from mafia.werewolves.constants import Role, Tag
 
 
 class Guarded(SettlementRule):
@@ -28,11 +28,23 @@ class Bitten(SettlementRule):
 
     def settle_tagged_player(self, tagged_player, players, result):
         bitten = tagged_player
-        # If a player is bitten, he's killed unless he's cured.
         if bitten.has_tag(Tag.CURED):
+            # Player is bitten and cured.
             result.log_private('%s was bitten but cured.' % bitten)
             bitten.remove_tag(Tag.BITTEN)
+        elif bitten.role == Role.SENIOR:
+            if bitten.has_tag(Tag.INJURED):
+                # Senior is bitten twice.
+                result.log_private('%s was bitten twice and killed.' % bitten)
+                bitten.mark_out(self.tag)
+                result.add_out_player(bitten)
+            else:
+                # Senior is bitten for the first time.
+                result.log_private('%s was bitten and injured.' % bitten)
+                bitten.add_tag(Tag.INJURED)
+                bitten.remove_tag(self.tag)
         else:
+            # Player is bitten.
             result.log_private('%s was bitten and killed.' % bitten)
             bitten.mark_out(self.tag)
             result.add_out_player(bitten)

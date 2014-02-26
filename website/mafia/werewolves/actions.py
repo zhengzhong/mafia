@@ -9,20 +9,29 @@ from mafia.werewolves.settlement import RULES
 
 class _WerewolvesAction(Action):
 
+    # TODO: if senior is dead with his lover, will idiot also die?
+
     def execute(self, players, targets, option):
         result = super(_WerewolvesAction, self).execute(players, targets, option)
-        # Finally, for the 2 lovers, if any of them is out, the other is also out.
-        out_lovers = []
-        for out_player in result.out_players:
-            if out_player.has_tag(Tag.LOVER):
-                lovers = [p for p in players if not p.is_out and p.has_tag(Tag.LOVER)]
-                for lover in lovers:
-                    result.log_private('%s was dead with his lover %s.' % (lover, out_player))
-                    lover.mark_out(Tag.LOVER)
-                    out_lovers.append(lover)
-                break
-        for out_lover in out_lovers:
-            result.add_out_player(out_lover)
+        # Process lovers.
+        out_lover = next((p for p in result.out_players if p.has_tag(Tag.LOVER)), None)
+        if out_lover is not None:
+            for lover in [p for p in players if not p.is_out and p.has_tag(Tag.LOVER)]:
+                result.log_private('%s was dead with his lover.' % lover)
+                lover.mark_out(Tag.LOVER)
+                result.add_out_player(lover)
+        # Process senior.
+        out_senior = next((p for p in result.out_players if p.role == Role.SENIOR), None)
+        if out_senior is not None and out_senior.out_tag != Tag.BITTEN:
+            for idiot in [p for p in players if not p.is_out and p.role == Role.IDIOT]:
+                if idiot.has_tag(Tag.IDIOT_EXPOSED):
+                    result.log_private('%s was dead with senior.' % idiot)
+                    idiot.mark_out(Tag.IDIOT_EXPOSED)
+                    result.add_out_player(idiot)
+            for player in players:
+                if player.role not in (Role.WEREWOLF, Role.CIVILIAN):
+                    result.log_private('%s was incapacitated.' % player)
+                    player.add_tag(Tag.INCAPACITATED)
         return result
 
 
@@ -68,19 +77,6 @@ class CupidAction(_WerewolvesAction):
 
     def is_executable_on(self, target):
         return not target.is_out and target.role != self.role
-
-
-class BodyguardAction(_WerewolvesAction):
-
-    role = Role.BODYGUARD
-    tag = Tag.GUARDED
-    is_optional = True
-
-    def get_min_max_num_targets(self):
-        return 0, 1
-
-    def is_executable_on(self, target):
-        return not target.is_out and not target.has_tag(Tag.UNGUARDABLE)
 
 
 class WerewolfAction(_WerewolvesAction):
@@ -153,6 +149,32 @@ class WizardAction(_WerewolvesAction):
             raise GameError('Invalid option for wizard: %s' % option)
 
 
+class BodyguardAction(_WerewolvesAction):
+
+    role = Role.BODYGUARD
+    tag = Tag.GUARDED
+    is_optional = True
+
+    def get_min_max_num_targets(self):
+        return 0, 1
+
+    def is_executable_on(self, target):
+        return not target.is_out and not target.has_tag(Tag.UNGUARDABLE)
+
+
+class FlutePlayerAction(_WerewolvesAction):
+
+    role = Role.FLUTE_PLAYER
+    tag = Tag.TEMPTED
+    is_optional = True
+
+    def get_min_max_num_targets(self):
+        return 0, 2
+
+    def is_executable_on(self, target):
+        return not target.is_out and target.role != self.role and not target.has_tag(self.tag)
+
+
 class SettleTags(_WerewolvesAction):
 
     role = None
@@ -189,14 +211,30 @@ class VoteAndLynch(_WerewolvesAction):
     role = None
     tag = Tag.LYNCHED
 
+    def get_min_max_num_targets(self):
+        return 0, 1
+
     def is_executable_by(self, player):
         return player.is_host
 
     def execute_with_result(self, players, targets, option, result):
-        for target in targets:
-            target.mark_out(self.tag)
-            result.log_public('%s was voted and lynched.' % target)
-            result.add_out_player(target)
+        if targets:
+            for target in targets:
+                if target.role == Role.IDIOT:
+                    target.add_tag(Tag.IDIOT_EXPOSED)
+                    result.log_public('%s was found to be an idiot, and was exempted.' % target)
+                else:
+                    target.mark_out(self.tag)
+                    result.log_public('%s was voted and lynched.' % target)
+                    result.add_out_player(target)
+        else:
+            scapegoat = next((p for p in players if p.role == Role.SCAPEGOAT and not p.out), None)
+            if scapegoat is not None:
+                scapegoat.mark_out(Tag.BORE_THE_BLAME)
+                result.log_public('%s bore the blame.' % scapegoat)
+                result.add_out_player(scapegoat)
+            else:
+                result.log_public('Nobody was voted.')
 
 
 class MayorAction(_WerewolvesAction):
@@ -227,36 +265,54 @@ class HunterAction(_WerewolvesAction):
             result.add_out_player(target)
 
 
+class ScapegoatAction(_WerewolvesAction):
+
+    role = Role.SCAPEGOAT
+    tag = Tag.DEBARRED_FROM_VOTING
+
+    def is_executable_by(self, player):
+        return player.is_out and player.role == self.role
+
+
 class WerewolvesActionList(ActionList):
 
     initial_action_classes = (
         ThiefAction,
         CupidAction,
-        BodyguardAction,
         WerewolfAction,
         PsychicAction,
         WizardAction,
+        BodyguardAction,
+        FlutePlayerAction,
         SettleTags,
         ElectMayor,
         VoteAndLynch,
     )
 
-    action_classes = initial_action_classes + (MayorAction, HunterAction)
+    action_classes = initial_action_classes + (MayorAction, HunterAction, ScapegoatAction)
 
     def move_to_next(self, result):
-        if isinstance(self[self.index], (ThiefAction, CupidAction, ElectMayor, MayorAction, HunterAction)):
+        one_off_action_classes = (
+            ThiefAction, CupidAction, ElectMayor, MayorAction, HunterAction, ScapegoatAction
+        )
+        if isinstance(self[self.index], one_off_action_classes):
             self.pop(self.index)
             self.index = self.index % len(self)
         else:
             is_hunter_action_enabled = False
             is_mayor_action_enabled = False
+            is_scapegoat_action_enabled = False
             for out_player in result.out_players:
                 if out_player.role == Role.HUNTER and out_player.out_tag != Tag.POISONED:
                     is_hunter_action_enabled = True
                 if out_player.has_tag(Tag.MAYOR):
                     is_mayor_action_enabled = True
+                if out_player.role == Role.SCAPEGOAT and out_player.out_tag == Tag.BORE_THE_BLAME:
+                    is_scapegoat_action_enabled = True
             if is_hunter_action_enabled:
                 self.insert(self.index + 1, HunterAction())
             if is_mayor_action_enabled:
                 self.insert(self.index + 1, MayorAction())
+            if is_scapegoat_action_enabled:
+                self.insert(self.index + 1, ScapegoatAction())
             super(WerewolvesActionList, self).move_to_next(result)
