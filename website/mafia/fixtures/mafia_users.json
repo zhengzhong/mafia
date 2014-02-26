@@ -106,5 +106,77 @@
       "email": "thompson@example.com",
       "date_joined": "2014-02-11T09:00:00.000Z"
     }
+  },
+  {
+    "pk": 17,
+    "model": "auth.user",
+    "fields": {
+      "username": "Bianca",
+      "first_name": "Bianca",
+      "last_name": "Castafiore",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2014-02-11T09:00:00.000Z",
+      "groups": [],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$BaA9Wj4uU311$9M2ITJHMlm6Is38HIDBvhMAtCY8Oiga67xOPOejDiuw=",
+      "email": "bianca@example.com",
+      "date_joined": "2014-02-11T09:00:00.000Z"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "auth.user",
+    "fields": {
+      "username": "Rastapopoulos",
+      "first_name": "Rastapopoulos",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2014-02-11T09:00:00.000Z",
+      "groups": [],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$BaA9Wj4uU311$9M2ITJHMlm6Is38HIDBvhMAtCY8Oiga67xOPOejDiuw=",
+      "email": "rastapopoulos@example.com",
+      "date_joined": "2014-02-11T09:00:00.000Z"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "auth.user",
+    "fields": {
+      "username": "Nestor",
+      "first_name": "Nestor",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2014-02-11T09:00:00.000Z",
+      "groups": [],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$BaA9Wj4uU311$9M2ITJHMlm6Is38HIDBvhMAtCY8Oiga67xOPOejDiuw=",
+      "email": "nestor@example.com",
+      "date_joined": "2014-02-11T09:00:00.000Z"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "auth.user",
+    "fields": {
+      "username": "Chong-Chen",
+      "first_name": "Chong-Chen",
+      "last_name": "Chang",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2014-02-11T09:00:00.000Z",
+      "groups": [],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$BaA9Wj4uU311$9M2ITJHMlm6Is38HIDBvhMAtCY8Oiga67xOPOejDiuw=",
+      "email": "chong-chen@example.com",
+      "date_joined": "2014-02-11T09:00:00.000Z"
+    }
   }
 ]

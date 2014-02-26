@@ -6,7 +6,7 @@ from mafia.classic.constants import Role, Tag
 from mafia.tests.base import BaseMafiaEngineStartedTestCase
 
 
-class MafiaClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
+class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
 
     variant = Game.VARIANT_CLASSIC
 

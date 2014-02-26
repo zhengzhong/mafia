@@ -228,8 +228,8 @@ class VoteAndLynch(_WerewolvesAction):
                     result.log_public('%s was voted and lynched.' % target)
                     result.add_out_player(target)
         else:
-            scapegoat = next((p for p in players if p.role == Role.SCAPEGOAT and not p.out), None)
-            if scapegoat is not None:
+            scapegoat = next((p for p in players if p.role == Role.SCAPEGOAT), None)
+            if scapegoat is not None and not scapegoat.is_out:
                 scapegoat.mark_out(Tag.BORE_THE_BLAME)
                 result.log_public('%s bore the blame.' % scapegoat)
                 result.add_out_player(scapegoat)

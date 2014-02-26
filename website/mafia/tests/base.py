@@ -33,7 +33,7 @@ class BaseMafiaEngineTestCase(TestCase):
             'engine': WerewolvesEngine,
             'config': {
                 'num_werewolves': 2,
-                'has_thief': True,
+                'has_thief': False,
                 'has_cupido': True,
                 'has_witch': True,
                 'has_hunter': True,
@@ -65,9 +65,9 @@ class BaseMafiaEngineStartedTestCase(BaseMafiaEngineTestCase):
     def get_player(self, role):
         return next(p for p in self.game.player_list if p.role == role)
 
-    def execute_action_for_role(self, role, target):
+    def execute_action_for_role(self, role, target, option=None):
         action = next(a for a in self.engine.action_list if a.role == role)
-        return action.execute(self.game.player_list, [target], None)
+        return action.execute(self.game.player_list, [target], option)
 
     def settle_tags(self):
         action = next(a for a in self.engine.action_list if a.name == 'SettleTags')
@@ -75,7 +75,8 @@ class BaseMafiaEngineStartedTestCase(BaseMafiaEngineTestCase):
 
     def vote(self, target):
         action = next(a for a in self.engine.action_list if a.name == 'VoteAndLynch')
-        return action.execute(self.game.player_list, [target], None)
+        targets = [target] if target is not None else []
+        return action.execute(self.game.player_list, targets, None)
 
 
 class EngineTestCaseMixin(object):

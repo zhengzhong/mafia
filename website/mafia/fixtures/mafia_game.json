@@ -132,5 +132,85 @@
       "hand_side": "right",
       "join_date": "2014-02-14T00:00:00.000Z"
     }
+  },
+  {
+    "pk": 13,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 17,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 17,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 18,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 18,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 19,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 19,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 20,
+      "hand_side": "left",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "mafia.player",
+    "fields": {
+      "game": 1,
+      "user": 20,
+      "hand_side": "right",
+      "join_date": "2014-02-14T00:00:00.000Z"
+    }
   }
 ]
