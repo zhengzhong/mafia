@@ -26,8 +26,8 @@ class GameForm(forms.ModelForm):
 
     num_werewolves = forms.IntegerField(initial=2, min_value=2, max_value=5)
     has_thief = forms.BooleanField(initial=False, required=False)
-    has_cupid = forms.BooleanField(initial=True, required=False)
-    has_wizard = forms.BooleanField(initial=True, required=False)
+    has_cupido = forms.BooleanField(initial=True, required=False)
+    has_witch = forms.BooleanField(initial=True, required=False)
     has_hunter = forms.BooleanField(initial=True, required=False)
     has_bodyguard = forms.BooleanField(initial=True, required=False)
     has_idiot = forms.BooleanField(initial=True, required=False)
@@ -42,7 +42,7 @@ class GameForm(forms.ModelForm):
         'num_killers', 'num_detectives', 'has_guardian', 'has_doctor', 'has_traitor',
     )
     WEREWOLVES_FIELD_NAMES = (
-        'num_werewolves', 'has_thief', 'has_cupid', 'has_wizard', 'has_hunter',
+        'num_werewolves', 'has_thief', 'has_cupido', 'has_witch', 'has_hunter',
         'has_bodyguard', 'has_idiot', 'has_senior', 'has_scapegoat', 'has_flute_player',
     )
 

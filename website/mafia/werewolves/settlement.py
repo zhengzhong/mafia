@@ -6,53 +6,53 @@ from mafia.gameplay import SettlementRule
 from mafia.werewolves.constants import Role, Tag
 
 
-class Guarded(SettlementRule):
+class ProtectedByBodyguard(SettlementRule):
 
-    tag = Tag.GUARDED
-
-    def settle_tagged_player(self, tagged_player, players, result):
-        guarded = tagged_player
-        # If a player is guarded, he cannot be killed by werewolves.
-        if guarded.has_tag(Tag.BITTEN):
-            result.log_private('%s was bitten but guarded.' % guarded)
-            guarded.remove_tag(Tag.BITTEN)
-        # Mark guarded player as unguardable.
-        guarded.remove_tag(Tag.GUARDED)
-        guarded.add_tag(Tag.UNGUARDABLE)
-        result.log_private('%s was guarded and became unguardable.' % guarded)
-
-
-class Bitten(SettlementRule):
-
-    tag = Tag.BITTEN
+    tag = Tag.PROTECTED_BY_BODYGUARD
 
     def settle_tagged_player(self, tagged_player, players, result):
-        bitten = tagged_player
-        if bitten.has_tag(Tag.CURED):
-            # Player is bitten and cured.
-            result.log_private('%s was bitten but cured.' % bitten)
-            bitten.remove_tag(Tag.BITTEN)
-        elif bitten.role == Role.SENIOR:
-            if bitten.has_tag(Tag.INJURED):
-                # Senior is bitten twice.
-                result.log_private('%s was bitten twice and killed.' % bitten)
-                bitten.mark_out(self.tag)
-                result.add_out_player(bitten)
+        protected = tagged_player
+        # If a player is protected by bodyguard, he cannot be killed by werewolves.
+        if protected.has_tag(Tag.ATTACKED_BY_WEREWOLF):
+            result.log_private('%s was attacked by werewolf but was protected.' % protected)
+            protected.remove_tag(Tag.ATTACKED_BY_WEREWOLF)
+        # Mark protected player as unprotectable.
+        protected.remove_tag(self.tag)
+        protected.add_tag(Tag.UNPROTECTABLE)
+        result.log_private('%s was protected by bodyguard and became unprotectable.' % protected)
+
+
+class AttackedByWerewolf(SettlementRule):
+
+    tag = Tag.ATTACKED_BY_WEREWOLF
+
+    def settle_tagged_player(self, tagged_player, players, result):
+        attacked = tagged_player
+        if attacked.has_tag(Tag.CURED_BY_WITCH):
+            # Player is attacked by werewolf and cured.
+            result.log_private('%s was attacked by werewolf but was cured.' % attacked)
+            attacked.remove_tag(self.tag)
+        elif attacked.role == Role.SENIOR:
+            if attacked.has_tag(Tag.INJURED_BY_WEREWOLF):
+                # Senior is attacked by werewolf twice.
+                result.log_private('%s was attacked by werewolf twice and killed.' % attacked)
+                attacked.mark_out(self.tag)
+                result.add_out_player(attacked)
             else:
-                # Senior is bitten for the first time.
-                result.log_private('%s was bitten and injured.' % bitten)
-                bitten.add_tag(Tag.INJURED)
-                bitten.remove_tag(self.tag)
+                # Senior is attacked by werewolf for the first time.
+                result.log_private('%s was attacked by werewolf and injured.' % attacked)
+                attacked.add_tag(Tag.INJURED_BY_WEREWOLF)
+                attacked.remove_tag(self.tag)
         else:
-            # Player is bitten.
-            result.log_private('%s was bitten and killed.' % bitten)
-            bitten.mark_out(self.tag)
-            result.add_out_player(bitten)
+            # Player is attacked by werewolf.
+            result.log_private('%s was attacked by werewolf and killed.' % attacked)
+            attacked.mark_out(self.tag)
+            result.add_out_player(attacked)
 
 
-class Poisoned(SettlementRule):
+class PoisonedByWitch(SettlementRule):
 
-    tag = Tag.POISONED
+    tag = Tag.POISONED_BY_WITCH
 
     def settle_tagged_player(self, tagged_player, players, result):
         poisoned = tagged_player
@@ -61,4 +61,4 @@ class Poisoned(SettlementRule):
         result.add_out_player(poisoned)
 
 
-RULES = (Guarded(), Bitten(), Poisoned())
+RULES = (ProtectedByBodyguard(), AttackedByWerewolf(), PoisonedByWitch())

@@ -14,19 +14,19 @@ class _WerewolvesAction(Action):
     def execute(self, players, targets, option):
         result = super(_WerewolvesAction, self).execute(players, targets, option)
         # Process lovers.
-        out_lover = next((p for p in result.out_players if p.has_tag(Tag.LOVER)), None)
+        out_lover = next((p for p in result.out_players if p.has_tag(Tag.CHOSEN_AS_LOVERS)), None)
         if out_lover is not None:
-            for lover in [p for p in players if not p.is_out and p.has_tag(Tag.LOVER)]:
-                result.log_private('%s was dead with his lover.' % lover)
-                lover.mark_out(Tag.LOVER)
+            for lover in [p for p in players if not p.is_out and p.has_tag(Tag.CHOSEN_AS_LOVERS)]:
+                result.log_private('%s died for love.' % lover)
+                lover.mark_out(Tag.DIED_FOR_LOVE)
                 result.add_out_player(lover)
         # Process senior.
         out_senior = next((p for p in result.out_players if p.role == Role.SENIOR), None)
-        if out_senior is not None and out_senior.out_tag != Tag.BITTEN:
+        if out_senior is not None and out_senior.out_tag != Tag.ATTACKED_BY_WEREWOLF:
             for idiot in [p for p in players if not p.is_out and p.role == Role.IDIOT]:
-                if idiot.has_tag(Tag.IDIOT_EXPOSED):
+                if idiot.has_tag(Tag.EXPOSED_AS_IDIOT):
                     result.log_private('%s was dead with senior.' % idiot)
-                    idiot.mark_out(Tag.IDIOT_EXPOSED)
+                    idiot.mark_out(Tag.EXPOSED_AS_IDIOT)
                     result.add_out_player(idiot)
             for player in players:
                 if player.role not in (Role.WEREWOLF, Role.CIVILIAN):
@@ -66,14 +66,14 @@ class ThiefAction(_WerewolvesAction):
             result.log('%s did not change the role.' % self.role, visibility=self.role)
 
 
-class CupidAction(_WerewolvesAction):
+class CupidoAction(_WerewolvesAction):
 
-    role = Role.CUPID
-    tag = Tag.LOVER
+    role = Role.CUPIDO
+    tag = Tag.CHOSEN_AS_LOVERS
     is_optional = True
 
     def get_min_max_num_targets(self):
-        return 2, 2  # Cupid must select 2 players.
+        return 2, 2  # Cupido must select 2 players.
 
     def is_executable_on(self, target):
         return not target.is_out and target.role != self.role
@@ -82,13 +82,13 @@ class CupidAction(_WerewolvesAction):
 class WerewolfAction(_WerewolvesAction):
 
     role = Role.WEREWOLF
-    tag = Tag.BITTEN
+    tag = Tag.ATTACKED_BY_WEREWOLF
 
 
-class PsychicAction(_WerewolvesAction):
+class SeerAction(_WerewolvesAction):
 
-    role = Role.PSYCHIC
-    tag = Tag.MINDREAD
+    role = Role.SEER
+    tag = Tag.FORESEEN_BY_SEER
 
     def is_executable_on(self, target):
         return target.role != self.role
@@ -97,16 +97,16 @@ class PsychicAction(_WerewolvesAction):
         return 'YES' if target.role == Role.WEREWOLF else 'NO'
 
 
-class WizardAction(_WerewolvesAction):
+class WitchAction(_WerewolvesAction):
 
-    role = Role.WIZARD
+    role = Role.WITCH
     is_optional = True
 
     OPTION_CURE = 'cure'
     OPTION_POISON = 'poison'
 
     def __init__(self, is_cure_used=False, is_poison_used=False, **kwargs):
-        super(WizardAction, self).__init__()
+        super(WitchAction, self).__init__()
         self.is_cure_used = is_cure_used
         self.is_poison_used = is_poison_used
 
@@ -141,31 +141,31 @@ class WizardAction(_WerewolvesAction):
     def get_tag(self, option):
         if option == self.OPTION_CURE and not self.is_cure_used:
             self.is_cure_used = True
-            return Tag.CURED
+            return Tag.CURED_BY_WITCH
         elif option == self.OPTION_POISON and not self.is_poison_used:
             self.is_poison_used = True
-            return Tag.POISONED
+            return Tag.POISONED_BY_WITCH
         else:
-            raise GameError('Invalid option for wizard: %s' % option)
+            raise GameError('Invalid option for witch: %s' % option)
 
 
 class BodyguardAction(_WerewolvesAction):
 
     role = Role.BODYGUARD
-    tag = Tag.GUARDED
+    tag = Tag.PROTECTED_BY_BODYGUARD
     is_optional = True
 
     def get_min_max_num_targets(self):
         return 0, 1
 
     def is_executable_on(self, target):
-        return not target.is_out and not target.has_tag(Tag.UNGUARDABLE)
+        return not target.is_out and not target.has_tag(Tag.UNPROTECTABLE)
 
 
 class FlutePlayerAction(_WerewolvesAction):
 
     role = Role.FLUTE_PLAYER
-    tag = Tag.TEMPTED
+    tag = Tag.TEMPTED_BY_FLUTE_PLAYER
     is_optional = True
 
     def get_min_max_num_targets(self):
@@ -196,7 +196,7 @@ class SettleTags(_WerewolvesAction):
 class ElectMayor(_WerewolvesAction):
 
     role = None
-    tag = Tag.MAYOR
+    tag = Tag.ELECTED_AS_MAYOR
 
     def is_executable_by(self, player):
         return player.is_host
@@ -221,7 +221,7 @@ class VoteAndLynch(_WerewolvesAction):
         if targets:
             for target in targets:
                 if target.role == Role.IDIOT:
-                    target.add_tag(Tag.IDIOT_EXPOSED)
+                    target.add_tag(Tag.EXPOSED_AS_IDIOT)
                     result.log_public('%s was found to be an idiot, and was exempted.' % target)
                 else:
                     target.mark_out(self.tag)
@@ -240,10 +240,10 @@ class VoteAndLynch(_WerewolvesAction):
 class MayorAction(_WerewolvesAction):
 
     role = None
-    tag = Tag.MAYOR
+    tag = Tag.ELECTED_AS_MAYOR
 
     def is_executable_by(self, player):
-        return player.is_out and player.has_tag(Tag.MAYOR)
+        return player.is_out and player.has_tag(Tag.ELECTED_AS_MAYOR)
 
 
 class HunterAction(_WerewolvesAction):
@@ -278,10 +278,10 @@ class WerewolvesActionList(ActionList):
 
     initial_action_classes = (
         ThiefAction,
-        CupidAction,
+        CupidoAction,
         WerewolfAction,
-        PsychicAction,
-        WizardAction,
+        SeerAction,
+        WitchAction,
         BodyguardAction,
         FlutePlayerAction,
         SettleTags,
@@ -293,7 +293,7 @@ class WerewolvesActionList(ActionList):
 
     def move_to_next(self, result):
         one_off_action_classes = (
-            ThiefAction, CupidAction, ElectMayor, MayorAction, HunterAction, ScapegoatAction
+            ThiefAction, CupidoAction, ElectMayor, MayorAction, HunterAction, ScapegoatAction
         )
         if isinstance(self[self.index], one_off_action_classes):
             self.pop(self.index)
@@ -303,9 +303,9 @@ class WerewolvesActionList(ActionList):
             is_mayor_action_enabled = False
             is_scapegoat_action_enabled = False
             for out_player in result.out_players:
-                if out_player.role == Role.HUNTER and out_player.out_tag != Tag.POISONED:
+                if out_player.role == Role.HUNTER and out_player.out_tag != Tag.POISONED_BY_WITCH:
                     is_hunter_action_enabled = True
-                if out_player.has_tag(Tag.MAYOR):
+                if out_player.has_tag(Tag.ELECTED_AS_MAYOR):
                     is_mayor_action_enabled = True
                 if out_player.role == Role.SCAPEGOAT and out_player.out_tag == Tag.BORE_THE_BLAME:
                     is_scapegoat_action_enabled = True

@@ -34,10 +34,14 @@ class BaseMafiaEngineTestCase(TestCase):
             'config': {
                 'num_werewolves': 2,
                 'has_thief': True,
-                'has_cupid': True,
-                'has_bodyguard': True,
-                'has_wizard': True,
+                'has_cupido': True,
+                'has_witch': True,
                 'has_hunter': True,
+                'has_bodyguard': True,
+                'has_idiot': True,
+                'has_senior': True,
+                'has_scapegoat': True,
+                'has_flute_player': True,
             },
         }
     }

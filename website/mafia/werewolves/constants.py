@@ -8,10 +8,10 @@ class Role(object):
 
     CIVILIAN = 'Civilian'
     THIEF = 'Thief'
-    CUPID = 'Cupid'
+    CUPIDO = 'Cupido'
     WEREWOLF = 'Werewolf'
-    PSYCHIC = 'Psychic'
-    WIZARD = 'Wizard'
+    SEER = 'Seer'
+    WITCH = 'Witch'
     HUNTER = 'Hunter'
     BODYGUARD = 'Bodyguard'
     IDIOT = 'Idiot'
@@ -23,10 +23,10 @@ class Role(object):
         '': 0,
         CIVILIAN: +1,
         THIEF: +1,
-        CUPID: +1,
+        CUPIDO: +1,
         WEREWOLF: -3,
-        PSYCHIC: +3,
-        WIZARD: +1,
+        SEER: +3,
+        WITCH: +1,
         HUNTER: +1,
         BODYGUARD: +1,
         IDIOT: +1,
@@ -47,19 +47,20 @@ class Role(object):
 
 class Tag(object):
 
-    MAYOR = 'mayor'
-    LOVER = 'lover'
-    GUARDED = 'guarded'
-    UNGUARDABLE = 'unguardable'
-    BITTEN = 'bitten'
-    MINDREAD = 'mindread'
-    CURED = 'cured'
-    POISONED = 'poisoned'
+    ELECTED_AS_MAYOR = 'elected_as_mayor'
+    CHOSEN_AS_LOVERS = 'chosen_as_lovers'
+    DIED_FOR_LOVE = 'died_for_love'
+    PROTECTED_BY_BODYGUARD = 'protected_by_bodyguard'
+    UNPROTECTABLE = 'unprotectable'
+    ATTACKED_BY_WEREWOLF = 'attacked_by_werewolf'
+    FORESEEN_BY_SEER = 'foreseen_by_seer'
+    CURED_BY_WITCH = 'cured_by_witch'
+    POISONED_BY_WITCH = 'poisoned_by_witch'
     SHOT_BY_HUNTER = 'shot_by_hunter'
-    IDIOT_EXPOSED = 'idiot_exposed'
-    INJURED = 'injured'
+    EXPOSED_AS_IDIOT = 'exposed_as_idiot'
+    INJURED_BY_WEREWOLF = 'injured_by_werewolf'
     INCAPACITATED = 'incapacitated'
     LYNCHED = 'lynched'
     BORE_THE_BLAME = 'bore_the_blame'
     DEBARRED_FROM_VOTING = 'debarred_from_voting'
-    TEMPTED = 'tempted'
+    TEMPTED_BY_FLUTE_PLAYER = 'tempted_by_flute_player'
