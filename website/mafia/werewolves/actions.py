@@ -9,9 +9,17 @@ from mafia.werewolves.settlement import RULES
 
 class _WerewolvesAction(Action):
 
-    # TODO: if senior is dead with his lover, will idiot also die?
+    def is_executable_by(self, player):
+        if not super(_WerewolvesAction, self).is_executable_by(player):
+            return False
+        if player.role != Role.WEREWOLF and player.has_tag(Tag.INCAPACITATED):
+            return False
+        return True
 
     def execute(self, players, targets, option):
+        """
+        TODO: if senior is dead with his lover, will idiot also die?
+        """
         result = super(_WerewolvesAction, self).execute(players, targets, option)
         # Process lovers.
         out_lover = next((p for p in result.out_players if p.has_tag(Tag.CHOSEN_AS_LOVERS)), None)
@@ -125,7 +133,7 @@ class WitchAction(_WerewolvesAction):
     def is_executable_by(self, player):
         if self.is_cure_used and self.is_poison_used:
             return False
-        return not player.is_out and player.role == self.role
+        return super(WitchAction, self).is_executable_by(player)
 
     def is_executable_on(self, target):
         return not target.is_out and not target.role == self.role
@@ -255,7 +263,7 @@ class HunterAction(_WerewolvesAction):
         return 0, 1
 
     def is_executable_by(self, player):
-        return player.is_out and player.role == self.role
+        return player.is_out and player.role == self.role and not player.has_tag(Tag.INCAPACITATED)
 
     def execute_with_result(self, players, targets, option, result):
         for target in targets:
@@ -271,7 +279,7 @@ class ScapegoatAction(_WerewolvesAction):
     tag = Tag.DEBARRED_FROM_VOTING
 
     def is_executable_by(self, player):
-        return player.is_out and player.role == self.role
+        return player.is_out and player.role == self.role and not player.has_tag(Tag.INCAPACITATED)
 
 
 class WerewolvesActionList(ActionList):
@@ -300,19 +308,21 @@ class WerewolvesActionList(ActionList):
             self.index = self.index % len(self)
         else:
             is_hunter_action_enabled = False
-            is_mayor_action_enabled = False
             is_scapegoat_action_enabled = False
+            is_mayor_action_enabled = False
             for out_player in result.out_players:
                 if out_player.role == Role.HUNTER and out_player.out_tag != Tag.POISONED_BY_WITCH:
-                    is_hunter_action_enabled = True
+                    if not out_player.has_tag(Tag.INCAPACITATED):
+                        is_hunter_action_enabled = True
+                if out_player.role == Role.SCAPEGOAT and out_player.out_tag == Tag.BORE_THE_BLAME:
+                    if not out_player.has_tag(Tag.INCAPACITATED):
+                        is_scapegoat_action_enabled = True
                 if out_player.has_tag(Tag.ELECTED_AS_MAYOR):
                     is_mayor_action_enabled = True
-                if out_player.role == Role.SCAPEGOAT and out_player.out_tag == Tag.BORE_THE_BLAME:
-                    is_scapegoat_action_enabled = True
             if is_hunter_action_enabled:
                 self.insert(self.index + 1, HunterAction())
-            if is_mayor_action_enabled:
-                self.insert(self.index + 1, MayorAction())
             if is_scapegoat_action_enabled:
                 self.insert(self.index + 1, ScapegoatAction())
+            if is_mayor_action_enabled:
+                self.insert(self.index + 1, MayorAction())
             super(WerewolvesActionList, self).move_to_next(result)
