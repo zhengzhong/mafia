@@ -30,12 +30,13 @@ class Game(models.Model):
         (VARIANT_WEREWOLVES, VARIANT_WEREWOLVES),
     )
 
-    MIN_DELAY_SECONDS = 10
+    MIN_DELAY_SECONDS = 0
+    DEFAULT_DELAY_SECONDS = 10
 
     name = models.CharField(_('Game Name'), max_length=100)
     is_two_handed = models.BooleanField(_('Two-Handed'), default=True)
     variant = models.CharField(_('Variant'), max_length=20, choices=VARIANT_CHOICES, default=VARIANT_CLASSIC)
-    delay_seconds = models.PositiveIntegerField(default=MIN_DELAY_SECONDS)
+    delay_seconds = models.PositiveIntegerField(default=DEFAULT_DELAY_SECONDS)
     config_json = models.TextField(blank=True)
     context_json = models.TextField(blank=True)
     logs_json = models.TextField(blank=True)

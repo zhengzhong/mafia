@@ -184,6 +184,7 @@ class ActionList(list):
 
     def move_to_next(self, result):
         self.index = (self.index + 1) % len(self)
+        return self.index == 0
 
     def as_json_data(self):
         list_data = []
@@ -374,8 +375,8 @@ class Engine(object):
         self.save_game()
 
     def move_to_next_action(self, result):
-        self.action_list.move_to_next(result)
-        if self.action_list.index == 0:
+        is_new_round = self.action_list.move_to_next(result)
+        if is_new_round:
             self.game.round += 1
 
     def save_game(self):

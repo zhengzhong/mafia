@@ -305,7 +305,11 @@ class WerewolvesActionList(ActionList):
         )
         if isinstance(self[self.index], one_off_action_classes):
             self.pop(self.index)
-            self.index = self.index % len(self)
+            if self.index >= len(self):
+                self.index = self.index % len(self)
+                return True
+            else:
+                return False
         else:
             is_hunter_action_enabled = False
             is_scapegoat_action_enabled = False
@@ -325,4 +329,4 @@ class WerewolvesActionList(ActionList):
                 self.insert(self.index + 1, ScapegoatAction())
             if is_mayor_action_enabled:
                 self.insert(self.index + 1, MayorAction())
-            super(WerewolvesActionList, self).move_to_next(result)
+            return super(WerewolvesActionList, self).move_to_next(result)

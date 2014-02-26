@@ -16,7 +16,7 @@ class GameForm(forms.ModelForm):
         model = Game
         fields = ('name', 'is_two_handed', 'variant', 'delay_seconds')
 
-    add_test_players = forms.BooleanField(label=_('Add test players (debug mode)'), initial=False, required=False)
+    add_test_players = forms.BooleanField(label=_('Add test players (debug mode)'), initial=True, required=False)
 
     num_killers = forms.IntegerField(initial=2, min_value=1, max_value=3)
     num_detectives = forms.IntegerField(initial=2, min_value=1, max_value=3)
@@ -83,7 +83,7 @@ class GameForm(forms.ModelForm):
         game.save()
         game.add_players(self._host)
         if self.cleaned_data['add_test_players']:
-            num_test_users = 5 if game.is_two_handed else 10
+            num_test_users = 10 if game.is_two_handed else 20
             test_users = User.objects.filter(is_active=True)[:num_test_users]
             for user in test_users:
                 game.add_players(user)
