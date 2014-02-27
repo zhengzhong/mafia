@@ -6,6 +6,7 @@ import logging
 from mafia.gameplay import Engine
 from mafia.classic.constants import Role
 from mafia.classic.actions import ClassicActionList
+from mafia.classic.translations import TRANSLATIONS
 
 
 logger = logging.getLogger(__name__)
@@ -14,6 +15,9 @@ logger = logging.getLogger(__name__)
 class ClassicEngine(Engine):
 
     action_list_class = ClassicActionList
+
+    def get_translations(self):
+        return TRANSLATIONS
 
     def get_role_list_on_stage(self):
         return (

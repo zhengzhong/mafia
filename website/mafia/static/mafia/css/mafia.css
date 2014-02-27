@@ -1,5 +1,9 @@
 /* * * * * * * * * * Stylesheet for Mafia * * * * * * * * * */
 
+.label {
+  font-size: 85%; /* to better display Chinese characters... */
+}
+
 .game-timer {
   padding: 10px;
   text-align: center;

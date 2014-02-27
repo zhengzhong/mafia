@@ -7,6 +7,7 @@ import random
 from mafia.gameplay import Engine
 from mafia.werewolves.constants import Role, Tag
 from mafia.werewolves.actions import WerewolvesActionList
+from mafia.werewolves.translations import TRANSLATIONS
 
 
 logger = logging.getLogger(__name__)
@@ -15,6 +16,9 @@ logger = logging.getLogger(__name__)
 class WerewolvesEngine(Engine):
 
     action_list_class = WerewolvesActionList
+
+    def get_translations(self):
+        return TRANSLATIONS
 
     def get_role_list_on_stage(self):
         return (

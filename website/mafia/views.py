@@ -83,7 +83,10 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super(MafiaGameDetailView, self).get_context_data(**kwargs)
-        context_data['is_god_mode'] = (self.request.GET.get('mode', None) == 'god')
+        context_data.update({
+            'translations': self.get_engine().get_translations(),
+            'is_god_mode': (self.request.GET.get('mode', None) == 'god'),
+        })
         return context_data
 
     @method_decorator(login_required)

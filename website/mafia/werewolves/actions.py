@@ -204,7 +204,7 @@ class SettleTags(_WerewolvesAction):
 class ElectMayor(_WerewolvesAction):
 
     role = None
-    tag = Tag.ELECTED_AS_MAYOR
+    tag = Tag.APPOINTED_AS_MAYOR
 
     def is_executable_by(self, player):
         return player.is_host
@@ -245,13 +245,13 @@ class VoteAndLynch(_WerewolvesAction):
                 result.log_public('Nobody was voted.')
 
 
-class MayorAction(_WerewolvesAction):
+class AppointNewMayor(_WerewolvesAction):
 
     role = None
-    tag = Tag.ELECTED_AS_MAYOR
+    tag = Tag.APPOINTED_AS_MAYOR
 
     def is_executable_by(self, player):
-        return player.is_out and player.has_tag(Tag.ELECTED_AS_MAYOR)
+        return player.is_out and player.has_tag(Tag.APPOINTED_AS_MAYOR)
 
 
 class HunterAction(_WerewolvesAction):
@@ -297,11 +297,11 @@ class WerewolvesActionList(ActionList):
         VoteAndLynch,
     )
 
-    action_classes = initial_action_classes + (MayorAction, HunterAction, ScapegoatAction)
+    action_classes = initial_action_classes + (AppointNewMayor, HunterAction, ScapegoatAction)
 
     def move_to_next(self, result):
         one_off_action_classes = (
-            ThiefAction, CupidoAction, ElectMayor, MayorAction, HunterAction, ScapegoatAction
+            ThiefAction, CupidoAction, ElectMayor, AppointNewMayor, HunterAction, ScapegoatAction
         )
         if isinstance(self[self.index], one_off_action_classes):
             self.pop(self.index)
@@ -321,12 +321,12 @@ class WerewolvesActionList(ActionList):
                 if out_player.role == Role.SCAPEGOAT and out_player.out_tag == Tag.BORE_THE_BLAME:
                     if not out_player.has_tag(Tag.INCAPACITATED):
                         is_scapegoat_action_enabled = True
-                if out_player.has_tag(Tag.ELECTED_AS_MAYOR):
+                if out_player.has_tag(Tag.APPOINTED_AS_MAYOR):
                     is_mayor_action_enabled = True
             if is_hunter_action_enabled:
                 self.insert(self.index + 1, HunterAction())
             if is_scapegoat_action_enabled:
                 self.insert(self.index + 1, ScapegoatAction())
             if is_mayor_action_enabled:
-                self.insert(self.index + 1, MayorAction())
+                self.insert(self.index + 1, AppointNewMayor())
             return super(WerewolvesActionList, self).move_to_next(result)

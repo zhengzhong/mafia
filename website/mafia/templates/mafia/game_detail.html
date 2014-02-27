@@ -134,6 +134,9 @@
                 <div class="col-md-3">
                   <div id="player-{{ player.pk }}" class="player">
                     <div class="player-heading">
+                      {% if request.user == player.user %}
+                        <div class="pull-right"><span class="label label-success">YOU</span></div>
+                      {% endif %}
                       <img class="player-avatar img-circle" src="{{ player.gravatar_url }}" alt="{{ player }}"/>
                       <h4>
                         {{ player }}
@@ -148,10 +151,7 @@
                         </a>
                         <span class="player-check-disabled glyphicon glyphicon-remove-sign" style="display: none;"></span>
                         <span class="player-checkmark glyphicon glyphicon-ok-sign" style="display: none;"></span>
-                        <span class="player-role-name label label-default">--</span>
-                        {% if request.user == player.user %}
-                          <span class="label label-success">YOU</span>
-                        {% endif %}
+                        <div><span class="player-role-name label label-default">--</span></div>
                       </div>
                       <div class="player-details"></div>
                       <div class="clearfix"></div>
@@ -281,6 +281,20 @@
 
     <script type="text/javascript">//<![CDATA[
 
+      var TRANSLATIONS = {
+        {% for key, value in translations.items %}
+          '{{ key|escapejs }}': '{{ value|escapejs }}' {% if not forloop.last %},{% endif %}
+        {% endfor %}
+      };
+
+      function trans(value) {
+        if (value in TRANSLATIONS) {
+          return TRANSLATIONS[value];
+        } else {
+          return value;
+        }
+      }
+
       var isGodMode = {{ is_god_mode|yesno:'true,false' }};
 
       /// For the current authenticated user, this is his corresponding player PKs.
@@ -369,7 +383,7 @@
         $('#game-round').text('Round ' + game.round);
         // Update information about the current action.
         if (game.current_action != null) {
-          $('#action-name').text(game.current_action.name);
+          $('#action-name').text(trans(game.current_action.name));
           if (isCurrentUserActor || isGodMode) {
             var numTargets = game.current_action.min_num_targets;
             if (numTargets < game.current_action.max_num_targets) {
@@ -395,7 +409,7 @@
         // Update player role.
         if (currentPlayerRoles.indexOf(player.role) != -1 || isGodMode) {
           // The player to update has the same role as the current player, or we are in god mode.
-          $('.player-role-name', element).text(player.role);
+          $('.player-role-name', element).text(trans(player.role));
           // $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');  // TODO: enable this!
           $('.player-card', element).attr('src', 'http://placehold.it/60x60');  // TODO: remove this!
         } else {

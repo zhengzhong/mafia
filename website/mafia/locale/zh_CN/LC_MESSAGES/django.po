@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-26 15:16+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+msgid "Add test players (debug mode)"
+msgstr "自动添加测试玩家（调试模式）"
+
+msgid "Game Name"
+msgstr "游戏名"
+
+msgid "Two-Handed"
+msgstr "双手模式"
+
+msgid "Variant"
+msgstr "游戏变种"
+
+msgid "Civilian"
+msgstr "平民"
+
+msgid "Killer"
+msgstr "杀手"
+
+msgid "Detective"
+msgstr "侦探"
+
+msgid "Guardian"
+msgstr "守护天使"
+
+msgid "Doctor"
+msgstr "医生"
+
+msgid "Traitor"
+msgstr "叛徒"
+
+msgid "Guardian Action"
+msgstr "守护天使行动"
+
+msgid "Killer Action"
+msgstr "杀手行动"
+
+msgid "Detective Action"
+msgstr "侦探行动"
+
+msgid "Doctor Action"
+msgstr "医生行动"
+
+msgid "Traitor Action"
+msgstr "叛徒行动"
+
+msgid "Settle Tags"
+msgstr "黎明结算"
+
+msgid "Vote and Lynch"
+msgstr "投票与私刑"
+
+msgid "Thief"
+msgstr "盗贼"
+
+msgid "Cupido"
+msgstr "丘比特"
+
+msgid "Werewolf"
+msgstr "狼人"
+
+msgid "Seer"
+msgstr "先知"
+
+msgid "Witch"
+msgstr "女巫"
+
+msgid "Hunter"
+msgstr "猎人"
+
+msgid "Bodyguard"
+msgstr "保镖"
+
+msgid "Idiot"
+msgstr "白痴"
+
+msgid "Senior"
+msgstr "长老"
+
+msgid "Scapegoat"
+msgstr "替罪羊"
+
+msgid "Flute Player"
+msgstr "吹笛者"
+
+msgid "Thief Action"
+msgstr "盗贼行动"
+
+msgid "Cupido Action"
+msgstr "丘比特行动"
+
+msgid "Werewolf Action"
+msgstr "狼人行动"
+
+msgid "Seer Action"
+msgstr "先知行动"
+
+msgid "Witch Action"
+msgstr "女巫行动"
+
+msgid "Bodyguard Action"
+msgstr "保镖行动"
+
+msgid "Flute Player Action"
+msgstr "吹笛者行动"
+
+msgid "Elect Mayor"
+msgstr "选举村长"
+
+msgid "Appoint New Mayor"
+msgstr "任命新村长"
+
+msgid "Hunter Action"
+msgstr "猎人行动"
+
+msgid "Scapegoat Action"
+msgstr "替罪羊行动"

@@ -252,6 +252,9 @@ class Engine(object):
         self.game = game
         self.action_list = self.action_list_class.load_json_data(game.context.get('action_list'))
 
+    def get_translations(self):
+        return {}
+
     def get_role_list_on_stage(self):
         raise NotImplementedError()
 

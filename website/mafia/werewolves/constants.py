@@ -47,7 +47,7 @@ class Role(object):
 
 class Tag(object):
 
-    ELECTED_AS_MAYOR = 'elected_as_mayor'
+    APPOINTED_AS_MAYOR = 'appointed_as_mayor'
     CHOSEN_AS_LOVERS = 'chosen_as_lovers'
     DIED_FOR_LOVE = 'died_for_love'
     PROTECTED_BY_BODYGUARD = 'protected_by_bodyguard'
