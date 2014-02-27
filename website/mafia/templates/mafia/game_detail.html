@@ -417,7 +417,7 @@
       }
 
       function heartbeat() {
-        $.get('{% url mafia-game-heartbeat pk=game.pk %}')
+        $.post('{% url mafia-game-heartbeat pk=game.pk %}')
             .done(function(game) {
               $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
               if (game.update_date != updateTimestamp) {

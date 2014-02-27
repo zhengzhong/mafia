@@ -143,6 +143,12 @@ class MafiaGameDetailView(_MafiaGameEngineDetailView):
 class MafiaGameHeartbeatView(_MafiaGameEngineDetailView):
 
     def get(self, request, *args, **kwargs):
+        return self._beat(request)
+
+    def post(self, request, *args, **kwargs):
+        return self._beat(request)
+
+    def _beat(self, request):
         engine = self.get_engine()
         engine.skip_action_if_not_executable()
         json_dict = engine.get_json_dict()
