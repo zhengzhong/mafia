@@ -18,7 +18,7 @@ class _WerewolvesAction(Action):
 
     def execute(self, players, targets, option):
         """
-        TODO: if senior is dead with his lover, will idiot also die?
+        TODO: if elder is dead with his lover, will idiot also die?
         """
         result = super(_WerewolvesAction, self).execute(players, targets, option)
         # Process lovers.
@@ -28,12 +28,12 @@ class _WerewolvesAction(Action):
                 result.log_private('%s died for love.' % lover)
                 lover.mark_out(Tag.DIED_FOR_LOVE)
                 result.add_out_player(lover)
-        # Process senior.
-        out_senior = next((p for p in result.out_players if p.role == Role.SENIOR), None)
-        if out_senior is not None and out_senior.out_tag != Tag.ATTACKED_BY_WEREWOLF:
+        # Process elder.
+        out_elder = next((p for p in result.out_players if p.role == Role.ELDER), None)
+        if out_elder is not None and out_elder.out_tag != Tag.ATTACKED_BY_WEREWOLF:
             for idiot in [p for p in players if not p.is_out and p.role == Role.IDIOT]:
                 if idiot.has_tag(Tag.EXPOSED_AS_IDIOT):
-                    result.log_private('%s was dead with senior.' % idiot)
+                    result.log_private('%s was dead with elder.' % idiot)
                     idiot.mark_out(Tag.EXPOSED_AS_IDIOT)
                     result.add_out_player(idiot)
             for player in players:

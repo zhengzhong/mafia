@@ -15,7 +15,7 @@ class Role(object):
     HUNTER = 'Hunter'
     BODYGUARD = 'Bodyguard'
     IDIOT = 'Idiot'
-    SENIOR = 'Senior'
+    ELDER = 'Elder'
     SCAPEGOAT = 'Scapegoat'
     FLUTE_PLAYER = 'FlutePlayer'
 
@@ -30,7 +30,7 @@ class Role(object):
         HUNTER: +1,
         BODYGUARD: +1,
         IDIOT: +1,
-        SENIOR: +1,
+        ELDER: +1,
         SCAPEGOAT: +1,
         FLUTE_PLAYER: +1,
     }

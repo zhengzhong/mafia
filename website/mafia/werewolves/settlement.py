@@ -32,14 +32,14 @@ class AttackedByWerewolf(SettlementRule):
             # Player is attacked by werewolf and cured.
             result.log_private('%s was attacked by werewolf but was cured.' % attacked)
             attacked.remove_tag(self.tag)
-        elif attacked.role == Role.SENIOR:
+        elif attacked.role == Role.ELDER:
             if attacked.has_tag(Tag.INJURED_BY_WEREWOLF):
-                # Senior is attacked by werewolf twice.
+                # Elder is attacked by werewolf twice.
                 result.log_private('%s was attacked by werewolf twice and killed.' % attacked)
                 attacked.mark_out(self.tag)
                 result.add_out_player(attacked)
             else:
-                # Senior is attacked by werewolf for the first time.
+                # Elder is attacked by werewolf for the first time.
                 result.log_private('%s was attacked by werewolf and injured.' % attacked)
                 attacked.add_tag(Tag.INJURED_BY_WEREWOLF)
                 attacked.remove_tag(self.tag)

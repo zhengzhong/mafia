@@ -29,7 +29,7 @@ class WerewolvesEngine(Engine):
             + [Role.HUNTER] * (1 if self.game.config['has_hunter'] else 0)
             + [Role.BODYGUARD] * (1 if self.game.config['has_bodyguard'] else 0)
             + [Role.IDIOT] * (1 if self.game.config['has_idiot'] else 0)
-            + [Role.SENIOR] * (1 if self.game.config['has_senior'] else 0)
+            + [Role.ELDER] * (1 if self.game.config['has_elder'] else 0)
             + [Role.SCAPEGOAT] * (1 if self.game.config['has_scapegoat'] else 0)
             + [Role.FLUTE_PLAYER] * (1 if self.game.config['has_flute_player'] else 0)
         )

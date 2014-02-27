@@ -56,7 +56,7 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
 
     def test_player_was_guarded_and_shot(self):
         civilian = self.get_player(Role.CIVILIAN)
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.execute_action_for_role(Role.KILLER, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.assertTrue(civilian.has_tag(Tag.SHOT))
@@ -65,20 +65,20 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
         self.assertEqual(result.out_players, [])
         self.assertFalse(civilian.is_out)
 
-    def test_guardian_was_guarded_and_shot(self):
-        guardian = self.get_player(Role.GUARDIAN)
-        self.execute_action_for_role(Role.GUARDIAN, guardian)
-        self.execute_action_for_role(Role.KILLER, guardian)
-        self.assertTrue(guardian.has_tag(Tag.GUARDED))
-        self.assertTrue(guardian.has_tag(Tag.SHOT))
+    def test_guardian_angel_was_guarded_and_shot(self):
+        guardian_angel = self.get_player(Role.GUARDIAN_ANGEL)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, guardian_angel)
+        self.execute_action_for_role(Role.KILLER, guardian_angel)
+        self.assertTrue(guardian_angel.has_tag(Tag.GUARDED))
+        self.assertTrue(guardian_angel.has_tag(Tag.SHOT))
         result = self.settle_tags()
-        # Guardian should be killed.
-        self.assertEqual(result.out_players, [guardian])
-        self.assertTrue(guardian.is_out)
+        # Guardian angel should be killed.
+        self.assertEqual(result.out_players, [guardian_angel])
+        self.assertTrue(guardian_angel.is_out)
 
     def test_player_was_guarded_and_cured(self):
         civilian = self.get_player(Role.CIVILIAN)
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.execute_action_for_role(Role.DOCTOR, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.assertTrue(civilian.has_tag(Tag.CURED))
@@ -92,7 +92,7 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
     def test_player_was_cured_while_doctor_was_guarded(self):
         civilian = self.get_player(Role.CIVILIAN)
         doctor = self.get_player(Role.DOCTOR)
-        self.execute_action_for_role(Role.GUARDIAN, doctor)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, doctor)
         self.execute_action_for_role(Role.DOCTOR, civilian)
         self.assertTrue(civilian.has_tag(Tag.CURED))
         self.assertTrue(doctor.has_tag(Tag.GUARDED))
@@ -104,7 +104,7 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
     def test_player_was_shot_while_killer_was_guarded(self):
         civilian = self.get_player(Role.CIVILIAN)
         killer = self.get_player(Role.KILLER)
-        self.execute_action_for_role(Role.GUARDIAN, killer)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, killer)
         self.execute_action_for_role(Role.KILLER, civilian)
         self.assertTrue(killer.has_tag(Tag.GUARDED))
         self.assertTrue(civilian.has_tag(Tag.SHOT))
@@ -113,35 +113,35 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
         self.assertEqual(result.out_players, [])
         self.assertFalse(civilian.is_out)
 
-    def test_guardian_was_shot_while_killer_was_guarded(self):
-        guardian = self.get_player(Role.GUARDIAN)
+    def test_guardian_angel_was_shot_while_killer_was_guarded(self):
+        guardian_angel = self.get_player(Role.GUARDIAN_ANGEL)
         killer = self.get_player(Role.KILLER)
-        self.execute_action_for_role(Role.GUARDIAN, killer)
-        self.execute_action_for_role(Role.KILLER, guardian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, killer)
+        self.execute_action_for_role(Role.KILLER, guardian_angel)
         self.assertTrue(killer.has_tag(Tag.GUARDED))
-        self.assertTrue(guardian.has_tag(Tag.SHOT))
+        self.assertTrue(guardian_angel.has_tag(Tag.SHOT))
         result = self.settle_tags()
-        # Both guardian and killer should be killed.
-        self.assertEqual(set(result.out_players), set([guardian, killer]))
-        self.assertTrue(guardian.is_out)
+        # Both guardian angel and killer should be killed.
+        self.assertEqual(set(result.out_players), set([guardian_angel, killer]))
+        self.assertTrue(guardian_angel.is_out)
         self.assertTrue(killer.is_out)
 
-    def test_player_was_guarded_while_guardian_was_shot(self):
+    def test_player_was_guarded_while_guardian_angel_was_shot(self):
         civilian = self.get_player(Role.CIVILIAN)
-        guardian = self.get_player(Role.GUARDIAN)
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
-        self.execute_action_for_role(Role.KILLER, guardian)
+        guardian_angel = self.get_player(Role.GUARDIAN_ANGEL)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
+        self.execute_action_for_role(Role.KILLER, guardian_angel)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
-        self.assertTrue(guardian.has_tag(Tag.SHOT))
+        self.assertTrue(guardian_angel.has_tag(Tag.SHOT))
         result = self.settle_tags()
-        # Both guardian and the guarded player should be killed.
-        self.assertEqual(set(result.out_players), set([civilian, guardian]))
+        # Both guardian angel and the guarded player should be killed.
+        self.assertEqual(set(result.out_players), set([civilian, guardian_angel]))
         self.assertTrue(civilian.is_out)
-        self.assertTrue(guardian.is_out)
+        self.assertTrue(guardian_angel.is_out)
 
     def test_player_was_guarded_and_shot_and_cured(self):
         civilian = self.get_player(Role.CIVILIAN)
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.execute_action_for_role(Role.KILLER, civilian)
         self.execute_action_for_role(Role.DOCTOR, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
@@ -153,76 +153,76 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
         self.assertFalse(civilian.is_out)
         self.assertFalse(civilian.has_tag(Tag.MISDIAGNOSED))
 
-    def test_guardian_was_guarded_and_shot_and_cured(self):
+    def test_guardian_angel_was_guarded_and_shot_and_cured(self):
         """
-        When guardian was guarded and shot, he could still have been killed.
-        But doctor cured guardian, so guardian is not killed (nor misdiagnosed).
+        When guardian angel was guarded and shot, he could still have been killed.
+        But doctor cured guardian angel, so guardian angel is not killed (nor misdiagnosed).
         Thus, killer should not be out either.
         """
-        guardian = self.get_player(Role.GUARDIAN)
-        self.execute_action_for_role(Role.GUARDIAN, guardian)
-        self.execute_action_for_role(Role.KILLER, guardian)
-        self.execute_action_for_role(Role.DOCTOR, guardian)
-        self.assertTrue(guardian.has_tag(Tag.GUARDED))
-        self.assertTrue(guardian.has_tag(Tag.SHOT))
-        self.assertTrue(guardian.has_tag(Tag.CURED))
+        guardian_angel = self.get_player(Role.GUARDIAN_ANGEL)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, guardian_angel)
+        self.execute_action_for_role(Role.KILLER, guardian_angel)
+        self.execute_action_for_role(Role.DOCTOR, guardian_angel)
+        self.assertTrue(guardian_angel.has_tag(Tag.GUARDED))
+        self.assertTrue(guardian_angel.has_tag(Tag.SHOT))
+        self.assertTrue(guardian_angel.has_tag(Tag.CURED))
         result = self.settle_tags()
-        # Guardian should be killed but not misdiagnosed.
-        self.assertEqual(result.out_players, [guardian])
-        self.assertTrue(guardian.is_out)
-        self.assertFalse(guardian.has_tag(Tag.MISDIAGNOSED))
+        # Guardian angel should be killed but not misdiagnosed.
+        self.assertEqual(result.out_players, [guardian_angel])
+        self.assertTrue(guardian_angel.is_out)
+        self.assertFalse(guardian_angel.has_tag(Tag.MISDIAGNOSED))
 
-    def test_guardian_was_shot_and_cured_while_killer_was_guarded(self):
+    def test_guardian_angel_was_shot_and_cured_while_killer_was_guarded(self):
         """
-        When guardian guarded killer and was shot, he could still have been killed.
-        But doctor cured guardian, so guardian is not killed (nor misdiagnosed).
+        When guardian angel guarded killer and was shot, he could still have been killed.
+        But doctor cured guardian angel, so guardian angel is not killed (nor misdiagnosed).
         Thus, killer should not be out either.
         """
-        guardian = self.get_player(Role.GUARDIAN)
+        guardian_angel = self.get_player(Role.GUARDIAN_ANGEL)
         killer = self.get_player(Role.KILLER)
-        self.execute_action_for_role(Role.GUARDIAN, killer)
-        self.execute_action_for_role(Role.KILLER, guardian)
-        self.execute_action_for_role(Role.DOCTOR, guardian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, killer)
+        self.execute_action_for_role(Role.KILLER, guardian_angel)
+        self.execute_action_for_role(Role.DOCTOR, guardian_angel)
         self.assertTrue(killer.has_tag(Tag.GUARDED))
-        self.assertTrue(guardian.has_tag(Tag.SHOT))
-        self.assertTrue(guardian.has_tag(Tag.CURED))
+        self.assertTrue(guardian_angel.has_tag(Tag.SHOT))
+        self.assertTrue(guardian_angel.has_tag(Tag.CURED))
         result = self.settle_tags()
-        # Guardian should not be killed nor be misdiagnosed.
+        # Guardian angel should not be killed nor be misdiagnosed.
         self.assertEqual(result.out_players, [])
-        self.assertFalse(guardian.is_out)
-        self.assertFalse(guardian.has_tag(Tag.MISDIAGNOSED))
+        self.assertFalse(guardian_angel.is_out)
+        self.assertFalse(guardian_angel.has_tag(Tag.MISDIAGNOSED))
         # Killer should not be killed.
         self.assertFalse(killer.is_out)
 
-    def test_guardian_was_shot_and_cured_while_doctor_was_guarded(self):
+    def test_guardian_angel_was_shot_and_cured_while_doctor_was_guarded(self):
         """
         When doctor was guarded, his action has no effect.
-        When guardian was shot and cured, he should still be killed.
+        When guardian angel was shot and cured, he should still be killed.
         Thus doctor should also be out (as he was guarded).
         """
-        guardian = self.get_player(Role.GUARDIAN)
+        guardian_angel = self.get_player(Role.GUARDIAN_ANGEL)
         doctor = self.get_player(Role.DOCTOR)
-        self.execute_action_for_role(Role.GUARDIAN, doctor)
-        self.execute_action_for_role(Role.KILLER, guardian)
-        self.execute_action_for_role(Role.DOCTOR, guardian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, doctor)
+        self.execute_action_for_role(Role.KILLER, guardian_angel)
+        self.execute_action_for_role(Role.DOCTOR, guardian_angel)
         self.assertTrue(doctor.has_tag(Tag.GUARDED))
-        self.assertTrue(guardian.has_tag(Tag.SHOT))
-        self.assertTrue(guardian.has_tag(Tag.CURED))
+        self.assertTrue(guardian_angel.has_tag(Tag.SHOT))
+        self.assertTrue(guardian_angel.has_tag(Tag.CURED))
         result = self.settle_tags()
-        # Both guardian and doctor should be out.
-        self.assertEqual(set(result.out_players), set([guardian, doctor]))
-        self.assertTrue(guardian.is_out)
+        # Both guardian angel and doctor should be out.
+        self.assertEqual(set(result.out_players), set([guardian_angel, doctor]))
+        self.assertTrue(guardian_angel.is_out)
         self.assertTrue(doctor.is_out)
 
     def test_player_was_guarded_twice_continuously(self):
         civilian = self.get_player(Role.CIVILIAN)
         # Guarded for the first time.
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.settle_tags()
         self.assertFalse(civilian.has_tag(Tag.UNGUARDABLE))
         # Guarded for the second time.
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.settle_tags()
         self.assertTrue(civilian.has_tag(Tag.UNGUARDABLE))
@@ -230,7 +230,7 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
     def test_player_was_guarded_but_not_continuously(self):
         civilian = self.get_player(Role.CIVILIAN)
         # Guarded for the first time.
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.settle_tags()
         self.assertFalse(civilian.has_tag(Tag.UNGUARDABLE))
@@ -238,7 +238,7 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
         self.settle_tags()
         self.assertFalse(civilian.has_tag(Tag.UNGUARDABLE))
         # Guarded for the second time, but not continuously.
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.settle_tags()
         self.assertFalse(civilian.has_tag(Tag.UNGUARDABLE))
@@ -252,7 +252,7 @@ class ClassicSettlementTestCase(BaseMafiaEngineStartedTestCase):
 
     def test_player_was_guarded_and_voted(self):
         civilian = self.get_player(Role.CIVILIAN)
-        self.execute_action_for_role(Role.GUARDIAN, civilian)
+        self.execute_action_for_role(Role.GUARDIAN_ANGEL, civilian)
         self.assertTrue(civilian.has_tag(Tag.GUARDED))
         self.settle_tags()
         self.assertTrue(civilian.has_tag(Tag.PREVIOUSLY_GUARDED))

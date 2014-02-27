@@ -18,7 +18,7 @@ TRANSLATIONS = {
     Role.HUNTER: _('Hunter'),
     Role.BODYGUARD: _('Bodyguard'),
     Role.IDIOT: _('Idiot'),
-    Role.SENIOR: _('Senior'),
+    Role.ELDER: _('Elder'),
     Role.SCAPEGOAT: _('Scapegoat'),
     Role.FLUTE_PLAYER: _('Flute Player'),
 

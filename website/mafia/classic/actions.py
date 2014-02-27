@@ -6,9 +6,9 @@ from mafia.classic.constants import Role, Tag
 from mafia.classic.settlement import RULES
 
 
-class GuardianAction(Action):
+class GuardianAngelAction(Action):
 
-    role = Role.GUARDIAN
+    role = Role.GUARDIAN_ANGEL
     tag = Tag.GUARDED
     is_optional = True
 
@@ -97,7 +97,7 @@ class VoteAndLynch(Action):
 class ClassicActionList(ActionList):
 
     initial_action_classes = (
-        GuardianAction,
+        GuardianAngelAction,
         KillerAction,
         DetectiveAction,
         DoctorAction,

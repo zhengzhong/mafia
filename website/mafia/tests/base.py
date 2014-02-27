@@ -24,7 +24,7 @@ class BaseMafiaEngineTestCase(TestCase):
             'config': {
                 'num_killers': 2,
                 'num_detectives': 2,
-                'has_guardian': True,
+                'has_guardian_angel': True,
                 'has_doctor': True,
                 'has_traitor': True,
             },
@@ -39,7 +39,7 @@ class BaseMafiaEngineTestCase(TestCase):
                 'has_hunter': True,
                 'has_bodyguard': True,
                 'has_idiot': True,
-                'has_senior': True,
+                'has_elder': True,
                 'has_scapegoat': True,
                 'has_flute_player': True,
             },

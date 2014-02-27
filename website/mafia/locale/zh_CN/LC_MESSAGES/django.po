@@ -38,7 +38,7 @@ msgstr "杀手"
 msgid "Detective"
 msgstr "侦探"
 
-msgid "Guardian"
+msgid "Guardian Angel"
 msgstr "守护天使"
 
 msgid "Doctor"
@@ -47,7 +47,7 @@ msgstr "医生"
 msgid "Traitor"
 msgstr "叛徒"
 
-msgid "Guardian Action"
+msgid "Guardian Angel Action"
 msgstr "守护天使行动"
 
 msgid "Killer Action"
@@ -92,7 +92,7 @@ msgstr "保镖"
 msgid "Idiot"
 msgstr "白痴"
 
-msgid "Senior"
+msgid "Elder"
 msgstr "长老"
 
 msgid "Scapegoat"

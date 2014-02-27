@@ -9,7 +9,7 @@ class Role(object):
     CIVILIAN = 'Civilian'
     KILLER = 'Killer'
     DETECTIVE = 'Detective'
-    GUARDIAN = 'Guardian'
+    GUARDIAN_ANGEL = 'GuardianAngel'
     DOCTOR = 'Doctor'
     TRAITOR = 'Traitor'
 
@@ -18,7 +18,7 @@ class Role(object):
         CIVILIAN: +1,
         KILLER: -3,
         DETECTIVE: +3,
-        GUARDIAN: +1,
+        GUARDIAN_ANGEL: +1,
         DOCTOR: +1,
         TRAITOR: -2,
     }

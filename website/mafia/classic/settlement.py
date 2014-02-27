@@ -12,10 +12,10 @@ class SettleGuarded(SettlementRule):
 
     def settle_tagged_player(self, tagged_player, players, result):
         guarded = tagged_player
-        # If killer is guarded, nobody can be shot except guardian.
+        # If killer is guarded, nobody can be shot except guardian angel.
         if guarded.role == Role.KILLER:
             for shot in self.filter_players_by_tag(players, Tag.SHOT):
-                if shot.role != Role.GUARDIAN:
+                if shot.role != Role.GUARDIAN_ANGEL:
                     result.log_private('%s was guarded and failed to shoot.' % guarded)
                     shot.remove_tag(Tag.SHOT)
                 else:
@@ -29,8 +29,8 @@ class SettleGuarded(SettlementRule):
         if guarded.has_tag(Tag.CURED):
             result.log_private('%s was guarded and could not be cured.' % guarded)
             guarded.remove_tag(Tag.CURED)
-        # If a player is guarded, he cannot be shot unless he is guardian.
-        if guarded.has_tag(Tag.SHOT) and guarded.role != Role.GUARDIAN:
+        # If a player is guarded, he cannot be shot unless he is guardian angel.
+        if guarded.has_tag(Tag.SHOT) and guarded.role != Role.GUARDIAN_ANGEL:
             result.log_private('%s was guarded and could not be shot.' % guarded)
             guarded.remove_tag(Tag.SHOT)
         # If a player is guarded twice continuously, he becomes unguardable.
@@ -54,10 +54,10 @@ class SettleShot(SettlementRule):
             result.log_private('%s was shot and killed.' % shot)
             shot.mark_out(self.tag)
             result.add_out_player(shot)
-            # If guardian is killed, the player he guarded is also killed.
-            if shot.role == Role.GUARDIAN:
+            # If guardian angel is killed, the player he guarded is also killed.
+            if shot.role == Role.GUARDIAN_ANGEL:
                 for guarded in self.filter_players_by_tag(players, Tag.GUARDED):
-                    result.log_private('%s was guarded and was dead with guardian.' % guarded)
+                    result.log_private('%s was guarded and was dead with guardian angel.' % guarded)
                     guarded.mark_out(Tag.GUARDED)
                     result.add_out_player(guarded)
 

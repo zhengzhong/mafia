@@ -23,7 +23,7 @@ class ClassicEngine(Engine):
         return (
             [Role.KILLER] * self.game.config['num_killers']
             + [Role.DETECTIVE] * self.game.config['num_detectives']
-            + [Role.GUARDIAN] * (1 if self.game.config['has_guardian'] else 0)
+            + [Role.GUARDIAN_ANGEL] * (1 if self.game.config['has_guardian_angel'] else 0)
             + [Role.DOCTOR] * (1 if self.game.config['has_doctor'] else 0)
             + [Role.TRAITOR] * (1 if self.game.config['has_traitor'] else 0)
         )

@@ -20,7 +20,7 @@ class GameForm(forms.ModelForm):
 
     num_killers = forms.IntegerField(initial=2, min_value=1, max_value=3)
     num_detectives = forms.IntegerField(initial=2, min_value=1, max_value=3)
-    has_guardian = forms.BooleanField(initial=True, required=False)
+    has_guardian_angel = forms.BooleanField(initial=True, required=False)
     has_doctor = forms.BooleanField(initial=True, required=False)
     has_traitor = forms.BooleanField(initial=True, required=False)
 
@@ -31,7 +31,7 @@ class GameForm(forms.ModelForm):
     has_hunter = forms.BooleanField(initial=True, required=False)
     has_bodyguard = forms.BooleanField(initial=True, required=False)
     has_idiot = forms.BooleanField(initial=True, required=False)
-    has_senior = forms.BooleanField(initial=True, required=False)
+    has_elder = forms.BooleanField(initial=True, required=False)
     has_scapegoat = forms.BooleanField(initial=True, required=False)
     has_flute_player = forms.BooleanField(initial=True, required=False)
 
@@ -39,11 +39,11 @@ class GameForm(forms.ModelForm):
         'name', 'is_two_handed', 'variant', 'delay_seconds', 'add_test_players',
     )
     CLASSIC_FIELD_NAMES = (
-        'num_killers', 'num_detectives', 'has_guardian', 'has_doctor', 'has_traitor',
+        'num_killers', 'num_detectives', 'has_guardian_angel', 'has_doctor', 'has_traitor',
     )
     WEREWOLVES_FIELD_NAMES = (
         'num_werewolves', 'has_thief', 'has_cupido', 'has_witch', 'has_hunter',
-        'has_bodyguard', 'has_idiot', 'has_senior', 'has_scapegoat', 'has_flute_player',
+        'has_bodyguard', 'has_idiot', 'has_elder', 'has_scapegoat', 'has_flute_player',
     )
 
     def __init__(self, host=None, *args, **kwargs):
