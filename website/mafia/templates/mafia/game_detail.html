@@ -407,7 +407,15 @@
         element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || isGodMode));
         $('.player-host', element).toggle(player.is_host);
         // Update player role.
-        if (currentPlayerRoles.indexOf(player.role) != -1 || isGodMode) {
+        var isPlayerRoleVisibleToCurrentUser = false;
+        if (isGodMode) {
+          isPlayerRoleVisibleToCurrentUser = true;
+        } else if (currentPlayerPKs.indexOf(player.pk) != -1) {
+          isPlayerRoleVisibleToCurrentUser = true;
+        } else if (player.role != 'Civilian' && currentPlayerRoles.indexOf(player.role) != -1) {
+          isPlayerRoleVisibleToCurrentUser = true;
+        }
+        if (isPlayerRoleVisibleToCurrentUser) {
           // The player to update has the same role as the current player, or we are in god mode.
           $('.player-role-name', element).text(trans(player.role));
           // $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');  // TODO: enable this!
