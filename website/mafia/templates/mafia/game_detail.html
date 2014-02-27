@@ -297,19 +297,87 @@
 
       var isGodMode = {{ is_god_mode|yesno:'true,false' }};
 
-      /// For the current authenticated user, this is his corresponding player PKs.
-      var currentPlayerPKs = [
-        {% for current_player in current_players %}
-          {{ current_player.pk }} {% if not forloop.last %},{% endif %}
-        {% endfor %}
-      ];
+      /// Simulation of a class holding information about the current players.
+      function CurrentPlayers() {
 
-      /// For the current authenticated user, this is his corresponding player roles.
-      var currentPlayerRoles = [
-        {% for current_player in current_players %}
-          '{{ current_player.role }}' {% if not forloop.last %},{% endif %}
-        {% endfor %}
-      ];
+        this.pks = [
+          {% for current_player in current_players %}
+            {{ current_player.pk }} {% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ];
+
+        this.roles = [
+          {% for current_player in current_players %}
+            '{{ current_player.role }}' {% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ];
+
+        this.tags = [];
+      }
+
+      CurrentPlayers.prototype.updateRoleAndTags = function(player) {
+        var index = this.pks.indexOf(player.pk);
+        if (index != -1) {
+          this.roles[index] = player.role;
+          for (var i = 0; i < player.tags.length; i++) {
+            var tag = player.tags[i];
+            if (this.tags.indexOf(tag) == -1) {
+              this.tags.push(tag);
+            }
+          }
+        }
+        
+      };
+
+      CurrentPlayers.prototype.isActor = function(game) {
+        for (var i = 0; i < this.pks.length; i++) {
+          if (game.actor_pk_list.indexOf(this.pks[i]) != -1) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      CurrentPlayers.prototype.hasTag = function(tag) {
+        return (this.tags.indexOf(tag) != -1);
+      };
+
+      CurrentPlayers.prototype.canSeePlayerRole = function(player) {
+          var isPlayerRoleVisibleToCurrentUser = false;
+          if (isGodMode) {
+            return true;
+          } else if (this.pks.indexOf(player.pk) != -1) {
+            return true;
+          } else if (player.role != 'Civilian' && this.roles.indexOf(player.role) != -1) {
+            return true;
+          } else if (this.hasTag('chosen_as_lovers') && player.tags.indexOf('chosen_as_lovers') != -1) {
+            return true;  // Lovers can see the role of each other.
+          } else {
+            return false;
+          }
+      };
+
+      CurrentPlayers.prototype.canSeePlayerTag = function(player, tag) {
+        if (isGodMode) {
+          return true;
+        }
+        if (tag == 'appointed_as_mayor') {
+          return true;  // Mayor is visible to everyone.
+        }
+        if (this.hasTag('chosen_as_lovers') && tag == 'chosen_as_lovers') {
+          return true;  // Lovers can see each other.
+        }
+        if (this.hasTag('tempted_by_flute_player') && tag == 'tempted_by_flute_player') {
+          return true;  // Players that were tempted by flute player can see each other.
+        }
+        return false;
+      };
+
+      CurrentPlayers.prototype.canSeeLog = function(log) {
+        return (log.visibility == '*' || this.roles.indexOf(log.visibility) != -1 || isGodMode);
+      };
+
+      var currentPlayers = new CurrentPlayers();
 
       /// Timestamp of the last update, used to decide if we need to refresh players.
       var updateTimestamp = null;
@@ -368,7 +436,7 @@
             var row = prototypeRow.clone().removeClass('prototype');
             $('.log-round', row).text(log.round);
             $('.log-action-name', row).text(log.action_name);
-            if (log.visibility == '*' || currentPlayerRoles.indexOf(log.visibility) != -1 || isGodMode) {
+            if (currentPlayers.canSeeLog(log)) {
               $('.log-text', row).text(log.text);
             } else {
               $('.log-text', row).text('* * *');
@@ -401,21 +469,14 @@
       }
 
       function updatePlayer(player, isPossibleTarget, isCurrentUserActor) {
+        currentPlayers.updateRoleAndTags(player);
         var element = $('#player-' + player.pk);
         // Update player status.
         element.toggleClass('player-out', player.is_out);
         element.toggleClass('player-checkable', isPossibleTarget && (isCurrentUserActor || isGodMode));
         $('.player-host', element).toggle(player.is_host);
         // Update player role.
-        var isPlayerRoleVisibleToCurrentUser = false;
-        if (isGodMode) {
-          isPlayerRoleVisibleToCurrentUser = true;
-        } else if (currentPlayerPKs.indexOf(player.pk) != -1) {
-          isPlayerRoleVisibleToCurrentUser = true;
-        } else if (player.role != 'Civilian' && currentPlayerRoles.indexOf(player.role) != -1) {
-          isPlayerRoleVisibleToCurrentUser = true;
-        }
-        if (isPlayerRoleVisibleToCurrentUser) {
+        if (currentPlayers.canSeePlayerRole(player)) {
           // The player to update has the same role as the current player, or we are in god mode.
           $('.player-role-name', element).text(trans(player.role));
           // $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');  // TODO: enable this!
@@ -428,8 +489,11 @@
         // Update player tags.
         var detailsElement = $('.player-details', element).empty();
         for (var i = 0; i < player.tags.length; i++) {
-          $('<span class="player-tag"></span>').addClass('player-tag-' + player.tags[i].toLowerCase()).appendTo(detailsElement);
-          // $('<span class="label label-default"></span>').text(player.tags[i]).appendTo(detailsElement); // TODO: debug.
+          var tag = player.tags[i];
+          if (currentPlayers.canSeePlayerTag(player, tag)) {
+            $('<span class="player-tag"></span>').addClass('player-tag-' + player.tags[i].toLowerCase()).appendTo(detailsElement);
+            // $('<span class="label label-default"></span>').text(player.tags[i]).appendTo(detailsElement); // TODO: debug.
+          }
         }
       }
 
@@ -445,13 +509,7 @@
               if (game.update_date != updateTimestamp) {
                 updateTimestamp = game.update_date;
                 // Check if the current user is actor of the current action.
-                var isCurrentUserActor = false;
-                for (var j = 0; j < currentPlayerPKs.length; j++) {
-                  if (game.actor_pk_list.indexOf(currentPlayerPKs[j]) != -1) {
-                    isCurrentUserActor = true;
-                    break;
-                  }
-                }
+                var isCurrentUserActor = currentPlayers.isActor(game);
                 updateGame(game, isCurrentUserActor);
                 for (var i = 0; i < game.players.length; i++) {
                   var player = game.players[i];

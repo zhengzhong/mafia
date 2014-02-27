@@ -91,7 +91,6 @@
 
 .player .player-details {
   margin-right: 80px;
-  display: none;
 }
 
 .player .player-details .label {
@@ -128,10 +127,6 @@
 }
 
 /* God mode... */
-
-.game-mode-god .player .player-details {
-  display: block;
-}
 
 .game-mode-god .player .player-role-killer {
   background-image: url('http://placehold.it/70x70');
