@@ -42,6 +42,7 @@ class Game(models.Model):
     logs_json = models.TextField(blank=True)
     round = models.PositiveIntegerField(default=0)
     is_over = models.BooleanField(default=False)
+    creator = models.ForeignKey(User)
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 

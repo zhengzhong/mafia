@@ -21,6 +21,7 @@
         <tr>
           <th>Game</th>
           <th>Variant</th>
+          <th>Creator</th>
           <th>Players</th>
           <th>Created</th>
           <th>Updated</th>
@@ -41,6 +42,7 @@
                 <span class="label label-default">two-handed</span></span>
               {% endif %}
             </td>
+            <td>{{ game.creator }}</td>
             <td><span class="badge">{{ game.player_set.count }}</span></td>
             <td>{{ game.create_date|naturaltime }}</td>
             <td>{{ game.update_date|naturaltime }}</td>

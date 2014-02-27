@@ -78,6 +78,7 @@ class GameForm(forms.ModelForm):
             Game.VARIANT_CLASSIC: self.CLASSIC_FIELD_NAMES,
             Game.VARIANT_WEREWOLVES: self.WEREWOLVES_FIELD_NAMES,
         }[game.variant]
+        game.creator = self._host
         config = dict((k, v) for k, v in self.cleaned_data.items() if k in config_field_names)
         game.config_json = json.dumps(config)
         game.save()
