@@ -307,6 +307,8 @@
         }
       }
 
+      var gameVariant = '{{ game.variant }}';
+
       var isGodMode = {{ is_god_mode|yesno:'true,false' }};
 
       /// Simulation of a class holding information about the current players.
@@ -489,14 +491,12 @@
         $('.player-host', element).toggle(player.is_host);
         // Update player role.
         if (currentPlayers.canSeePlayerRole(player)) {
-          // The player to update has the same role as the current player, or we are in god mode.
+          var roleImageURL = '{{ STATIC_URL }}mafia/img.draft/' + gameVariant + '/role_' + player.role.toLowerCase() + '.jpg';
+          $('.player-card', element).attr('src', roleImageURL);
           $('.player-role-name', element).text(trans(player.role));
-          // $('.player-card', element).attr('src', '{{ STATIC_URL }}mafia/img/role_' + player.role.toLowerCase() + '.png');  // TODO: enable this!
-          $('.player-card', element).attr('src', 'http://placehold.it/60x60');  // TODO: remove this!
         } else {
-          // The player to update has a different role from the current player.
-          $('.player-role-name', element).text('--');
           $('.player-card', element).attr('src', 'http://placehold.it/60x60');  // TODO: use face-down image!
+          $('.player-role-name', element).text('--');
         }
         // Update player tags.
         var detailsElement = $('.player-details', element).empty();
