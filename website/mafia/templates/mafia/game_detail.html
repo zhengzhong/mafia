@@ -63,6 +63,8 @@
 
       <form id="game-action-form" class="form-inline" action="{% url mafia-game-play pk=game.pk %}" method="post" onsubmit="return executeAction();">
 
+        <input type="hidden" name="uuid" value=""/>
+
         <!-- game over alert ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
         <div id="game-over" class="alert alert-warning" style="display: none;">
@@ -263,10 +265,19 @@
 
   <script type="text/javascript">//<![CDATA[
 
+    function uuid() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0;
+        var v = (c == 'x' ? r : (r & 0x3 | 0x8));
+        return v.toString(16);
+      });
+    }
+
     //! Performs game action: join, quit, kickoff (username), reset, start.
     function performGameAction(action, username) {
       username = (typeof username !== 'undefined' ? username : null);
-      $.post('{{ game.get_absolute_url }}', {action: action, username: username})
+      // Add a UUID to the request data to prevent browser caching.
+      $.post('{{ game.get_absolute_url }}', {action: action, username: username, uuid: uuid()})
           .done(function(data) {
             location.reload();
           })
@@ -503,7 +514,8 @@
       }
 
       function heartbeat() {
-        $.post('{% url mafia-game-heartbeat pk=game.pk %}')
+        // Add a UUID to the request data to prevent browser caching.
+        $.post('{% url mafia-game-heartbeat pk=game.pk %}', {uuid: uuid()})
             .done(function(game) {
               $('#game-timer').removeClass('text-danger').addClass('text-success').text(game.elapsed_seconds_since_last_update);
               if (game.update_date != updateTimestamp) {
@@ -546,6 +558,7 @@
 
       function executeAction() {
         var form = $('#game-action-form');
+        $('input[name="uuid"]', form).val(uuid());  // Auto-fill uuid to prevent browser caching.
         $('.done', form).hide();
         $.ajax({
           url: form.attr('action'),
