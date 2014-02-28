@@ -162,11 +162,12 @@ class MafiaGamePlayView(_MafiaGameEngineDetailView):
 
     def post(self, request, *args, **kwargs):
         engine = self.get_engine()
+        action_name = request.POST.get('action_name')
         target_pk_list = [int(target_pk) for target_pk in request.POST.getlist('target_pk[]')]
         targets = [p for p in engine.game.player_list if p.pk in target_pk_list]
         option = request.POST.get('option')
         try:
-            engine.execute_action(targets, option)
+            engine.execute_action(action_name, targets, option)
             return HttpResponse('success', mimetype='text/plain')
         except GameError, exc:
             message = unicode(exc)

@@ -9,6 +9,7 @@
       "is_two_handed": true,
       "is_over": false,
       "round": 0,
+      "creator": 11,
       "create_date": "2014-02-14T00:00:00.000Z",
       "update_date": "2014-02-14T00:00:00.000Z"
     }

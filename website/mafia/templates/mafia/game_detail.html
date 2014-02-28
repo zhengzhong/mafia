@@ -84,6 +84,7 @@
                   <span class="glyphicon glyphicon-info-sign"></span> Select <strong id="action-num-targets"></strong> target(s)
                 </div>
                 <div class="form-group">
+                  <input type="hidden" name="action_name" value=""/>
                   <input type="hidden" name="option" value=""/>
                   <span id="action-options"></span>
                 </div>
@@ -409,30 +410,33 @@
         return false;
       }
 
-      function updateActionOptions(options) {
+      function updateActionInputs(action) {
+        $('#game-action-form input[name="action_name"]').val(action != null ? action.name : '');
         $('#game-action-form input[name="option"]').val('');
         var optionsContainer = $('#action-options').empty();
-        for (var i = 0; i < options.length; i++) {
-          var option = options[i];
-          var optionImage = $('<img class="img-thumbnail"/>')
-              .attr('src', 'http://placehold.it/32x32')  // TODO:
-              .attr('alt', option);
-          var optionLink = $('<a class="action-option" href="javascript:void(0);"></a>')
-              .attr('data-option', option)
-              .append(optionImage);
-          optionLink.click(function() {
-            var optionInput = $('#game-action-form input[name="option"]');
-            var selectedOption = $(this).attr('data-option');
-            $('a.action-option').removeClass('action-option-checked');
-            if (optionInput.val() == selectedOption) {
-              optionInput.val('');
-            } else {
-              optionInput.val(selectedOption);
-              $(this).addClass('action-option-checked');
-            }
-            return false;
-          });
-          optionsContainer.append(optionLink);
+        if (action != null) {
+          for (var i = 0; i < action.option_choices.length; i++) {
+            var option = action.option_choices[i];
+            var optionImage = $('<img class="img-thumbnail"/>')
+                .attr('src', 'http://placehold.it/32x32')  // TODO:
+                .attr('alt', option);
+            var optionLink = $('<a class="action-option" href="javascript:void(0);"></a>')
+                .attr('data-option', option)
+                .append(optionImage);
+            optionLink.click(function() {
+              var optionInput = $('#game-action-form input[name="option"]');
+              var selectedOption = $(this).attr('data-option');
+              $('a.action-option').removeClass('action-option-checked');
+              if (optionInput.val() == selectedOption) {
+                optionInput.val('');
+              } else {
+                optionInput.val(selectedOption);
+                $(this).addClass('action-option-checked');
+              }
+              return false;
+            });
+            optionsContainer.append(optionLink);
+          }
         }
       }
 
@@ -461,21 +465,18 @@
         $('#game-over').toggle(game.is_over);
         $('#game-round').text('Round ' + game.round);
         // Update information about the current action.
-        if (game.current_action != null) {
-          $('#action-name').text(trans(game.current_action.name));
-          if (isCurrentUserActor || isGodMode) {
-            var numTargets = game.current_action.min_num_targets;
-            if (numTargets < game.current_action.max_num_targets) {
-              numTargets = numTargets + ' - ' + game.current_action.max_num_targets;
-            }
-            $('#action-num-targets').text(numTargets);
-            updateActionOptions(game.current_action.option_choices);
-            $('#action-execute-button').prop('disabled', false);
-          } else {
-            $('#action-num-targets').text('?');
-            updateActionOptions([]);
-            $('#action-execute-button').prop('disabled', true);
+        $('#action-name').text(game.current_action != null ? trans(game.current_action.name) : '--');
+        updateActionInputs(game.current_action);
+        if (game.current_action != null && (isCurrentUserActor || isGodMode)) {
+          var numTargets = game.current_action.min_num_targets;
+          if (numTargets < game.current_action.max_num_targets) {
+            numTargets = numTargets + ' - ' + game.current_action.max_num_targets;
           }
+          $('#action-num-targets').text(numTargets);
+          $('#action-execute-button').prop('disabled', false);
+        } else {
+          $('#action-num-targets').text('?');
+          $('#action-execute-button').prop('disabled', true);
         }
       }
 

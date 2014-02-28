@@ -365,9 +365,13 @@ class Engine(object):
                 self.move_to_next_action(result)
                 self.save_game()
 
-    def execute_action(self, targets, option=None):
+    def execute_action(self, action_name, targets, option=None):
         # Execute the current action and check if game is over.
+        if not self.game.is_ongoing:
+            raise GameError('Cannot execute action because game is not ongoing.')
         action = self.get_current_action()
+        if action.name != action_name:
+            raise GameError('Invalid action name %s, expected %s.' % (action_name, action.name))
         logger.info('About to execute %s...' % action)
         result = action.execute(self.game.player_list, targets, option)
         self.game.log_action_result(result)
