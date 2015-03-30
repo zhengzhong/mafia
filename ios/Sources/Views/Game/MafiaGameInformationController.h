@@ -18,11 +18,11 @@
 
 @interface MafiaGameInformationController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIImageView *categoryImageView;
-@property (retain, nonatomic) IBOutlet UILabel *messageLabel;
-@property (retain, nonatomic) IBOutlet UILabel *detailsLabel;
-@property (retain, nonatomic) MafiaInformation *information;
-@property (readonly, assign, nonatomic) id<MafiaGameInformationControllerDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UIImageView *categoryImageView;
+@property (strong, nonatomic) IBOutlet UILabel *messageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (strong, nonatomic) MafiaInformation *information;
+@property (readonly, weak, nonatomic) id<MafiaGameInformationControllerDelegate> delegate;
 
 + (id)controllerWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate;
 

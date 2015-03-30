@@ -13,12 +13,6 @@
 @synthesize alignment = _alignment;
 
 
-- (void)dealloc
-{
-    [_name release];
-    [_displayName release];
-    [super dealloc];
-}
 
 
 - (id)initWithName:(NSString *)name displayName:(NSString *)displayName alignment:(NSInteger)alignment

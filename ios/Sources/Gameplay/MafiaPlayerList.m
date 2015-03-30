@@ -14,11 +14,6 @@
 @synthesize players = _players;
 
 
-- (void)dealloc
-{
-    [_players release];
-    [super dealloc];
-}
 
 
 - (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded
@@ -39,7 +34,6 @@
             }
         }
         _players = [players copy];
-        [players release];
     }
     return self;
 }
@@ -48,7 +42,7 @@
 #pragma mark - NSFastEnumeration method
 
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])stackbuf count:(NSUInteger)len
 {
     return [self.players countByEnumeratingWithState:state objects:stackbuf count:len];
 }

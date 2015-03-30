@@ -16,18 +16,12 @@
 @synthesize tabBarController = _tabBarController;
 
 
-- (void)dealloc
-{
-    [_window release];
-    [_tabBarController release];
-    [super dealloc];
-}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
     self.tabBarController.viewControllers = @[
         [MafiaGameSetupController controllerForTab],

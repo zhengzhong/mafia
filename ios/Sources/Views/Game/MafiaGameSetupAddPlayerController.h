@@ -19,9 +19,9 @@
 
 @interface MafiaGameSetupAddPlayerController : UIViewController <ABPeoplePickerNavigationControllerDelegate>
 
-@property (retain, nonatomic) IBOutlet UILabel *playerNameLabel;
-@property (retain, nonatomic) IBOutlet UITextField *playerNameField;
-@property (readonly, assign, nonatomic) id<MafiaGameSetupAddPlayerControllerDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UILabel *playerNameLabel;
+@property (strong, nonatomic) IBOutlet UITextField *playerNameField;
+@property (readonly, weak, nonatomic) id<MafiaGameSetupAddPlayerControllerDelegate> delegate;
 
 + (id)controllerWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate;
 

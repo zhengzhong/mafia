@@ -29,7 +29,7 @@
     NSArray *playerNames = @[@"Assassin", @"Guardian", @"Killer 1", @"Killer 2",
                              @"Detective 1", @"Detective 2", @"Doctor", @"Traitor", @"Undercover",
                              @"Civilian 1", @"Civilian 2", @"Civilian 3", @"Civilian 4"];
-    self.playerList = [[[MafiaPlayerList alloc] initWithPlayerNames:playerNames isTwoHanded:NO] autorelease];
+    self.playerList = [[MafiaPlayerList alloc] initWithPlayerNames:playerNames isTwoHanded:NO];
     self.assassin = [self.playerList playerNamed:@"Assassin"];
     self.killer1 = [self.playerList playerNamed:@"Killer 1"];
     self.killer2 = [self.playerList playerNamed:@"Killer 2"];

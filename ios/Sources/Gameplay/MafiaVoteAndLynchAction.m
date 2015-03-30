@@ -14,7 +14,7 @@
 
 + (id)actionWithPlayerList:(MafiaPlayerList *)playerList
 {
-    return [[[self alloc] initWithPlayerList:playerList] autorelease];
+    return [[self alloc] initWithPlayerList:playerList];
 }
 
 

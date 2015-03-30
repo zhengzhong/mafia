@@ -20,11 +20,6 @@
 @synthesize isExecuted = _isExecuted;
 
 
-- (void)dealloc
-{
-    [_playerList release];
-    [super dealloc];
-}
 
 
 - (id)initWithNumberOfActors:(NSInteger)numberOfActors playerList:(MafiaPlayerList *)playerList
@@ -32,7 +27,7 @@
     if (self = [super init])
     {
         _numberOfActors = numberOfActors;
-        _playerList = [playerList retain];
+        _playerList = playerList;
         _isAssigned = NO;
         _isExecuted = NO;
     }
@@ -42,7 +37,7 @@
 
 + (id)actionWithNumberOfActors:(NSInteger)numberOfActors playerList:(MafiaPlayerList *)playerList
 {
-    return [[[self alloc] initWithNumberOfActors:numberOfActors playerList:playerList] autorelease];
+    return [[self alloc] initWithNumberOfActors:numberOfActors playerList:playerList];
 }
 
 

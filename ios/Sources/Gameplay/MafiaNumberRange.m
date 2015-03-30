@@ -15,13 +15,13 @@
 
 + (id)numberRangeWithSingleValue:(NSInteger)value
 {
-    return [[[self alloc] initWithSingleValue:value] autorelease];
+    return [[self alloc] initWithSingleValue:value];
 }
 
 
 + (id)numberRangeWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue
 {
-    return [[[self alloc] initWithMinValue:minValue maxValue:maxValue] autorelease];
+    return [[self alloc] initWithMinValue:minValue maxValue:maxValue];
 }
 
 

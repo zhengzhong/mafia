@@ -11,13 +11,13 @@
 @interface MafiaPlayer : NSObject
 
 @property (copy, nonatomic) NSString *name;
-@property (retain, nonatomic) MafiaRole *role;
+@property (strong, nonatomic) MafiaRole *role;
 @property (assign, nonatomic) BOOL isDead;
 @property (assign, nonatomic) BOOL isMisdiagnosed;
 @property (assign, nonatomic) BOOL isJustGuarded;
 @property (assign, nonatomic) BOOL isUnguardable;
 @property (assign, nonatomic) BOOL isVoted;
-@property (retain, nonatomic) NSMutableArray *tags;
+@property (strong, nonatomic) NSMutableArray *tags;
 
 - (id)initWithName:(NSString *)name;
 

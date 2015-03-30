@@ -35,10 +35,10 @@
 
 @interface MafiaGamePlayerController : UITableViewController <MafiaGamePlayerRoleControllerDelegate>
 
-@property (readonly, retain, nonatomic) MafiaPlayer *player;
-@property (retain, nonatomic) MafiaRole *role;
+@property (readonly, strong, nonatomic) MafiaPlayer *player;
+@property (strong, nonatomic) MafiaRole *role;
 @property (readonly, copy, nonatomic) NSArray *statuses;
-@property (readonly, assign, nonatomic) id<MafiaGamePlayerControllerDelegate> delegate;
+@property (readonly, weak, nonatomic) id<MafiaGamePlayerControllerDelegate> delegate;
 
 + (id)controllerWithPlayer:(MafiaPlayer *)player delegate:(id<MafiaGamePlayerControllerDelegate>)delegate;
 

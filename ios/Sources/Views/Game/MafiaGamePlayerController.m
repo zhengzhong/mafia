@@ -37,16 +37,9 @@ enum MafiaGamePlayerStatus
 
 + (id)statusWithName:(NSString *)name imageName:(NSString *)imageName key:(NSString *)key value:(BOOL)value
 {
-    return [[[self alloc] initWithName:name imageName:imageName key:key value:value] autorelease];
+    return [[self alloc] initWithName:name imageName:imageName key:key value:value];
 }
 
-- (void)dealloc
-{
-    [_name release];
-    [_imageName release];
-    [_key release];
-    [super dealloc];
-}
 
 - (id)initWithName:(NSString *)name imageName:(NSString *)imageName key:(NSString *)key value:(BOOL)value
 {
@@ -83,25 +76,18 @@ enum MafiaGamePlayerStatus
 
 + (id)controllerWithPlayer:(MafiaPlayer *)player delegate:(id<MafiaGamePlayerControllerDelegate>)delegate
 {
-    return [[[self alloc] initWithPlayer:player delegate:delegate] autorelease];
+    return [[self alloc] initWithPlayer:player delegate:delegate];
 }
 
 
-- (void)dealloc
-{
-    [_player release];
-    [_role release];
-    [_statuses release];
-    [super dealloc];
-}
 
 
 - (id)initWithPlayer:(MafiaPlayer *)player delegate:(id<MafiaGamePlayerControllerDelegate>)delegate
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped])
     {
-        _player = [player retain];
-        _role = [player.role retain];
+        _player = player;
+        _role = player.role;
         _statuses = [[NSArray alloc] initWithObjects:
                      [MafiaGamePlayerStatus statusWithName:NSLocalizedString(@"Dead?", nil)
                                                  imageName:@"is_dead.png"
@@ -137,10 +123,8 @@ enum MafiaGamePlayerStatus
     self.tableView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTapped:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    [cancelButton release];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
     self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
 }
 
@@ -256,7 +240,7 @@ enum MafiaGamePlayerStatus
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
     cell.textLabel.text = self.role.displayName;
@@ -272,17 +256,17 @@ enum MafiaGamePlayerStatus
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     MafiaGamePlayerStatus *status = [self.statuses objectAtIndex:indexPath.row];
     cell.imageView.image = [UIImage imageNamed:status.imageName];
     cell.textLabel.text = status.name;
     // TODO: maybe we could reuse the UISwitch if it exists.
-    UISwitch *statusSwitch = [[[UISwitch alloc] init] autorelease];
+    UISwitch *statusSwitch = [[UISwitch alloc] init];
     statusSwitch.on = status.value;
     [statusSwitch addTarget:self action:@selector(statusToggled:) forControlEvents:UIControlEventTouchUpInside];
     statusSwitch.tag = indexPath.row;
-    cell.accessoryView = [[[UIView alloc] initWithFrame:statusSwitch.frame] autorelease];
+    cell.accessoryView = [[UIView alloc] initWithFrame:statusSwitch.frame];
     [cell.accessoryView addSubview:statusSwitch];
     return cell;
 }

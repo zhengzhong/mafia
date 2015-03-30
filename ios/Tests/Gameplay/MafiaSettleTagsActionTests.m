@@ -9,7 +9,7 @@
 
 @interface MafiaSettleTagsActionTests : MafiaGameplayTestCase
 
-@property (retain, nonatomic) MafiaSettleTagsAction *settleTagsAction;
+@property (strong, nonatomic) MafiaSettleTagsAction *settleTagsAction;
 
 @end // MafiaSettleTagsActionTests
 

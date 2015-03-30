@@ -15,23 +15,17 @@
 
 + (id)controllerWithHTMLPage:(MafiaHTMLPage *)htmlPage
 {
-    return [[[self alloc] initWithHTMLPage:htmlPage] autorelease];
+    return [[self alloc] initWithHTMLPage:htmlPage];
 }
 
 
-- (void)dealloc
-{
-    [_webView release];
-    [_htmlPage release];
-    [super dealloc];
-}
 
 
 - (id)initWithHTMLPage:(MafiaHTMLPage *)htmlPage
 {
     if (self = [super initWithNibName:@"MafiaHTMLPageController" bundle:nil])
     {
-        _htmlPage = [htmlPage retain];
+        _htmlPage = htmlPage;
         self.title = htmlPage.title;
     }
     return self;

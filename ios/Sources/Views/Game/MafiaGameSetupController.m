@@ -54,19 +54,14 @@ enum MafiaGameSetupRoleRows
 
 + (UIViewController *)controllerForTab
 {
-    MafiaGameSetupController *gameSetupController = [[[self alloc] initWithDefaultGameSetup] autorelease];
-    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:gameSetupController] autorelease];
+    MafiaGameSetupController *gameSetupController = [[self alloc] initWithDefaultGameSetup];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:gameSetupController];
     navigationController.title = NSLocalizedString(@"Game", nil);
     navigationController.tabBarItem.image = [UIImage imageNamed:@"moon.png"];
     return navigationController;
 }
 
 
-- (void)dealloc
-{
-    [_gameSetup release];
-    [super dealloc];
-}
 
 
 - (id)initWithDefaultGameSetup
@@ -97,7 +92,6 @@ enum MafiaGameSetupRoleRows
                                                                   action:@selector(startGameTapped:)];
     startButton.enabled = [self.gameSetup isValid];
     self.navigationItem.rightBarButtonItem = startButton;
-    [startButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
 }
 
@@ -402,7 +396,7 @@ enum MafiaGameSetupRoleRows
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", number];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -416,14 +410,14 @@ enum MafiaGameSetupRoleRows
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     // TODO: maybe we could reuse the UISwitch if it exists.
-    UISwitch *switchInCell = [[[UISwitch alloc] init] autorelease];
+    UISwitch *switchInCell = [[UISwitch alloc] init];
     switchInCell.on = on;
     [switchInCell addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     switchInCell.tag = tag;
-    cell.accessoryView = [[[UIView alloc] initWithFrame:switchInCell.frame] autorelease];
+    cell.accessoryView = [[UIView alloc] initWithFrame:switchInCell.frame];
     [cell.accessoryView addSubview:switchInCell];
     return cell;
 }

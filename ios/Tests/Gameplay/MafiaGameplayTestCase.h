@@ -12,16 +12,16 @@
 
 @interface MafiaGameplayTestCase : SenTestCase
 
-@property (retain, nonatomic) MafiaPlayerList *playerList;
-@property (retain, nonatomic) MafiaPlayer *assassin;
-@property (retain, nonatomic) MafiaPlayer *killer1;
-@property (retain, nonatomic) MafiaPlayer *killer2;
-@property (retain, nonatomic) MafiaPlayer *detective1;
-@property (retain, nonatomic) MafiaPlayer *detective2;
-@property (retain, nonatomic) MafiaPlayer *guardian;
-@property (retain, nonatomic) MafiaPlayer *doctor;
-@property (retain, nonatomic) MafiaPlayer *traitor;
-@property (retain, nonatomic) MafiaPlayer *undercover;
+@property (strong, nonatomic) MafiaPlayerList *playerList;
+@property (strong, nonatomic) MafiaPlayer *assassin;
+@property (strong, nonatomic) MafiaPlayer *killer1;
+@property (strong, nonatomic) MafiaPlayer *killer2;
+@property (strong, nonatomic) MafiaPlayer *detective1;
+@property (strong, nonatomic) MafiaPlayer *detective2;
+@property (strong, nonatomic) MafiaPlayer *guardian;
+@property (strong, nonatomic) MafiaPlayer *doctor;
+@property (strong, nonatomic) MafiaPlayer *traitor;
+@property (strong, nonatomic) MafiaPlayer *undercover;
 
 - (void)resetPlayerListAndAssignRoles;
 

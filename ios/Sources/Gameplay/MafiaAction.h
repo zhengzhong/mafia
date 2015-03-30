@@ -15,7 +15,7 @@
 @interface MafiaAction : NSObject
 
 @property (readonly, assign, nonatomic) NSInteger numberOfActors;
-@property (readonly, retain, nonatomic) MafiaPlayerList *playerList;
+@property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
 @property (assign, nonatomic) BOOL isAssigned;
 @property (assign, nonatomic) BOOL isExecuted;
 

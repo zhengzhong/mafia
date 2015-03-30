@@ -24,19 +24,14 @@
                    value:(NSInteger)value
                 delegate:(id<MafiaGameSetupRoleControllerDelegate>)delegate
 {
-    return [[[self alloc] initWithRole:role
+    return [[self alloc] initWithRole:role
                               minValue:minValue
                               maxValue:maxValue
                                  value:value
-                              delegate:delegate] autorelease];
+                              delegate:delegate];
 }
 
 
-- (void)dealloc
-{
-    [_role release];
-    [super dealloc];
-}
 
 
 - (id)initWithRole:(MafiaRole *)role
@@ -48,7 +43,7 @@
     NSAssert(minValue <= value && value <= maxValue, @"Invalid minValue/maxValue/value.");
     if (self = [super initWithStyle:UITableViewStyleGrouped])
     {
-        _role = [role retain];
+        _role = role;
         _minValue = minValue;
         _maxValue = maxValue;
         _value = value;
@@ -65,7 +60,6 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
     self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
 }
 
@@ -98,7 +92,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ x %d", self.role.displayName, (self.minValue + indexPath.row)];

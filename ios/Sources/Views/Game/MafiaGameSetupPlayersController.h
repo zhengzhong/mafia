@@ -21,10 +21,10 @@
 
 @interface MafiaGameSetupPlayersController : UITableViewController <MafiaGameSetupAddPlayerControllerDelegate>
 
-@property (readonly, retain, nonatomic) MafiaGameSetup *gameSetup;
-@property (readonly, assign, nonatomic) id<MafiaGameSetupPlayersControllerDelegate> delegate;
-@property (retain, nonatomic) UIBarButtonItem *editButton;
-@property (retain, nonatomic) UIBarButtonItem *doneButton;
+@property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
+@property (readonly, weak, nonatomic) id<MafiaGameSetupPlayersControllerDelegate> delegate;
+@property (strong, nonatomic) UIBarButtonItem *editButton;
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
 
 + (id)controllerWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate;
 

@@ -7,7 +7,7 @@
 
 @interface MafiaGameSetup : NSObject
 
-@property (readonly, retain, nonatomic) NSMutableArray *playerNames;
+@property (readonly, strong, nonatomic) NSMutableArray *playerNames;
 @property (assign, nonatomic) BOOL isTwoHanded;
 @property (assign, nonatomic) NSInteger numberOfKillers;
 @property (assign, nonatomic) NSInteger numberOfDetectives;

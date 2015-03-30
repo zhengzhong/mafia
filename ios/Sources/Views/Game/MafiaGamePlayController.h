@@ -16,13 +16,13 @@
 @interface MafiaGamePlayController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MafiaGamePlayerControllerDelegate, MafiaGameInformationControllerDelegate>
 
-@property (retain, nonatomic) IBOutlet UIImageView *dayNightImageView;
-@property (retain, nonatomic) IBOutlet UILabel *actionLabel;
-@property (retain, nonatomic) IBOutlet UILabel *promptLabel;
-@property (retain, nonatomic) IBOutlet UITableView *playersTableView;
-@property (retain, nonatomic) MafiaGameInformationController *informationController;
-@property (retain, nonatomic) MafiaGame *game;
-@property (retain, nonatomic) NSMutableArray *selectedPlayers;
+@property (strong, nonatomic) IBOutlet UIImageView *dayNightImageView;
+@property (strong, nonatomic) IBOutlet UILabel *actionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *promptLabel;
+@property (strong, nonatomic) IBOutlet UITableView *playersTableView;
+@property (strong, nonatomic) MafiaGameInformationController *informationController;
+@property (strong, nonatomic) MafiaGame *game;
+@property (strong, nonatomic) NSMutableArray *selectedPlayers;
 
 + (UIViewController *)controllerWithGameSetup:(MafiaGameSetup *)gameSetup;
 

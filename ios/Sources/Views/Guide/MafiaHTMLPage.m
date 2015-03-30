@@ -13,7 +13,7 @@
 
 + (id)pageWithTitle:(NSString *)title pageName:(NSString *)pageName language:(NSString *)language
 {
-    return [[[self alloc] initWithTitle:title pageName:pageName language:language] autorelease];
+    return [[self alloc] initWithTitle:title pageName:pageName language:language];
 }
 
 - (id)initWithTitle:(NSString *)title pageName:(NSString *)pageName language:(NSString *)language

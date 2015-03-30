@@ -30,21 +30,10 @@
 
 + (UIViewController *)controllerWithGameSetup:(MafiaGameSetup *)gameSetup
 {
-    return [[[self alloc] initWithGameSetup:gameSetup] autorelease];
+    return [[self alloc] initWithGameSetup:gameSetup];
 }
 
 
-- (void)dealloc
-{
-    [_dayNightImageView release];
-    [_actionLabel release];
-    [_promptLabel release];
-    [_playersTableView release];
-    [_informationController release];
-    [_game release];
-    [_selectedPlayers release];
-    [super dealloc];
-}
 
 
 - (id)initWithGameSetup:(MafiaGameSetup *)gameSetup
@@ -68,13 +57,11 @@
                                    target:self
                                    action:@selector(continueToNextAction:)];
     self.navigationItem.rightBarButtonItem = nextButton;
-    [nextButton release];
     UIBarButtonItem *resetButton = [[UIBarButtonItem alloc]
                                     initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
                                     target:self
                                     action:@selector(confirmResetGame:)];
     self.navigationItem.leftBarButtonItem = resetButton;
-    [resetButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
     [self.game reset];
     [self reloadData];
@@ -272,7 +259,6 @@
                                   otherButtonTitles:nil];
     // See: http://stackoverflow.com/questions/4447563/last-button-of-actionsheet-does-not-get-clicked
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
-    [actionSheet release];
 }
 
 
@@ -321,7 +307,6 @@
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     [self reloadData];
 }

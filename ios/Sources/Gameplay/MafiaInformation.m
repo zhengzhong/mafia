@@ -16,26 +16,19 @@
 
 + (id)announcementInformation
 {
-    return [[[self alloc] initWithCategory:@"announcement"] autorelease];
+    return [[self alloc] initWithCategory:@"announcement"];
 }
 
 
 + (id)thumbInformationWithIndicator:(BOOL)indicator
 {
     NSString *category = (indicator ? @"positive" : @"negative");
-    MafiaInformation *information = [[[self alloc] initWithCategory:category] autorelease];
+    MafiaInformation *information = [[self alloc] initWithCategory:category];
     information.message = (indicator ? NSLocalizedString(@"Thumb Up! Positive!", nil) : NSLocalizedString(@"Thumb Down! Negative!", nil));
     return information;
 }
 
 
-- (void)dealloc
-{
-    [_category release];
-    [_message release];
-    [_details release];
-    [super dealloc];
-}
 
 
 - (id)initWithCategory:(NSString *)category

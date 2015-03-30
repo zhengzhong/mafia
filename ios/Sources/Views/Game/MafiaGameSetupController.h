@@ -14,7 +14,7 @@
 
 @interface MafiaGameSetupController : UITableViewController <MafiaGameSetupPlayersControllerDelegate, MafiaGameSetupRoleControllerDelegate>
 
-@property (readonly, retain, nonatomic) MafiaGameSetup *gameSetup;
+@property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
 
 + (UIViewController *)controllerForTab;
 

@@ -20,11 +20,6 @@
 @synthesize hasUndercover = _hasUndercover;
 
 
-- (void)dealloc
-{
-    [_playerNames release];
-    [super dealloc];
-}
 
 
 - (id)init

@@ -9,8 +9,8 @@
 
 @interface MafiaVoteAndLynchActionTests : MafiaGameplayTestCase
 
-@property (retain, nonatomic) MafiaSettleTagsAction *settleTagsAction;
-@property (retain, nonatomic) MafiaVoteAndLynchAction *voteAndLynchAction;
+@property (strong, nonatomic) MafiaSettleTagsAction *settleTagsAction;
+@property (strong, nonatomic) MafiaVoteAndLynchAction *voteAndLynchAction;
 
 @end // MafiaVoteAndLynchActionTests
 

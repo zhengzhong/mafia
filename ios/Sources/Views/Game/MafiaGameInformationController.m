@@ -29,18 +29,10 @@
 
 + (id)controllerWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate
 {
-    return [[[self alloc] initWithDelegate:delegate] autorelease];
+    return [[self alloc] initWithDelegate:delegate];
 }
 
 
-- (void)dealloc
-{
-    [_categoryImageView release];
-    [_messageLabel release];
-    [_detailsLabel release];
-    [_information release];
-    [super dealloc];
-}
 
 
 - (id)initWithDelegate:(id<MafiaGameInformationControllerDelegate>)delegate

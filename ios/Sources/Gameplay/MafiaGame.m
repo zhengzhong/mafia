@@ -23,13 +23,6 @@
 @synthesize winner = _winner;
 
 
-- (void)dealloc
-{
-    [_playerList release];
-    [_actions release];
-    [_winner release];
-    [super dealloc];
-}
 
 
 - (id)initWithGameSetup:(MafiaGameSetup *)gameSetup
@@ -64,7 +57,6 @@
         [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:_playerList]];
         [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:_playerList]];
         _actions = [[NSArray alloc] initWithArray:actions];
-        [actions release];
         _round = 0;
         _actionIndex = 0;
         _winner = nil;

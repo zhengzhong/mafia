@@ -10,11 +10,11 @@
 
 @interface MafiaGamePlayerTableViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UIImageView *avatarImageView;
-@property (retain, nonatomic) IBOutlet UILabel *nameLabel;
-@property (retain, nonatomic) IBOutlet UILabel *roleLabel;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *stateImageCollection;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *tagImageCollection;
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *roleLabel;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *stateImageCollection;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tagImageCollection;
 
 - (void)refreshWithPlayer:(MafiaPlayer *)player;
 

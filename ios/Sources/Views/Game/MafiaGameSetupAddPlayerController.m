@@ -16,16 +16,10 @@
 
 + (id)controllerWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate
 {
-    return [[[self alloc] initWithDelegate:delegate] autorelease];
+    return [[self alloc] initWithDelegate:delegate];
 }
 
 
-- (void)dealloc
-{
-    [_playerNameLabel release];
-    [_playerNameField release];
-    [super dealloc];
-}
 
 
 - (id)initWithDelegate:(id<MafiaGameSetupAddPlayerControllerDelegate>)delegate
@@ -45,10 +39,8 @@
     self.view.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTapped:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    [cancelButton release];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
     self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
     self.playerNameLabel.text = NSLocalizedString(@"Name", nil);
 }
@@ -81,7 +73,6 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     peoplePicker.peoplePickerDelegate = self;
     [self presentModalViewController:peoplePicker animated:YES];
-    [peoplePicker release];
 }
 
 
@@ -103,11 +94,9 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
       shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
-    NSString *firstName = (NSString *) ABRecordCopyValue(person, kABPersonFirstNameProperty);
-    NSString *lastName = (NSString *) ABRecordCopyValue(person, kABPersonLastNameProperty);
+    NSString *firstName = (NSString *) CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+    NSString *lastName = (NSString *) CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
     NSString *fullName = [NSString stringWithFormat:@"%@ %@", (firstName != nil ? firstName : @""), (lastName != nil ? lastName : @"")];
-    [firstName release];
-    [lastName release];
     self.playerNameField.text = [fullName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     [self dismissModalViewControllerAnimated:YES];
     return NO;

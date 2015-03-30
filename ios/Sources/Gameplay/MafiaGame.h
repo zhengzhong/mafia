@@ -13,8 +13,8 @@
 
 @interface MafiaGame : NSObject
 
-@property (readonly, retain, nonatomic) MafiaPlayerList *playerList;
-@property (readonly, retain, nonatomic) NSArray *actions;
+@property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
+@property (readonly, strong, nonatomic) NSArray *actions;
 @property (assign, nonatomic) NSInteger round;
 @property (assign, nonatomic) NSInteger actionIndex;
 @property (copy, nonatomic) NSString *winner;

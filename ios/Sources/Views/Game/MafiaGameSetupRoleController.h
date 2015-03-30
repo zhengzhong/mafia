@@ -19,11 +19,11 @@
 
 @interface MafiaGameSetupRoleController : UITableViewController
 
-@property (readonly, retain, nonatomic) MafiaRole *role;
+@property (readonly, strong, nonatomic) MafiaRole *role;
 @property (readonly, assign, nonatomic) NSInteger minValue;
 @property (readonly, assign, nonatomic) NSInteger maxValue;
 @property (assign, nonatomic) NSInteger value;
-@property (readonly, assign, nonatomic) id<MafiaGameSetupRoleControllerDelegate> delegate;
+@property (readonly, weak, nonatomic) id<MafiaGameSetupRoleControllerDelegate> delegate;
 
 + (id)controllerWithRole:(MafiaRole *)role
                 minValue:(NSInteger)minValue

@@ -19,25 +19,18 @@
 
 + (id)controllerWithRole:(MafiaRole *)role delegate:(id<MafiaGamePlayerRoleControllerDelegate>)delegate
 {
-    return [[[self alloc] initWithRole:role delegate:delegate] autorelease];
+    return [[self alloc] initWithRole:role delegate:delegate];
 }
 
 
-- (void)dealloc
-{
-    [_originalRole release];
-    [_selectedRole release];
-    [_roles release];
-    [super dealloc];
-}
 
 
 - (id)initWithRole:(MafiaRole *)role delegate:(id<MafiaGamePlayerRoleControllerDelegate>)delegate
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped])
     {
-        _originalRole = [role retain];
-        _selectedRole = [role retain];
+        _originalRole = role;
+        _selectedRole = role;
         _roles = [[MafiaRole roles] copy];
         _delegate = delegate;
         self.title = role.displayName;
@@ -55,13 +48,11 @@
                                    target:self
                                    action:@selector(doneTapped:)];
     self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                      target:self
                                      action:@selector(cancelTapped:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    [cancelButton release];
     [self.navigationItem setHidesBackButton:YES animated:YES];
 }
 
@@ -94,7 +85,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     MafiaRole *role = [self.roles objectAtIndex:indexPath.row];
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", role.name]];

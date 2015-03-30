@@ -16,19 +16,14 @@
 
 + (UIViewController *)controllerForTab
 {
-    MafiaGuideController *guideController = [[[self alloc] initWithTableOfContents] autorelease];
-    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:guideController] autorelease];
+    MafiaGuideController *guideController = [[self alloc] initWithTableOfContents];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:guideController];
     navigationController.title = NSLocalizedString(@"Guide", nil);
     navigationController.tabBarItem.image = [UIImage imageNamed:@"guide.png"];
     return navigationController;
 }
 
 
-- (void)dealloc
-{
-    [_tableOfContents release];
-    [super dealloc];
-}
 
 
 - (id)initWithTableOfContents
@@ -78,7 +73,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     MafiaHTMLPage *htmlPage = [self.tableOfContents objectAtIndex:indexPath.row];
     cell.imageView.image = [UIImage imageNamed:@"guide.png"];

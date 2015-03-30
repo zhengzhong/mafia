@@ -8,8 +8,8 @@
 
 @interface MafiaHTMLPageController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIWebView *webView;
-@property (readonly, retain, nonatomic) MafiaHTMLPage *htmlPage;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (readonly, strong, nonatomic) MafiaHTMLPage *htmlPage;
 
 + (id)controllerWithHTMLPage:(MafiaHTMLPage *)htmlPage;
 

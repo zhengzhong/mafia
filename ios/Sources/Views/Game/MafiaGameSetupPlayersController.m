@@ -28,24 +28,17 @@ enum MafiaGameSetupPlayersSections
 
 + (id)controllerWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate
 {
-    return [[[self alloc] initWithGameSetup:gameSetup delegate:delegate] autorelease];
+    return [[self alloc] initWithGameSetup:gameSetup delegate:delegate];
 }
 
 
-- (void)dealloc
-{
-    [_gameSetup release];
-    [_editButton release];
-    [_doneButton release];
-    [super dealloc];
-}
 
 
 - (id)initWithGameSetup:(MafiaGameSetup *)gameSetup delegate:(id<MafiaGameSetupPlayersControllerDelegate>)delegate
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped])
     {
-        _gameSetup = [gameSetup retain];
+        _gameSetup = gameSetup;
         _delegate = delegate;
         _editButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(editTapped:)];
         _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped:)];
@@ -103,7 +96,7 @@ enum MafiaGameSetupPlayersSections
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     if (indexPath.section == MafiaGameSetupPlayersListSection)
     {
@@ -147,10 +140,9 @@ enum MafiaGameSetupPlayersSections
 {
     if (fromIndexPath.section == MafiaGameSetupPlayersListSection && toIndexPath.section == MafiaGameSetupPlayersListSection)
     {
-        NSString *playerName = [[self.gameSetup.playerNames objectAtIndex:fromIndexPath.row] retain];
+        NSString *playerName = [self.gameSetup.playerNames objectAtIndex:fromIndexPath.row];
         [self.gameSetup.playerNames removeObjectAtIndex:fromIndexPath.row];
         [self.gameSetup.playerNames insertObject:playerName atIndex:toIndexPath.row];
-        [playerName release];
         [self.tableView reloadData];
     }
 }
