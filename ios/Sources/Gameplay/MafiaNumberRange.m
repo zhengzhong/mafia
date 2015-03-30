@@ -55,11 +55,11 @@
     NSString *singleOrPluralForm = (self.maxValue <= 1 ? singleForm : pluralForm);
     if (self.minValue == self.maxValue)
     {
-        return [NSString stringWithFormat:@"%d %@", self.minValue, singleOrPluralForm];
+        return [NSString stringWithFormat:@"%@ %@", @(self.minValue), singleOrPluralForm];
     }
     else
     {
-        return [NSString stringWithFormat:@"%d ~ %d %@", self.minValue, self.maxValue, singleOrPluralForm];
+        return [NSString stringWithFormat:@"%@ ~ %@ %@", @(self.minValue), @(self.maxValue), singleOrPluralForm];
     }
 }
 

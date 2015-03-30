@@ -95,7 +95,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ x %d", self.role.displayName, (self.minValue + indexPath.row)];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", self.role.displayName, @(self.minValue + indexPath.row)];
     if (indexPath.row == self.value - self.minValue)
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

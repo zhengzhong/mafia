@@ -66,7 +66,7 @@
     {
         return;
     }
-    NSAssert([players count] == self.numberOfActors, @"Invalid number of actors: expected %d.", self.numberOfActors);
+    NSAssert([players count] == self.numberOfActors, @"Invalid number of actors: expected %@.", @(self.numberOfActors));
     for (MafiaPlayer *player in players)
     {
         NSAssert([player isUnrevealed], @"Player %@ was already assigned as %@.", player, player.role);

@@ -398,7 +398,7 @@ enum MafiaGameSetupRoleRows
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", number];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(number)];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

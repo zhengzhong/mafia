@@ -131,7 +131,7 @@
 
 - (MafiaAction *)currentAction
 {
-    NSAssert(self.actionIndex >= 0 && self.actionIndex < [self.actions count], @"Invalid action index %d.", self.actionIndex);
+    NSAssert(self.actionIndex >= 0 && self.actionIndex < [self.actions count], @"Invalid action index %@.", @(self.actionIndex));
     return (self.winner == nil ? [self.actions objectAtIndex:self.actionIndex] : nil);
 }
 
