@@ -57,7 +57,6 @@
 		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
 		417F09671671001900F44475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
 		417F09681671001900F44475 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F481652D5A600EE800D /* Foundation.framework */; };
-		417F09881671069700F44475 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09871671069600F44475 /* SenTestingKit.framework */; };
 		41857F471652D5A600EE800D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
 		41857F491652D5A600EE800D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F481652D5A600EE800D /* Foundation.framework */; };
 		41857F4B1652D5A600EE800D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F4A1652D5A600EE800D /* CoreGraphics.framework */; };
@@ -162,8 +161,7 @@
 		416E66D0166D2C610062AE57 /* information_positive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_positive.png; sourceTree = "<group>"; };
 		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		417F09641671001900F44475 /* MafiaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		417F09871671069600F44475 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		417F09641671001900F44475 /* MafiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41857F421652D5A600EE800D /* Mafia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mafia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41857F461652D5A600EE800D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		41857F481652D5A600EE800D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,7 +216,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				417F09881671069700F44475 /* SenTestingKit.framework in Frameworks */,
 				417F09671671001900F44475 /* UIKit.framework in Frameworks */,
 				417F09681671001900F44475 /* Foundation.framework in Frameworks */,
 			);
@@ -338,7 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				41857F421652D5A600EE800D /* Mafia.app */,
-				417F09641671001900F44475 /* MafiaTests.octest */,
+				417F09641671001900F44475 /* MafiaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,7 +347,6 @@
 				417F09141670ECA100F44475 /* AddressBookUI.framework */,
 				41857F4A1652D5A600EE800D /* CoreGraphics.framework */,
 				41857F481652D5A600EE800D /* Foundation.framework */,
-				417F09871671069600F44475 /* SenTestingKit.framework */,
 				41857F461652D5A600EE800D /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -509,8 +505,8 @@
 			);
 			name = MafiaTests;
 			productName = MafiaTests;
-			productReference = 417F09641671001900F44475 /* MafiaTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 417F09641671001900F44475 /* MafiaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		41857F411652D5A600EE800D /* Mafia */ = {
 			isa = PBXNativeTarget;
@@ -721,38 +717,36 @@
 		417F09741671001900F44475 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mafia.app/Mafia";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mafia-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Tests/MafiaTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mafia.app/Mafia";
 			};
 			name = Debug;
 		};
 		417F09751671001900F44475 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mafia.app/Mafia";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mafia-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Tests/MafiaTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mafia.app/Mafia";
 			};
 			name = Release;
 		};

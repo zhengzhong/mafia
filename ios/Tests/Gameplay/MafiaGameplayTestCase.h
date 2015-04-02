@@ -3,14 +3,14 @@
 //  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 
 @class MafiaPlayer;
 @class MafiaPlayerList;
 
 
-@interface MafiaGameplayTestCase : SenTestCase
+@interface MafiaGameplayTestCase : XCTestCase
 
 @property (strong, nonatomic) MafiaPlayerList *playerList;
 @property (strong, nonatomic) MafiaPlayer *assassin;
@@ -25,5 +25,4 @@
 
 - (void)resetPlayerListAndAssignRoles;
 
-@end // MafiaGameplayTestCase
-
+@end  // MafiaGameplayTestCase
