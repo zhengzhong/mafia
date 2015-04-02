@@ -9,19 +9,12 @@
 @implementation MafiaInformation
 
 
-@synthesize category = _category;
-@synthesize message = _message;
-@synthesize details = _details;
-
-
-+ (id)announcementInformation
-{
++ (instancetype)announcementInformation {
     return [[self alloc] initWithCategory:@"announcement"];
 }
 
 
-+ (id)thumbInformationWithIndicator:(BOOL)indicator
-{
++ (instancetype)thumbInformationWithIndicator:(BOOL)indicator {
     NSString *category = (indicator ? @"positive" : @"negative");
     MafiaInformation *information = [[self alloc] initWithCategory:category];
     information.message = (indicator ? NSLocalizedString(@"Thumb Up! Positive!", nil) : NSLocalizedString(@"Thumb Down! Negative!", nil));
@@ -29,25 +22,18 @@
 }
 
 
-
-
-- (id)initWithCategory:(NSString *)category
-{
-    if (self = [super init])
-    {
+- (instancetype)initWithCategory:(NSString *)category {
+    if (self = [super init]) {
         _category = [category copy];
-        _message = nil;
         _details = [[NSMutableArray alloc] initWithCapacity:4];
     }
     return self;
 }
 
 
-- (void)addDetails:(NSArray *)details
-{
+- (void)addDetails:(NSArray *)details {
     [self.details addObjectsFromArray:details];
 }
 
 
-@end // MafiaMessage
-
+@end  // MafiaMessage

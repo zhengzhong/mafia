@@ -16,47 +16,42 @@
 @implementation MafiaGame
 
 
-@synthesize playerList = _playerList;
-@synthesize actions = _actions;
-@synthesize round = _round;
-@synthesize actionIndex = _actionIndex;
-@synthesize winner = _winner;
+- (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded {
+    MafiaGameSetup *gameSetup = [[MafiaGameSetup alloc] init];
+    for (NSString *playerName in playerNames) {
+        [gameSetup addPlayerName:playerName];
+    }
+    gameSetup.isTwoHanded = isTwoHanded;
+    return [self initWithGameSetup:gameSetup];
+}
 
 
-
-
-- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup
-{
+- (instancetype)initWithGameSetup:(MafiaGameSetup *)gameSetup {
     NSAssert([gameSetup isValid], @"Game setup is invalid.");
-    if (self = [super init])
-    {
-        _playerList = [[MafiaPlayerList alloc] initWithPlayerNames:gameSetup.playerNames isTwoHanded:gameSetup.isTwoHanded];
-        NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:10];
-        if (gameSetup.hasAssassin)
-        {
+    if (self = [super init]) {
+        _playerList = [[MafiaPlayerList alloc] initWithPlayerNames:gameSetup.playerNames
+                                                       isTwoHanded:gameSetup.isTwoHanded];
+        NSMutableArray *actions = [NSMutableArray arrayWithCapacity:10];
+        if (gameSetup.hasAssassin) {
             [actions addObject:[MafiaAssassinAction actionWithNumberOfActors:1 playerList:_playerList]];
         }
-        if (gameSetup.hasGuardian)
-        {
+        if (gameSetup.hasGuardian) {
             [actions addObject:[MafiaGuardianAction actionWithNumberOfActors:1 playerList:_playerList]];
         }
         [actions addObject:[MafiaKillerAction actionWithNumberOfActors:gameSetup.numberOfKillers playerList:_playerList]];
         [actions addObject:[MafiaDetectiveAction actionWithNumberOfActors:gameSetup.numberOfDetectives playerList:_playerList]];
-        if (gameSetup.hasDoctor)
-        {
+        if (gameSetup.hasDoctor) {
             [actions addObject:[MafiaDoctorAction actionWithNumberOfActors:1 playerList:_playerList]];
         }
-        if (gameSetup.hasTraitor)
-        {
+        if (gameSetup.hasTraitor) {
             [actions addObject:[MafiaTraitorAction actionWithNumberOfActors:1 playerList:_playerList]];
         }
-        if (gameSetup.hasUndercover)
-        {
+        if (gameSetup.hasUndercover) {
             [actions addObject:[MafiaUndercoverAction actionWithNumberOfActors:1 playerList:_playerList]];
         }
         [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:_playerList]];
         [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:_playerList]];
-        _actions = [[NSArray alloc] initWithArray:actions];
+        _actions = [actions copy];
         _round = 0;
         _actionIndex = 0;
         _winner = nil;
@@ -65,33 +60,9 @@
 }
 
 
-- (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded
-{
-    if (self = [super init])
-    {
-        _playerList = [[MafiaPlayerList alloc] initWithPlayerNames:playerNames isTwoHanded:isTwoHanded];
-        _actions = [[NSArray alloc] initWithObjects:
-                    [MafiaGuardianAction actionWithNumberOfActors:1 playerList:_playerList],
-                    [MafiaKillerAction actionWithNumberOfActors:2 playerList:_playerList],
-                    [MafiaDetectiveAction actionWithNumberOfActors:2 playerList:_playerList],
-                    [MafiaDoctorAction actionWithNumberOfActors:1 playerList:_playerList],
-                    [MafiaTraitorAction actionWithNumberOfActors:1 playerList:_playerList],
-                    [MafiaSettleTagsAction actionWithPlayerList:_playerList],
-                    [MafiaVoteAndLynchAction actionWithPlayerList:_playerList],
-                    nil];
-        _round = 0;
-        _actionIndex = 0;
-        _winner = nil;
-    }
-    return self;
-}
-
-
-- (void)reset
-{
+- (void)reset {
     [self.playerList reset];
-    for (MafiaAction *action in self.actions)
-    {
+    for (MafiaAction *action in self.actions) {
         [action reset];
     }
     self.round = 0;
@@ -100,28 +71,23 @@
 }
 
 
-- (BOOL)checkGameOver
-{
+- (BOOL)checkGameOver {
     NSArray *unrevealedPlayers = [self.playerList alivePlayersWithRole:[MafiaRole unrevealed]];
-    if ([unrevealedPlayers count] > 0)
-    {
+    if ([unrevealedPlayers count] > 0) {
         return NO;
     }
-    NSArray *killers = [self.playerList alivePlayersWithRole:[MafiaRole killer]];
-    if ([killers count] == 0)
-    {
+    NSArray *aliveKillers = [self.playerList alivePlayersWithRole:[MafiaRole killer]];
+    if ([aliveKillers count] == 0) {
         self.winner = NSLocalizedString(@"Civilian Alignment", nil);
         return YES;
     }
-    NSArray *detectives = [self.playerList alivePlayersWithRole:[MafiaRole detective]];
-    if ([detectives count] == 0)
-    {
+    NSArray *aliveDetectives = [self.playerList alivePlayersWithRole:[MafiaRole detective]];
+    if ([aliveDetectives count] == 0) {
         self.winner = NSLocalizedString(@"Killer Alignment", nil);
         return YES;
     }
     NSArray *alivePlayers = [self.playerList alivePlayers];
-    if ([killers count] * 2 >= [alivePlayers count])
-    {
+    if ([aliveKillers count] * 2 >= [alivePlayers count]) {
         self.winner = NSLocalizedString(@"Killer Alignment", nil);
         return YES;
     }
@@ -129,20 +95,17 @@
 }
 
 
-- (MafiaAction *)currentAction
-{
-    NSAssert(self.actionIndex >= 0 && self.actionIndex < [self.actions count], @"Invalid action index %@.", @(self.actionIndex));
-    return (self.winner == nil ? [self.actions objectAtIndex:self.actionIndex] : nil);
+- (MafiaAction *)currentAction {
+    NSAssert(self.actionIndex >= 0 && self.actionIndex < [self.actions count],
+             @"Invalid action index %@.", @(self.actionIndex));
+    return (self.winner == nil ? self.actions[self.actionIndex] : nil);
 }
 
 
-- (MafiaAction *)continueToNextAction
-{
-    if (![self checkGameOver])
-    {
+- (MafiaAction *)continueToNextAction {
+    if (![self checkGameOver]) {
         self.actionIndex = (self.actionIndex + 1) % [self.actions count];
-        if (self.actionIndex == 0)
-        {
+        if (self.actionIndex == 0) {
             ++self.round;
         }
     }
@@ -150,5 +113,4 @@
 }
 
 
-@end // MafiaGame
-
+@end  // MafiaGame

@@ -13,4 +13,3 @@
 #import "MafiaRole.h"
 #import "MafiaSettleTagsAction.h"
 #import "MafiaVoteAndLynchAction.h"
-

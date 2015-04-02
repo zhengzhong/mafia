@@ -13,7 +13,14 @@
 
 @property (readonly, copy, nonatomic) NSArray *players;
 
-- (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded;
+/*!
+ * Initializes the player list.
+ * @param playerNames  an array of player names.
+ * @param isTwoHanded  whether the game is in two-handed mode. If yes, for each player name, two
+ *                     players will be added (for left hand and right hand, respectively).
+ */
+- (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded
+    NS_DESIGNATED_INITIALIZER;
 
 - (NSUInteger)count;
 
@@ -25,9 +32,9 @@
 
 - (NSArray *)alivePlayersWithRole:(MafiaRole *)role;
 
-- (NSArray *)alivePlayersSelectedBy:(MafiaRole *)selectedBy;
+- (NSArray *)alivePlayersSelectedBy:(MafiaRole *)selectorRole;
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role selectedBy:(MafiaRole *)selectedBy;
+- (NSArray *)alivePlayersWithRole:(MafiaRole *)role selectedBy:(MafiaRole *)selectorRole;
 
 - (void)reset;
 

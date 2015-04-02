@@ -14,18 +14,28 @@
 @implementation MafiaAction
 
 
-@synthesize numberOfActors = _numberOfActors;
-@synthesize playerList = _playerList;
-@synthesize isAssigned = _isAssigned;
-@synthesize isExecuted = _isExecuted;
+#pragma mark - Properties
 
 
+@dynamic role;
+
+- (MafiaRole *)role {
+    return nil;
+}
 
 
-- (id)initWithNumberOfActors:(NSInteger)numberOfActors playerList:(MafiaPlayerList *)playerList
-{
-    if (self = [super init])
-    {
+#pragma mark - Factory Method and Initializer
+
+
++ (instancetype)actionWithNumberOfActors:(NSInteger)numberOfActors
+                              playerList:(MafiaPlayerList *)playerList {
+    return [[self alloc] initWithNumberOfActors:numberOfActors playerList:playerList];
+}
+
+
+- (instancetype)initWithNumberOfActors:(NSInteger)numberOfActors
+                            playerList:(MafiaPlayerList *)playerList {
+    if (self = [super init]) {
         _numberOfActors = numberOfActors;
         _playerList = playerList;
         _isAssigned = NO;
@@ -35,140 +45,103 @@
 }
 
 
-+ (id)actionWithNumberOfActors:(NSInteger)numberOfActors playerList:(MafiaPlayerList *)playerList
-{
-    return [[self alloc] initWithNumberOfActors:numberOfActors playerList:playerList];
+#pragma mark - NSObject
+
+
+- (NSString *)description {
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ Action", nil), self.role];
 }
 
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:NSLocalizedString(@"%@ Action", nil), [self role]];
-}
+#pragma mark - Public Methods
 
 
-- (MafiaRole *)role
-{
-    return nil;
-}
-
-
-- (void)reset
-{
+- (void)reset {
     self.isAssigned = NO;
     self.isExecuted = NO;
 }
 
 
-- (void)assignRoleToPlayers:(NSArray *)players
-{
-    if (self.isAssigned || [self role] == nil)
-    {
+- (void)assignRoleToPlayers:(NSArray *)players {
+    if (self.isAssigned || self.role == nil) {
         return;
     }
     NSAssert([players count] == self.numberOfActors, @"Invalid number of actors: expected %@.", @(self.numberOfActors));
-    for (MafiaPlayer *player in players)
-    {
-        NSAssert([player isUnrevealed], @"Player %@ was already assigned as %@.", player, player.role);
-        player.role = [self role];
+    for (MafiaPlayer *player in players) {
+        NSAssert(player.isUnrevealed, @"Player %@ was already assigned as %@.", player, player.role);
+        player.role = self.role;
     }
     self.isAssigned = YES;
 }
 
 
-- (NSArray *)actors
-{
-    return [self.playerList alivePlayersWithRole:[self role]];
+- (NSArray *)actors {
+    return [self.playerList alivePlayersWithRole:self.role];
 }
 
 
-- (BOOL)isExecutable
-{
+- (BOOL)isExecutable {
     return ([[self actors] count] > 0);
 }
 
 
-- (MafiaNumberRange *)numberOfChoices
-{
+- (MafiaNumberRange *)numberOfChoices {
     // By default, in each action, 1 player can be selected.
     return [MafiaNumberRange numberRangeWithSingleValue:1];
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
-{
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
     return !player.isDead;
 }
 
 
-- (void)beginAction
-{
+- (void)beginAction {
     self.isExecuted = NO;
 }
 
 
-- (void)executeOnPlayer:(MafiaPlayer *)player
-{
+- (void)executeOnPlayer:(MafiaPlayer *)player {
     NSAssert(!self.isExecuted, @"%@ is already executed.", self);
-    NSAssert([self isPlayerSelectable:player], @"%@ cannot select %@.", [self role], player);
-    [player selectByRole:[self role]];
+    NSAssert([self isPlayerSelectable:player], @"%@ cannot select %@.", self.role, player);
+    [player selectByRole:self.role];
     self.isExecuted = YES;
 }
 
 
-- (MafiaInformation *)endAction
-{
+- (MafiaInformation *)endAction {
     return nil;
 }
 
 
-@end // MafiaAction
+@end  // MafiaAction
 
 
 @implementation MafiaAssassinAction : MafiaAction
 
 
-@synthesize isChanceUsed = _isChanceUsed;
-
-
-- (id)initWithNumberOfActors:(NSInteger)numberOfActors playerList:(MafiaPlayerList *)playerList
-{
-    if (self = [super initWithNumberOfActors:numberOfActors playerList:playerList])
-    {
-        _isChanceUsed = NO;
-    }
-    return self;
-}
-
-
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole assassin];
 }
 
 
-- (MafiaNumberRange *)numberOfChoices
-{
+- (MafiaNumberRange *)numberOfChoices {
     return [MafiaNumberRange numberRangeWithMinValue:0 maxValue:1];
 }
 
 
-- (void)executeOnPlayer:(MafiaPlayer *)player
-{
+- (void)executeOnPlayer:(MafiaPlayer *)player {
     NSAssert(!self.isChanceUsed, @"Assassin has already used his chance and cannot execute again.");
     [super executeOnPlayer:player];
     self.isChanceUsed = YES;
 }
 
 
-- (MafiaInformation *)endAction
-{
-    // Assassin becomes a killer after using his chance to shoot.
+- (MafiaInformation *)endAction {
     MafiaInformation *information = nil;
-    if (self.isChanceUsed)
-    {
-        for (MafiaPlayer *assassin in [self actors])
-        {
+    if (self.isChanceUsed) {
+        // Assassin becomes a killer after using his chance to shoot.
+        for (MafiaPlayer *assassin in [self actors]) {
             assassin.role = [MafiaRole killer];
         }
         information = [MafiaInformation announcementInformation];
@@ -178,62 +151,55 @@
 }
 
 
-@end // MafiaAssassinAction
+@end  // MafiaAssassinAction
 
 
 @implementation MafiaGuardianAction
 
 
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole guardian];
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
-{
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
     return (!player.isDead && !player.isUnguardable);
 }
 
 
-@end // MafiaGuardianAction
+@end  // MafiaGuardianAction
 
 
 @implementation MafiaKillerAction
 
 
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole killer];
 }
 
 
-@end // MafiaKillerAction
+@end  // MafiaKillerAction
 
 
 @implementation MafiaDetectiveAction
 
 
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole detective];
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
-{
-    return (player.role != [self role]);
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    // Detective can check any non-detective player, even if he's dead.
+    return (![player.role isEqualToRole:self.role]);
 }
 
 
-- (MafiaInformation *)endAction
-{
-    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:[self role]];
+- (MafiaInformation *)endAction {
+    NSArray *selectedPlayers = [self.playerList alivePlayersSelectedBy:self.role];
     BOOL isPositive = NO;
-    for (MafiaPlayer *player in introspectedPlayers)
-    {
-        if (player.role == [MafiaRole killer])
-        {
+    for (MafiaPlayer *player in selectedPlayers) {
+        if ([player.role isEqualToRole:[MafiaRole killer]]) {
             isPositive = YES;
         }
     }
@@ -241,44 +207,39 @@
 }
 
 
-@end // MafiaDetectiveAction
+@end  // MafiaDetectiveAction
 
 
 @implementation MafiaDoctorAction
 
 
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole doctor];
 }
 
 
-@end // MafiaDoctorAction
+@end  // MafiaDoctorAction
 
 
 @implementation MafiaTraitorAction
 
 
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole traitor];
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
-{
-    return (player.role != [self role]);
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    // Traitor can check any non-traitor player, even if he's dead.
+    return (![player.role isEqualToRole:self.role]);
 }
 
 
-- (MafiaInformation *)endAction
-{
-    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:[self role]];
+- (MafiaInformation *)endAction {
+    NSArray *selectedPlayers = [self.playerList alivePlayersSelectedBy:self.role];
     BOOL isPositive = NO;
-    for (MafiaPlayer *player in introspectedPlayers)
-    {
-        if (player.role == [MafiaRole killer] || player.role == [MafiaRole assassin])
-        {
+    for (MafiaPlayer *player in selectedPlayers) {
+        if ([player.role isEqualToRole:[MafiaRole killer]] || [player.role isEqualToRole:[MafiaRole assassin]]) {
             isPositive = YES;
         }
     }
@@ -286,32 +247,28 @@
 }
 
 
-@end // MafiaTraitorAction
+@end  // MafiaTraitorAction
 
 
 @implementation MafiaUndercoverAction : MafiaAction
 
 
-- (MafiaRole *)role
-{
+- (MafiaRole *)role {
     return [MafiaRole undercover];
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
-{
-    return (player.role != [self role]);
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    // Undercover can check any non-undercover player, even if he's dead.
+    return (![player.role isEqualToRole:self.role]);
 }
 
 
-- (MafiaInformation *)endAction
-{
-    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:[self role]];
+- (MafiaInformation *)endAction {
+    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:self.role];
     BOOL isPositive = NO;
-    for (MafiaPlayer *player in introspectedPlayers)
-    {
-        if (player.role == [MafiaRole killer] || player.role == [MafiaRole assassin])
-        {
+    for (MafiaPlayer *player in introspectedPlayers) {
+        if ([player.role isEqualToRole:[MafiaRole killer]] || [player.role isEqualToRole:[MafiaRole assassin]]) {
             isPositive = YES;
         }
     }
@@ -319,5 +276,4 @@
 }
 
 
-@end // MafiaUndercoverAction
-
+@end  // MafiaUndercoverAction

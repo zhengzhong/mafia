@@ -17,13 +17,10 @@
 @property (assign, nonatomic) BOOL hasTraitor;
 @property (assign, nonatomic) BOOL hasUndercover;
 
-- (id)init;
-
 - (void)addPlayerName:(NSString *)playerName;
 
 - (NSInteger)numberOfPlayersRequired;
 
 - (BOOL)isValid;
 
-@end // MafiaGameSetup
-
+@end  // MafiaGameSetup

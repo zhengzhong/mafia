@@ -19,9 +19,10 @@
 @property (assign, nonatomic) NSInteger actionIndex;
 @property (copy, nonatomic) NSString *winner;
 
-- (id)initWithGameSetup:(MafiaGameSetup *)gameSetup;
+- (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded;
 
-- (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded;
+- (instancetype)initWithGameSetup:(MafiaGameSetup *)gameSetup
+    NS_DESIGNATED_INITIALIZER;
 
 - (void)reset;
 
@@ -31,5 +32,4 @@
 
 - (MafiaAction *)continueToNextAction;
 
-@end // MafiaGame
-
+@end  // MafiaGame

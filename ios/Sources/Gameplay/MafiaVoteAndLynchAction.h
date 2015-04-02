@@ -10,11 +10,11 @@
 
 @interface MafiaVoteAndLynchAction : MafiaAction
 
-- (id)initWithPlayerList:(MafiaPlayerList *)playerList;
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList;
 
-+ (id)actionWithPlayerList:(MafiaPlayerList *)playerList;
+- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList
+    NS_DESIGNATED_INITIALIZER;
 
 - (MafiaInformation *)settleVoteAndLynch;
 
-@end // MafiaVoteAndLynchAction
-
+@end  // MafiaVoteAndLynchAction

@@ -12,75 +12,72 @@
 @implementation MafiaVoteAndLynchAction
 
 
-+ (id)actionWithPlayerList:(MafiaPlayerList *)playerList
-{
+#pragma mark - Factory Method and Initializer
+
+
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList {
     return [[self alloc] initWithPlayerList:playerList];
 }
 
 
-- (id)initWithPlayerList:(MafiaPlayerList *)playerList
-{
-    if (self = [super initWithNumberOfActors:0 playerList:playerList])
-    {
-        self.isAssigned = YES; // TODO:
+- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList {
+    if (self = [super initWithNumberOfActors:0 playerList:playerList]) {
+        self.isAssigned = YES;  // This action can never be in a non-assigned status.
     }
     return self;
 }
 
 
-- (NSString *)description
-{
-    return NSLocalizedString(@"Vote and Lynch", nil);
+// Override superclass' designated initializer.
+- (instancetype)initWithNumberOfActors:(NSInteger)numberOfActors
+                            playerList:(MafiaPlayerList *)playerList {
+    NSAssert(NO, @"Client should NOT call this initializer.");
+    return [self initWithPlayerList:playerList];
 }
 
 
-- (MafiaRole *)role
-{
+#pragma mark - Overrides
+
+
+- (MafiaRole *)role {
     return nil;
 }
 
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
-    self.isAssigned = YES;
+    self.isAssigned = YES;  // This action can never be in a non-assigned status.
 }
 
 
-- (NSArray *)actors
-{
+- (NSArray *)actors {
     return [self.playerList alivePlayers];
 }
 
 
-- (void)executeOnPlayer:(MafiaPlayer *)player
-{
+- (void)executeOnPlayer:(MafiaPlayer *)player {
     NSAssert(!self.isExecuted, @"%@ is already executed.", self);
     player.isVoted = YES;
     self.isExecuted = YES;
 }
 
 
-- (MafiaInformation *)endAction
-{
+- (MafiaInformation *)endAction {
     return [self settleVoteAndLynch];
 }
 
 
-- (MafiaInformation *)settleVoteAndLynch
-{
+#pragma mark - Public
+
+
+- (MafiaInformation *)settleVoteAndLynch {
     MafiaInformation *information = [MafiaInformation announcementInformation];
-    for (MafiaPlayer *player in [self.playerList alivePlayers])
-    {
-        if (player.isVoted)
-        {
-            if (player.isJustGuarded)
-            {
+    for (MafiaPlayer *player in [self.playerList alivePlayers]) {
+        if (player.isVoted) {
+            if (player.isJustGuarded) {
                 information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted but guarded", nil), player.name];
                 player.isVoted = NO;
-            }
-            else
-            {
+            } else {
                 information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted and lynched", nil), player.name];
                 [player markDead];
             }
@@ -90,5 +87,12 @@
 }
 
 
-@end // MafiaVoteAndLynchAction
+#pragma mark - NSObject
 
+
+- (NSString *)description {
+    return NSLocalizedString(@"Vote and Lynch", nil);
+}
+
+
+@end  // MafiaVoteAndLynchAction

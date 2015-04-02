@@ -11,25 +11,14 @@
 @implementation MafiaPlayerList
 
 
-@synthesize players = _players;
-
-
-
-
-- (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded
-{
-    if (self = [super init])
-    {
-        NSMutableArray *players = [[NSMutableArray alloc] initWithCapacity:[playerNames count] * 2];
-        for (NSString *playerName in playerNames)
-        {
-            if (isTwoHanded)
-            {
+- (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded {
+    if (self = [super init]) {
+        NSMutableArray *players = [NSMutableArray arrayWithCapacity:[playerNames count] * 2];
+        for (NSString *playerName in playerNames) {
+            if (isTwoHanded) {
                 [players addObject:[MafiaPlayer playerWithName:[NSString stringWithFormat:@"%@:L", playerName]]];
                 [players addObject:[MafiaPlayer playerWithName:[NSString stringWithFormat:@"%@:R", playerName]]];
-            }
-            else
-            {
+            } else {
                 [players addObject:[MafiaPlayer playerWithName:playerName]];
             }
         }
@@ -39,33 +28,32 @@
 }
 
 
-#pragma mark - NSFastEnumeration method
+#pragma mark - NSFastEnumeration
 
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])stackbuf count:(NSUInteger)len
-{
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                  objects:(id __unsafe_unretained [])stackbuf
+                                    count:(NSUInteger)len {
     return [self.players countByEnumeratingWithState:state objects:stackbuf count:len];
 }
 
 
-- (NSUInteger)count
-{
+#pragma mark - Public
+
+
+- (NSUInteger)count {
     return [self.players count];
 }
 
 
-- (MafiaPlayer *)playerAtIndex:(NSUInteger)index
-{
-    return [self.players objectAtIndex:index];
+- (MafiaPlayer *)playerAtIndex:(NSUInteger)index {
+    return self.players[index];
 }
 
 
-- (MafiaPlayer *)playerNamed:(NSString *)name
-{
-    for (MafiaPlayer *player in self.players)
-    {
-        if ([player.name isEqualToString:name])
-        {
+- (MafiaPlayer *)playerNamed:(NSString *)name {
+    for (MafiaPlayer *player in self.players) {
+        if ([player.name isEqualToString:name]) {
             return player;
         }
     }
@@ -73,52 +61,45 @@
 }
 
 
-- (NSArray *)alivePlayers
-{
+- (NSArray *)alivePlayers {
     return [self alivePlayersWithRole:nil selectedBy:nil];
 }
 
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role
-{
+- (NSArray *)alivePlayersWithRole:(MafiaRole *)role {
     return [self alivePlayersWithRole:role selectedBy:nil];
 }
 
 
-- (NSArray *)alivePlayersSelectedBy:(MafiaRole *)selectedBy
-{
-    return [self alivePlayersWithRole:nil selectedBy:selectedBy];
+- (NSArray *)alivePlayersSelectedBy:(MafiaRole *)selectorRole {
+    return [self alivePlayersWithRole:nil selectedBy:selectorRole];
 }
 
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role selectedBy:(MafiaRole *)selectedBy
-{
-    NSPredicate *playerIsAlive = [NSPredicate predicateWithFormat:@"isDead == NO"];
-    NSArray *filteredPlayers = [self.players filteredArrayUsingPredicate:playerIsAlive];
-    if (role != nil)
-    {
-        NSPredicate *playerIsRole = [NSPredicate predicateWithFormat:@"role.name == %@", role.name];
-        filteredPlayers = [filteredPlayers filteredArrayUsingPredicate:playerIsRole];
-    }
-    if (selectedBy != nil)
-    {
-        NSPredicate *playerIsSelected = [NSPredicate predicateWithBlock:^BOOL(id player, NSDictionary *bindings) {
-            return [player isSelectedByRole:selectedBy];
+- (NSArray *)alivePlayersWithRole:(MafiaRole *)role selectedBy:(MafiaRole *)selectorRole {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:
+        ^BOOL(id object, NSDictionary *bindings) {
+            MafiaPlayer *player = object;
+            if (player.isDead) {
+                return NO;
+            }
+            if (role != nil && ![role isEqualToRole:player.role]) {
+                return NO;
+            }
+            if (selectorRole != nil && ![player isSelectedByRole:selectorRole]) {
+                return NO;
+            }
+            return YES;
         }];
-        filteredPlayers = [filteredPlayers filteredArrayUsingPredicate:playerIsSelected];
-    }
-    return filteredPlayers;
+    return [self.players filteredArrayUsingPredicate:predicate];
 }
 
 
-- (void)reset
-{
-    for (MafiaPlayer *player in self.players)
-    {
+- (void)reset {
+    for (MafiaPlayer *player in self.players) {
         [player reset];
     }
 }
 
 
-@end // MafiaPlayerList
-
+@end  // MafiaPlayerList

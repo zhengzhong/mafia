@@ -8,13 +8,16 @@
 #import "MafiaAction.h"
 
 
+/*!
+ * This action is executed at dawn, when all the roles have executed their actions at night.
+ */
 @interface MafiaSettleTagsAction : MafiaAction
 
-- (id)initWithPlayerList:(MafiaPlayerList *)playerList;
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList;
 
-+ (id)actionWithPlayerList:(MafiaPlayerList *)playerList;
+- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList
+    NS_DESIGNATED_INITIALIZER;
 
 - (MafiaInformation *)settleTags;
 
-@end // MafiaSettleTagsAction
-
+@end  // MafiaSettleTagsAction

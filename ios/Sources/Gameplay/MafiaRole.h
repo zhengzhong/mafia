@@ -5,33 +5,49 @@
 
 #import <Foundation/Foundation.h>
 
+/*!
+ * Enumeration class of a role.
+ */
 @interface MafiaRole : NSObject
 
 @property (readonly, copy, nonatomic) NSString *name;
 @property (readonly, copy, nonatomic) NSString *displayName;
 @property (readonly, assign, nonatomic) NSInteger alignment;
 
-- (id)initWithName:(NSString *)name displayName:(NSString *)displayName alignment:(NSInteger)alignment;
++ (instancetype)unrevealed;
 
-+ (MafiaRole *)unrevealed;
++ (instancetype)civilian;
 
-+ (MafiaRole *)civilian;
++ (instancetype)assassin;
 
-+ (MafiaRole *)assassin;
++ (instancetype)guardian;
 
-+ (MafiaRole *)guardian;
++ (instancetype)killer;
 
-+ (MafiaRole *)killer;
++ (instancetype)detective;
 
-+ (MafiaRole *)detective;
++ (instancetype)doctor;
 
-+ (MafiaRole *)doctor;
++ (instancetype)traitor;
 
-+ (MafiaRole *)traitor;
++ (instancetype)undercover;
 
-+ (MafiaRole *)undercover;
-
+/*!
+ * Returns an array of all available roles.
+ */
 + (NSArray *)roles;
 
-@end // MafiaRole
+/*!
+ * Designated initializer. This initializer should not be used externally.
+ */
+- (instancetype)initWithName:(NSString *)name
+                 displayName:(NSString *)displayName
+                   alignment:(NSInteger)alignment
+    NS_DESIGNATED_INITIALIZER;
 
+/*!
+ * Checks equality.
+ */
+- (BOOL)isEqualToRole:(MafiaRole *)otherRole;
+
+@end  // MafiaRole

@@ -19,13 +19,13 @@
 @property (assign, nonatomic) BOOL isVoted;
 @property (strong, nonatomic) NSMutableArray *tags;
 
-- (id)initWithName:(NSString *)name;
+@property (readonly, assign, nonatomic) BOOL isUnrevealed;
 
-+ (id)playerWithName:(NSString *)name;
++ (instancetype)playerWithName:(NSString *)name;
+
+- (instancetype)initWithName:(NSString *)name;
 
 - (void)reset;
-
-- (BOOL)isUnrevealed;
 
 - (void)selectByRole:(MafiaRole *)role;
 
@@ -35,7 +35,10 @@
 
 - (void)lynch;
 
+/*!
+ * Marks the player as dead, and removes all the tags attached on him.
+ * Note: the status flags on the player are not changed.
+ */
 - (void)markDead;
 
-@end
-
+@end  // MafiaPlayer

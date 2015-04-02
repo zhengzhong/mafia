@@ -5,135 +5,113 @@
 
 #import "MafiaRole.h"
 
+
 @implementation MafiaRole
 
 
-@synthesize name = _name;
-@synthesize displayName = _displayName;
-@synthesize alignment = _alignment;
+#pragma mark - Factory Methods
 
 
-
-
-- (id)initWithName:(NSString *)name displayName:(NSString *)displayName alignment:(NSInteger)alignment
-{
-    if (self = [super init])
-    {
-        _name = [name copy];
-        _displayName = [displayName copy];
-        _alignment = alignment;
++ (instancetype)unrevealed {
+    static MafiaRole *unrevealed = nil;
+    if (unrevealed == nil) {
+        unrevealed = [[self alloc] initWithName:@"unrevealed"
+                                    displayName:NSLocalizedString(@"Unrevealed", nil)
+                                      alignment:0];
     }
-    return self;
+    return unrevealed;
 }
 
 
-- (NSString *)description
-{
-    return self.displayName;
-}
-
-
-+ (MafiaRole *)unrevealed
-{
-    static MafiaRole *Unrevealed = nil;
-    if (Unrevealed == nil)
-    {
-        Unrevealed = [[self alloc] initWithName:@"unrevealed" displayName:NSLocalizedString(@"Unrevealed", nil) alignment:0];
++ (instancetype)civilian {
+    static MafiaRole *civilian = nil;
+    if (civilian == nil) {
+        civilian = [[self alloc] initWithName:@"civilian"
+                                  displayName:NSLocalizedString(@"Civilian", nil)
+                                    alignment:1];
     }
-    return Unrevealed;
+    return civilian;
 }
 
 
-+ (MafiaRole *)civilian
-{
-    static MafiaRole *Civilian = nil;
-    if (Civilian == nil)
-    {
-        Civilian = [[self alloc] initWithName:@"civilian" displayName:NSLocalizedString(@"Civilian", nil) alignment:1];
++ (instancetype)assassin {
+    static MafiaRole *assassin = nil;
+    if (assassin == nil) {
+        assassin = [[self alloc] initWithName:@"assassin"
+                                  displayName:NSLocalizedString(@"Assassin", nil)
+                                    alignment:-3];
     }
-    return Civilian;
+    return assassin;
 }
 
 
-+ (MafiaRole *)assassin
-{
-    static MafiaRole *Assassin = nil;
-    if (Assassin == nil)
-    {
-        Assassin = [[self alloc] initWithName:@"assassin" displayName:NSLocalizedString(@"Assassin", nil) alignment:-3];
++ (instancetype)guardian {
+    static MafiaRole *guardian = nil;
+    if (guardian == nil) {
+        guardian = [[self alloc] initWithName:@"guardian"
+                                  displayName:NSLocalizedString(@"Guardian", nil)
+                                    alignment:1];
     }
-    return Assassin;
+    return guardian;
 }
 
 
-+ (MafiaRole *)guardian;
-{
-    static MafiaRole *Guardian = nil;
-    if (Guardian == nil)
-    {
-        Guardian = [[self alloc] initWithName:@"guardian" displayName:NSLocalizedString(@"Guardian", nil) alignment:1];
++ (instancetype)killer {
+    static MafiaRole *killer = nil;
+    if (killer == nil) {
+        killer = [[self alloc] initWithName:@"killer"
+                                displayName:NSLocalizedString(@"Killer", nil)
+                                  alignment:-3];
     }
-    return Guardian;
+    return killer;
 }
 
 
-+ (MafiaRole *)killer
-{
-    static MafiaRole *Killer = nil;
-    if (Killer == nil)
-    {
-        Killer = [[self alloc] initWithName:@"killer" displayName:NSLocalizedString(@"Killer", nil) alignment:-3];
++ (instancetype)detective {
+    static MafiaRole *detective = nil;
+    if (detective == nil) {
+        detective = [[self alloc] initWithName:@"detective"
+                                   displayName:NSLocalizedString(@"Detective", nil)
+                                     alignment:3];
     }
-    return Killer;
+    return detective;
 }
 
 
-+ (MafiaRole *)detective
-{
-    static MafiaRole *Detective = nil;
-    if (Detective == nil)
-    {
-        Detective = [[self alloc] initWithName:@"detective" displayName:NSLocalizedString(@"Detective", nil) alignment:3];
++ (instancetype)doctor {
+    static MafiaRole *doctor = nil;
+    if (doctor == nil) {
+        doctor = [[self alloc] initWithName:@"doctor"
+                                displayName:NSLocalizedString(@"Doctor", nil)
+                                  alignment:1];
     }
-    return Detective;
+    return doctor;
 }
 
 
-+ (MafiaRole *)doctor
-{
-    static MafiaRole *Doctor = nil;
-    if (Doctor == nil)
-    {
-        Doctor = [[self alloc] initWithName:@"doctor" displayName:NSLocalizedString(@"Doctor", nil) alignment:1];
++ (instancetype)traitor {
+    static MafiaRole *traitor = nil;
+    if (traitor == nil) {
+        traitor = [[self alloc] initWithName:@"traitor"
+                                 displayName:NSLocalizedString(@"Traitor", nil)
+                                   alignment:-2];
     }
-    return Doctor;
+    return traitor;
 }
 
 
-+ (MafiaRole *)traitor
-{
-    static MafiaRole *Traitor = nil;
-    if (Traitor == nil)
-    {
-        Traitor = [[self alloc] initWithName:@"traitor" displayName:NSLocalizedString(@"Traitor", nil) alignment:-2];
++ (instancetype)undercover {
+    static MafiaRole *undercover = nil;
+    if (undercover == nil) {
+        undercover = [[self alloc] initWithName:@"undercover"
+                                    displayName:NSLocalizedString(@"Undercover", nil)
+                                      alignment:-3];
     }
-    return Traitor;
+    return undercover;
 }
 
 
-+ (MafiaRole *)undercover
-{
-    static MafiaRole *Undercover = nil;
-    if (Undercover == nil)
-    {
-        Undercover = [[self alloc] initWithName:@"undercover" displayName:NSLocalizedString(@"Undercover", nil) alignment:-3];
-    }
-    return Undercover;
-}
-
-
-+ (NSArray *)roles
-{
++ (NSArray *)roles {
     return @[
         [self civilian],
         [self assassin],
@@ -147,5 +125,49 @@
 }
 
 
-@end // MafiaRole
+#pragma mark - Initializer
 
+
+- (instancetype)initWithName:(NSString *)name
+                 displayName:(NSString *)displayName
+                   alignment:(NSInteger)alignment {
+    if (self = [super init]) {
+        _name = [name copy];
+        _displayName = [displayName copy];
+        _alignment = alignment;
+    }
+    return self;
+}
+
+
+#pragma mark - Equality
+
+
+- (BOOL)isEqual:(id)other {
+    if (other == self) {
+        return YES;
+    }
+    if (other == nil || ![other isKindOfClass:[self class]]) {
+        return NO;
+    }
+    return [self isEqualToRole:other];
+}
+
+
+- (BOOL)isEqualToRole:(MafiaRole *)otherRole {
+    if (self == otherRole) {
+        return YES;
+    }
+    return [self.name isEqualToString:otherRole.name];
+}
+
+
+#pragma mark - NSObject
+
+
+- (NSString *)description {
+    return self.displayName;
+}
+
+
+@end  // MafiaRole

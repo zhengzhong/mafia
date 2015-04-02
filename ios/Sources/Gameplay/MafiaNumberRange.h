@@ -10,17 +10,16 @@
 @property (readonly, assign, nonatomic) NSInteger minValue;
 @property (readonly, assign, nonatomic) NSInteger maxValue;
 
-+ (id)numberRangeWithSingleValue:(NSInteger)value;
++ (instancetype)numberRangeWithSingleValue:(NSInteger)value;
 
-+ (id)numberRangeWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue;
++ (instancetype)numberRangeWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue;
 
-- (id)initWithSingleValue:(NSInteger)value;
-
-- (id)initWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue;
+- (instancetype)initWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue
+    NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)isNumberInRange:(NSInteger)number;
 
-- (NSString *)formattedStringWithSingleForm:(NSString *)singleForm pluralForm:(NSString *)pluralForm;
+- (NSString *)formattedStringWithSingleForm:(NSString *)singleForm
+                                 pluralForm:(NSString *)pluralForm;
 
-@end // MafiaNumberRange
-
+@end  // MafiaNumberRange

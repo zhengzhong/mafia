@@ -11,112 +11,91 @@
 #import "MafiaRole.h"
 
 
-@interface MafiaSettleTagsAction ()
-
-- (NSArray *)settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames;
-
-- (NSArray *)settleGuardianTag;
-
-- (NSArray *)settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames;
-
-- (NSArray *)settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames;
-
-- (NSArray *)settleIntrospectionTags;
-
-@end
-
-
 @implementation MafiaSettleTagsAction
 
 
-+ (id)actionWithPlayerList:(MafiaPlayerList *)playerList
-{
+#pragma mark - Factory Method and Initializer
+
+
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList {
     return [[self alloc] initWithPlayerList:playerList];
 }
 
 
-- (id)initWithPlayerList:(MafiaPlayerList *)playerList
-{
-    if (self = [super initWithNumberOfActors:0 playerList:playerList])
-    {
-        self.isAssigned = YES; // TODO;
+- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList {
+    if (self = [super initWithNumberOfActors:0 playerList:playerList]) {
+        self.isAssigned = YES;
     }
     return self;
 }
 
 
-- (NSString *)description
-{
-    return NSLocalizedString(@"Settle Tags", nil);
+// Override superclass' designated initializer.
+- (instancetype)initWithNumberOfActors:(NSInteger)numberOfActors
+                            playerList:(MafiaPlayerList *)playerList {
+    NSAssert(NO, @"Client should NOT call this initializer.");
+    return [self initWithPlayerList:playerList];
 }
 
 
-- (void)reset
-{
+#pragma mark - Overrides
+
+
+- (void)reset {
     [super reset];
     self.isAssigned = YES;
 }
 
 
-- (NSArray *)actors
-{
-    return [NSArray arrayWithObjects:nil];
+- (NSArray *)actors {
+    return @[];  // This action has no actors.
 }
 
 
-- (MafiaNumberRange *)numberOfChoices
-{
+- (MafiaNumberRange *)numberOfChoices {
     return [MafiaNumberRange numberRangeWithSingleValue:0];
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player
-{
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
     return NO;
 }
 
 
-- (void)beginAction
-{
+- (void)beginAction {
     [super beginAction];
-    for (MafiaPlayer *player in self.playerList.players)
-    {
-        if ([player isUnrevealed])
-        {
+    // Assign civilian role to all unrevealed players. This should happen only at the first dawn.
+    for (MafiaPlayer *player in self.playerList) {
+        if (player.isUnrevealed) {
             player.role = [MafiaRole civilian];
         }
     }
 }
 
 
-- (MafiaInformation *)endAction
-{
+- (MafiaInformation *)endAction {
     return [self settleTags];
 }
 
 
-- (MafiaInformation *)settleTags
-{
+#pragma mark - Public
+
+
+- (MafiaInformation *)settleTags {
     MafiaInformation *information = [MafiaInformation announcementInformation];
-    // Settle tags and collect information details.
+    // Settle tags in order, and collect information details.
     NSMutableArray *deadPlayerNames = [NSMutableArray arrayWithCapacity:4];
-    [information addDetails:[self settleAssassinTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
-    [information addDetails:[self settleGuardianTag]];
-    [information addDetails:[self settleKillerTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
-    [information addDetails:[self settleDoctorTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
-    [information addDetails:[self settleIntrospectionTags]];
-    // Construct information message.
-    if ([deadPlayerNames count] == 0)
-    {
+    [information addDetails:[self _settleAssassinTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self _settleGuardianTag]];
+    [information addDetails:[self _settleKillerTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self _settleDoctorTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self _settleIntrospectionTags]];
+    // Construct information message as a summary of the settlement result.
+    if ([deadPlayerNames count] == 0) {
         information.message = NSLocalizedString(@"Nobody was dead", nil);
-    }
-    else if ([deadPlayerNames count] == 1)
-    {
-        NSString *deadPlayerName = [deadPlayerNames objectAtIndex:0];
-        information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was dead", nil), deadPlayerName];
-    }
-    else
-    {
+    } else if ([deadPlayerNames count] == 1) {
+        information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was dead", nil), deadPlayerNames[0]];
+    } else {
         NSString *deadPlayerNamesString = [deadPlayerNames componentsJoinedByString:@", "];
         information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ were dead", nil), deadPlayerNamesString];
     }
@@ -124,30 +103,27 @@
 }
 
 
-#pragma mark - Private methods
+#pragma mark - Private
 
 
-- (NSArray *)settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames
-{
+- (NSArray *)_settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If a player is assassined, he's definitely killed.
     BOOL isGuardianKilled = NO;
-    for (MafiaPlayer *assassinedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole assassin]])
-    {
+    NSArray *assassinedPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole assassin]];
+    for (MafiaPlayer *assassinedPlayer in assassinedPlayers) {
         [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was assassined", nil), assassinedPlayer]];
         [assassinedPlayer markDead];
         [deadPlayerNames addObject:assassinedPlayer.name];
-        if (assassinedPlayer.role == [MafiaRole guardian])
-        {
+        if ([assassinedPlayer.role isEqualToRole:[MafiaRole guardian]]) {
             isGuardianKilled = YES;
         }
     }
     // If guardian is assassined, the guarded player is also dead.
     // Note: when settling assassin tag, guardian tag has not yet been settled.
-    if (isGuardianKilled)
-    {
-        for (MafiaPlayer *guardedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]])
-        {
+    if (isGuardianKilled) {
+        NSArray *guardedPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]];
+        for (MafiaPlayer *guardedPlayer in guardedPlayers) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), guardedPlayer]];
             [guardedPlayer markDead];
             [deadPlayerNames addObject:guardedPlayer.name];
@@ -157,110 +133,90 @@
 }
 
 
-- (NSArray *)settleGuardianTag
-{
+- (NSArray *)_settleGuardianTag {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // Check the guarded players...
-    for (MafiaPlayer *guardedPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]])
-    {
-        if (guardedPlayer.role == [MafiaRole killer])
-        {
-            // If killer is guarded, nobody can be shot except guardian himself.
-            for (MafiaPlayer *shotPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole killer]])
-            {
-                if (shotPlayer.role != [MafiaRole guardian])
-                {
+    NSArray *guardedPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]];
+    for (MafiaPlayer *guardedPlayer in guardedPlayers) {
+        // If killer is guarded, nobody can be shot except guardian himself.
+        if ([guardedPlayer.role isEqualToRole:[MafiaRole killer]]) {
+            NSArray *shotPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole killer]];
+            for (MafiaPlayer *shotPlayer in shotPlayers) {
+                if (![shotPlayer.role isEqualToRole:[MafiaRole guardian]]) {
                     [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to shoot", nil), guardedPlayer]];
                     [shotPlayer unselectFromRole:[MafiaRole killer]];
-                }
-                else
-                {
+                } else {
                     [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%1$@ was guarded and %2$@ was shot", nil), guardedPlayer, shotPlayer]];
                 }
             }
         }
-        else if (guardedPlayer.role == [MafiaRole doctor])
-        {
-            // If doctor is guarded, nobody can be healt.
+        // If doctor is guarded, nobody can be healt.
+        if ([guardedPlayer.role isEqualToRole:[MafiaRole doctor]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to heal", nil), guardedPlayer]];
-            for (MafiaPlayer *healtPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]])
-            {
+            NSArray *healtPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]];
+            for (MafiaPlayer *healtPlayer in healtPlayers) {
                 [healtPlayer unselectFromRole:[MafiaRole doctor]];
             }
         }
-        // Generally, if a player is guarded, he can neither be healt nor be shot.
-        // Exception: if guardian is guarded, he can still be shot.
-        if ([guardedPlayer isSelectedByRole:[MafiaRole doctor]])
-        {
+        // If a player is guarded, he cannot be healt.
+        if ([guardedPlayer isSelectedByRole:[MafiaRole doctor]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be healt", nil), guardedPlayer]];
             [guardedPlayer unselectFromRole:[MafiaRole doctor]];
         }
-        if ([guardedPlayer isSelectedByRole:[MafiaRole killer]] && guardedPlayer.role != [MafiaRole guardian])
-        {
-            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be shot", nil), guardedPlayer]];
-            [guardedPlayer unselectFromRole:[MafiaRole killer]];
+        // If a player is guarded, he cannot be shot, unless he's guardian himself.
+        if ([guardedPlayer isSelectedByRole:[MafiaRole killer]]) {
+            if (![guardedPlayer.role isEqualToRole:[MafiaRole guardian]]) {
+                [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be shot", nil), guardedPlayer]];
+                [guardedPlayer unselectFromRole:[MafiaRole killer]];
+            }
         }
     }
-    // Make player unguardable if he's guarded twice continuously.
-    for (MafiaPlayer *player in [self.playerList alivePlayers])
-    {
-        if ([player isSelectedByRole:[MafiaRole guardian]])
-        {
-            if (player.isJustGuarded)
-            {
+    // Update isJustGuarded flag for all alive players.
+    for (MafiaPlayer *player in [self.playerList alivePlayers]) {
+        if ([player isSelectedByRole:[MafiaRole guardian]]) {
+            // Make player unguardable if he's guarded twice continuously.
+            if (player.isJustGuarded) {
                 [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded twice continuously and became unguardable", nil), player]];
                 player.isUnguardable = YES;
             }
             player.isJustGuarded = YES;
             [player unselectFromRole:[MafiaRole guardian]];
-        }
-        else
-        {
+        } else {
             player.isJustGuarded = NO;
         }
     }
-    // Return messages.
+    // Done.
     return messages;
 }
 
 
-- (NSArray *)settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames
-{
+- (NSArray *)_settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If a player is shot, he's killed unless his role is assassin or he's healt.
     BOOL isGuardianKilled = NO;
-    for (MafiaPlayer *shotPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole killer]])
-    {
-        if (shotPlayer.role == [MafiaRole assassin])
-        {
+    NSArray *shotPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole killer]];
+    for (MafiaPlayer *shotPlayer in shotPlayers) {
+        if ([shotPlayer.role isEqualToRole:[MafiaRole assassin]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ dodged the bullet from killer", nil), shotPlayer]];
             [shotPlayer unselectFromRole:[MafiaRole killer]];
-        }
-        else if ([shotPlayer isSelectedByRole:[MafiaRole doctor]])
-        {
+        } else if ([shotPlayer isSelectedByRole:[MafiaRole doctor]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot but healt", nil), shotPlayer]];
             [shotPlayer unselectFromRole:[MafiaRole killer]];
             [shotPlayer unselectFromRole:[MafiaRole doctor]];
-        }
-        else
-        {
+        } else {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot and killed", nil), shotPlayer]];
             [shotPlayer markDead];
             [deadPlayerNames addObject:shotPlayer.name];
-            if (shotPlayer.role == [MafiaRole guardian])
-            {
+            if ([shotPlayer.role isEqualToRole:[MafiaRole guardian]]) {
                 isGuardianKilled = YES;
             }
         }
     }
     // If guardian is killed, the guarded player is also dead.
-    // Note: when settling killer tag, guardian tag has already been settled.
-    if (isGuardianKilled)
-    {
-        for (MafiaPlayer *player in [self.playerList alivePlayers])
-        {
-            if (player.isJustGuarded)
-            {
+    // Note: guardian tag should have already been settled, so we only check isJustGuarded flag.
+    if (isGuardianKilled) {
+        for (MafiaPlayer *player in [self.playerList alivePlayers]) {
+            if (player.isJustGuarded) {
                 [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), player]];
                 [player markDead];
                 [deadPlayerNames addObject:player.name];
@@ -271,26 +227,18 @@
 }
 
 
-- (NSArray *)settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames
-{
+- (NSArray *)_settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If player is misdiagnosed twice, he's killed.
-    for (MafiaPlayer *healtPlayer in [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]])
-    {
-        if ([healtPlayer isSelectedByRole:[MafiaRole killer]])
-        {
-            [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot but healt", nil), healtPlayer]];
-            [healtPlayer unselectFromRole:[MafiaRole killer]];
-            [healtPlayer unselectFromRole:[MafiaRole doctor]];
-        }
-        else if (healtPlayer.isMisdiagnosed)
-        {
+    // Note: killer tag should have already been settled, so no need to check if the healt player
+    // is shot by killer. In this stage, all players selected by doctor are misdiagnosed.
+    NSArray *healtPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]];
+    for (MafiaPlayer *healtPlayer in healtPlayers) {
+        if (healtPlayer.isMisdiagnosed) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed twice and killed", nil), healtPlayer]];
             [healtPlayer markDead];
             [deadPlayerNames addObject:healtPlayer.name];
-        }
-        else
-        {
+        } else {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed", nil), healtPlayer]];
             healtPlayer.isMisdiagnosed = YES;
             [healtPlayer unselectFromRole:[MafiaRole doctor]];
@@ -300,10 +248,8 @@
 }
 
 
-- (NSArray *)settleIntrospectionTags
-{
-    for (MafiaPlayer *player in [self.playerList alivePlayers])
-    {
+- (NSArray *)_settleIntrospectionTags {
+    for (MafiaPlayer *player in [self.playerList alivePlayers]) {
         [player unselectFromRole:[MafiaRole detective]];
         [player unselectFromRole:[MafiaRole traitor]];
         [player unselectFromRole:[MafiaRole undercover]];
@@ -312,5 +258,11 @@
 }
 
 
-@end // MafiaSettleTagsAction
+#pragma mark - NSObject
 
+- (NSString *)description {
+    return NSLocalizedString(@"Settle Tags", nil);
+}
+
+
+@end  // MafiaSettleTagsAction
