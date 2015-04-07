@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ESU-4A-lUb">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <scenes>
+        <!--Gameplay-->
+        <scene sceneID="TaS-mp-fhu">
+            <objects>
+                <viewController id="uLx-O2-8iE" customClass="MafiaGameplayWebPageController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7aa-l4-uYN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="3PB-am-y9K">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="uLx-O2-8iE" id="OyP-Es-fkl"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Gameplay" id="ujA-1G-FHn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="JO1-mn-6RT">
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="uLx-O2-8iE" id="TPP-2R-WUb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshBarButtonItem" destination="JO1-mn-6RT" id="rhQ-hN-xmS"/>
+                        <outlet property="webView" destination="3PB-am-y9K" id="F9N-NG-7tl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jyi-0H-dzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1132" y="414"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="Fd6-78-qSx">
+            <objects>
+                <viewController id="7aS-ih-nRB" customClass="MafiaAboutController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="15r-5x-W5D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="M88-k3-t1j">
+                                <rect key="frame" x="16" y="223" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Gameplay">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="uLx-O2-8iE" kind="push" id="3aj-Fu-tPB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="Fkh-SU-wcu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mk0-av-Y09" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="583" y="414"/>
+        </scene>
+        <!--Game-->
+        <scene sceneID="bkL-bR-28T">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Yvd-SR-Pqa" customClass="MafiaGameController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0lj-cC-77k">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="dfC-GY-PKj">
+                                <rect key="frame" x="0.0" y="170" width="320" height="348"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="145" id="1eK-oM-ZyZ" customClass="MafiaGamePlayerCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1eK-oM-ZyZ" id="qej-1t-hfH">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WxN-pg-8za">
+                                                    <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iwq-Sr-70t">
+                                                    <rect key="frame" x="80" y="8" width="194" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FtZ-G2-fUr">
+                                                    <rect key="frame" x="80" y="37" width="232" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="eHh-kl-0AA">
+                                                    <rect key="frame" x="8" y="80" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FUw-z5-W3E">
+                                                    <rect key="frame" x="40" y="80" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wtv-Fo-dtC">
+                                                    <rect key="frame" x="72" y="80" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2bk-rS-DTM">
+                                                    <rect key="frame" x="104" y="80" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="c0R-8X-Vev">
+                                                    <rect key="frame" x="136" y="80" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vlc-fd-N61">
+                                                    <rect key="frame" x="168" y="80" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pTy-x7-6N5">
+                                                    <rect key="frame" x="8" y="112" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4Ol-7O-ua3">
+                                                    <rect key="frame" x="40" y="112" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mXq-Gf-8Aa">
+                                                    <rect key="frame" x="72" y="112" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="x4Y-tC-uO0">
+                                                    <rect key="frame" x="104" y="112" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XWy-fL-dhV">
+                                                    <rect key="frame" x="136" y="112" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yMU-Di-HGS">
+                                                    <rect key="frame" x="168" y="112" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="P2J-h8-BhO">
+                                                    <rect key="frame" x="256" y="80" width="56" height="56"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pVI-Sn-HMV">
+                                                    <rect key="frame" x="282" y="8" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="...">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="UdU-qU-szj" kind="push" identifier="UpdatePlayer" id="XrZ-av-Zl8"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImageView" destination="WxN-pg-8za" id="MaV-3s-Iv7"/>
+                                            <outlet property="nameLabel" destination="iwq-Sr-70t" id="hdI-7e-iY4"/>
+                                            <outlet property="roleImageView" destination="P2J-h8-BhO" id="dsg-KQ-nT5"/>
+                                            <outlet property="roleLabel" destination="FtZ-G2-fUr" id="2rg-zw-o87"/>
+                                            <outletCollection property="tagImageViews" destination="pTy-x7-6N5" id="Kx7-qC-M5Q"/>
+                                            <outletCollection property="tagImageViews" destination="4Ol-7O-ua3" id="32N-SA-hnW"/>
+                                            <outletCollection property="tagImageViews" destination="mXq-Gf-8Aa" id="I4Y-Hd-HHH"/>
+                                            <outletCollection property="tagImageViews" destination="x4Y-tC-uO0" id="1a2-ol-HHV"/>
+                                            <outletCollection property="tagImageViews" destination="XWy-fL-dhV" id="YS1-t9-7ua"/>
+                                            <outletCollection property="tagImageViews" destination="yMU-Di-HGS" id="i3c-gn-Hmo"/>
+                                            <outletCollection property="statusImageViews" destination="eHh-kl-0AA" id="WYa-R6-NHf"/>
+                                            <outletCollection property="statusImageViews" destination="FUw-z5-W3E" id="NEW-cj-trH"/>
+                                            <outletCollection property="statusImageViews" destination="wtv-Fo-dtC" id="2TK-rM-Wi5"/>
+                                            <outletCollection property="statusImageViews" destination="2bk-rS-DTM" id="5YB-1k-wMN"/>
+                                            <outletCollection property="statusImageViews" destination="c0R-8X-Vev" id="wWe-tX-g0i"/>
+                                            <outletCollection property="statusImageViews" destination="Vlc-fd-N61" id="noN-DN-PXu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Yvd-SR-Pqa" id="MK6-aY-cCk"/>
+                                    <outlet property="delegate" destination="Yvd-SR-Pqa" id="iZf-mo-JUu"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pBi-Of-3aj">
+                                <rect key="frame" x="16" y="80" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Action" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VRu-v6-0iF">
+                                <rect key="frame" x="72" y="80" width="232" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prompt of current action" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TVb-oD-g5y">
+                                <rect key="frame" x="72" y="110" width="232" height="18"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l9S-Dn-oe6">
+                                <rect key="frame" x="16" y="140" width="288" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="Yvd-SR-Pqa" eventType="touchUpInside" id="jqz-UO-OWI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Game" id="b2K-Cw-oFN">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="8Zp-Db-mhi">
+                            <connections>
+                                <action selector="resetButtonTapped:" destination="Yvd-SR-Pqa" id="KHl-TY-nsd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="actionLabel" destination="VRu-v6-0iF" id="65s-gQ-Xhl"/>
+                        <outlet property="dayNightImageView" destination="pBi-Of-3aj" id="65z-L8-jpi"/>
+                        <outlet property="nextButton" destination="l9S-Dn-oe6" id="LZq-Wz-4x3"/>
+                        <outlet property="playersTableView" destination="dfC-GY-PKj" id="cnF-sc-TuL"/>
+                        <outlet property="promptLabel" destination="TVb-oD-g5y" id="eMi-4D-jPx"/>
+                        <segue destination="9XC-g6-jPb" kind="modal" identifier="ShowInformation" id="8RF-T5-mpa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z9U-YU-eRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1664" y="414"/>
+        </scene>
+        <!--Update Player-->
+        <scene sceneID="MYh-MI-JUD">
+            <objects>
+                <tableViewController id="UdU-qU-szj" customClass="MafiaUpdatePlayerController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ugq-kq-am0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Role" id="JGt-6M-o4W">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="DJl-6A-ZvG" style="IBUITableViewCellStyleDefault" id="K6E-G9-ygR">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6E-G9-ygR" id="ZLY-uQ-G9r">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DJl-6A-ZvG">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="GID-9f-bIv" kind="push" identifier="UpdatePlayerRole" id="uco-8C-CAB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Status" id="WNB-ey-3yb">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="RvF-6B-0gg" style="IBUITableViewCellStyleDefault" id="dUy-8r-3WB" customClass="MafiaPlayerStatusCell">
+                                        <rect key="frame" x="0.0" y="170" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dUy-8r-3WB" id="b8e-xQ-0cn">
+                                            <rect key="frame" x="0.0" y="170" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Dead?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RvF-6B-0gg">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="dYy-8k-tof">
+                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchToggled:" destination="dUy-8r-3WB" eventType="touchUpInside" id="9kH-ZU-JZ3"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="valueSwitch" destination="dYy-8k-tof" id="ICQ-8e-apd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="PKS-uM-Xx4" style="IBUITableViewCellStyleDefault" id="0Sd-S9-BhI" customClass="MafiaPlayerStatusCell">
+                                        <rect key="frame" x="0.0" y="170" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Sd-S9-BhI" id="hiC-Jr-WCR">
+                                            <rect key="frame" x="0.0" y="170" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Misdiagnosed?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PKS-uM-Xx4">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="4Ql-kQ-GxV">
+                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchToggled:" destination="0Sd-S9-BhI" eventType="touchUpInside" id="I7f-Zb-33s"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="valueSwitch" destination="4Ql-kQ-GxV" id="rze-zv-3OM"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="AjN-fo-sNL" style="IBUITableViewCellStyleDefault" id="zAi-gE-k95" customClass="MafiaPlayerStatusCell">
+                                        <rect key="frame" x="0.0" y="170" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zAi-gE-k95" id="rua-1N-gM1">
+                                            <rect key="frame" x="0.0" y="170" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Just Guarded?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AjN-fo-sNL">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="pOo-4m-Fnl">
+                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchToggled:" destination="zAi-gE-k95" eventType="touchUpInside" id="c0d-kd-yG5"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="valueSwitch" destination="pOo-4m-Fnl" id="6Yn-bo-tLh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="YQX-ce-WlD" style="IBUITableViewCellStyleDefault" id="0eS-w9-ApR" customClass="MafiaPlayerStatusCell">
+                                        <rect key="frame" x="0.0" y="170" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0eS-w9-ApR" id="DgR-qm-dAb">
+                                            <rect key="frame" x="0.0" y="170" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Unguardable?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YQX-ce-WlD">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="bES-vY-FdJ">
+                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchToggled:" destination="0eS-w9-ApR" eventType="touchUpInside" id="6PP-aj-Jy5"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="valueSwitch" destination="bES-vY-FdJ" id="vd5-UL-aCh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="pWr-CP-vdQ" style="IBUITableViewCellStyleDefault" id="klq-Iw-VxZ" customClass="MafiaPlayerStatusCell">
+                                        <rect key="frame" x="0.0" y="170" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="klq-Iw-VxZ" id="hlT-MF-QOS">
+                                            <rect key="frame" x="0.0" y="170" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Voted?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pWr-CP-vdQ">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="9Yz-w3-MqU">
+                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchToggled:" destination="klq-Iw-VxZ" eventType="touchUpInside" id="djA-wd-rcZ"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="valueSwitch" destination="9Yz-w3-MqU" id="UWD-kJ-M2F"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="UdU-qU-szj" id="GAl-UE-iht"/>
+                            <outlet property="delegate" destination="UdU-qU-szj" id="cY2-Db-LdH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Update Player" id="LiV-Up-2TT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PBG-Me-IWN">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="UdU-qU-szj" id="51V-Dn-ggJ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="PAc-fO-ntR">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="UdU-qU-szj" id="dc9-Pj-9vb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="deadStatusCell" destination="dUy-8r-3WB" id="pF5-bH-QNd"/>
+                        <outlet property="justGuardedStatusCell" destination="zAi-gE-k95" id="Zly-TY-NvP"/>
+                        <outlet property="misdiagnosedStatusCell" destination="0Sd-S9-BhI" id="67a-NF-djl"/>
+                        <outlet property="roleCell" destination="K6E-G9-ygR" id="eB5-0i-X47"/>
+                        <outlet property="unguardableStatusCell" destination="0eS-w9-ApR" id="Noh-ds-rnf"/>
+                        <outlet property="votedStatusCell" destination="klq-Iw-VxZ" id="F10-xI-taH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p3n-lv-Ig7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2184" y="414"/>
+        </scene>
+        <!--Mafia Information Controller-->
+        <scene sceneID="RzD-ZX-iib">
+            <objects>
+                <viewController id="9XC-g6-jPb" customClass="MafiaInformationController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WD5-Nm-7Lr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="De7-am-08v">
+                                <rect key="frame" x="16" y="20" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eqr-JY-ut1">
+                                <rect key="frame" x="72" y="20" width="232" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nkP-hd-aT1">
+                                <rect key="frame" x="19" y="76" width="285" height="100"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5dg-Ia-XOe">
+                                <rect key="frame" x="19" y="184" width="285" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonTapped:" destination="9XC-g6-jPb" eventType="touchUpInside" id="cbP-No-Occ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="categoryImageView" destination="De7-am-08v" id="LnM-r9-I3e"/>
+                        <outlet property="detailsLabel" destination="nkP-hd-aT1" id="o5L-Nj-pAe"/>
+                        <outlet property="messageLabel" destination="eqr-JY-ut1" id="0gw-LD-6Fj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kkL-3W-cxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1652" y="1129"/>
+        </scene>
+        <!--Update Player Role-->
+        <scene sceneID="cCg-0P-3sF">
+            <objects>
+                <tableViewController id="GID-9f-bIv" customClass="MafiaUpdatePlayerRoleController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0IK-Sl-EnN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoleCell" textLabel="5D0-de-x6z" style="IBUITableViewCellStyleDefault" id="PkG-7I-keZ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PkG-7I-keZ" id="3cv-Up-awb">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5D0-de-x6z">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GID-9f-bIv" id="eU1-0y-Psv"/>
+                            <outlet property="delegate" destination="GID-9f-bIv" id="CU6-PJ-l7H"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Update Player Role" id="LKj-zJ-dcv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="00O-EC-bn3">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="GID-9f-bIv" id="VCY-Rf-bUY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Vxn-fD-i7Z">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="GID-9f-bIv" id="hyz-no-lAa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wIw-k5-rLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2734" y="414"/>
+        </scene>
+        <!--Game Setup-->
+        <scene sceneID="RGr-L4-kOY">
+            <objects>
+                <tableViewController id="ZSX-on-vFz" customClass="MafiaGameSetupController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="17t-4m-ptw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CellOfPlayers" textLabel="eNi-cz-2Ai" detailTextLabel="r05-CW-DJD" style="IBUITableViewCellStyleValue1" id="0Ru-n8-vwO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ru-n8-vwO" id="r0w-un-xQ5">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Players" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eNi-cz-2Ai">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="X" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r05-CW-DJD">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="gj2-es-Qr1" kind="push" identifier="SelectPlayers" id="Zru-Ks-fHT"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CellWithNumber" textLabel="F28-N5-gVy" detailTextLabel="g2w-96-iB0" style="IBUITableViewCellStyleValue1" id="mjL-AT-qVE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mjL-AT-qVE" id="4kF-KF-VuH">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role (Killer/Detective)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F28-N5-gVy">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1-4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g2w-96-iB0">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Hef-Te-4C9" kind="push" identifier="ConfigureRole" id="R3h-l9-2lP"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellWithSwitch" textLabel="Y9C-3r-vQb" style="IBUITableViewCellStyleDefault" id="Ho4-VO-Tic">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ho4-VO-Tic" id="sYo-6K-hCw">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y9C-3r-vQb">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="frd-zk-HcP">
+                                            <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                        </switch>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZSX-on-vFz" id="Xgw-8C-a1I"/>
+                            <outlet property="delegate" destination="ZSX-on-vFz" id="cez-9K-YoU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Game Setup" id="Nsk-N0-fhe">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="z7E-IL-K18"/>
+                        <barButtonItem key="rightBarButtonItem" title="Start" id="x8w-EU-0Vl">
+                            <connections>
+                                <segue destination="Yvd-SR-Pqa" kind="push" identifier="StartGame" id="856-JZ-xct"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="startButton" destination="x8w-EU-0Vl" id="CZG-BF-OBM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sgE-uf-OsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="583" y="-299"/>
+        </scene>
+        <!--Role-->
+        <scene sceneID="fkw-Ov-xI9">
+            <objects>
+                <tableViewController id="Hef-Te-4C9" customClass="MafiaConfigureRoleController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gGA-wp-XgI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="5PF-Ny-ce7" style="IBUITableViewCellStyleDefault" id="wNW-Zl-teJ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wNW-Zl-teJ" id="dWT-mr-Ks4">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role x X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5PF-Ny-ce7">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Hef-Te-4C9" id="yAY-bf-e8N"/>
+                            <outlet property="delegate" destination="Hef-Te-4C9" id="7GH-YN-Rvr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Role" id="pX0-Y6-DG2"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sBQ-S2-FtU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1132" y="-299"/>
+        </scene>
+        <!--Select Players-->
+        <scene sceneID="0fG-sx-6Hb">
+            <objects>
+                <tableViewController id="gj2-es-Qr1" customClass="MafiaSelectPlayersController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PWa-NE-jaS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" textLabel="kdU-bH-UiJ" style="IBUITableViewCellStyleDefault" id="JF2-Mx-qV7">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JF2-Mx-qV7" id="cCD-6x-cyo">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kdU-bH-UiJ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gj2-es-Qr1" id="oya-m8-vtc"/>
+                            <outlet property="delegate" destination="gj2-es-Qr1" id="7Ax-Mo-RWh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Players" id="G8S-0m-1Az"/>
+                    <connections>
+                        <segue destination="mwA-MP-EZY" kind="modal" identifier="AddPlayer" id="e0v-SK-6QS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XUa-bP-ELM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1132" y="-1001"/>
+        </scene>
+        <!--Add Player-->
+        <scene sceneID="iga-sD-fRB">
+            <objects>
+                <viewController id="PZu-XJ-8Yc" customClass="MafiaAddPlayerController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XQn-Jq-dew" customClass="UIControl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3kg-2M-WxB">
+                                <rect key="frame" x="16" y="80" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="37z-4o-QiO">
+                                <rect key="frame" x="16" y="109" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="backgroundTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="HYf-3O-LTm"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Player" id="JR9-CJ-9Yf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gs1-L6-KW6">
+                            <connections>
+                                <action selector="cancelBarButtonItemTapped:" destination="PZu-XJ-8Yc" id="Tjm-R7-6Dv"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="0Sb-RG-U3o">
+                            <connections>
+                                <action selector="doneBarButtonItemTapped:" destination="PZu-XJ-8Yc" id="4qY-Al-hzY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="playerNameField" destination="37z-4o-QiO" id="Xnb-O5-quK"/>
+                        <outlet property="playerNameLabel" destination="3kg-2M-WxB" id="gLa-RC-EeH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hgl-y9-4u6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2226" y="-1001"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="EgH-hS-u79">
+            <objects>
+                <tabBarController id="ESU-4A-lUb" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="se8-LN-ZFx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="6BQ-Yr-g65" kind="relationship" relationship="viewControllers" id="rTg-mp-Ghh"/>
+                        <segue destination="6Ho-mU-8Xd" kind="relationship" relationship="viewControllers" id="cDQ-xz-TyT"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bhe-wf-tUl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-440" y="71"/>
+        </scene>
+        <!--Game-->
+        <scene sceneID="0X5-7C-Md1">
+            <objects>
+                <navigationController title="Game" automaticallyAdjustsScrollViewInsets="NO" id="6BQ-Yr-g65" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Game" id="2Ne-M8-RPY"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FZE-RO-b6I">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZSX-on-vFz" kind="relationship" relationship="rootViewController" id="0Ot-1d-fe8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="96y-va-n9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="-299"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Mqp-nt-qgV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mwA-MP-EZY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LdA-lv-IfN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PZu-XJ-8Yc" kind="relationship" relationship="rootViewController" id="Crb-Q0-vGF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s8O-U9-C4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1694" y="-1001"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="OIG-hp-2Hp">
+            <objects>
+                <navigationController title="About" automaticallyAdjustsScrollViewInsets="NO" id="6Ho-mU-8Xd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" id="yha-eo-prU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wqB-WJ-HAs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7aS-ih-nRB" kind="relationship" relationship="rootViewController" id="L9f-83-92H"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vMX-kR-b9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="81" y="414"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
