@@ -75,7 +75,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="dfC-GY-PKj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="dfC-GY-PKj">
                                 <rect key="frame" x="0.0" y="170" width="320" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,15 +212,6 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l9S-Dn-oe6">
-                                <rect key="frame" x="16" y="140" width="288" height="22"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Next"/>
-                                <connections>
-                                    <action selector="nextButtonTapped:" destination="Yvd-SR-Pqa" eventType="touchUpInside" id="jqz-UO-OWI"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -230,11 +221,15 @@
                                 <action selector="resetButtonTapped:" destination="Yvd-SR-Pqa" id="KHl-TY-nsd"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="PyJ-IH-bxQ">
+                            <connections>
+                                <action selector="nextButtonTapped:" destination="Yvd-SR-Pqa" id="Ko9-AO-jMa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="actionLabel" destination="VRu-v6-0iF" id="65s-gQ-Xhl"/>
                         <outlet property="dayNightImageView" destination="pBi-Of-3aj" id="65z-L8-jpi"/>
-                        <outlet property="nextButton" destination="l9S-Dn-oe6" id="LZq-Wz-4x3"/>
                         <outlet property="playersTableView" destination="dfC-GY-PKj" id="cnF-sc-TuL"/>
                         <outlet property="promptLabel" destination="TVb-oD-g5y" id="eMi-4D-jPx"/>
                         <segue destination="9XC-g6-jPb" kind="modal" identifier="ShowInformation" id="8RF-T5-mpa"/>

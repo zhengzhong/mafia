@@ -138,27 +138,16 @@
 
 // Note: Setting backgrund color of a cell must be done in this delegate method.
 // See: http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewCell_Class/Reference/Reference.html
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+// TODO: use a check mark to indicate a player is selected.
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-    UIColor *backgroundColor = nil;
-    if ([self.selectedPlayers containsObject:player])
-    {
-        backgroundColor = [UIColor colorWithRed:0.87 green:0.94 blue:0.84 alpha:1.0];
+    if ([self.selectedPlayers containsObject:player]) {
+        cell.backgroundColor = [UIColor colorWithRed:0.87 green:0.94 blue:0.84 alpha:1.0];
+    } else if (player.isDead) {
+        cell.backgroundColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
     }
-    else if (player.isDead)
-    {
-        backgroundColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0];
-    }
-    else if (indexPath.row % 2 == 0)
-    {
-        backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0];
-    }
-    else
-    {
-        backgroundColor = [UIColor whiteColor];
-    }
-    cell.backgroundColor = backgroundColor;
 }
 
 
@@ -194,17 +183,6 @@
     }
     [self mafia_refreshView];
 }
-
-
-// TODO:
-/*
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-    MafiaGamePlayerController *playerController = [MafiaGamePlayerController controllerWithPlayer:player delegate:self];
-    [self.navigationController pushViewController:playerController animated:YES];
-}
- */
 
 
 #pragma mark - UIActionSheetDelegate

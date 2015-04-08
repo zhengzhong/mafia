@@ -26,12 +26,10 @@
 
 
 @interface MafiaGameController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-// TODO: <MafiaGameInformationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *dayNightImageView;
 @property (strong, nonatomic) IBOutlet UILabel *actionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *promptLabel;
-@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 @property (strong, nonatomic) IBOutlet UITableView *playersTableView;
 
 @property (strong, nonatomic) MafiaGame *game;
