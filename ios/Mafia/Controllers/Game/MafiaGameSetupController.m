@@ -56,7 +56,6 @@ static const NSInteger kSwitchTag = 1;
         [self.gameSetup addPlayerName:playerName];
     }
     self.gameSetup.isTwoHanded = YES;
-    self.title = NSLocalizedString(@"Game Setup", nil);
     self.startButton.enabled = [self.gameSetup isValid];
 }
 
