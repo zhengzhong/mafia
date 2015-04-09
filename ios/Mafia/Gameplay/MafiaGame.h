@@ -34,6 +34,8 @@
 
 - (void)assignCivilianRoleToUnrevealedPlayers;
 
+- (void)assignRolesRandomly;
+
 - (BOOL)isReadyToStart;
 
 - (void)startGame;

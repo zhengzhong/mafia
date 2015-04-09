@@ -94,6 +94,49 @@
 }
 
 
+- (void)assignRolesRandomly {
+    // Reset all players to unrevealed.
+    for (MafiaPlayer *player in self.playerList) {
+        player.role = [MafiaRole unrevealed];
+    }
+    // Shuffle the players <http://stackoverflow.com/questions/56648/>.
+    NSMutableArray *shuffledPlayers = [self.playerList.players mutableCopy];
+    NSUInteger numberOfPlayers = [shuffledPlayers count];
+    for (NSUInteger i = 0; i < numberOfPlayers; ++i) {
+        NSInteger remainingCount = numberOfPlayers - i;
+        NSInteger exchangeIndex = i + arc4random_uniform((u_int32_t)remainingCount);
+        [shuffledPlayers exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
+    }
+    // Create an array of roles to assign: the number of roles should match the number of players.
+    NSMutableArray *rolesToAssign = [[NSMutableArray alloc] initWithCapacity:numberOfPlayers];
+    for (MafiaRole *role in [MafiaRole specialRoles]) {
+        NSInteger numberOfActors = [self.gameSetup numberOfActorsForRole:role];
+        for (NSInteger i = 0; i < numberOfActors; ++i) {
+            [rolesToAssign addObject:role];
+        }
+    }
+    for (NSUInteger i = [rolesToAssign count]; i < numberOfPlayers; ++i) {
+        [rolesToAssign addObject:[MafiaRole civilian]];
+    }
+    NSAssert([rolesToAssign count] == numberOfPlayers, @"Number of roles does not match number of players.");
+    // Assign roles to players, avoiding any possible conflicts.
+    for (MafiaRole *role in rolesToAssign) {
+        MafiaPlayer *assignedPlayer = nil;
+        for (MafiaPlayer *player in shuffledPlayers) {
+            MafiaPlayer *twinPlayer = [self.playerList twinOfPlayer:player];
+            if (twinPlayer == nil || twinPlayer.role.alignment + role.alignment != 0) {
+                player.role = role;
+                assignedPlayer = player;
+                break;
+            }
+        }
+        NSAssert(assignedPlayer != nil, @"Role should have been assigned to one player.");
+        [shuffledPlayers removeObject:assignedPlayer];
+    }
+    NSAssert([shuffledPlayers count] == 0, @"All players should have been assigned.");
+}
+
+
 - (BOOL)isReadyToStart {
     for (MafiaPlayer *player in self.playerList) {
         if (player.isUnrevealed) {

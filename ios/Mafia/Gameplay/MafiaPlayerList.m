@@ -61,6 +61,12 @@
 }
 
 
+- (MafiaPlayer *)twinOfPlayer:(MafiaPlayer *)player {
+    // FIXME: implement this!
+    return nil;
+}
+
+
 - (NSArray *)alivePlayers {
     return [self alivePlayersWithRole:nil selectedBy:nil];
 }

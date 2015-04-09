@@ -28,6 +28,13 @@
 
 - (MafiaPlayer *)playerNamed:(NSString *)name;
 
+/*!
+ * Returns the twin player of the given player. In two-handed mode, the returned player is the
+ * other hand of the given player. In non-two-handed mode, this method returns nil.
+ * @param player  the player with whom the twin player is searched.
+ */
+- (MafiaPlayer *)twinOfPlayer:(MafiaPlayer *)player;
+
 - (NSArray *)alivePlayers;
 
 - (NSArray *)alivePlayersWithRole:(MafiaRole *)role;

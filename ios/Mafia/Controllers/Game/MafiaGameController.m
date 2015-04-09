@@ -110,7 +110,7 @@
     self.game = [[MafiaGame alloc] initWithGameSetup:gameSetup];
     self.selectedPlayers = [NSMutableArray arrayWithCapacity:2];
     // FIXME: assign roles, and start the game.
-    [self.game assignCivilianRoleToUnrevealedPlayers];
+    [self.game assignRolesRandomly];
     [self.game startGame];
 }
 
