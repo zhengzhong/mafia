@@ -7,14 +7,8 @@
 
 #import "MafiaAction.h"
 
-
 @interface MafiaVoteAndLynchAction : MafiaAction
-
-+ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList;
-
-- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList
-    NS_DESIGNATED_INITIALIZER;
 
 - (MafiaInformation *)settleVoteAndLynch;
 
-@end  // MafiaVoteAndLynchAction
+@end

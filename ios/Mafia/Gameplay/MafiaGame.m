@@ -29,32 +29,9 @@
 - (instancetype)initWithGameSetup:(MafiaGameSetup *)gameSetup {
     NSAssert([gameSetup isValid], @"Game setup is invalid.");
     if (self = [super init]) {
+        _gameSetup = gameSetup;
         _playerList = [[MafiaPlayerList alloc] initWithPlayerNames:gameSetup.playerNames
                                                        isTwoHanded:gameSetup.isTwoHanded];
-        NSMutableArray *actions = [NSMutableArray arrayWithCapacity:10];
-        if (gameSetup.hasAssassin) {
-            [actions addObject:[MafiaAssassinAction actionWithNumberOfActors:1 playerList:_playerList]];
-        }
-        if (gameSetup.hasGuardian) {
-            [actions addObject:[MafiaGuardianAction actionWithNumberOfActors:1 playerList:_playerList]];
-        }
-        [actions addObject:[MafiaKillerAction actionWithNumberOfActors:gameSetup.numberOfKillers playerList:_playerList]];
-        [actions addObject:[MafiaDetectiveAction actionWithNumberOfActors:gameSetup.numberOfDetectives playerList:_playerList]];
-        if (gameSetup.hasDoctor) {
-            [actions addObject:[MafiaDoctorAction actionWithNumberOfActors:1 playerList:_playerList]];
-        }
-        if (gameSetup.hasTraitor) {
-            [actions addObject:[MafiaTraitorAction actionWithNumberOfActors:1 playerList:_playerList]];
-        }
-        if (gameSetup.hasUndercover) {
-            [actions addObject:[MafiaUndercoverAction actionWithNumberOfActors:1 playerList:_playerList]];
-        }
-        [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:_playerList]];
-        [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:_playerList]];
-        _actions = [actions copy];
-        _round = 0;
-        _actionIndex = 0;
-        _winner = nil;
     }
     return self;
 }
@@ -62,9 +39,7 @@
 
 - (void)reset {
     [self.playerList reset];
-    for (MafiaAction *action in self.actions) {
-        [action reset];
-    }
+    self.actions = nil;
     self.round = 0;
     self.actionIndex = 0;
     self.winner = nil;
@@ -95,6 +70,74 @@
 }
 
 
+- (void)assignRole:(MafiaRole *)role toPlayers:(NSArray *)players {
+    NSInteger numberOfActors = [self.gameSetup numberOfActorsForRole:role];
+    NSAssert([players count] == numberOfActors, @"Invalid number of actors: expected %@.", @(numberOfActors));
+    for (MafiaPlayer *player in self.playerList) {
+        if ([player.role isEqualToRole:role]) {
+            player.role = [MafiaRole unrevealed];
+        }
+    }
+    for (MafiaPlayer *player in players) {
+        NSAssert(player.isUnrevealed, @"Player %@ was already assigned as %@.", player, player.role);
+        player.role = role;
+    }
+}
+
+
+- (void)assignCivilianRoleToUnrevealedPlayers {
+    for (MafiaPlayer *player in self.playerList) {
+        if (player.isUnrevealed) {
+            player.role = [MafiaRole civilian];
+        }
+    }
+}
+
+
+- (BOOL)isReadyToStart {
+    for (MafiaPlayer *player in self.playerList) {
+        if (player.isUnrevealed) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+- (void)startGame {
+    NSAssert([self isReadyToStart], @"Game is not ready to start.");
+    [self.playerList prepareToStart];
+    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:10];
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0) {
+        [actions addObject:[MafiaAssassinAction actionWithPlayerList:self.playerList]];
+    }
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole guardian]] > 0) {
+        [actions addObject:[MafiaGuardianAction actionWithPlayerList:self.playerList]];
+    }
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole killer]] > 0) {
+        [actions addObject:[MafiaKillerAction actionWithPlayerList:self.playerList]];
+    }
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole detective]] > 0) {
+        [actions addObject:[MafiaDetectiveAction actionWithPlayerList:self.playerList]];
+    }
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole doctor]] > 0) {
+        [actions addObject:[MafiaDoctorAction actionWithPlayerList:self.playerList]];
+    }
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole traitor]] > 0) {
+        [actions addObject:[MafiaTraitorAction actionWithPlayerList:self.playerList]];
+    }
+    if ([self.gameSetup numberOfActorsForRole:[MafiaRole undercover]] > 0) {
+        [actions addObject:[MafiaUndercoverAction actionWithPlayerList:self.playerList]];
+    }
+    [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:self.playerList]];
+    [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:self.playerList]];
+    self.actions = [actions copy];
+    self.round = 0;
+    self.actionIndex = 0;
+    self.winner = nil;
+}
+
+
 - (MafiaAction *)currentAction {
     NSAssert(self.actionIndex >= 0 && self.actionIndex < [self.actions count],
              @"Invalid action index %@.", @(self.actionIndex));
@@ -113,4 +156,4 @@
 }
 
 
-@end  // MafiaGame
+@end

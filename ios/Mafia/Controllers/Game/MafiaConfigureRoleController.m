@@ -21,26 +21,13 @@ static const NSInteger kMaxNumberOfActors = 4;  // Maximal 4 killers or detectiv
 @dynamic numberOfActors;
 
 - (NSInteger)numberOfActors {
-    if ([self.role isEqualToRole:[MafiaRole killer]]) {
-        return self.gameSetup.numberOfKillers;
-    } else if ([self.role isEqualToRole:[MafiaRole detective]]) {
-        return self.gameSetup.numberOfDetectives;
-    } else {
-        NSAssert(NO, @"Only killer role and detective role can be configured.");
-        return 0;
-    }
+    return [self.gameSetup numberOfActorsForRole:self.role];
 }
 
 - (void)setNumberOfActors:(NSInteger)numberOfActors {
     NSAssert(numberOfActors >= kMinNumberOfActors && numberOfActors <= kMaxNumberOfActors,
              @"Number of actors out of range [%@, %@].", @(kMinNumberOfActors), @(kMaxNumberOfActors));
-    if ([self.role isEqualToRole:[MafiaRole killer]]) {
-        self.gameSetup.numberOfKillers = numberOfActors;
-    } else if ([self.role isEqualToRole:[MafiaRole detective]]) {
-        self.gameSetup.numberOfDetectives = numberOfActors;
-    } else {
-        NSAssert(NO, @"Only killer role and detective role can be configured.");
-    }
+    [self.gameSetup setNumberOfActors:numberOfActors forRole:self.role];
 }
 
 

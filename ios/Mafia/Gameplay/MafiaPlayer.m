@@ -43,6 +43,11 @@
 
 - (void)reset {
     self.role = [MafiaRole unrevealed];
+    [self prepareToStart];
+}
+
+
+- (void)prepareToStart {
     self.isDead = NO;
     self.isMisdiagnosed = NO;
     self.isJustGuarded = NO;

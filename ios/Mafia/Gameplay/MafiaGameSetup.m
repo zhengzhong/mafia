@@ -4,6 +4,7 @@
 //
 
 #import "MafiaGameSetup.h"
+#import "MafiaRole.h"
 
 
 @implementation MafiaGameSetup
@@ -13,13 +14,15 @@
     if (self = [super init]) {
         _playerNames = [NSMutableArray arrayWithCapacity:20];
         _isTwoHanded = YES;
-        _numberOfKillers = 2;
-        _numberOfDetectives = 2;
-        _hasAssassin = NO;
-        _hasGuardian = YES;
-        _hasDoctor = YES;
-        _hasTraitor = YES;
-        _hasUndercover = NO;
+        _roleSettings = [@{
+            [MafiaRole killer]: @2,
+            [MafiaRole detective]: @2,
+            [MafiaRole assassin]: @0,
+            [MafiaRole guardian]: @1,
+            [MafiaRole doctor]: @1,
+            [MafiaRole traitor]: @1,
+            [MafiaRole undercover]: @0,
+        } mutableCopy];
     }
     return self;
 }
@@ -32,15 +35,22 @@
 }
 
 
+- (NSInteger)numberOfActorsForRole:(MafiaRole *)role {
+    return [self.roleSettings[role] intValue];
+}
+
+
+- (void)setNumberOfActors:(NSInteger)numberOfActors forRole:(MafiaRole *)role {
+    self.roleSettings[role] = @(numberOfActors);
+}
+
+
 - (NSInteger)numberOfPlayersRequired {
-    NSInteger numberOfRoles = self.numberOfKillers + self.numberOfDetectives
-        + (self.hasAssassin ? 1 : 0)
-        + (self.hasGuardian ? 1 : 0)
-        + (self.hasDoctor ? 1 : 0)
-        + (self.hasTraitor ? 1 : 0)
-        + (self.hasUndercover ? 1 : 0);
-    NSInteger numberOfPlayersRequired = ceil(numberOfRoles * (self.isTwoHanded ? 0.7 : 1.4));
-    return numberOfPlayersRequired;
+    NSInteger numberOfRoles = 0;
+    for (MafiaRole *role in self.roleSettings) {
+        numberOfRoles += [self.roleSettings[role] intValue];
+    }
+    return (NSInteger)ceil(numberOfRoles * (self.isTwoHanded ? 0.7 : 1.4));
 }
 
 
@@ -49,4 +59,4 @@
 }
 
 
-@end  // MafiaGameSetup
+@end

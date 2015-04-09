@@ -109,6 +109,9 @@
 - (void)startWithGameSetup:(MafiaGameSetup *)gameSetup {
     self.game = [[MafiaGame alloc] initWithGameSetup:gameSetup];
     self.selectedPlayers = [NSMutableArray arrayWithCapacity:2];
+    // FIXME: assign roles, and start the game.
+    [self.game assignCivilianRoleToUnrevealedPlayers];
+    [self.game startGame];
 }
 
 
@@ -158,12 +161,7 @@
     }
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
     MafiaAction *currentAction = [self.game currentAction];
-    if (!currentAction.isAssigned) {
-        // Select player to assign role of current action: only unassigned player is selectable.
-        return (player.isUnrevealed ? indexPath : nil);
-    } else {
-        return ([currentAction isPlayerSelectable:player] ? indexPath : nil);
-    }
+    return ([currentAction isPlayerSelectable:player] ? indexPath : nil);
 }
 
 
@@ -225,24 +223,22 @@
 
 
 - (IBAction)nextButtonTapped:(id)sender {
+    if ([self.game checkGameOver]) {
+        return;  // Do nothing if game is over.
+    }
     MafiaAction *currentAction = [self.game currentAction];
     MafiaNumberRange *numberOfChoices = [self mafia_numberOfChoicesForActon:currentAction];
     if ([numberOfChoices isNumberInRange:[self.selectedPlayers count]]) {
-        // Assign role to player(s) or execute the current action.
-        self.information = nil;
-        if (!currentAction.isAssigned) {
-            [currentAction assignRoleToPlayers:self.selectedPlayers];
-        } else {
-            [currentAction beginAction];
-            if ([currentAction isExecutable]) {
-                for (MafiaPlayer *player in self.selectedPlayers) {
-                    [currentAction executeOnPlayer:player];
-                }
+        // Execute the current action.
+        [currentAction beginAction];
+        if ([currentAction isExecutable]) {
+            for (MafiaPlayer *player in self.selectedPlayers) {
+                [currentAction executeOnPlayer:player];
             }
-            self.information = [currentAction endAction];
-            [self.game continueToNextAction];
         }
-        // Clear the selected players.
+        self.information = [currentAction endAction];
+        // Continue to the next action.
+        [self.game continueToNextAction];
         [self.selectedPlayers removeAllObjects];
         // Display information as necessary.
         if (self.information != nil) {
@@ -290,9 +286,7 @@
 
 
 - (MafiaNumberRange *)mafia_numberOfChoicesForActon:(MafiaAction *)action {
-    if (!action.isAssigned) {
-        return [MafiaNumberRange numberRangeWithSingleValue:action.numberOfActors];
-    } else if ([action isExecutable]) {
+    if ([action isExecutable]) {
         return [action numberOfChoices];
     } else {
         return [MafiaNumberRange numberRangeWithSingleValue:0];
@@ -301,37 +295,31 @@
 
 
 - (void)mafia_refreshView {
-    MafiaAction *currentAction = [self.game currentAction];
-    self.dayNightImageView.image = [UIImage imageNamed:
-        (currentAction.role != nil ? @"action_in_night.png" : @"action_in_day.png")];
-    if (self.game.winner) {
+    if ([self.game checkGameOver]) {
         // Game over.
         self.title = NSLocalizedString(@"Game Over", nil);
+        self.nextBarButtonItem.enabled = NO;
+        self.dayNightImageView.image = [UIImage imageNamed:@"action_in_day.png"];
         self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ Wins!", nil), self.game.winner];
         self.promptLabel.text = nil;
     } else {
         // Game ongoing.
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Round %d", nil), self.game.round];
-        if (currentAction.isAssigned) {
-            self.actionLabel.text = [NSString stringWithFormat:@"%@", currentAction];
-            if ([currentAction isExecutable]) {
-                MafiaNumberRange *numberOfChoices = [self mafia_numberOfChoicesForActon:currentAction];
-                NSString *numberOfChoicesString = [numberOfChoices
-                    formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
-                                       pluralForm:NSLocalizedString(@"players", nil)];
-                self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
-            } else if (currentAction.role != nil) {
-                self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ not available", nil), currentAction.role];
-            } else {
-                self.promptLabel.text = NSLocalizedString(@"Continue to next", nil);
-            }
-        } else {
-            self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assign %@", nil), currentAction.role];
+        self.nextBarButtonItem.enabled = YES;
+        MafiaAction *currentAction = [self.game currentAction];
+        self.dayNightImageView.image = [UIImage imageNamed:
+            (currentAction.role != nil ? @"action_in_night.png" : @"action_in_day.png")];
+        self.actionLabel.text = [NSString stringWithFormat:@"%@", currentAction];
+        if ([currentAction isExecutable]) {
             MafiaNumberRange *numberOfChoices = [self mafia_numberOfChoicesForActon:currentAction];
             NSString *numberOfChoicesString = [numberOfChoices
                 formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
                                    pluralForm:NSLocalizedString(@"players", nil)];
             self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
+        } else if (currentAction.role != nil) {
+            self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ not available", nil), currentAction.role];
+        } else {
+            self.promptLabel.text = NSLocalizedString(@"Continue to next", nil);
         }
     }
     [self.playersTableView reloadData];

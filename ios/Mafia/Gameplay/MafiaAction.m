@@ -27,18 +27,14 @@
 #pragma mark - Factory Method and Initializer
 
 
-+ (instancetype)actionWithNumberOfActors:(NSInteger)numberOfActors
-                              playerList:(MafiaPlayerList *)playerList {
-    return [[self alloc] initWithNumberOfActors:numberOfActors playerList:playerList];
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList {
+    return [[self alloc] initWithPlayerList:playerList];
 }
 
 
-- (instancetype)initWithNumberOfActors:(NSInteger)numberOfActors
-                            playerList:(MafiaPlayerList *)playerList {
+- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList {
     if (self = [super init]) {
-        _numberOfActors = numberOfActors;
         _playerList = playerList;
-        _isAssigned = NO;
         _isExecuted = NO;
     }
     return self;
@@ -54,25 +50,6 @@
 
 
 #pragma mark - Public Methods
-
-
-- (void)reset {
-    self.isAssigned = NO;
-    self.isExecuted = NO;
-}
-
-
-- (void)assignRoleToPlayers:(NSArray *)players {
-    if (self.isAssigned || self.role == nil) {
-        return;
-    }
-    NSAssert([players count] == self.numberOfActors, @"Invalid number of actors: expected %@.", @(self.numberOfActors));
-    for (MafiaPlayer *player in players) {
-        NSAssert(player.isUnrevealed, @"Player %@ was already assigned as %@.", player, player.role);
-        player.role = self.role;
-    }
-    self.isAssigned = YES;
-}
 
 
 - (NSArray *)actors {

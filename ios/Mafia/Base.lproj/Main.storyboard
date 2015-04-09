@@ -230,6 +230,7 @@
                     <connections>
                         <outlet property="actionLabel" destination="VRu-v6-0iF" id="65s-gQ-Xhl"/>
                         <outlet property="dayNightImageView" destination="pBi-Of-3aj" id="65z-L8-jpi"/>
+                        <outlet property="nextBarButtonItem" destination="PyJ-IH-bxQ" id="azC-VH-xxi"/>
                         <outlet property="playersTableView" destination="dfC-GY-PKj" id="cnF-sc-TuL"/>
                         <outlet property="promptLabel" destination="TVb-oD-g5y" id="eMi-4D-jPx"/>
                         <segue destination="9XC-g6-jPb" kind="modal" identifier="ShowInformation" id="8RF-T5-mpa"/>

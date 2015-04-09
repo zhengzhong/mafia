@@ -108,22 +108,23 @@ static const NSInteger kSwitchTag = 1;
         case kRolesSection: {
             switch (indexPath.row) {
                 case kNumberOfKillersRow: {
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithNumber:self.gameSetup.numberOfKillers];
+                    NSInteger numberOfKillers = [self.gameSetup numberOfActorsForRole:[MafiaRole killer]];
+                    UITableViewCell *cell = [self mafia_tableView:tableView cellWithNumber:numberOfKillers];
                     cell.imageView.image = [UIImage imageNamed:@"role_killer.png"];
                     cell.textLabel.text = NSLocalizedString(@"Number of Killers", nil);
                     return cell;
                 }
                 case kNumberOfDetectivesRow: {
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithNumber:self.gameSetup.numberOfDetectives];
+                    NSInteger numberOfDetectives = [self.gameSetup numberOfActorsForRole:[MafiaRole detective]];
+                    UITableViewCell *cell = [self mafia_tableView:tableView cellWithNumber:numberOfDetectives];
                     cell.imageView.image = [UIImage imageNamed:@"role_detective.png"];
                     cell.textLabel.text = NSLocalizedString(@"Number of Detectives", nil);
                     return cell;
                 }
                 case kHasAssassinRow: {
+                    BOOL hasAssassin = ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0);
                     UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:self.gameSetup.hasAssassin
+                                                   cellWithSwitch:hasAssassin
                                                            target:self
                                                            action:@selector(hasAssassinToggled:)];
                     cell.imageView.image = [UIImage imageNamed:@"role_assassin.png"];
@@ -131,8 +132,9 @@ static const NSInteger kSwitchTag = 1;
                     return cell;
                 }
                 case kHasGuardianRow: {
+                    BOOL hasGuardian = ([self.gameSetup numberOfActorsForRole:[MafiaRole guardian]] > 0);
                     UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:self.gameSetup.hasGuardian
+                                                   cellWithSwitch:hasGuardian
                                                            target:self
                                                            action:@selector(hasGuardianToggled:)];
                     cell.imageView.image = [UIImage imageNamed:@"role_guardian.png"];
@@ -140,8 +142,9 @@ static const NSInteger kSwitchTag = 1;
                     return cell;
                 }
                 case kHasDoctorRow: {
+                    BOOL hasDoctor = ([self.gameSetup numberOfActorsForRole:[MafiaRole doctor]] > 0);
                     UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:self.gameSetup.hasDoctor
+                                                   cellWithSwitch:hasDoctor
                                                            target:self
                                                            action:@selector(hasDoctorToggled:)
                                              ];
@@ -150,8 +153,9 @@ static const NSInteger kSwitchTag = 1;
                     return cell;
                 }
                 case kHasTraitorRow: {
+                    BOOL hasTraitor = ([self.gameSetup numberOfActorsForRole:[MafiaRole traitor]] > 0);
                     UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:self.gameSetup.hasTraitor
+                                                   cellWithSwitch:hasTraitor
                                                            target:self
                                                            action:@selector(hasTraitorToggled:)];
                     cell.imageView.image = [UIImage imageNamed:@"role_traitor.png"];
@@ -159,8 +163,9 @@ static const NSInteger kSwitchTag = 1;
                     return cell;
                 }
                 case kHasUndercoverRow: {
+                    BOOL hasUndercover = ([self.gameSetup numberOfActorsForRole:[MafiaRole undercover]] > 0);
                     UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:self.gameSetup.hasUndercover
+                                                   cellWithSwitch:hasUndercover
                                                            target:self
                                                            action:@selector(hasUndercoverToggled:)];
                     cell.imageView.image = [UIImage imageNamed:@"role_undercover.png"];
@@ -172,8 +177,7 @@ static const NSInteger kSwitchTag = 1;
                 }
             }
         }
-        default:
-        {
+        default: {
             return nil;
         }
     }
@@ -241,31 +245,33 @@ static const NSInteger kSwitchTag = 1;
 
 
 - (void)hasAssassinToggled:(id)sender {
-    self.gameSetup.hasAssassin = ((UISwitch *) sender).on;
-    self.startButton.enabled = [self.gameSetup isValid];
+    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole assassin]];
 }
 
 
 - (void)hasGuardianToggled:(id)sender {
-    self.gameSetup.hasGuardian = ((UISwitch *) sender).on;
-    self.startButton.enabled = [self.gameSetup isValid];
+    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole guardian]];
 }
 
 
 - (void)hasDoctorToggled:(id)sender {
-    self.gameSetup.hasDoctor = ((UISwitch *) sender).on;
-    self.startButton.enabled = [self.gameSetup isValid];
+    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole doctor]];
 }
 
 
 - (void)hasTraitorToggled:(id)sender {
-    self.gameSetup.hasTraitor = ((UISwitch *) sender).on;
-    self.startButton.enabled = [self.gameSetup isValid];
+    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole traitor]];
 }
 
 
 - (void)hasUndercoverToggled:(id)sender {
-    self.gameSetup.hasUndercover = ((UISwitch *) sender).on;
+    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole undercover]];
+}
+
+
+- (void)mafia_roleSwitch:(UISwitch *)roleSwitch toggledForRole:(MafiaRole *)role {
+    NSInteger numberOfActors = (roleSwitch.on ? 1 : 0);
+    [self.gameSetup setNumberOfActors:numberOfActors forRole:role];
     self.startButton.enabled = [self.gameSetup isValid];
 }
 

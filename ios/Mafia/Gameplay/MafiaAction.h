@@ -17,44 +17,25 @@
  */
 @interface MafiaAction : NSObject
 
-/// Number of actors of this action.
-@property (readonly, assign, nonatomic) NSInteger numberOfActors;
+/// The role of this action.
+@property (readonly, strong, nonatomic) MafiaRole *role;
 
 /// A list of all the players of the game.
 @property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
 
-/// Whether the role of this action has already been assigned to player(s).
-@property (assign, nonatomic) BOOL isAssigned;
-
 /// Whether this action has been executed (in the current round).
 @property (assign, nonatomic) BOOL isExecuted;
-
-/// The role of this action.
-@property (readonly, strong, nonatomic) MafiaRole *role;
 
 /*!
  * Returns an action instance.
  */
-+ (instancetype)actionWithNumberOfActors:(NSInteger)numberOfActors
-                              playerList:(MafiaPlayerList *)playerList;
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList;
 
 /*!
  * Designated initializer.
  */
-- (instancetype)initWithNumberOfActors:(NSInteger)numberOfActors
-                            playerList:(MafiaPlayerList *)playerList
+- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList
     NS_DESIGNATED_INITIALIZER;
-
-/*!
- * Resets status of this action to un-assigned and un-executed.
- */
-- (void)reset;
-
-/*!
- * Assigns the role of this action to the given players. Number of players to assign must match
- * the number of actors.
- */
-- (void)assignRoleToPlayers:(NSArray *)players;
 
 /*!
  * Returns an array of actors of this action who are still alive.

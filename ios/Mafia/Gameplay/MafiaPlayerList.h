@@ -38,5 +38,6 @@
 
 - (void)reset;
 
-@end // MafiaPlayerList
+- (void)prepareToStart;
 
+@end

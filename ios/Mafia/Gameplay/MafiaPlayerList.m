@@ -102,4 +102,11 @@
 }
 
 
-@end  // MafiaPlayerList
+- (void)prepareToStart {
+    for (MafiaPlayer *player in self.players) {
+        [player prepareToStart];
+    }
+}
+
+
+@end

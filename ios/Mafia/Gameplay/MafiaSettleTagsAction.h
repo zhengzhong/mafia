@@ -13,11 +13,6 @@
  */
 @interface MafiaSettleTagsAction : MafiaAction
 
-+ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList;
-
-- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList
-    NS_DESIGNATED_INITIALIZER;
-
 - (MafiaInformation *)settleTags;
 
-@end  // MafiaSettleTagsAction
+@end

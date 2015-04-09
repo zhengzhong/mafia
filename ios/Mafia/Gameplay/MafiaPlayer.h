@@ -27,6 +27,8 @@
 
 - (void)reset;
 
+- (void)prepareToStart;
+
 - (void)selectByRole:(MafiaRole *)role;
 
 - (void)unselectFromRole:(MafiaRole *)role;

@@ -9,12 +9,14 @@
 @class MafiaGameSetup;
 @class MafiaPlayer;
 @class MafiaPlayerList;
+@class MafiaRole;
 
 
 @interface MafiaGame : NSObject
 
+@property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
 @property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
-@property (readonly, strong, nonatomic) NSArray *actions;
+@property (strong, nonatomic) NSArray *actions;
 @property (assign, nonatomic) NSInteger round;
 @property (assign, nonatomic) NSInteger actionIndex;
 @property (copy, nonatomic) NSString *winner;
@@ -28,8 +30,16 @@
 
 - (BOOL)checkGameOver;
 
+- (void)assignRole:(MafiaRole *)role toPlayers:(NSArray *)players;
+
+- (void)assignCivilianRoleToUnrevealedPlayers;
+
+- (BOOL)isReadyToStart;
+
+- (void)startGame;
+
 - (MafiaAction *)currentAction;
 
 - (MafiaAction *)continueToNextAction;
 
-@end  // MafiaGame
+@end

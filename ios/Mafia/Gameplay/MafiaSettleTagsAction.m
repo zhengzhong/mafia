@@ -14,37 +14,7 @@
 @implementation MafiaSettleTagsAction
 
 
-#pragma mark - Factory Method and Initializer
-
-
-+ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList {
-    return [[self alloc] initWithPlayerList:playerList];
-}
-
-
-- (instancetype)initWithPlayerList:(MafiaPlayerList *)playerList {
-    if (self = [super initWithNumberOfActors:0 playerList:playerList]) {
-        self.isAssigned = YES;
-    }
-    return self;
-}
-
-
-// Override superclass' designated initializer.
-- (instancetype)initWithNumberOfActors:(NSInteger)numberOfActors
-                            playerList:(MafiaPlayerList *)playerList {
-    NSAssert(NO, @"Client should NOT call this initializer.");
-    return [self initWithPlayerList:playerList];
-}
-
-
 #pragma mark - Overrides
-
-
-- (void)reset {
-    [super reset];
-    self.isAssigned = YES;
-}
 
 
 - (NSArray *)actors {
