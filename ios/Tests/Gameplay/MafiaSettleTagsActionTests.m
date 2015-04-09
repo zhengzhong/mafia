@@ -26,7 +26,7 @@
 - (void)testPlayerIsKilledWhenShot {
     for (MafiaPlayer *player in self.playerList) {
         [self resetPlayerListAndAssignRoles];
-        if (player.role != [MafiaRole assassin]) {
+        if (![player.role isEqualToRole:[MafiaRole assassin]]) {
             // When
             [player selectByRole:[MafiaRole killer]];
             [self.settleTagsAction settleTags];
@@ -50,7 +50,7 @@
 - (void)testPlayerIsNotKilledOrMisdiagnosedWhenShotAndHealt {
     for (MafiaPlayer *player in self.playerList) {
         [self resetPlayerListAndAssignRoles];
-        if (player.role != [MafiaRole assassin]) {
+        if (![player.role isEqualToRole:[MafiaRole assassin]]) {
             // When
             [player selectByRole:[MafiaRole killer]];
             [player selectByRole:[MafiaRole doctor]];
@@ -110,7 +110,7 @@
 - (void)testPlayerIsNotKilledWhenShotAndGuarded {
     for (MafiaPlayer *player in self.playerList) {
         [self resetPlayerListAndAssignRoles];
-        if (player.role != [MafiaRole guardian]) {
+        if (![player.role isEqualToRole:[MafiaRole guardian]]) {
             // When
             [player selectByRole:[MafiaRole killer]];
             [player selectByRole:[MafiaRole guardian]];
@@ -165,7 +165,7 @@
 - (void)testPlayerIsNotKilledWhenShotAndKillerWasGuarded {
     for (MafiaPlayer *player in self.playerList) {
         [self resetPlayerListAndAssignRoles];
-        if (player.role != [MafiaRole guardian]) {
+        if (![player.role isEqualToRole:[MafiaRole guardian]]) {
             // When
             [self.killer1 selectByRole:[MafiaRole guardian]];
             [player selectByRole:[MafiaRole killer]];
@@ -207,7 +207,7 @@
 - (void)testPlayerIsNotKilledOrMisdiagnosedWhenShotAndHealtAndGuarded {
     for (MafiaPlayer *player in self.playerList) {
         [self resetPlayerListAndAssignRoles];
-        if (player.role != [MafiaRole guardian]) {
+        if (![player.role isEqualToRole:[MafiaRole guardian]]) {
             // When
             [player selectByRole:[MafiaRole guardian]];
             [player selectByRole:[MafiaRole killer]];

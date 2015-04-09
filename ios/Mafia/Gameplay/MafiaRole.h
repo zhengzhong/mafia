@@ -6,9 +6,9 @@
 #import <Foundation/Foundation.h>
 
 /*!
- * Enumeration class of a role.
+ * This class represents a role in the game. It is immutable. It can be used as NSDictionary key.
  */
-@interface MafiaRole : NSObject
+@interface MafiaRole : NSObject <NSCopying>
 
 @property (readonly, copy, nonatomic) NSString *name;
 @property (readonly, copy, nonatomic) NSString *displayName;
@@ -50,4 +50,4 @@
  */
 - (BOOL)isEqualToRole:(MafiaRole *)otherRole;
 
-@end  // MafiaRole
+@end
