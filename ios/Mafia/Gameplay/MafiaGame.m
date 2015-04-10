@@ -152,7 +152,8 @@
     NSAssert([self isReadyToStart], @"Game is not ready to start.");
     [self.playerList prepareToStart];
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:20];
-    if (YES) {  // TODO: if not in autonomic mode
+    if (!self.gameSetup.isAutonomic) {
+        // Non-autonomic mode: a judge is required.
         NSArray *specialRoles = @[
             [MafiaRole assassin],
             [MafiaRole guardian],
@@ -171,7 +172,7 @@
             }
         }
     } else {
-        // TODO: if in autonomic mode
+        // Autonomic mode: there is no judge, players act one-by-one.
         for (MafiaPlayer *player in self.playerList) {
             MafiaAction *action = [MafiaRoleAction actionWithRole:player.role
                                                            player:player
@@ -181,7 +182,7 @@
     }
     [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:self.playerList]];
     [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:self.playerList]];
-    self.actions = [actions copy];
+    self.actions = actions;
     self.round = 0;
     self.actionIndex = 0;
     self.winner = nil;
@@ -199,7 +200,18 @@
     if (![self checkGameOver]) {
         self.actionIndex = (self.actionIndex + 1) % [self.actions count];
         if (self.actionIndex == 0) {
+            // We are back to the first action, so we are in a new round.
             ++self.round;
+            // In autonomic mode, each action is associated with a player. If the player is dead,
+            // remove the action for the next round. Note: in non-autonomic mode, even if all
+            // actors of an action are dead, and the action becomes non-executable, it should NOT
+            // be removed, because this information should be kept secret to all players.
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:
+                ^BOOL(id object, NSDictionary *bindings) {
+                    MafiaAction *action = object;
+                    return (action.player == nil || !action.player.isDead);
+                }];
+            self.actions = [self.actions filteredArrayUsingPredicate:predicate];
         }
     }
     return [self currentAction];

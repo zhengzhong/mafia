@@ -16,7 +16,7 @@
 
 @property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
 @property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
-@property (strong, nonatomic) NSArray *actions;
+@property (copy, nonatomic) NSArray *actions;
 @property (assign, nonatomic) NSInteger round;
 @property (assign, nonatomic) NSInteger actionIndex;
 @property (copy, nonatomic) NSString *winner;

@@ -14,6 +14,7 @@
     if (self = [super init]) {
         _playerNames = [NSMutableArray arrayWithCapacity:20];
         _isTwoHanded = YES;
+        _isAutonomic = NO;
         _roleSettings = [@{
             [MafiaRole killer]: @2,
             [MafiaRole detective]: @2,

@@ -52,8 +52,9 @@ FOUNDATION_EXPORT NSString *const MafiaInvalidActionRoleException;
 - (NSArray *)actors;
 
 /*!
- * Checks if the action is executable. By default, an action is executable if there exists at least
- * one actor.
+ * Checks if the action is executable. Note that for a non-executable action, in its turn, the
+ * `beginAction` and `endAction` methods should still be called, but its `executeOnPlayer:` method
+ * should not be called. By default, an action is executable if there exists at least one actor.
  */
 - (BOOL)isExecutable;
 

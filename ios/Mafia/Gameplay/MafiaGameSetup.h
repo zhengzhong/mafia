@@ -15,6 +15,9 @@
 /// Whether the game is using two-handed mode.
 @property (assign, nonatomic) BOOL isTwoHanded;
 
+/// Whether the game will be in autonomic mode (no judge).
+@property (assign, nonatomic) BOOL isAutonomic;
+
 /// Settings of roles: key is the role, value is the number of actors for the role.
 @property (readonly, strong, nonatomic) NSMutableDictionary *roleSettings;
 
