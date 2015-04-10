@@ -13,28 +13,6 @@
 #import "UIColor+MafiaAdditions.h"
 
 
-typedef NS_ENUM(NSInteger, kSectionConstants) {
-    kPlayersSection = 0,
-    kTwoHandedSection,
-    kRolesSection,
-    kNumberOfSections,
-};
-
-
-typedef NS_ENUM(NSInteger, kRoleRowConstants) {
-    kNumberOfKillersRow = 0,
-    kNumberOfDetectivesRow,
-    kHasAssassinRow,
-    kHasGuardianRow,
-    kHasDoctorRow,
-    kHasTraitorRow,
-    kHasUndercoverRow,
-    kNumberOfRoleRows,
-};
-
-static const NSInteger kSwitchTag = 1;
-
-
 @interface MafiaGameSetupController ()
 
 @property (readwrite, strong, nonatomic) MafiaGameSetup *gameSetup;
@@ -56,149 +34,12 @@ static const NSInteger kSwitchTag = 1;
         [self.gameSetup addPlayerName:playerName];
     }
     self.gameSetup.isTwoHanded = YES;
-    self.startButton.enabled = [self.gameSetup isValid];
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.tableView reloadData];
-    self.startButton.enabled = [self.gameSetup isValid];
-}
-
-
-#pragma mark - UITableViewDataSource
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return kNumberOfSections;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Only roles section contains multiple rows. Other sections have only 1 row each.
-    return (section == kRolesSection ? kNumberOfRoleRows : 1);
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case kPlayersSection: {
-            UITableViewCell *cell = [self mafia_tableView:tableView
-                                  cellWithNumberOfPlayers:[self.gameSetup.playerNames count]];
-            cell.imageView.image = [UIImage imageNamed:@"players.png"];
-            cell.textLabel.text = NSLocalizedString(@"Players", nil);
-            if ([self.gameSetup.playerNames count] >= [self.gameSetup numberOfPlayersRequired]) {
-                cell.detailTextLabel.textColor = [UIColor mafia_successColor];
-            } else {
-                cell.detailTextLabel.textColor = [UIColor mafia_dangerColor];
-            }
-            return cell;
-        }
-        case kTwoHandedSection: {
-            UITableViewCell *cell = [self mafia_tableView:tableView
-                                           cellWithSwitch:self.gameSetup.isTwoHanded
-                                                   target:self
-                                                   action:@selector(twoHandedToggled:)];
-            cell.imageView.image = [UIImage imageNamed:@"two_handed.png"];
-            cell.textLabel.text = NSLocalizedString(@"Two Handed", nil);
-            return cell;
-        }
-        case kRolesSection: {
-            switch (indexPath.row) {
-                case kNumberOfKillersRow: {
-                    NSInteger numberOfKillers = [self.gameSetup numberOfActorsForRole:[MafiaRole killer]];
-                    UITableViewCell *cell = [self mafia_tableView:tableView cellWithNumber:numberOfKillers];
-                    cell.imageView.image = [UIImage imageNamed:@"role_killer.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Number of Killers", nil);
-                    return cell;
-                }
-                case kNumberOfDetectivesRow: {
-                    NSInteger numberOfDetectives = [self.gameSetup numberOfActorsForRole:[MafiaRole detective]];
-                    UITableViewCell *cell = [self mafia_tableView:tableView cellWithNumber:numberOfDetectives];
-                    cell.imageView.image = [UIImage imageNamed:@"role_detective.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Number of Detectives", nil);
-                    return cell;
-                }
-                case kHasAssassinRow: {
-                    BOOL hasAssassin = ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0);
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:hasAssassin
-                                                           target:self
-                                                           action:@selector(hasAssassinToggled:)];
-                    cell.imageView.image = [UIImage imageNamed:@"role_assassin.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Has Assassin", nil);
-                    return cell;
-                }
-                case kHasGuardianRow: {
-                    BOOL hasGuardian = ([self.gameSetup numberOfActorsForRole:[MafiaRole guardian]] > 0);
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:hasGuardian
-                                                           target:self
-                                                           action:@selector(hasGuardianToggled:)];
-                    cell.imageView.image = [UIImage imageNamed:@"role_guardian.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Has Guardian", nil);
-                    return cell;
-                }
-                case kHasDoctorRow: {
-                    BOOL hasDoctor = ([self.gameSetup numberOfActorsForRole:[MafiaRole doctor]] > 0);
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:hasDoctor
-                                                           target:self
-                                                           action:@selector(hasDoctorToggled:)
-                                             ];
-                    cell.imageView.image = [UIImage imageNamed:@"role_doctor.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Has Doctor", nil);
-                    return cell;
-                }
-                case kHasTraitorRow: {
-                    BOOL hasTraitor = ([self.gameSetup numberOfActorsForRole:[MafiaRole traitor]] > 0);
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:hasTraitor
-                                                           target:self
-                                                           action:@selector(hasTraitorToggled:)];
-                    cell.imageView.image = [UIImage imageNamed:@"role_traitor.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Has Traitor", nil);
-                    return cell;
-                }
-                case kHasUndercoverRow: {
-                    BOOL hasUndercover = ([self.gameSetup numberOfActorsForRole:[MafiaRole undercover]] > 0);
-                    UITableViewCell *cell = [self mafia_tableView:tableView
-                                                   cellWithSwitch:hasUndercover
-                                                           target:self
-                                                           action:@selector(hasUndercoverToggled:)];
-                    cell.imageView.image = [UIImage imageNamed:@"role_undercover.png"];
-                    cell.textLabel.text = NSLocalizedString(@"Has Undercover", nil);
-                    return cell;
-                }
-                default: {
-                    return nil;
-                }
-            }
-        }
-        default: {
-            return nil;
-        }
-    }
-}
-
-
-#pragma mark - UITableViewDelegate
-
-
-- (NSIndexPath *)tableView:(UITableView *)tableView
-    willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kPlayersSection) {
-        return indexPath;
-    }
-    if (indexPath.section == kRolesSection) {
-        if (indexPath.row == kNumberOfKillersRow || indexPath.row == kNumberOfDetectivesRow) {
-            return indexPath;
-        }
-    }
-    // All the other rows are not selectable.
-    return nil;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self mafia_refreshUI];
 }
 
 
@@ -209,17 +50,14 @@ static const NSInteger kSwitchTag = 1;
     if ([segue.identifier isEqualToString:@"SelectPlayers"]) {
         MafiaSelectPlayersController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
-    } else if ([segue.identifier isEqualToString:@"ConfigureRole"]) {
+    } else if ([segue.identifier isEqualToString:@"ConfigureNumberOfKillers"]) {
         MafiaConfigureRoleController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        if (indexPath.section == kRolesSection) {
-            if (indexPath.row == kNumberOfKillersRow) {
-                controller.role = [MafiaRole killer];
-            } else if (indexPath.row == kNumberOfDetectivesRow) {
-                controller.role = [MafiaRole detective];
-            }
-        }
+        controller.role = [MafiaRole killer];
+    } else if ([segue.identifier isEqualToString:@"ConfigureNumberOfDetectives"]) {
+        MafiaConfigureRoleController *controller = segue.destinationViewController;
+        controller.gameSetup = self.gameSetup;
+        controller.role = [MafiaRole detective];
     } else if ([segue.identifier isEqualToString:@"StartGame"]) {
         MafiaGameController *controller = segue.destinationViewController;
         [controller startWithGameSetup:self.gameSetup];
@@ -235,36 +73,42 @@ static const NSInteger kSwitchTag = 1;
 }
 
 
-#pragma mark - Callbacks
+#pragma mark - Actions
 
 
-- (void)twoHandedToggled:(id)sender {
+- (IBAction)twoHandedToggled:(id)sender {
     self.gameSetup.isTwoHanded = ((UISwitch *)sender).on;
-    self.startButton.enabled = [self.gameSetup isValid];
+    [self mafia_refreshUI];
 }
 
 
-- (void)hasAssassinToggled:(id)sender {
+- (IBAction)autonomicToggled:(id)sender {
+    self.gameSetup.isAutonomic = ((UISwitch *)sender).on;
+    [self mafia_refreshUI];
+}
+
+
+- (IBAction)hasAssassinToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole assassin]];
 }
 
 
-- (void)hasGuardianToggled:(id)sender {
+- (IBAction)hasGuardianToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole guardian]];
 }
 
 
-- (void)hasDoctorToggled:(id)sender {
+- (IBAction)hasDoctorToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole doctor]];
 }
 
 
-- (void)hasTraitorToggled:(id)sender {
+- (IBAction)hasTraitorToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole traitor]];
 }
 
 
-- (void)hasUndercoverToggled:(id)sender {
+- (IBAction)hasUndercoverToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole undercover]];
 }
 
@@ -272,38 +116,25 @@ static const NSInteger kSwitchTag = 1;
 - (void)mafia_roleSwitch:(UISwitch *)roleSwitch toggledForRole:(MafiaRole *)role {
     NSInteger numberOfActors = (roleSwitch.on ? 1 : 0);
     [self.gameSetup setNumberOfActors:numberOfActors forRole:role];
-    self.startButton.enabled = [self.gameSetup isValid];
+    [self mafia_refreshUI];
 }
 
 
 #pragma mark - Private
 
 
-- (UITableViewCell *)mafia_tableView:(UITableView *)tableView
-             cellWithNumberOfPlayers:(NSInteger)numberOfPlayers {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellOfPlayers"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(numberOfPlayers)];
-    return cell;
-}
-
-
-- (UITableViewCell *)mafia_tableView:(UITableView *)tableView
-                      cellWithNumber:(NSInteger)number {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellWithNumber"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(number)];
-    return cell;
-}
-
-
-- (UITableViewCell *)mafia_tableView:(UITableView *)tableView
-                      cellWithSwitch:(BOOL)on
-                              target:(id)target
-                              action:(SEL)action {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellWithSwitch"];
-    UISwitch *switchInCell = (UISwitch *)[cell.contentView viewWithTag:kSwitchTag];
-    switchInCell.on = on;
-    [switchInCell addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    return cell;
+- (void)mafia_refreshUI {
+    self.startButton.enabled = [self.gameSetup isValid];
+    self.numberOfPlayersLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup.playerNames count])];
+    self.twoHandedSwitch.on = self.gameSetup.isTwoHanded;
+    self.autonomicSwitch.on = self.gameSetup.isAutonomic;
+    self.numberOfKillersLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup numberOfActorsForRole:[MafiaRole killer]])];
+    self.numberOfDetectivesLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup numberOfActorsForRole:[MafiaRole detective]])];
+    self.hasAssassinSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0);
+    self.hasGuardianSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole guardian]] > 0);
+    self.hasDoctorSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole doctor]] > 0);
+    self.hasTraitorSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole traitor]] > 0);
+    self.hasUndercoverSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole undercover]] > 0);
 }
 
 
