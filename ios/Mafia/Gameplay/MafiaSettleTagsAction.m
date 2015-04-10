@@ -14,6 +14,23 @@
 @implementation MafiaSettleTagsAction
 
 
+#pragma mark - Factory Method and Initializer
+
+
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList {
+    return [[self alloc] initWithRole:nil player:nil playerList:playerList];
+}
+
+
+- (instancetype)initWithRole:(MafiaRole *)role
+                      player:(MafiaPlayer *)player
+                  playerList:(MafiaPlayerList *)playerList {
+    // Ensure that this action has no role or player.
+    self = [super initWithRole:nil player:nil playerList:playerList];
+    return self;
+}
+
+
 #pragma mark - Overrides
 
 
@@ -29,17 +46,6 @@
 
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
     return NO;
-}
-
-
-- (void)beginAction {
-    [super beginAction];
-    // Assign civilian role to all unrevealed players. This should happen only at the first dawn.
-    for (MafiaPlayer *player in self.playerList) {
-        if (player.isUnrevealed) {
-            player.role = [MafiaRole civilian];
-        }
-    }
 }
 
 
@@ -230,9 +236,10 @@
 
 #pragma mark - NSObject
 
+
 - (NSString *)description {
     return NSLocalizedString(@"Settle Tags", nil);
 }
 
 
-@end  // MafiaSettleTagsAction
+@end

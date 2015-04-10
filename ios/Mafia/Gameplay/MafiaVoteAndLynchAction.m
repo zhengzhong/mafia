@@ -12,12 +12,24 @@
 @implementation MafiaVoteAndLynchAction
 
 
-#pragma mark - Overrides
+#pragma mark - Factory Method and Initializer
 
 
-- (MafiaRole *)role {
-    return nil;
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList {
+    return [[self alloc] initWithRole:nil player:nil playerList:playerList];
 }
+
+
+- (instancetype)initWithRole:(MafiaRole *)role
+                      player:(MafiaPlayer *)player
+                  playerList:(MafiaPlayerList *)playerList {
+    // Ensure that this action has no role or player.
+    self = [super initWithRole:nil player:nil playerList:playerList];
+    return self;
+}
+
+
+#pragma mark - Overrides
 
 
 - (NSArray *)actors {

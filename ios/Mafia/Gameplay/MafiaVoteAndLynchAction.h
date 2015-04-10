@@ -7,7 +7,12 @@
 
 #import "MafiaAction.h"
 
+/*!
+ * This action is executed by all alive players during the day. It is executed on the voted player.
+ */
 @interface MafiaVoteAndLynchAction : MafiaAction
+
++ (instancetype)actionWithPlayerList:(MafiaPlayerList *)playerList;
 
 - (MafiaInformation *)settleVoteAndLynch;
 

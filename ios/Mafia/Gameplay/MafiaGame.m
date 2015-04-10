@@ -9,6 +9,7 @@
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
+#import "MafiaRoleAction.h"
 #import "MafiaSettleTagsAction.h"
 #import "MafiaVoteAndLynchAction.h"
 
@@ -150,27 +151,33 @@
 - (void)startGame {
     NSAssert([self isReadyToStart], @"Game is not ready to start.");
     [self.playerList prepareToStart];
-    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:10];
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0) {
-        [actions addObject:[MafiaAssassinAction actionWithPlayerList:self.playerList]];
-    }
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole guardian]] > 0) {
-        [actions addObject:[MafiaGuardianAction actionWithPlayerList:self.playerList]];
-    }
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole killer]] > 0) {
-        [actions addObject:[MafiaKillerAction actionWithPlayerList:self.playerList]];
-    }
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole detective]] > 0) {
-        [actions addObject:[MafiaDetectiveAction actionWithPlayerList:self.playerList]];
-    }
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole doctor]] > 0) {
-        [actions addObject:[MafiaDoctorAction actionWithPlayerList:self.playerList]];
-    }
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole traitor]] > 0) {
-        [actions addObject:[MafiaTraitorAction actionWithPlayerList:self.playerList]];
-    }
-    if ([self.gameSetup numberOfActorsForRole:[MafiaRole undercover]] > 0) {
-        [actions addObject:[MafiaUndercoverAction actionWithPlayerList:self.playerList]];
+    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:20];
+    if (YES) {  // TODO: if not in autonomic mode
+        NSArray *specialRoles = @[
+            [MafiaRole assassin],
+            [MafiaRole guardian],
+            [MafiaRole killer],
+            [MafiaRole detective],
+            [MafiaRole doctor],
+            [MafiaRole traitor],
+            [MafiaRole undercover],
+        ];
+        for (MafiaRole *role in specialRoles) {
+            if ([self.gameSetup numberOfActorsForRole:role] > 0) {
+                MafiaAction *action = [MafiaRoleAction actionWithRole:role
+                                                               player:nil
+                                                           playerList:self.playerList];
+                [actions addObject:action];
+            }
+        }
+    } else {
+        // TODO: if in autonomic mode
+        for (MafiaPlayer *player in self.playerList) {
+            MafiaAction *action = [MafiaRoleAction actionWithRole:player.role
+                                                           player:player
+                                                       playerList:self.playerList];
+            [actions addObject:action];
+        }
     }
     [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:self.playerList]];
     [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:self.playerList]];

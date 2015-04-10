@@ -11,5 +11,6 @@
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
+#import "MafiaRoleAction.h"
 #import "MafiaSettleTagsAction.h"
 #import "MafiaVoteAndLynchAction.h"
