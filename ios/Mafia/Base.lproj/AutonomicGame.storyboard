@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
-        <!--Autonomic Players-->
+        <!--Autonomic Game-->
         <scene sceneID="MD4-Fj-WCy">
             <objects>
-                <tableViewController storyboardIdentifier="AutonomicGame" title="Autonomic Players" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z2p-vz-ikV" customClass="MafiaAutonomicGameController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AutonomicGame" title="Autonomic Game" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z2p-vz-ikV" customClass="MafiaAutonomicGameController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i90-TU-W8C">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +38,7 @@
                     <navigationItem key="navigationItem" title="Players" id="FHa-2y-r63">
                         <barButtonItem key="leftBarButtonItem" title="Reset" id="MpZ-47-G8B">
                             <connections>
-                                <action selector="resetButtonTapped:" destination="z2p-vz-ikV" id="t4j-t1-rqJ"/>
+                                <action selector="resetButtonTapped:" destination="z2p-vz-ikV" id="Omc-LR-DoI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

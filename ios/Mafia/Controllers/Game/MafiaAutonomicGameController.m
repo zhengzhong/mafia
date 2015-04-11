@@ -48,8 +48,10 @@
         cell.textLabel.text = player.name;
         MafiaAction *action = [self.game currentAction];
         if (action != nil && action.player == player) {
+            cell.textLabel.textColor = [UIColor blackColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
+            cell.textLabel.textColor = [UIColor grayColor];
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
         return cell;
