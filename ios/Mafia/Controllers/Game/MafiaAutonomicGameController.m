@@ -4,11 +4,15 @@
 //
 
 #import "MafiaAutonomicGameController.h"
+#import "MafiaAutonomicActionController.h"
 
 #import "MafiaGameplay.h"
 
 
-@interface MafiaAutonomicGameController () <UIActionSheetDelegate>
+static NSString *const kSegueStartAction = @"StartAction";
+
+
+@interface MafiaAutonomicGameController () <UIActionSheetDelegate, MafiaAuthnomicActionControllerDelegate>
 
 @end
 
@@ -23,6 +27,15 @@
     NSAssert(game.gameSetup.isAutonomic, @"This controller only accepts autonomic game.");
     self.game = game;
     [self.game startGame];
+}
+
+
+#pragma mark - Lifecycle
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 
@@ -85,6 +98,16 @@
 }
 
 
+#pragma mark - MafiaAuthnomicActionControllerDelegate
+
+
+- (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller {
+    // The current action is complete, and we are about to continue to the next action.
+    [self.game continueToNextAction];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 #pragma mark - Actions
 
 
@@ -96,6 +119,18 @@
         destructiveButtonTitle:NSLocalizedString(@"Yes. Reset the game!", nil)
              otherButtonTitles:nil];
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+
+#pragma mark - Segue
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kSegueStartAction]) {
+        MafiaAutonomicActionController *controller = segue.destinationViewController;
+        controller.delegate = self;
+        [controller setupWithGame:self.game];
+    }
 }
 
 
