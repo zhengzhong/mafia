@@ -5,12 +5,18 @@
 
 #import "MafiaGameSetupController.h"
 
+#import "MafiaAssignRolesController.h"
 #import "MafiaConfigureRoleController.h"
-#import "MafiaGameController.h"
 #import "MafiaSelectPlayersController.h"
 
 #import "MafiaGameplay.h"
 #import "UIColor+MafiaAdditions.h"
+
+
+static NSString *const kSegueSelectPlayers = @"SelectPlayers";
+static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKillers";
+static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
+static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 
 @interface MafiaGameSetupController ()
@@ -47,26 +53,26 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"SelectPlayers"]) {
+    if ([segue.identifier isEqualToString:kSegueSelectPlayers]) {
         MafiaSelectPlayersController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
-    } else if ([segue.identifier isEqualToString:@"ConfigureNumberOfKillers"]) {
+    } else if ([segue.identifier isEqualToString:kSegueConfigureNumberOfKillers]) {
         MafiaConfigureRoleController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
         controller.role = [MafiaRole killer];
-    } else if ([segue.identifier isEqualToString:@"ConfigureNumberOfDetectives"]) {
+    } else if ([segue.identifier isEqualToString:kSegueConfigureNumberOfDetectives]) {
         MafiaConfigureRoleController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
         controller.role = [MafiaRole detective];
-    } else if ([segue.identifier isEqualToString:@"StartGame"]) {
-        MafiaGameController *controller = segue.destinationViewController;
-        [controller startWithGameSetup:self.gameSetup];
+    } else if ([segue.identifier isEqualToString:kSegueAssignRoles]) {
+        MafiaAssignRolesController *controller = segue.destinationViewController;
+        [controller assignRolesRandomlyWithGameSetup:self.gameSetup];
     }
 }
 
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:@"StartGame"]) {
+    if ([identifier isEqualToString:kSegueAssignRoles]) {
         return [self.gameSetup isValid];
     }
     return YES;

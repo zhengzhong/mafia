@@ -106,11 +106,10 @@
 #pragma mark - Public Methods
 
 
-- (void)startWithGameSetup:(MafiaGameSetup *)gameSetup {
-    self.game = [[MafiaGame alloc] initWithGameSetup:gameSetup];
+- (void)startGame:(MafiaGame *)game {
+    NSAssert([game isReadyToStart], @"Game is not ready to start.");
+    self.game = game;
     self.selectedPlayers = [NSMutableArray arrayWithCapacity:2];
-    // FIXME: assign roles, and start the game.
-    [self.game assignRolesRandomly];
     [self.game startGame];
 }
 
@@ -188,7 +187,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == [actionSheet destructiveButtonIndex]) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

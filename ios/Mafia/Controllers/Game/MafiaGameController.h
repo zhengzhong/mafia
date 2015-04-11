@@ -6,7 +6,6 @@
 #import <UIKit/UIKit.h>
 
 @class MafiaGame;
-@class MafiaGameSetup;
 @class MafiaInformation;
 @class MafiaPlayer;
 
@@ -37,7 +36,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedPlayers;
 @property (strong, nonatomic) MafiaInformation *information;
 
-- (void)startWithGameSetup:(MafiaGameSetup *)gameSetup;
+- (void)startGame:(MafiaGame *)game;
 
 - (IBAction)nextButtonTapped:(id)sender;
 
