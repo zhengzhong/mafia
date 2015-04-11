@@ -162,10 +162,13 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="vN6-7L-ECd"/>
                         <barButtonItem key="rightBarButtonItem" title="Start" id="Gmz-hy-4Cv">
                             <connections>
-                                <segue destination="Yvd-SR-Pqa" kind="push" identifier="StartGame" id="ccH-LM-Wly"/>
+                                <action selector="startButtonTapped:" destination="c6u-6r-LBL" id="BCi-Uj-NEn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Yvd-SR-Pqa" kind="push" identifier="StartJudgeDrivenGame" id="jaQ-lu-sYt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djs-sC-uds" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

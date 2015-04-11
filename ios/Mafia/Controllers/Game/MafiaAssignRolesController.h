@@ -43,4 +43,6 @@
 
 - (void)assignRolesRandomlyWithGameSetup:(MafiaGameSetup *)gameSetup;
 
+- (IBAction)startButtonTapped:(id)sender;
+
 @end  // MafiaAssignRolesController

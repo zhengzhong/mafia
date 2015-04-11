@@ -4,12 +4,14 @@
 //
 
 #import "MafiaAssignRolesController.h"
+#import "MafiaAutonomicGameController.h"
 #import "MafiaGameController.h"
+#import "MafiaStoryboards.h"
 
 #import "MafiaGameplay.h"
 
 
-static NSString *const kSegueStartGame = @"StartGame";
+static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
 
 
 @implementation MafiaTwoPlayersCell
@@ -126,22 +128,34 @@ static NSString *const kSegueStartGame = @"StartGame";
 }
 
 
-#pragma mark - Segue
+#pragma mark - Actions
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:kSegueStartGame]) {
-        MafiaGameController *controller = segue.destinationViewController;
-        [controller startGame:self.game];
+- (IBAction)startButtonTapped:(id)sender {
+    if ([self.game isReadyToStart]) {
+        if (!self.game.gameSetup.isAutonomic) {
+            // Judge-driven game.
+            // TODO: move this to a separate storyboard.
+            [self performSegueWithIdentifier:kSegueStartJudgeDrivenGame sender:self];
+        } else {
+            // Autonomic game.
+            MafiaAutonomicGameController *controller = [MafiaStoryboards instantiateAutonomicGameController];
+            [controller startGame:self.game];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:@"StartGame"]) {
-        return [self.game isReadyToStart];
+#pragma mark - Segue
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // TODO: move this to a separate storyboard.
+    if ([segue.identifier isEqualToString:kSegueStartJudgeDrivenGame]) {
+        MafiaGameController *controller = segue.destinationViewController;
+        [controller startGame:self.game];
     }
-    return YES;
 }
 
 
