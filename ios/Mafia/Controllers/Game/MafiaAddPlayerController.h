@@ -17,15 +17,18 @@
 @end
 
 
-@interface MafiaAddPlayerController : UIViewController
+@interface MafiaAddPlayerController : UIViewController <UITextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UILabel *playerNameLabel;
-@property (strong, nonatomic) IBOutlet UITextField *playerNameField;
 @property (weak, nonatomic) id<MafiaAddPlayerControllerDelegate> delegate;
 
-- (IBAction)cancelBarButtonItemTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet UIImageView *playerPhotoImageView;
+@property (strong, nonatomic) IBOutlet UITextField *playerNameField;
 
-- (IBAction)doneBarButtonItemTapped:(id)sender;
+- (IBAction)addPhotoButtonTapped:(id)sender;
+
+- (IBAction)cancelButtonTapped:(id)sender;
+
+- (IBAction)doneButtonTapped:(id)sender;
 
 - (IBAction)backgroundTapped:(id)sender;
 

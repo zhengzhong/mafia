@@ -1018,44 +1018,62 @@
         <scene sceneID="iga-sD-fRB">
             <objects>
                 <viewController id="PZu-XJ-8Yc" customClass="MafiaAddPlayerController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XQn-Jq-dew" customClass="UIControl">
+                    <view key="view" contentMode="scaleToFill" id="XQn-Jq-dew" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3kg-2M-WxB">
-                                <rect key="frame" x="16" y="80" width="288" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="37z-4o-QiO">
-                                <rect key="frame" x="16" y="109" width="288" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cPC-jx-X2i">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backgroundTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="up9-8C-9pG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2pN-JC-csC">
+                                <rect key="frame" x="80" y="120" width="160" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Add Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addPhotoButtonTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="sxo-ww-fvc"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="k9j-kU-qxM">
+                                <rect key="frame" x="80" y="120" width="160" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" minimumFontSize="17" id="37z-4o-QiO">
+                                <rect key="frame" x="40" y="300" width="240" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PZu-XJ-8Yc" id="mv8-ko-KOK"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <action selector="backgroundTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="HYf-3O-LTm"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Add Player" id="JR9-CJ-9Yf">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gs1-L6-KW6">
                             <connections>
-                                <action selector="cancelBarButtonItemTapped:" destination="PZu-XJ-8Yc" id="Tjm-R7-6Dv"/>
+                                <action selector="cancelButtonTapped:" destination="PZu-XJ-8Yc" id="V1d-F4-Aaq"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="0Sb-RG-U3o">
                             <connections>
-                                <action selector="doneBarButtonItemTapped:" destination="PZu-XJ-8Yc" id="4qY-Al-hzY"/>
+                                <action selector="doneButtonTapped:" destination="PZu-XJ-8Yc" id="6px-g8-SXc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="playerNameField" destination="37z-4o-QiO" id="Xnb-O5-quK"/>
-                        <outlet property="playerNameLabel" destination="3kg-2M-WxB" id="gLa-RC-EeH"/>
+                        <outlet property="playerPhotoImageView" destination="k9j-kU-qxM" id="4Je-tw-FTT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hgl-y9-4u6" userLabel="First Responder" sceneMemberID="firstResponder"/>
