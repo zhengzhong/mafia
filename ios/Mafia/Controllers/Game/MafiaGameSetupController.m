@@ -7,13 +7,13 @@
 
 #import "MafiaAssignRolesController.h"
 #import "MafiaConfigureRoleController.h"
-#import "MafiaSelectPlayersController.h"
+#import "MafiaManagePlayersController.h"
 
 #import "MafiaGameplay.h"
 #import "UIColor+MafiaAdditions.h"
 
 
-static NSString *const kSegueSelectPlayers = @"SelectPlayers";
+static NSString *const kSegueManagePlayers = @"ManagePlayers";
 static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKillers";
 static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
 static NSString *const kSegueAssignRoles = @"AssignRoles";
@@ -53,8 +53,8 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:kSegueSelectPlayers]) {
-        MafiaSelectPlayersController *controller = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:kSegueManagePlayers]) {
+        MafiaManagePlayersController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
     } else if ([segue.identifier isEqualToString:kSegueConfigureNumberOfKillers]) {
         MafiaConfigureRoleController *controller = segue.destinationViewController;

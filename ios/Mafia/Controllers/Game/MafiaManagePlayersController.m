@@ -3,18 +3,18 @@
 //  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
 //
 
-#import "MafiaSelectPlayersController.h"
+#import "MafiaManagePlayersController.h"
 #import "MafiaAddPlayerController.h"
 
 #import "MafiaGameplay.h"
 
 
-@interface MafiaSelectPlayersController () <MafiaAddPlayerControllerDelegate>
+@interface MafiaManagePlayersController () <MafiaAddPlayerControllerDelegate>
 
 @end
 
 
-@implementation MafiaSelectPlayersController
+@implementation MafiaManagePlayersController
 
 
 #pragma mark - Lifecycle

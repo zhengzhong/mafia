@@ -7,7 +7,7 @@
 
 @class MafiaGameSetup;
 
-@interface MafiaSelectPlayersController : UITableViewController
+@interface MafiaManagePlayersController : UITableViewController
 
 @property (strong, nonatomic) MafiaGameSetup *gameSetup;
 @property (strong, nonatomic) UIBarButtonItem *addBarButtonItem;
