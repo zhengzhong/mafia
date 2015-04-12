@@ -109,11 +109,6 @@
 }
 
 
-- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
-    //return !player.isDead;
-}
-
-
 - (void)executeOnPlayer:(MafiaPlayer *)player {
     [super executeOnPlayer:player];
     [player selectByRole:self.role];
