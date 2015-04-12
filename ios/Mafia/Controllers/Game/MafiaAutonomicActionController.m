@@ -7,6 +7,13 @@
 
 #import "MafiaGameplay.h"
 
+#import "TSMessages/TSMessage.h"
+
+
+// ------------------------------------------------------------------------------------------------
+// Custom Cells
+// ------------------------------------------------------------------------------------------------
+
 
 @implementation MafiaAutonomicActorCell
 
@@ -44,6 +51,11 @@
 @end
 
 
+// ------------------------------------------------------------------------------------------------
+// MafiaAutonomicActionController
+// ------------------------------------------------------------------------------------------------
+
+
 @implementation MafiaAutonomicActionController
 
 
@@ -53,7 +65,23 @@
 - (void)setupWithGame:(MafiaGame *)game {
     self.game = game;
     self.selectedPlayers = [[NSMutableArray alloc] initWithCapacity:2];
-    self.information = nil;
+    self.isActionCompleted = NO;
+}
+
+
+#pragma mark - Lifecycle
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Player must complete the action. There's no way back.
+    self.navigationItem.hidesBackButton = YES;
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self mafia_refreshBarButtonItems];
 }
 
 
@@ -145,22 +173,14 @@
 }
 
 
-
-
-#pragma mark - UIActionSheetDelegate
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == [actionSheet destructiveButtonIndex]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
-
-
 #pragma mark - Actions
 
 
 - (IBAction)okButtonTapped:(id)sender {
+    if (self.isActionCompleted) {
+        NSLog(@"Action is already completed. OK button should not be tapped.");
+        return;
+    }
     MafiaAction *action = [self.game currentAction];
     MafiaNumberRange *numberOfChoices = [action numberOfChoices];
     if ([numberOfChoices isNumberInRange:[self.selectedPlayers count]]) {
@@ -171,24 +191,48 @@
                 [action executeOnPlayer:player];
             }
         }
-        self.information = [action endAction];
+        MafiaInformation *information = [action endAction];
+        NSString *message = (information != nil ? information.message : NSLocalizedString(@"Action Completed", nil));
         // TODO: Display information if it's not nil.
-
-        [self.delegate autonomicActionControllerDidCompleteAction:self];
+        [TSMessage showNotificationWithTitle:message
+                                    subtitle:NSLocalizedString(@"Tap \"Done\" button on the top-left to continue.", nil)
+                                        type:TSMessageNotificationTypeSuccess];
+        self.isActionCompleted = YES;
+        [self mafia_refreshBarButtonItems];
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *numberOfChoicesString = [numberOfChoices
                                            formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
                                            pluralForm:NSLocalizedString(@"players", nil)];
         NSString *message = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Messages", nil)
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        [TSMessage showNotificationWithTitle:NSLocalizedString(@"Invalid Selections", nil)
+                                    subtitle:message
+                                        type:TSMessageNotificationTypeError];
     }
     [self.tableView reloadData];
+}
+
+
+- (IBAction)doneButtonTapped:(id)sender {
+    if (!self.isActionCompleted) {
+        NSLog(@"Action is not completed. Done button should not be tapped.");
+        return;
+    }
+    [self.delegate autonomicActionControllerDidCompleteAction:self];
+}
+
+
+#pragma mark - Private
+
+
+- (void)mafia_refreshBarButtonItems {
+    if (!self.isActionCompleted) {
+        self.okBarButtonItem.enabled = YES;
+        self.doneBarButtonItem.enabled = NO;
+    } else {
+        self.okBarButtonItem.enabled = NO;
+        self.doneBarButtonItem.enabled = YES;
+    }
 }
 
 

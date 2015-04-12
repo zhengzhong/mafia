@@ -12,11 +12,9 @@
 @class MafiaRole;
 
 
-@protocol MafiaAuthnomicActionControllerDelegate <NSObject>
-
-- (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller;
-
-@end
+// ------------------------------------------------------------------------------------------------
+// Custom Cells
+// ------------------------------------------------------------------------------------------------
 
 
 @interface MafiaAutonomicActorCell : UITableViewCell
@@ -41,18 +39,33 @@
 @end  // MafiaTargetPlayerCell
 
 
+// ------------------------------------------------------------------------------------------------
+// MafiaAutonomicActionController
+// ------------------------------------------------------------------------------------------------
+
+
+@protocol MafiaAuthnomicActionControllerDelegate <NSObject>
+
+- (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller;
+
+@end
+
+
 @interface MafiaAutonomicActionController : UITableViewController
 
 @property (strong, nonatomic) MafiaGame *game;
 @property (strong, nonatomic) NSMutableArray *selectedPlayers;
-@property (strong, nonatomic) MafiaInformation *information;
+@property (assign, nonatomic) BOOL isActionCompleted;
 
 @property (weak, nonatomic) id<MafiaAuthnomicActionControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *okBarButtonItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButtonItem;
 
 - (void)setupWithGame:(MafiaGame *)game;
 
 - (IBAction)okButtonTapped:(id)sender;
+
+- (IBAction)doneButtonTapped:(id)sender;
 
 @end  // MafiaAutonomicActionController

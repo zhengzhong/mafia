@@ -22,7 +22,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hCb-jS-NiA">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -39,6 +39,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Players" id="FHa-2y-r63">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="oMX-nA-Nz5"/>
                         <barButtonItem key="leftBarButtonItem" title="Reset" id="MpZ-47-G8B">
                             <connections>
                                 <action selector="resetButtonTapped:" destination="z2p-vz-ikV" id="Omc-LR-DoI"/>
@@ -74,7 +75,7 @@
                                             <rect key="frame" x="80" y="8" width="160" height="24"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gsz-6n-CmE">
@@ -117,7 +118,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mej-3n-hbR">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="BAD-rr-8Xf">
@@ -137,6 +138,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Player Action" id="xDX-cl-5H9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="vCA-Hg-T3r">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="gfG-zY-HoV" id="oTK-6y-8Vk"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="OK" id="jLg-iA-jDM">
                             <connections>
                                 <action selector="okButtonTapped:" destination="gfG-zY-HoV" id="Lcu-mv-gQG"/>
@@ -144,6 +150,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneBarButtonItem" destination="vCA-Hg-T3r" id="Ttf-DR-pkA"/>
                         <outlet property="okBarButtonItem" destination="jLg-iA-jDM" id="qqa-Hs-l5B"/>
                     </connections>
                 </tableViewController>
