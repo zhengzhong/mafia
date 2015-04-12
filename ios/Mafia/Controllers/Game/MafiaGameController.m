@@ -54,7 +54,7 @@
     }
     // Refresh tags.
     NSUInteger tagIndex = 0;
-    for (MafiaRole *taggedByRole in player.tags) {
+    for (MafiaRole *taggedByRole in player.currentRoleTags) {
         NSString *tagImageName = [NSString stringWithFormat:@"tag_%@.png", taggedByRole.name];
         UIImageView *imageView = self.tagImageViews[tagIndex];
         imageView.image = [UIImage imageNamed:tagImageName];

@@ -125,7 +125,7 @@
             for (MafiaPlayer *shotPlayer in shotPlayers) {
                 if (![shotPlayer.role isEqualToRole:[MafiaRole guardian]]) {
                     [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to shoot", nil), guardedPlayer]];
-                    [shotPlayer unselectFromRole:[MafiaRole killer]];
+                    [shotPlayer clearSelectionTagByRole:[MafiaRole killer]];
                 } else {
                     [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%1$@ was guarded and %2$@ was shot", nil), guardedPlayer, shotPlayer]];
                 }
@@ -136,19 +136,19 @@
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to heal", nil), guardedPlayer]];
             NSArray *healtPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]];
             for (MafiaPlayer *healtPlayer in healtPlayers) {
-                [healtPlayer unselectFromRole:[MafiaRole doctor]];
+                [healtPlayer clearSelectionTagByRole:[MafiaRole doctor]];
             }
         }
         // If a player is guarded, he cannot be healt.
         if ([guardedPlayer isSelectedByRole:[MafiaRole doctor]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be healt", nil), guardedPlayer]];
-            [guardedPlayer unselectFromRole:[MafiaRole doctor]];
+            [guardedPlayer clearSelectionTagByRole:[MafiaRole doctor]];
         }
         // If a player is guarded, he cannot be shot, unless he's guardian himself.
         if ([guardedPlayer isSelectedByRole:[MafiaRole killer]]) {
             if (![guardedPlayer.role isEqualToRole:[MafiaRole guardian]]) {
                 [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and could not be shot", nil), guardedPlayer]];
-                [guardedPlayer unselectFromRole:[MafiaRole killer]];
+                [guardedPlayer clearSelectionTagByRole:[MafiaRole killer]];
             }
         }
     }
@@ -161,7 +161,7 @@
                 player.isUnguardable = YES;
             }
             player.isJustGuarded = YES;
-            [player unselectFromRole:[MafiaRole guardian]];
+            [player clearSelectionTagByRole:[MafiaRole guardian]];
         } else {
             player.isJustGuarded = NO;
         }
@@ -179,11 +179,11 @@
     for (MafiaPlayer *shotPlayer in shotPlayers) {
         if ([shotPlayer.role isEqualToRole:[MafiaRole assassin]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ dodged the bullet from killer", nil), shotPlayer]];
-            [shotPlayer unselectFromRole:[MafiaRole killer]];
+            [shotPlayer clearSelectionTagByRole:[MafiaRole killer]];
         } else if ([shotPlayer isSelectedByRole:[MafiaRole doctor]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot but healt", nil), shotPlayer]];
-            [shotPlayer unselectFromRole:[MafiaRole killer]];
-            [shotPlayer unselectFromRole:[MafiaRole doctor]];
+            [shotPlayer clearSelectionTagByRole:[MafiaRole killer]];
+            [shotPlayer clearSelectionTagByRole:[MafiaRole doctor]];
         } else {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot and killed", nil), shotPlayer]];
             [shotPlayer markDead];
@@ -222,7 +222,7 @@
         } else {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed", nil), healtPlayer]];
             healtPlayer.isMisdiagnosed = YES;
-            [healtPlayer unselectFromRole:[MafiaRole doctor]];
+            [healtPlayer clearSelectionTagByRole:[MafiaRole doctor]];
         }
     }
     return messages;
@@ -231,9 +231,9 @@
 
 - (NSArray *)_settleIntrospectionTags {
     for (MafiaPlayer *player in [self.playerList alivePlayers]) {
-        [player unselectFromRole:[MafiaRole detective]];
-        [player unselectFromRole:[MafiaRole traitor]];
-        [player unselectFromRole:[MafiaRole undercover]];
+        [player clearSelectionTagByRole:[MafiaRole detective]];
+        [player clearSelectionTagByRole:[MafiaRole traitor]];
+        [player clearSelectionTagByRole:[MafiaRole undercover]];
     }
     return [NSArray arrayWithObjects:nil];
 }

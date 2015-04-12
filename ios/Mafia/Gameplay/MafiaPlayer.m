@@ -10,16 +10,6 @@
 @implementation MafiaPlayer
 
 
-#pragma mark - Properties
-
-
-@dynamic isUnrevealed;
-
-- (BOOL)isUnrevealed {
-    return [self.role isEqualToRole:[MafiaRole unrevealed]];
-}
-
-
 #pragma mark - Factory Method and Initializer
 
 
@@ -32,9 +22,20 @@
     if (self = [super init]) {
         _name = [name copy];
         _role = [MafiaRole unrevealed];
-        _tags = [[NSMutableArray alloc] initWithCapacity:8];
+        _previousRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
+        _currentRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
     }
     return self;
+}
+
+
+#pragma mark - Properties
+
+
+@dynamic isUnrevealed;
+
+- (BOOL)isUnrevealed {
+    return [self.role isEqualToRole:[MafiaRole unrevealed]];
 }
 
 
@@ -53,22 +54,31 @@
     self.isJustGuarded = NO;
     self.isUnguardable = NO;
     self.isVoted = NO;
-    [self.tags removeAllObjects];
+    [self.previousRoleTags removeAllObjects];
+    [self.currentRoleTags removeAllObjects];
 }
 
 
 - (void)selectByRole:(MafiaRole *)role {
-    [self.tags addObject:role];
+    [self.currentRoleTags addObject:role];
 }
 
 
-- (void)unselectFromRole:(MafiaRole *)role {
-    [self.tags removeObject:role];
+- (void)clearSelectionTagByRole:(MafiaRole *)role {
+    if ([self.currentRoleTags containsObject:role]) {
+        [self.currentRoleTags removeObject:role];
+        [self.previousRoleTags addObject:role];
+    }
 }
 
 
 - (BOOL)isSelectedByRole:(MafiaRole *)role {
-    return [self.tags containsObject:role];
+    return [self.currentRoleTags containsObject:role];
+}
+
+
+- (BOOL)wasSelectedByRole:(MafiaRole *)role {
+    return [self.previousRoleTags containsObject:role];
 }
 
 
@@ -81,7 +91,7 @@
 
 - (void)markDead {
     self.isDead = YES;
-    [self.tags removeAllObjects];
+    [self.currentRoleTags removeAllObjects];
 }
 
 
