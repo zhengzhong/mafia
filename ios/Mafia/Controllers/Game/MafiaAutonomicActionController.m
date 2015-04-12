@@ -37,11 +37,15 @@
 
 @implementation MafiaTargetPlayerCell
 
-- (void)setupWithTargetPlayer:(MafiaPlayer *)player ofRole:(MafiaRole *)role selected:(BOOL)isSelected {
+- (void)setupWithTargetPlayer:(MafiaPlayer *)player
+                       ofRole:(MafiaRole *)role
+                   selectable:(BOOL)selectable
+                     selected:(BOOL)selected {
     self.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
     self.textLabel.text = player.name;
+    self.textLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor grayColor]);
     // TODO: 3-state check image!
-    if (isSelected) {
+    if (selected) {
         self.checkImageView.image = [UIImage imageNamed:@"player.png"];
     } else {
         self.checkImageView.image = nil;
@@ -120,10 +124,12 @@
 - (UITableViewCell *)mafia_tableView:(UITableView *)tableView targetPlayerCellForRow:(NSInteger)row {
     if (row < [self.game.playerList count]) {
         MafiaPlayer *player = [self.game.playerList playerAtIndex:row];
-        MafiaRole *role = [self.game currentAction].role;
+        MafiaAction *action = [self.game currentAction];
+        MafiaRole *role = action.role;
+        BOOL selectable = [action isPlayerSelectable:player];
         BOOL selected = [self.selectedPlayers containsObject:player];
         MafiaTargetPlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TargetPlayerCell"];
-        [cell setupWithTargetPlayer:player ofRole:role selected:selected];
+        [cell setupWithTargetPlayer:player ofRole:role selectable:selectable selected:selected];
         return cell;
     }
     return nil;

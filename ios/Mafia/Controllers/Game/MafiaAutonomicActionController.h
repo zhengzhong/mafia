@@ -34,7 +34,10 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *checkImageView;
 
-- (void)setupWithTargetPlayer:(MafiaPlayer *)player ofRole:(MafiaRole *)role selected:(BOOL)isSelected;
+- (void)setupWithTargetPlayer:(MafiaPlayer *)player
+                       ofRole:(MafiaRole *)role
+                   selectable:(BOOL)selectable
+                     selected:(BOOL)selected;
 
 @end  // MafiaTargetPlayerCell
 
