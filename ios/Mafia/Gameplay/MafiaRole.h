@@ -14,8 +14,6 @@
 @property (readonly, copy, nonatomic) NSString *displayName;
 @property (readonly, assign, nonatomic) NSInteger alignment;
 
-+ (instancetype)unrevealed;
-
 + (instancetype)civilian;
 
 + (instancetype)assassin;

@@ -32,7 +32,7 @@
 
 - (void)assignRole:(MafiaRole *)role toPlayers:(NSArray *)players;
 
-- (void)assignCivilianRoleToUnrevealedPlayers;
+- (void)assignCivilianRoleToUnassignedPlayers;
 
 - (void)assignRolesRandomly;
 

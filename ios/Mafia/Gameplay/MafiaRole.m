@@ -12,13 +12,6 @@
 #pragma mark - Factory Methods
 
 
-+ (instancetype)unrevealed {
-    return [[self alloc] initWithName:@"unrevealed"
-                          displayName:NSLocalizedString(@"Unrevealed", nil)
-                            alignment:0];
-}
-
-
 + (instancetype)civilian {
     return [[self alloc] initWithName:@"civilian"
                           displayName:NSLocalizedString(@"Civilian", nil)

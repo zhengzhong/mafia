@@ -45,8 +45,6 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
 /// A set of roles, indicating that in the current round, which roles have selected this player.
 @property (strong, nonatomic) NSMutableSet *currentRoleTags;
 
-@property (readonly, assign, nonatomic) BOOL isUnrevealed;
-
 + (instancetype)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide;
 
 - (instancetype)initWithName:(NSString *)name handSide:(MafiaHandSide)handSide

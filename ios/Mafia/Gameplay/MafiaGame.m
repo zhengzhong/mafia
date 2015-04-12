@@ -82,19 +82,19 @@
     NSAssert([players count] == numberOfActors, @"Invalid number of actors: expected %@.", @(numberOfActors));
     for (MafiaPlayer *player in self.playerList) {
         if ([player.role isEqualToRole:role]) {
-            player.role = [MafiaRole unrevealed];
+            player.role = nil;
         }
     }
     for (MafiaPlayer *player in players) {
-        NSAssert(player.isUnrevealed, @"Player %@ was already assigned as %@.", player, player.role);
+        NSAssert(player.role == nil, @"Player %@ was already assigned as %@.", player, player.role);
         player.role = role;
     }
 }
 
 
-- (void)assignCivilianRoleToUnrevealedPlayers {
+- (void)assignCivilianRoleToUnassignedPlayers {
     for (MafiaPlayer *player in self.playerList) {
-        if (player.isUnrevealed) {
+        if (player.role == nil) {
             player.role = [MafiaRole civilian];
         }
     }
@@ -104,7 +104,7 @@
 - (void)assignRolesRandomly {
     // Reset all players to unrevealed.
     for (MafiaPlayer *player in self.playerList) {
-        player.role = [MafiaRole unrevealed];
+        player.role = nil;
     }
     // Shuffle the players <http://stackoverflow.com/questions/56648/>.
     NSMutableArray *shuffledPlayers = [self.playerList.players mutableCopy];
@@ -156,7 +156,7 @@
 
 - (BOOL)isReadyToStart {
     for (MafiaPlayer *player in self.playerList) {
-        if (player.isUnrevealed) {
+        if (player.role == nil) {
             return NO;
         }
     }
@@ -170,7 +170,7 @@
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:20];
     if (!self.gameSetup.isAutonomic) {
         // Non-autonomic mode: a judge is required.
-        NSArray *specialRoles = @[
+        NSArray *specialRolesByActingOrder = @[
             [MafiaRole assassin],
             [MafiaRole guardian],
             [MafiaRole killer],
@@ -179,7 +179,7 @@
             [MafiaRole traitor],
             [MafiaRole undercover],
         ];
-        for (MafiaRole *role in specialRoles) {
+        for (MafiaRole *role in specialRolesByActingOrder) {
             if ([self.gameSetup numberOfActorsForRole:role] > 0) {
                 MafiaAction *action = [MafiaRoleAction actionWithRole:role
                                                                player:nil

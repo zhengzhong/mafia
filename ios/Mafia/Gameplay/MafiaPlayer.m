@@ -22,7 +22,7 @@
     if (self = [super init]) {
         _name = [name copy];
         _handSide = handSide;
-        _role = [MafiaRole unrevealed];
+        _role = nil;
         _previousRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
         _currentRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
     }
@@ -56,18 +56,11 @@
 }
 
 
-@dynamic isUnrevealed;
-
-- (BOOL)isUnrevealed {
-    return [self.role isEqualToRole:[MafiaRole unrevealed]];
-}
-
-
 #pragma mark - Public
 
 
 - (void)reset {
-    self.role = [MafiaRole unrevealed];
+    self.role = nil;
     [self prepareToStart];
 }
 

@@ -43,11 +43,11 @@
     self.traitor.role = [MafiaRole traitor];
     self.undercover.role = [MafiaRole undercover];
     for (MafiaPlayer *player in self.playerList) {
-        if (player.isUnrevealed) {
+        if (player.role == nil) {
             player.role = [MafiaRole civilian];
         }
     }
 }
 
 
-@end  // MafiaGameplayTestCase
+@end
