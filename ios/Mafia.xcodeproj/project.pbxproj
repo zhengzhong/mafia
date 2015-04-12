@@ -23,6 +23,7 @@
 		414AB5221AD2F6F8001B913C /* MafiaUpdatePlayerRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB51A1AD2F6F8001B913C /* MafiaUpdatePlayerRoleController.m */; };
 		414AB5291AD4523A001B913C /* MafiaGameplayWebPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */; };
 		414AB52F1AD47A99001B913C /* MafiaAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB52E1AD47A99001B913C /* MafiaAboutController.m */; };
+		4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4153791F1ADAD31F0096B906 /* Localizable.strings */; };
 		415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83E165D6EBA00CDB5B2 /* action_in_day.png */; };
 		415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83F165D6EBA00CDB5B2 /* action_in_night.png */; };
 		415CF857165D6EBA00CDB5B2 /* is_just_guarded.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */; };
@@ -80,7 +81,6 @@
 		41B3250F166F579E00E9D509 /* gameplay.zh.html in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250D166F579E00E9D509 /* gameplay.zh.html */; };
 		41B32510166F579E00E9D509 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250E166F579E00E9D509 /* style.css */; };
 		41B32515166F70C700E9D509 /* is_dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B32514166F70C700E9D509 /* is_dead.png */; };
-		41B3C0CA1673642400233934 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41B3C0CC1673642400233934 /* Localizable.strings */; };
 		41B5A623166E120B009F8CAE /* information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B5A622166E120B009F8CAE /* information_background.png */; };
 		41D39A6E1AD86BA300C13084 /* MafiaRoleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A6D1AD86BA300C13084 /* MafiaRoleAction.m */; };
 		41D39A711AD9057B00C13084 /* MafiaAssignRolesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A701AD9057B00C13084 /* MafiaAssignRolesController.m */; };
@@ -129,6 +129,10 @@
 		414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameplayWebPageController.m; sourceTree = "<group>"; };
 		414AB52D1AD47A99001B913C /* MafiaAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAboutController.h; sourceTree = "<group>"; };
 		414AB52E1AD47A99001B913C /* MafiaAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAboutController.m; sourceTree = "<group>"; };
+		4153791A1ADAD1900096B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4153791E1ADAD31F0096B906 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		415379201ADAD3E10096B906 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		415379221ADAD5770096B906 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		415CF83E165D6EBA00CDB5B2 /* action_in_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_day.png; sourceTree = "<group>"; };
 		415CF83F165D6EBA00CDB5B2 /* action_in_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_night.png; sourceTree = "<group>"; };
 		415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_just_guarded.png; sourceTree = "<group>"; };
@@ -204,8 +208,6 @@
 		41B3250D166F579E00E9D509 /* gameplay.zh.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = gameplay.zh.html; sourceTree = "<group>"; };
 		41B3250E166F579E00E9D509 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		41B32514166F70C700E9D509 /* is_dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_dead.png; sourceTree = "<group>"; };
-		41B3C0CB1673642400233934 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		41B3C0CE1673663900233934 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		41B5A622166E120B009F8CAE /* information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_background.png; sourceTree = "<group>"; };
 		41D39A6C1AD86BA300C13084 /* MafiaRoleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaRoleAction.h; sourceTree = "<group>"; };
 		41D39A6D1AD86BA300C13084 /* MafiaRoleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaRoleAction.m; sourceTree = "<group>"; };
@@ -392,7 +394,6 @@
 			children = (
 				41B3250C166F577A00E9D509 /* HTML */,
 				41857F701652DAAB00EE800D /* Images */,
-				41B3C0C7167363BD00233934 /* Strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -435,6 +436,7 @@
 				41A7F3811ACED9C70086015F /* MafiaAppDelegate.m */,
 				418A72F91AC9570400A652D2 /* Images.xcassets */,
 				41A7F37C1ACED9C70086015F /* LaunchScreen.xib */,
+				4153791F1ADAD31F0096B906 /* Localizable.strings */,
 				41A7F3571ACEC8900086015F /* Controllers */,
 				41A7F3581ACEC8B10086015F /* Gameplay */,
 				41D39A771AD92DBF00C13084 /* Storyboards */,
@@ -515,14 +517,6 @@
 				41B3250E166F579E00E9D509 /* style.css */,
 			);
 			path = HTML;
-			sourceTree = "<group>";
-		};
-		41B3C0C7167363BD00233934 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				41B3C0CC1673642400233934 /* Localizable.strings */,
-			);
-			path = Strings;
 			sourceTree = "<group>";
 		};
 		41D39A771AD92DBF00C13084 /* Storyboards */ = {
@@ -657,6 +651,7 @@
 				413FE500166CC93500A5356C /* moon.png in Resources */,
 				413FE501166CC93500A5356C /* player.png in Resources */,
 				413FE502166CC93500A5356C /* players.png in Resources */,
+				4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */,
 				413FE503166CC93500A5356C /* two_handed.png in Resources */,
 				41A7F3831ACED9C70086015F /* Main.storyboard in Resources */,
 				416E66D1166D2C610062AE57 /* information_announcement.png in Resources */,
@@ -667,7 +662,6 @@
 				41B3250F166F579E00E9D509 /* gameplay.zh.html in Resources */,
 				41B32510166F579E00E9D509 /* style.css in Resources */,
 				41B32515166F70C700E9D509 /* is_dead.png in Resources */,
-				41B3C0CA1673642400233934 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,6 +800,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4153791F1ADAD31F0096B906 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4153791E1ADAD31F0096B906 /* Base */,
+				415379201ADAD3E10096B906 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		418A101F16710999003D81C0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -826,6 +829,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				41A7F37D1ACED9C70086015F /* Base */,
+				4153791A1ADAD1900096B906 /* en */,
+				415379221ADAD5770096B906 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -836,15 +841,6 @@
 				41A7F37F1ACED9C70086015F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		41B3C0CC1673642400233934 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				41B3C0CB1673642400233934 /* en */,
-				41B3C0CE1673663900233934 /* zh-Hans */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		41D39A761AD92D6F00C13084 /* AutonomicGame.storyboard */ = {
