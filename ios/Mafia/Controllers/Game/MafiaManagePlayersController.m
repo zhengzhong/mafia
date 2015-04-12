@@ -104,15 +104,16 @@
 }
 
 
-#pragma mark - MafiaAddPlayerDelegate
+#pragma mark - MafiaAddPlayerControllerDelegate
 
 
-- (void)addPlayerController:(MafiaAddPlayerController *)controller
-       didAddPlayerWithName:(NSString *)name {
-    NSString *trimmedName = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (trimmedName != nil && [trimmedName length] > 0) {
-        [self.gameSetup.playerNames addObject:trimmedName];
+- (void)addPlayerController:(UIViewController *)controller
+       didAddPlayerWithName:(NSString *)name
+                avatarImage:(UIImage *)avatarImage {
+    if (name != nil) {
+        [self.gameSetup.playerNames addObject:name];
     }
+    // TODO: save player avatar image.
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tableView reloadData];
 }

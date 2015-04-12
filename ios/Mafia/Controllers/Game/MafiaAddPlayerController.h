@@ -6,22 +6,21 @@
 #import <UIKit/UIKit.h>
 
 
-@class MafiaAddPlayerController;
-
-
 @protocol MafiaAddPlayerControllerDelegate <NSObject>
 
-- (void)addPlayerController:(MafiaAddPlayerController *)controller
-       didAddPlayerWithName:(NSString *)name;
+- (void)addPlayerController:(UIViewController *)controller
+       didAddPlayerWithName:(NSString *)name
+                avatarImage:(UIImage *)avatarImage;
 
 @end
 
 
 @interface MafiaAddPlayerController : UIViewController <UITextFieldDelegate>
 
+@property (strong, nonatomic) UIImage *avatarImage;
 @property (weak, nonatomic) id<MafiaAddPlayerControllerDelegate> delegate;
 
-@property (strong, nonatomic) IBOutlet UIImageView *playerPhotoImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *playerAvatarImageView;
 @property (strong, nonatomic) IBOutlet UITextField *playerNameField;
 
 - (IBAction)addPhotoButtonTapped:(id)sender;

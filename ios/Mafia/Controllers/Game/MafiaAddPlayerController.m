@@ -47,13 +47,11 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *photoImage = info[UIImagePickerControllerEditedImage];
-    if (photoImage == nil) {
-        photoImage = info[UIImagePickerControllerOriginalImage];
+    self.avatarImage = info[UIImagePickerControllerEditedImage];
+    if (self.avatarImage == nil) {
+        self.avatarImage = info[UIImagePickerControllerOriginalImage];
     }
-    if (photoImage != nil) {
-        self.playerPhotoImageView.image = photoImage;
-    }
+    self.playerAvatarImageView.image = self.avatarImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -103,13 +101,18 @@
 
 
 - (IBAction)cancelButtonTapped:(id)sender {
-    [self.delegate addPlayerController:self didAddPlayerWithName:nil];
+    [self.delegate addPlayerController:self didAddPlayerWithName:nil avatarImage:nil];
 }
 
 
 
 - (IBAction)doneButtonTapped:(id)sender {
-    [self.delegate addPlayerController:self didAddPlayerWithName:self.playerNameField.text];
+    NSString *name = [self.playerNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (name == nil || [name length] == 0) {
+        [self.delegate addPlayerController:self didAddPlayerWithName:nil avatarImage:nil];
+    } else {
+        [self.delegate addPlayerController:self didAddPlayerWithName:name avatarImage:self.avatarImage];
+    }
 }
 
 
