@@ -14,12 +14,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PlayerCell" textLabel="hCb-jS-NiA" style="IBUITableViewCellStyleDefault" id="M2k-zW-zJk">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ActionCell" textLabel="hCb-jS-NiA" style="IBUITableViewCellStyleDefault" id="M2k-zW-zJk">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M2k-zW-zJk" id="r5H-Fn-vKi">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hCb-jS-NiA">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Action Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hCb-jS-NiA">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,7 +38,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Players" id="FHa-2y-r63">
+                    <navigationItem key="navigationItem" title="Actions" id="FHa-2y-r63">
                         <barButtonItem key="backBarButtonItem" title="Back" id="oMX-nA-Nz5"/>
                         <barButtonItem key="leftBarButtonItem" title="Reset" id="MpZ-47-G8B">
                             <connections>
@@ -60,7 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AutonomicActorCell" rowHeight="108" id="1cc-9T-SLv" customClass="MafiaAutonomicActorCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AutonomicActionHeaderCell" rowHeight="108" id="1cc-9T-SLv" customClass="MafiaAutonomicActionHeaderCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cc-9T-SLv" id="XwO-uO-dyh">
@@ -71,14 +71,14 @@
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EbS-fK-4jo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EbS-fK-4jo">
                                             <rect key="frame" x="80" y="8" width="160" height="24"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gsz-6n-CmE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gsz-6n-CmE">
                                             <rect key="frame" x="80" y="40" width="160" height="20"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -101,11 +101,11 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="avatarImageView" destination="y67-wE-ssp" id="kfC-5C-zu0"/>
-                                    <outlet property="nameLabel" destination="EbS-fK-4jo" id="gWZ-8d-be4"/>
-                                    <outlet property="promptLabel" destination="9MM-wW-HDb" id="f9o-h3-zZh"/>
-                                    <outlet property="roleImageView" destination="cIj-qA-XYG" id="s43-Da-DEw"/>
-                                    <outlet property="roleLabel" destination="Gsz-6n-CmE" id="KQp-JF-uwx"/>
+                                    <outlet property="actionNameLabel" destination="EbS-fK-4jo" id="4OZ-lE-HGI"/>
+                                    <outlet property="actionPromptLabel" destination="9MM-wW-HDb" id="gE6-6S-zGr"/>
+                                    <outlet property="actionRoleImageView" destination="cIj-qA-XYG" id="7W3-VF-ezu"/>
+                                    <outlet property="actionRoleLabel" destination="Gsz-6n-CmE" id="ejb-wJ-eBu"/>
+                                    <outlet property="actorImageView" destination="y67-wE-ssp" id="SV6-B2-k2E"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TargetPlayerCell" textLabel="mej-3n-hbR" rowHeight="44" style="IBUITableViewCellStyleDefault" id="iXD-5E-qEA" customClass="MafiaTargetPlayerCell">

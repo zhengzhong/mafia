@@ -34,6 +34,11 @@
 #pragma mark - Overrides
 
 
+- (NSString *)displayName {
+    return NSLocalizedString(@"Settle Tags", nil);
+}
+
+
 - (NSArray *)actors {
     return @[];  // This action has no actors.
 }
@@ -231,14 +236,6 @@
         [player unselectFromRole:[MafiaRole undercover]];
     }
     return [NSArray arrayWithObjects:nil];
-}
-
-
-#pragma mark - NSObject
-
-
-- (NSString *)description {
-    return NSLocalizedString(@"Settle Tags", nil);
 }
 
 

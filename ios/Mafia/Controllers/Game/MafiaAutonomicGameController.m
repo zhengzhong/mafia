@@ -48,19 +48,17 @@ static NSString *const kSegueStartAction = @"StartAction";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 0 ? [self.game.playerList count] : 0);
+    return (section == 0 ? [self.game.actions count] : 0);
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [self.game.playerList count]) {
-        MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerCell"];
-        cell.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
-        cell.textLabel.text = player.name;
-        MafiaAction *action = [self.game currentAction];
-        if (action != nil && action.player == player) {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row < [self.game.actions count]) {
+        MafiaAction *action = self.game.actions[indexPath.row];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActionCell"];
+        cell.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: actor photo
+        cell.textLabel.text = action.displayName;
+        if (action == [self.game currentAction]) {
             cell.textLabel.textColor = [UIColor blackColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
@@ -77,10 +75,9 @@ static NSString *const kSegueStartAction = @"StartAction";
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [self.game.playerList count]) {
-        MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-        MafiaAction *action = [self.game currentAction];
-        if (action != nil && action.player == player) {
+    if (indexPath.section == 0 && indexPath.row < [self.game.actions count]) {
+        MafiaAction *action = self.game.actions[indexPath.row];
+        if (action == [self.game currentAction]) {
             return indexPath;
         }
     }
@@ -92,6 +89,7 @@ static NSString *const kSegueStartAction = @"StartAction";
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // Action sheet is for resetting game.
     if (buttonIndex == [actionSheet destructiveButtonIndex]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
@@ -104,6 +102,7 @@ static NSString *const kSegueStartAction = @"StartAction";
 - (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller {
     // The current action is complete, and we are about to continue to the next action.
     [self.game continueToNextAction];
+    [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

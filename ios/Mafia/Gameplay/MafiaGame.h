@@ -16,10 +16,10 @@
 
 @property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
 @property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
-@property (copy, nonatomic) NSArray *actions;
-@property (assign, nonatomic) NSInteger round;
-@property (assign, nonatomic) NSInteger actionIndex;
-@property (copy, nonatomic) NSString *winner;
+@property (readonly, copy, nonatomic) NSArray *actions;
+@property (readonly, assign, nonatomic) NSInteger round;
+@property (readonly, assign, nonatomic) NSInteger actionIndex;
+@property (readonly, copy, nonatomic) NSString *winner;
 
 - (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded;
 

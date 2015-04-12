@@ -14,6 +14,16 @@
 #import "MafiaVoteAndLynchAction.h"
 
 
+@interface MafiaGame ()
+
+@property (copy, nonatomic) NSArray *actions;
+@property (assign, nonatomic) NSInteger round;
+@property (assign, nonatomic) NSInteger actionIndex;
+@property (copy, nonatomic) NSString *winner;
+
+@end
+
+
 @implementation MafiaGame
 
 

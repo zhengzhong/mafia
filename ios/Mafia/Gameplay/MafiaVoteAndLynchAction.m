@@ -32,6 +32,11 @@
 #pragma mark - Overrides
 
 
+- (NSString *)displayName {
+    return NSLocalizedString(@"Vote and Lynch", nil);
+}
+
+
 - (NSArray *)actors {
     return [self.playerList alivePlayers];
 }
@@ -66,14 +71,6 @@
         }
     }
     return information;
-}
-
-
-#pragma mark - NSObject
-
-
-- (NSString *)description {
-    return NSLocalizedString(@"Vote and Lynch", nil);
 }
 
 

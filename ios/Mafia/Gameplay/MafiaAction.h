@@ -32,6 +32,9 @@ FOUNDATION_EXPORT NSString *const MafiaInvalidActionRoleException;
 /// Whether this action has been executed (in the current round).
 @property (assign, nonatomic) BOOL isExecuted;
 
+/// The display name of this action.
+@property (readonly, copy, nonatomic) NSString *displayName;
+
 /*!
  * Initializes an action. The given role must match the action subclass.
  * @param role  the role of this action, must match the action subclass.

@@ -15,20 +15,27 @@
 // ------------------------------------------------------------------------------------------------
 
 
-@implementation MafiaAutonomicActorCell
+@implementation MafiaAutonomicActionHeaderCell
 
-- (void)setupWithPlayer:(MafiaPlayer *)player numberOfChoices:(MafiaNumberRange *)numberOfChoices {
-    self.avatarImageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
-    self.nameLabel.text = player.name;
-    self.roleLabel.text = player.role.displayName;
-    self.roleImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", player.role.name]];
+- (void)setupWithAction:(MafiaAction *)action {
+    self.actorImageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
+    self.actionNameLabel.text = action.displayName;
+    if (action.role != nil) {
+        self.actionRoleLabel.text = action.role.displayName;
+        self.actionRoleImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", action.role.name]];
+    } else {
+        // TODO:
+        self.actionRoleLabel.text = nil;
+        self.actionRoleImageView.image = nil;
+    }
+    MafiaNumberRange *numberOfChoices = [action numberOfChoices];
     if (numberOfChoices.maxValue > 0) {
         NSString *numberOfChoicesString = [numberOfChoices
             formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
                                pluralForm:NSLocalizedString(@"players", nil)];
-        self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
+        self.actionPromptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
     } else {
-        self.promptLabel.text = NSLocalizedString(@"Click OK to continue", nil);
+        self.actionPromptLabel.text = NSLocalizedString(@"Click OK to continue", nil);
     }
 }
 
@@ -104,19 +111,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return [self mafia_tableView:tableView autonomicActorCellForRow:indexPath.row];
+        return [self mafia_tableView:tableView headerCellForRow:indexPath.row];
     } else {
         return [self mafia_tableView:tableView targetPlayerCellForRow:indexPath.row];
     }
 }
 
 
-- (UITableViewCell *)mafia_tableView:(UITableView *)tableView autonomicActorCellForRow:(NSInteger)row {
-    MafiaAction *action = [self.game currentAction];
-    MafiaPlayer *actor = action.player;
-    MafiaNumberRange *numberOfChoices = [action numberOfChoices];
-    MafiaAutonomicActorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AutonomicActorCell"];
-    [cell setupWithPlayer:actor numberOfChoices:numberOfChoices];
+- (UITableViewCell *)mafia_tableView:(UITableView *)tableView headerCellForRow:(NSInteger)row {
+    MafiaAutonomicActionHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AutonomicActionHeaderCell"];
+    [cell setupWithAction:[self.game currentAction]];
     return cell;
 }
 

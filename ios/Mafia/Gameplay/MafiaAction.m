@@ -35,6 +35,17 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 }
 
 
+#pragma mark - Properties
+
+
+@dynamic displayName;
+
+- (NSString *)displayName {
+    NSString *prefix = (self.player != nil ? self.player.name : self.role.displayName);
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ Action", nil), prefix];
+}
+
+
 #pragma mark - Public Methods
 
 
@@ -84,7 +95,7 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedString(@"%@ Action", nil), self.role];
+    return self.displayName;
 }
 
 

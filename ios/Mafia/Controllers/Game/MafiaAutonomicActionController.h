@@ -5,6 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class MafiaAction;
 @class MafiaGame;
 @class MafiaInformation;
 @class MafiaNumberRange;
@@ -17,17 +18,17 @@
 // ------------------------------------------------------------------------------------------------
 
 
-@interface MafiaAutonomicActorCell : UITableViewCell
+@interface MafiaAutonomicActionHeaderCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *roleLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *roleImageView;
-@property (strong, nonatomic) IBOutlet UILabel *promptLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *actorImageView;
+@property (strong, nonatomic) IBOutlet UILabel *actionNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *actionRoleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *actionRoleImageView;
+@property (strong, nonatomic) IBOutlet UILabel *actionPromptLabel;
 
-- (void)setupWithPlayer:(MafiaPlayer *)player numberOfChoices:(MafiaNumberRange *)numberOfChoices;
+- (void)setupWithAction:(MafiaAction *)action;
 
-@end  // MafiaAutonomicActorCell
+@end  // MafiaAutonomicActionHeaderCell
 
 
 @interface MafiaTargetPlayerCell : UITableViewCell
