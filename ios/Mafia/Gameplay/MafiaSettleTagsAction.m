@@ -66,11 +66,11 @@
     MafiaInformation *information = [MafiaInformation announcementInformation];
     // Settle tags in order, and collect information details.
     NSMutableArray *deadPlayerNames = [NSMutableArray arrayWithCapacity:4];
-    [information addDetails:[self _settleAssassinTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
-    [information addDetails:[self _settleGuardianTag]];
-    [information addDetails:[self _settleKillerTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
-    [information addDetails:[self _settleDoctorTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
-    [information addDetails:[self _settleIntrospectionTags]];
+    [information addDetails:[self mafia_settleAssassinTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self mafia_settleGuardianTag]];
+    [information addDetails:[self mafia_settleKillerTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self mafia_settleDoctorTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
+    [information addDetails:[self mafia_settleIntrospectionTags]];
     // Construct information message as a summary of the settlement result.
     if ([deadPlayerNames count] == 0) {
         information.message = NSLocalizedString(@"Nobody was dead", nil);
@@ -87,11 +87,11 @@
 #pragma mark - Private
 
 
-- (NSArray *)_settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
+- (NSArray *)mafia_settleAssassinTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If a player is assassined, he's definitely killed.
     BOOL isGuardianKilled = NO;
-    NSArray *assassinedPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole assassin]];
+    NSArray *assassinedPlayers = [self.playerList playersSelectedBy:[MafiaRole assassin] aliveOnly:YES];
     for (MafiaPlayer *assassinedPlayer in assassinedPlayers) {
         [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was assassined", nil), assassinedPlayer]];
         [assassinedPlayer markDead];
@@ -103,7 +103,7 @@
     // If guardian is assassined, the guarded player is also dead.
     // Note: when settling assassin tag, guardian tag has not yet been settled.
     if (isGuardianKilled) {
-        NSArray *guardedPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]];
+        NSArray *guardedPlayers = [self.playerList playersSelectedBy:[MafiaRole guardian] aliveOnly:YES];
         for (MafiaPlayer *guardedPlayer in guardedPlayers) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), guardedPlayer]];
             [guardedPlayer markDead];
@@ -114,14 +114,14 @@
 }
 
 
-- (NSArray *)_settleGuardianTag {
+- (NSArray *)mafia_settleGuardianTag {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // Check the guarded players...
-    NSArray *guardedPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole guardian]];
+    NSArray *guardedPlayers = [self.playerList playersSelectedBy:[MafiaRole guardian] aliveOnly:YES];
     for (MafiaPlayer *guardedPlayer in guardedPlayers) {
         // If killer is guarded, nobody can be shot except guardian himself.
         if ([guardedPlayer.role isEqualToRole:[MafiaRole killer]]) {
-            NSArray *shotPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole killer]];
+            NSArray *shotPlayers = [self.playerList playersSelectedBy:[MafiaRole killer] aliveOnly:YES];
             for (MafiaPlayer *shotPlayer in shotPlayers) {
                 if (![shotPlayer.role isEqualToRole:[MafiaRole guardian]]) {
                     [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to shoot", nil), guardedPlayer]];
@@ -134,7 +134,7 @@
         // If doctor is guarded, nobody can be healt.
         if ([guardedPlayer.role isEqualToRole:[MafiaRole doctor]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and failed to heal", nil), guardedPlayer]];
-            NSArray *healtPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]];
+            NSArray *healtPlayers = [self.playerList playersSelectedBy:[MafiaRole doctor] aliveOnly:YES];
             for (MafiaPlayer *healtPlayer in healtPlayers) {
                 [healtPlayer clearSelectionTagByRole:[MafiaRole doctor]];
             }
@@ -171,11 +171,11 @@
 }
 
 
-- (NSArray *)_settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
+- (NSArray *)mafia_settleKillerTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If a player is shot, he's killed unless his role is assassin or he's healt.
     BOOL isGuardianKilled = NO;
-    NSArray *shotPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole killer]];
+    NSArray *shotPlayers = [self.playerList playersSelectedBy:[MafiaRole killer] aliveOnly:YES];
     for (MafiaPlayer *shotPlayer in shotPlayers) {
         if ([shotPlayer.role isEqualToRole:[MafiaRole assassin]]) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ dodged the bullet from killer", nil), shotPlayer]];
@@ -208,12 +208,12 @@
 }
 
 
-- (NSArray *)_settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
+- (NSArray *)mafia_settleDoctorTagAndSaveDeadPlayerNamesTo:(NSMutableArray *)deadPlayerNames {
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:4];
     // If player is misdiagnosed twice, he's killed.
     // Note: killer tag should have already been settled, so no need to check if the healt player
     // is shot by killer. In this stage, all players selected by doctor are misdiagnosed.
-    NSArray *healtPlayers = [self.playerList alivePlayersSelectedBy:[MafiaRole doctor]];
+    NSArray *healtPlayers = [self.playerList playersSelectedBy:[MafiaRole doctor] aliveOnly:YES];
     for (MafiaPlayer *healtPlayer in healtPlayers) {
         if (healtPlayer.isMisdiagnosed) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed twice and killed", nil), healtPlayer]];
@@ -229,7 +229,7 @@
 }
 
 
-- (NSArray *)_settleIntrospectionTags {
+- (NSArray *)mafia_settleIntrospectionTags {
     for (MafiaPlayer *player in [self.playerList alivePlayers]) {
         [player clearSelectionTagByRole:[MafiaRole detective]];
         [player clearSelectionTagByRole:[MafiaRole traitor]];

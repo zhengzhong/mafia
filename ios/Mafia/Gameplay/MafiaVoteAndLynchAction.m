@@ -42,6 +42,11 @@
 }
 
 
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    return !player.isDead;
+}
+
+
 - (void)executeOnPlayer:(MafiaPlayer *)player {
     NSAssert(!self.isExecuted, @"%@ is already executed.", self);
     player.isVoted = YES;

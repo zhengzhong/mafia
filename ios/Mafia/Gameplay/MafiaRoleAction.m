@@ -109,6 +109,17 @@
 }
 
 
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    //return !player.isDead;
+}
+
+
+- (void)executeOnPlayer:(MafiaPlayer *)player {
+    [super executeOnPlayer:player];
+    [player selectByRole:self.role];
+}
+
+
 @end
 
 
@@ -153,6 +164,11 @@
 
 - (MafiaNumberRange *)numberOfChoices {
     return [MafiaNumberRange numberRangeWithMinValue:0 maxValue:1];
+}
+
+
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    return !player.isDead;
 }
 
 
@@ -214,6 +230,20 @@
 }
 
 
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    // In autonomic mode, if one killer has already selected a player in the current round,
+    // only that same player is selectable by any other killers.
+    if (self.player != nil) {
+        NSArray *selectedPlayers = [self.playerList playersSelectedBy:self.role aliveOnly:YES];
+        if ([selectedPlayers count] > 0) {
+            return [selectedPlayers containsObject:player];
+        }
+    }
+    // Otherwise, alive players are all selectable.
+    return !player.isDead;
+}
+
+
 @end
 
 
@@ -231,13 +261,21 @@
 
 
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
-    // Detective can check any non-detective player, even if he's dead.
+    // In autonomic mode, if one detective has already selected a player in the current round,
+    // only that same player is selectable by any other detectives.
+    if (self.player != nil) {
+        NSArray *selectedPlayers = [self.playerList playersSelectedBy:self.role aliveOnly:NO];
+        if ([selectedPlayers count] > 0) {
+            return [selectedPlayers containsObject:player];
+        }
+    }
+    // Otherwise: Detective can check any non-detective player, even if he's dead.
     return (![player.role isEqualToRole:self.role]);
 }
 
 
 - (MafiaInformation *)endAction {
-    NSArray *selectedPlayers = [self.playerList alivePlayersSelectedBy:self.role];
+    NSArray *selectedPlayers = [self.playerList playersSelectedBy:self.role aliveOnly:NO];
     BOOL isPositive = NO;
     for (MafiaPlayer *player in selectedPlayers) {
         if ([player.role isEqualToRole:[MafiaRole killer]]) {
@@ -264,6 +302,11 @@
 }
 
 
+- (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
+    return !player.isDead;
+}
+
+
 @end
 
 
@@ -287,7 +330,7 @@
 
 
 - (MafiaInformation *)endAction {
-    NSArray *selectedPlayers = [self.playerList alivePlayersSelectedBy:self.role];
+    NSArray *selectedPlayers = [self.playerList playersSelectedBy:self.role aliveOnly:NO];
     BOOL isPositive = NO;
     for (MafiaPlayer *player in selectedPlayers) {
         if ([player.role isEqualToRole:[MafiaRole killer]] || [player.role isEqualToRole:[MafiaRole assassin]]) {
@@ -321,9 +364,9 @@
 
 
 - (MafiaInformation *)endAction {
-    NSArray *introspectedPlayers = [self.playerList alivePlayersSelectedBy:self.role];
+    NSArray *selectedPlayers = [self.playerList playersSelectedBy:self.role aliveOnly:NO];
     BOOL isPositive = NO;
-    for (MafiaPlayer *player in introspectedPlayers) {
+    for (MafiaPlayer *player in selectedPlayers) {
         if ([player.role isEqualToRole:[MafiaRole killer]] || [player.role isEqualToRole:[MafiaRole assassin]]) {
             isPositive = YES;
         }

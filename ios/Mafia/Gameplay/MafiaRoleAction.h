@@ -9,7 +9,7 @@
 
 
 /*!
- * Abstract class (class cluster) representing an action for a special (non-civilian) role.
+ * Abstract class (class cluster) representing an action for a role. The role property is not nil.
  */
 @interface MafiaRoleAction : MafiaAction
 

@@ -68,8 +68,7 @@ FOUNDATION_EXPORT NSString *const MafiaInvalidActionRoleException;
 - (MafiaNumberRange *)numberOfChoices;
 
 /*!
- * Checks if the given player can be selected by this action. By default, a player is selectable
- * if he is alive.
+ * Checks if the given player can be selected by this action. Subclass must implement this method.
  */
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player;
 
@@ -80,8 +79,8 @@ FOUNDATION_EXPORT NSString *const MafiaInvalidActionRoleException;
 
 /*!
  * Executes the action on the given player. The action must be in non-executed state, and the given
- * player must be selectable by this action. By default, this method marks the given player as
- * selected by the action's role. After this method is called, the action is marked as executed.
+ * player must be selectable by this action. By default, this method does nothing but mark the
+ * action as executed.
  */
 - (void)executeOnPlayer:(MafiaPlayer *)player;
 

@@ -50,10 +50,10 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 
 
 - (NSArray *)actors {
-    if (self.player == nil) {
-        return [self.playerList alivePlayersWithRole:self.role];
-    } else {
+    if (self.player != nil) {
         return (self.player.isDead ? @[] : @[self.player]);
+    } else {
+        return [self.playerList playersWithRole:self.role aliveOnly:YES];
     }
 }
 
@@ -69,7 +69,8 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 
 
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
-    return !player.isDead;
+    [self doesNotRecognizeSelector:_cmd];
+    return NO;
 }
 
 
@@ -81,7 +82,6 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 - (void)executeOnPlayer:(MafiaPlayer *)player {
     NSAssert(!self.isExecuted, @"%@ is already executed.", self);
     NSAssert([self isPlayerSelectable:player], @"%@ cannot select %@.", self.role, player);
-    [player selectByRole:self.role];
     self.isExecuted = YES;
 }
 

@@ -68,31 +68,33 @@
 
 
 - (NSArray *)alivePlayers {
-    return [self alivePlayersWithRole:nil selectedBy:nil];
+    return [self playersWithRole:nil selectedBy:nil aliveOnly:YES];
 }
 
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role {
-    return [self alivePlayersWithRole:role selectedBy:nil];
+- (NSArray *)playersWithRole:(MafiaRole *)role aliveOnly:(BOOL)aliveOnly {
+    return [self playersWithRole:role selectedBy:nil aliveOnly:aliveOnly];
 }
 
 
-- (NSArray *)alivePlayersSelectedBy:(MafiaRole *)selectorRole {
-    return [self alivePlayersWithRole:nil selectedBy:selectorRole];
+- (NSArray *)playersSelectedBy:(MafiaRole *)selectedByRole aliveOnly:(BOOL)aliveOnly {
+    return [self playersWithRole:nil selectedBy:selectedByRole aliveOnly:aliveOnly];
 }
 
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role selectedBy:(MafiaRole *)selectorRole {
+- (NSArray *)playersWithRole:(MafiaRole *)role
+                  selectedBy:(MafiaRole *)selectedByRole
+                   aliveOnly:(BOOL)aliveOnly {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:
         ^BOOL(id object, NSDictionary *bindings) {
             MafiaPlayer *player = object;
-            if (player.isDead) {
-                return NO;
-            }
             if (role != nil && ![role isEqualToRole:player.role]) {
                 return NO;
             }
-            if (selectorRole != nil && ![player isSelectedByRole:selectorRole]) {
+            if (selectedByRole != nil && ![player isSelectedByRole:selectedByRole]) {
+                return NO;
+            }
+            if (aliveOnly && player.isDead) {
                 return NO;
             }
             return YES;

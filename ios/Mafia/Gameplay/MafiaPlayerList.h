@@ -35,13 +35,34 @@
  */
 - (MafiaPlayer *)twinOfPlayer:(MafiaPlayer *)player;
 
+/*!
+ * Returns an array of alive players.
+ */
 - (NSArray *)alivePlayers;
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role;
+/*!
+ * Returns an array of players whose role is the given role.
+ * @param role  the role used to filter players.
+ * @param aliveOnly  whether only alive players should be returned.
+ */
+- (NSArray *)playersWithRole:(MafiaRole *)role aliveOnly:(BOOL)aliveOnly;
 
-- (NSArray *)alivePlayersSelectedBy:(MafiaRole *)selectorRole;
+/*!
+ * Returns an array of players who are selected by the given role in the current round.
+ * @param selectedByRole  the role who has selected the players in the current round.
+ * @param aliveOnly  whether only alive players should be returned.
+ */
+- (NSArray *)playersSelectedBy:(MafiaRole *)selectedByRole aliveOnly:(BOOL)aliveOnly;
 
-- (NSArray *)alivePlayersWithRole:(MafiaRole *)role selectedBy:(MafiaRole *)selectorRole;
+/*!
+ * Returns an array of players that satisfy the given conditions.
+ * @param role  the role of the players.
+ * @param selectedByRole  the role who selects the players in the current round.
+ * @param aliveOnly  whether to return only alive players.
+ */
+- (NSArray *)playersWithRole:(MafiaRole *)role
+                  selectedBy:(MafiaRole *)selectedByRole
+                   aliveOnly:(BOOL)aliveOnly;
 
 - (void)reset;
 
