@@ -107,11 +107,14 @@
 
 
 - (IBAction)doneButtonTapped:(id)sender {
+    // Remove compiler warning: Weak property 'delegate' is accessed multiple times in this method
+    // but may be unpredictably set to nil; assign to a strong variable to keep the object alive.
+    id<MafiaAddPlayerControllerDelegate> strongDelegate = self.delegate;
     NSString *name = [self.playerNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (name == nil || [name length] == 0) {
-        [self.delegate addPlayerController:self didAddPlayerWithName:nil avatarImage:nil];
+        [strongDelegate addPlayerController:self didAddPlayerWithName:nil avatarImage:nil];
     } else {
-        [self.delegate addPlayerController:self didAddPlayerWithName:name avatarImage:self.avatarImage];
+        [strongDelegate addPlayerController:self didAddPlayerWithName:name avatarImage:self.avatarImage];
     }
 }
 
