@@ -5,8 +5,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MafiaPlayer.h"
+
 @class MafiaRole;
-@class MafiaPlayer;
 
 
 @interface MafiaPlayerList : NSObject <NSFastEnumeration>
@@ -22,11 +23,20 @@
 - (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded
     NS_DESIGNATED_INITIALIZER;
 
+/*!
+ * Returns the number of players.
+ */
 - (NSUInteger)count;
 
+/*!
+ * Returns a player at the given index.
+ */
 - (MafiaPlayer *)playerAtIndex:(NSUInteger)index;
 
-- (MafiaPlayer *)playerNamed:(NSString *)name;
+/*!
+ * Returns a player by given name and hand side.
+ */
+- (MafiaPlayer *)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide;
 
 /*!
  * Returns the twin player of the given player. In two-handed mode, the returned player is the
@@ -64,8 +74,14 @@
                   selectedBy:(MafiaRole *)selectedByRole
                    aliveOnly:(BOOL)aliveOnly;
 
+/*!
+ * Resets properties of all the players. Player roles will also be reset.
+ */
 - (void)reset;
 
+/*!
+ * Prepares the players when the game starts, by resetting their properties to initial states.
+ */
 - (void)prepareToStart;
 
 @end

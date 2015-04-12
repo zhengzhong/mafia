@@ -67,7 +67,7 @@ static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
             label.text = player.role.displayName;
         } else {
             imageView.image = [UIImage imageNamed:@"role_unrevealed.png"];  // TODO: use player photo
-            label.text = player.name;
+            label.text = player.displayName;
         }
     } else {
         button.enabled = NO;

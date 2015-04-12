@@ -89,19 +89,6 @@
 }
 
 
-+ (NSArray *)specialRoles {
-    return @[
-        [self assassin],
-        [self guardian],
-        [self killer],
-        [self detective],
-        [self doctor],
-        [self traitor],
-        [self undercover]
-    ];
-}
-
-
 #pragma mark - Initializer
 
 

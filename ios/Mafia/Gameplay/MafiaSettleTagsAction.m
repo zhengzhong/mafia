@@ -95,7 +95,7 @@
     for (MafiaPlayer *assassinedPlayer in assassinedPlayers) {
         [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was assassined", nil), assassinedPlayer]];
         [assassinedPlayer markDead];
-        [deadPlayerNames addObject:assassinedPlayer.name];
+        [deadPlayerNames addObject:assassinedPlayer.displayName];
         if ([assassinedPlayer.role isEqualToRole:[MafiaRole guardian]]) {
             isGuardianKilled = YES;
         }
@@ -107,7 +107,7 @@
         for (MafiaPlayer *guardedPlayer in guardedPlayers) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), guardedPlayer]];
             [guardedPlayer markDead];
-            [deadPlayerNames addObject:guardedPlayer.name];
+            [deadPlayerNames addObject:guardedPlayer.displayName];
         }
     }
     return messages;
@@ -187,7 +187,7 @@
         } else {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was shot and killed", nil), shotPlayer]];
             [shotPlayer markDead];
-            [deadPlayerNames addObject:shotPlayer.name];
+            [deadPlayerNames addObject:shotPlayer.displayName];
             if ([shotPlayer.role isEqualToRole:[MafiaRole guardian]]) {
                 isGuardianKilled = YES;
             }
@@ -200,7 +200,7 @@
             if (player.isJustGuarded) {
                 [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was guarded and was dead with guardian", nil), player]];
                 [player markDead];
-                [deadPlayerNames addObject:player.name];
+                [deadPlayerNames addObject:player.displayName];
             }
         }
     }
@@ -218,7 +218,7 @@
         if (healtPlayer.isMisdiagnosed) {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed twice and killed", nil), healtPlayer]];
             [healtPlayer markDead];
-            [deadPlayerNames addObject:healtPlayer.name];
+            [deadPlayerNames addObject:healtPlayer.displayName];
         } else {
             [messages addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ was misdiagnosed", nil), healtPlayer]];
             healtPlayer.isMisdiagnosed = YES;

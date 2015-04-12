@@ -13,14 +13,15 @@
 #pragma mark - Factory Method and Initializer
 
 
-+ (instancetype)playerWithName:(NSString *)name {
-    return [[self alloc] initWithName:name];
++ (instancetype)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide {
+    return [[self alloc] initWithName:name handSide:handSide];
 }
 
 
-- (instancetype)initWithName:(NSString *)name {
+- (instancetype)initWithName:(NSString *)name handSide:(MafiaHandSide)handSide {
     if (self = [super init]) {
         _name = [name copy];
+        _handSide = handSide;
         _role = [MafiaRole unrevealed];
         _previousRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
         _currentRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
@@ -30,6 +31,29 @@
 
 
 #pragma mark - Properties
+
+
+@dynamic displayName;
+
+- (NSString *)displayName {
+    NSString *handSideString = nil;
+    switch (self.handSide) {
+        case MafiaHandSideBoth:
+            handSideString = nil;
+            break;
+        case MafiaHandSideLeft:
+            handSideString = NSLocalizedString(@"Left", nil);
+            break;
+        case MafiaHandSideRight:
+            handSideString = NSLocalizedString(@"Right", nil);
+            break;
+    }
+    if (handSideString == nil) {
+        return self.name;
+    } else {
+        return [NSString stringWithFormat:@"%@:%@", self.name, handSideString];
+    }
+}
 
 
 @dynamic isUnrevealed;
@@ -99,7 +123,7 @@
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@", self.role.displayName, self.name];
+    return [NSString stringWithFormat:@"%@ (%@)", self.displayName, self.role.displayName];
 }
 
 

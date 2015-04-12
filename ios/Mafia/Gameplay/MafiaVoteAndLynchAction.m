@@ -67,10 +67,10 @@
     for (MafiaPlayer *player in [self.playerList alivePlayers]) {
         if (player.isVoted) {
             if (player.isJustGuarded) {
-                information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted but guarded", nil), player.name];
+                information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted but guarded", nil), player.displayName];
                 player.isVoted = NO;
             } else {
-                information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted and lynched", nil), player.name];
+                information.message = [NSString stringWithFormat:NSLocalizedString(@"%@ was voted and lynched", nil), player.displayName];
                 [player markDead];
             }
         }

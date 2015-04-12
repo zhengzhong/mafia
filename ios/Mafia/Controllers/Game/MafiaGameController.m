@@ -17,7 +17,7 @@
 - (void)refreshWithPlayer:(MafiaPlayer *)player {
     // Refresh player information.
     self.avatarImageView.image = nil;  // TODO:
-    self.nameLabel.text = player.name;
+    self.nameLabel.text = player.displayName;
     self.roleLabel.text = player.role.displayName;
     NSString *roleImageName = nil;
     if (player.isDead) {

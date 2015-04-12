@@ -49,7 +49,7 @@
                    selectable:(BOOL)selectable
                      selected:(BOOL)selected {
     self.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
-    self.textLabel.text = player.name;
+    self.textLabel.text = player.displayName;
     self.textLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor grayColor]);
     // TODO: 3-state check image!
     if (selected) {

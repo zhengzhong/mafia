@@ -115,8 +115,18 @@
         [shuffledPlayers exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
     }
     // Create an array of roles to assign: the number of roles should match the number of players.
+    // Note: roles with highest absolute value of alignment should be assigned first, to avoid potential conflicts.
     NSMutableArray *rolesToAssign = [[NSMutableArray alloc] initWithCapacity:numberOfPlayers];
-    for (MafiaRole *role in [MafiaRole specialRoles]) {
+    NSArray *specialRoles = @[
+        [MafiaRole killer],
+        [MafiaRole detective],
+        [MafiaRole assassin],
+        [MafiaRole undercover],
+        [MafiaRole traitor],
+        [MafiaRole guardian],
+        [MafiaRole doctor],
+    ];
+    for (MafiaRole *role in specialRoles) {
         NSInteger numberOfActors = [self.gameSetup numberOfActorsForRole:role];
         for (NSInteger i = 0; i < numberOfActors; ++i) {
             [rolesToAssign addObject:role];

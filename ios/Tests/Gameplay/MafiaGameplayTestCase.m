@@ -19,15 +19,15 @@
         @"Civilian 1", @"Civilian 2", @"Civilian 3", @"Civilian 4",
     ];
     self.playerList = [[MafiaPlayerList alloc] initWithPlayerNames:playerNames isTwoHanded:NO];
-    self.assassin = [self.playerList playerNamed:@"Assassin"];
-    self.killer1 = [self.playerList playerNamed:@"Killer 1"];
-    self.killer2 = [self.playerList playerNamed:@"Killer 2"];
-    self.detective1 = [self.playerList playerNamed:@"Detective 1"];
-    self.detective1 = [self.playerList playerNamed:@"Detective 2"];
-    self.guardian = [self.playerList playerNamed:@"Guardian"];
-    self.doctor = [self.playerList playerNamed:@"Doctor"];
-    self.traitor = [self.playerList playerNamed:@"Traitor"];
-    self.undercover = [self.playerList playerNamed:@"Undercover"];
+    self.assassin = [self.playerList playerWithName:@"Assassin" handSide:MafiaHandSideBoth];
+    self.killer1 = [self.playerList playerWithName:@"Killer 1" handSide:MafiaHandSideBoth];
+    self.killer2 = [self.playerList playerWithName:@"Killer 2" handSide:MafiaHandSideBoth];
+    self.detective1 = [self.playerList playerWithName:@"Detective 1" handSide:MafiaHandSideBoth];
+    self.detective1 = [self.playerList playerWithName:@"Detective 2" handSide:MafiaHandSideBoth];
+    self.guardian = [self.playerList playerWithName:@"Guardian" handSide:MafiaHandSideBoth];
+    self.doctor = [self.playerList playerWithName:@"Doctor" handSide:MafiaHandSideBoth];
+    self.traitor = [self.playerList playerWithName:@"Traitor" handSide:MafiaHandSideBoth];
+    self.undercover = [self.playerList playerWithName:@"Undercover" handSide:MafiaHandSideBoth];
 }
 
 

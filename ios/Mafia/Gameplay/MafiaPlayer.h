@@ -8,14 +8,31 @@
 @class MafiaRole;
 
 
+typedef NS_ENUM(NSInteger, MafiaHandSide) {
+    MafiaHandSideBoth,
+    MafiaHandSideLeft,
+    MafiaHandSideRight,
+};
+
+
 /*!
  * This class represents a player in the game. Note: in two-handed mode, a real person
  * participating the game has 2 players, one for each hand side.
  */
 @interface MafiaPlayer : NSObject
 
-@property (copy, nonatomic) NSString *name;
-@property (strong, nonatomic) MafiaRole *role;
+/// The name of the person who controls this player.
+@property (readonly, copy, nonatomic) NSString *name;
+
+/// The hand side of the person who controls this player.
+@property (readonly, assign, nonatomic) MafiaHandSide handSide;
+
+/// The display name of this player, composed by name and hand side.
+@property (readonly, copy, nonatomic) NSString *displayName;
+
+/// The role assigned to this player.
+@property (copy, nonatomic) MafiaRole *role;
+
 @property (assign, nonatomic) BOOL isDead;
 @property (assign, nonatomic) BOOL isMisdiagnosed;
 @property (assign, nonatomic) BOOL isJustGuarded;
@@ -30,9 +47,10 @@
 
 @property (readonly, assign, nonatomic) BOOL isUnrevealed;
 
-+ (instancetype)playerWithName:(NSString *)name;
++ (instancetype)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide;
 
-- (instancetype)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name handSide:(MafiaHandSide)handSide
+    NS_DESIGNATED_INITIALIZER;
 
 /*!
  * Resets properties of this player, including his role.

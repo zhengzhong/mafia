@@ -38,11 +38,6 @@
 + (NSArray *)roles;
 
 /*!
- * Returns an array of all special, non-civilian roles.
- */
-+ (NSArray *)specialRoles;
-
-/*!
  * Designated initializer. This initializer should not be used externally.
  */
 - (instancetype)initWithName:(NSString *)name

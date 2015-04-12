@@ -76,7 +76,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.title = self.player.name;
+    self.title = self.player.displayName;
     // Bind statuses to cells.
     self.deadStatusCell.status = self.deadStatus;
     self.misdiagnosedStatusCell.status = self.misdiagnosedStatus;

@@ -16,10 +16,10 @@
         NSMutableArray *players = [NSMutableArray arrayWithCapacity:[playerNames count] * 2];
         for (NSString *playerName in playerNames) {
             if (isTwoHanded) {
-                [players addObject:[MafiaPlayer playerWithName:[NSString stringWithFormat:@"%@:L", playerName]]];
-                [players addObject:[MafiaPlayer playerWithName:[NSString stringWithFormat:@"%@:R", playerName]]];
+                [players addObject:[MafiaPlayer playerWithName:playerName handSide:MafiaHandSideLeft]];
+                [players addObject:[MafiaPlayer playerWithName:playerName handSide:MafiaHandSideRight]];
             } else {
-                [players addObject:[MafiaPlayer playerWithName:playerName]];
+                [players addObject:[MafiaPlayer playerWithName:playerName handSide:MafiaHandSideBoth]];
             }
         }
         _players = [players copy];
@@ -51,9 +51,9 @@
 }
 
 
-- (MafiaPlayer *)playerNamed:(NSString *)name {
+- (MafiaPlayer *)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide {
     for (MafiaPlayer *player in self.players) {
-        if ([player.name isEqualToString:name]) {
+        if ([player.name isEqualToString:name] && player.handSide == handSide) {
             return player;
         }
     }
@@ -62,7 +62,11 @@
 
 
 - (MafiaPlayer *)twinOfPlayer:(MafiaPlayer *)player {
-    // FIXME: implement this!
+    for (MafiaPlayer *otherPlayer in self.players) {
+        if ([otherPlayer.name isEqualToString:player.name] && otherPlayer.handSide != player.handSide) {
+            return otherPlayer;
+        }
+    }
     return nil;
 }
 
