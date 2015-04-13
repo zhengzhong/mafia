@@ -10,21 +10,22 @@
 
 
 + (instancetype)announcementInformation {
-    return [[self alloc] initWithCategory:@"announcement"];
+    return [[self alloc] initWithKind:MafiaInformationKindAnnouncement];
 }
 
 
-+ (instancetype)thumbInformationWithIndicator:(BOOL)indicator {
-    NSString *category = (indicator ? @"positive" : @"negative");
-    MafiaInformation *information = [[self alloc] initWithCategory:category];
-    information.message = (indicator ? NSLocalizedString(@"Thumb Up! Positive!", nil) : NSLocalizedString(@"Thumb Down! Negative!", nil));
++ (instancetype)informationWithAnswer:(BOOL)answer {
+    MafiaInformationKind kind = (answer ? MafiaInformationKindPositiveAnswer : MafiaInformationKindNegativeAnswer);
+    NSString *message = (answer ? NSLocalizedString(@"The answer is YES!", nil) : NSLocalizedString(@"The answer is NO!", nil));
+    MafiaInformation *information = [[self alloc] initWithKind:kind];
+    information.message = message;
     return information;
 }
 
 
-- (instancetype)initWithCategory:(NSString *)category {
+- (instancetype)initWithKind:(MafiaInformationKind)kind {
     if (self = [super init]) {
-        _category = [category copy];
+        _kind = kind;
         _details = [[NSMutableArray alloc] initWithCapacity:4];
     }
     return self;

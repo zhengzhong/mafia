@@ -5,8 +5,8 @@
 
 #import "MafiaGameController.h"
 
-#import "MafiaInformationController.h"
 #import "MafiaUpdatePlayerController.h"
+#import "TSMessage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
 
@@ -69,7 +69,7 @@
 @end
 
 
-@interface MafiaGameController () <UIActionSheetDelegate, MafiaInformationControllerDelegate>
+@interface MafiaGameController () <UIActionSheetDelegate>
 
 @end
 
@@ -210,10 +210,6 @@
         MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
         MafiaUpdatePlayerController *controller = segue.destinationViewController;
         [controller loadPlayer:player];
-    } else if ([segue.identifier isEqualToString:@"ShowInformation"]) {
-        MafiaInformationController *controller = segue.destinationViewController;
-        controller.information = self.information;
-        controller.delegate = self;
     }
 }
 
@@ -235,14 +231,14 @@
                 [currentAction executeOnPlayer:player];
             }
         }
-        self.information = [currentAction endAction];
+        MafiaInformation *information = [currentAction endAction];
+        if (information != nil) {
+            [TSMessage mafia_showMessageAndDetailsOfInformation:information];
+        }
         // Continue to the next action.
         [self.game continueToNextAction];
         [self.selectedPlayers removeAllObjects];
-        // Display information as necessary.
-        if (self.information != nil) {
-            [self performSegueWithIdentifier:@"ShowInformation" sender:self];
-        }
+        [self mafia_refreshView];
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *numberOfChoicesString = [numberOfChoices
@@ -269,15 +265,6 @@
              otherButtonTitles:nil];
     // See: http://stackoverflow.com/questions/4447563/last-button-of-actionsheet-does-not-get-clicked
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
-}
-
-
-#pragma mark - MafiaInformationControllerDelegate
-
-
-- (void)informationControllerDidComplete:(UIViewController *)controller {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    self.information = nil;
 }
 
 

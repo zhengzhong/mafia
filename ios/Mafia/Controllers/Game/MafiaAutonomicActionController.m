@@ -4,10 +4,9 @@
 //
 
 #import "MafiaAutonomicActionController.h"
+#import "TSMessage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
-
-#import "TSMessages/TSMessage.h"
 
 
 // ------------------------------------------------------------------------------------------------
@@ -202,22 +201,23 @@
             }
         }
         MafiaInformation *information = [action endAction];
-        NSString *message = (information != nil ? information.message : NSLocalizedString(@"Action Completed", nil));
-        // TODO: Display information if it's not nil.
-        [TSMessage showNotificationWithTitle:message
-                                    subtitle:NSLocalizedString(@"Tap \"Done\" button on the top-left to continue.", nil)
-                                        type:TSMessageNotificationTypeSuccess];
+        NSString *hintInSubtitle = NSLocalizedString(@"Tap \"Done\" button on the top-left to continue.", nil);
+        if (information != nil) {
+            [TSMessage mafia_showMessageOfInformation:information subtitle:hintInSubtitle];
+        } else {
+            NSString *title = NSLocalizedString(@"Action Completed", nil);
+            [TSMessage mafia_showMessageWithTitle:title subtitle:hintInSubtitle];
+        }
         self.isActionCompleted = YES;
         [self mafia_refreshBarButtonItems];
     } else {
         // Cannot continue to next: wrong number of players selected.
+        NSString *title = NSLocalizedString(@"Invalid Selections", nil);
         NSString *numberOfChoicesString = [numberOfChoices
-                                           formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
-                                           pluralForm:NSLocalizedString(@"players", nil)];
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
-        [TSMessage showNotificationWithTitle:NSLocalizedString(@"Invalid Selections", nil)
-                                    subtitle:message
-                                        type:TSMessageNotificationTypeError];
+            formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
+                               pluralForm:NSLocalizedString(@"players", nil)];
+        NSString *hintInSubtitle = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
+        [TSMessage mafia_showErrorWithTitle:title subtitle:hintInSubtitle];
     }
     [self.tableView reloadData];
 }

@@ -277,7 +277,7 @@
             isPositive = YES;
         }
     }
-    return [MafiaInformation thumbInformationWithIndicator:isPositive];
+    return [MafiaInformation informationWithAnswer:isPositive];
 }
 
 
@@ -332,7 +332,7 @@
             isPositive = YES;
         }
     }
-    return [MafiaInformation thumbInformationWithIndicator:isPositive];
+    return [MafiaInformation informationWithAnswer:isPositive];
 }
 
 
@@ -366,7 +366,7 @@
             isPositive = YES;
         }
     }
-    return [MafiaInformation thumbInformationWithIndicator:isPositive];
+    return [MafiaInformation informationWithAnswer:isPositive];
 }
 
 
