@@ -79,7 +79,7 @@ static NSString *const kNegativeAnswerImageName = @"InformationNegative";
                                   subtitle:subtitle
                                      image:image
                                       type:type
-                                  duration:TSMessageNotificationDurationEndless
+                                  duration:TSMessageNotificationDurationAutomatic
                                   callback:nil
                                buttonTitle:nil
                             buttonCallback:nil

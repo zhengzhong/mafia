@@ -45,8 +45,7 @@
 + (void)mafia_showErrorWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
 
 /*!
- * Shows a notification with default configurations for the game. The notification will NOT be
- * dismissed automatically. User must tap to dismiss it.
+ * Shows a notification with default configurations for the game.
  *
  * This method is called by all the other methods.
  */
