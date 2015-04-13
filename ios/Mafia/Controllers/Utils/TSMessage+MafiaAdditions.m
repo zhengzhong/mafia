@@ -8,11 +8,9 @@
 #import "MafiaGameplay.h"
 
 
-static NSString *const kAnnouncementImageName = @"information_announcement.png";
-static NSString *const kPositiveAnswerImageName = @"information_positive.png";
-static NSString *const kNegativeAnswerImageName = @"information_negative.png";
-static NSString *const kMessageImageName = @"information_message.png";
-static NSString *const kErrorImageName = @"information_error.png";
+static NSString *const kAnnouncementImageName = @"InformationAnnouncement";
+static NSString *const kPositiveAnswerImageName = @"InformationPositive";
+static NSString *const kNegativeAnswerImageName = @"InformationNegative";
 
 
 @implementation TSMessage (MafiaAdditions)
@@ -45,7 +43,7 @@ static NSString *const kErrorImageName = @"information_error.png";
             break;
         case MafiaInformationKindNegativeAnswer:
             imageName = kNegativeAnswerImageName;
-            type = TSMessageNotificationTypeWarning;
+            type = TSMessageNotificationTypeError;
             break;
     }
     [self mafia_showNotificationWithTitle:title
@@ -58,7 +56,7 @@ static NSString *const kErrorImageName = @"information_error.png";
 + (void)mafia_showMessageWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
     [self mafia_showNotificationWithTitle:title
                                  subtitle:subtitle
-                                imageName:kMessageImageName
+                                imageName:nil
                                      type:TSMessageNotificationTypeMessage];
 }
 
@@ -66,7 +64,7 @@ static NSString *const kErrorImageName = @"information_error.png";
 + (void)mafia_showErrorWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
     [self mafia_showNotificationWithTitle:title
                                  subtitle:subtitle
-                                imageName:kErrorImageName
+                                imageName:nil
                                      type:TSMessageNotificationTypeError];
 }
 
@@ -75,7 +73,7 @@ static NSString *const kErrorImageName = @"information_error.png";
                                subtitle:(NSString *)subtitle
                               imageName:(NSString *)imageName
                                    type:(TSMessageNotificationType)type {
-    UIImage *image = [UIImage imageNamed:imageName];
+    UIImage *image = (imageName != nil ? [UIImage imageNamed:imageName] : nil);
     [self showNotificationInViewController:[self defaultViewController]
                                      title:title
                                   subtitle:subtitle
