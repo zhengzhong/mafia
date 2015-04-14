@@ -113,11 +113,11 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <view contentMode="scaleToFill" id="tQ1-JH-qab">
-                                            <rect key="frame" x="166" y="8" width="135" height="136"/>
+                                            <rect key="frame" x="166" y="8" width="134" height="136"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lT5-eD-owk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="136"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="134" height="136"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal">
@@ -128,11 +128,11 @@
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="T1J-nC-v2n">
-                                                    <rect key="frame" x="30" y="14" width="72" height="72"/>
+                                                    <rect key="frame" x="28" y="13" width="72" height="72"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="28a-yU-CMZ">
-                                                    <rect key="frame" x="6" y="98" width="120" height="21"/>
+                                                    <rect key="frame" x="6" y="98" width="119" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,14 +199,14 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iwq-Sr-70t">
-                                                    <rect key="frame" x="79" y="8" width="194" height="21"/>
+                                                    <rect key="frame" x="78" y="8" width="194" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FtZ-G2-fUr">
-                                                    <rect key="frame" x="79" y="37" width="232" height="18"/>
+                                                    <rect key="frame" x="78" y="37" width="232" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -261,11 +261,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="P2J-h8-BhO">
-                                                    <rect key="frame" x="255" y="80" width="56" height="56"/>
+                                                    <rect key="frame" x="254" y="80" width="56" height="56"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pVI-Sn-HMV">
-                                                    <rect key="frame" x="281" y="8" width="30" height="30"/>
+                                                    <rect key="frame" x="280" y="8" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="...">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -917,7 +917,7 @@
                         <outlet property="hasUndercoverSwitch" destination="fm3-4f-VHE" id="48E-eW-ppe"/>
                         <outlet property="numberOfDetectivesLabel" destination="6hC-2x-woc" id="3TB-dB-6m9"/>
                         <outlet property="numberOfKillersLabel" destination="igC-ge-TcW" id="mbQ-TT-SkP"/>
-                        <outlet property="numberOfPlayersLabel" destination="ZDu-pC-Fzg" id="bIk-fV-xdC"/>
+                        <outlet property="numberOfPersonsLabel" destination="ZDu-pC-Fzg" id="Pns-gc-BgH"/>
                         <outlet property="startButton" destination="d6O-vX-6sO" id="Odc-Or-v6M"/>
                         <outlet property="twoHandedSwitch" destination="3Kk-W0-3BG" id="yVM-CF-FZ7"/>
                     </connections>
@@ -957,17 +957,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Players" id="G8S-0m-1Az"/>
                     <connections>
-                        <segue destination="mwA-MP-EZY" kind="modal" identifier="AddPlayer" id="e0v-SK-6QS"/>
+                        <segue destination="mwA-MP-EZY" kind="modal" identifier="AddPerson" id="e0v-SK-6QS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUa-bP-ELM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1132" y="-1559"/>
         </scene>
-        <!--Add Player-->
+        <!--Add Person-->
         <scene sceneID="iga-sD-fRB">
             <objects>
-                <viewController id="PZu-XJ-8Yc" customClass="MafiaAddPlayerController" sceneMemberID="viewController">
+                <viewController id="PZu-XJ-8Yc" customClass="MafiaAddPersonController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XQn-Jq-dew" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -997,7 +997,7 @@
                                 <rect key="frame" x="80" y="120" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" textAlignment="center" minimumFontSize="17" id="37z-4o-QiO">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" id="37z-4o-QiO">
                                 <rect key="frame" x="40" y="300" width="240" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -1009,7 +1009,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Player" id="JR9-CJ-9Yf">
+                    <navigationItem key="navigationItem" title="Add Person" id="JR9-CJ-9Yf">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gs1-L6-KW6">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="PZu-XJ-8Yc" id="V1d-F4-Aaq"/>

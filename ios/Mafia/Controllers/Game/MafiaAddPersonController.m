@@ -3,10 +3,12 @@
 //  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
 //
 
-#import "MafiaAddPlayerController.h"
+#import "MafiaAddPersonController.h"
+
+#import "MafiaGameplay.h"
 
 
-@interface MafiaAddPlayerController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface MafiaAddPersonController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (assign, nonatomic) NSInteger pickFromPhotoLibraryIndex;
 @property (assign, nonatomic) NSInteger takePhotoUsingCameraIndex;
@@ -14,7 +16,7 @@
 @end
 
 
-@implementation MafiaAddPlayerController
+@implementation MafiaAddPersonController
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,7 +103,7 @@
 
 
 - (IBAction)cancelButtonTapped:(id)sender {
-    [self.delegate addPlayerController:self didAddPlayerWithName:nil avatarImage:nil];
+    [self.delegate addPersonController:self didAddPersonOrNil:nil];
 }
 
 
@@ -109,12 +111,13 @@
 - (IBAction)doneButtonTapped:(id)sender {
     // Remove compiler warning: Weak property 'delegate' is accessed multiple times in this method
     // but may be unpredictably set to nil; assign to a strong variable to keep the object alive.
-    id<MafiaAddPlayerControllerDelegate> strongDelegate = self.delegate;
+    id<MafiaAddPersonControllerDelegate> strongDelegate = self.delegate;
     NSString *name = [self.playerNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (name == nil || [name length] == 0) {
-        [strongDelegate addPlayerController:self didAddPlayerWithName:nil avatarImage:nil];
+        [strongDelegate addPersonController:self didAddPersonOrNil:nil];
     } else {
-        [strongDelegate addPlayerController:self didAddPlayerWithName:name avatarImage:self.avatarImage];
+        MafiaPerson *person = [MafiaPerson personWithName:name avatarImage:self.avatarImage];
+        [strongDelegate addPersonController:self didAddPersonOrNil:person];
     }
 }
 

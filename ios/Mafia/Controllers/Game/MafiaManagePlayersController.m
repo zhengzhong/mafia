@@ -4,12 +4,12 @@
 //
 
 #import "MafiaManagePlayersController.h"
-#import "MafiaAddPlayerController.h"
+#import "MafiaAddPersonController.h"
 
 #import "MafiaGameplay.h"
 
 
-@interface MafiaManagePlayersController () <MafiaAddPlayerControllerDelegate>
+@interface MafiaManagePlayersController () <MafiaAddPersonControllerDelegate>
 
 @end
 
@@ -48,16 +48,16 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 0 ? [self.gameSetup.playerNames count] : 0);
+    return (section == 0 ? [self.gameSetup.persons count] : 0);
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [self.gameSetup.playerNames count]) {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < [self.gameSetup.persons count]) {
+        MafiaPerson *person = self.gameSetup.persons[indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerCell"];
-        cell.imageView.image = [UIImage imageNamed:@"player.png"];
-        cell.textLabel.text = self.gameSetup.playerNames[indexPath.row];
+        cell.imageView.image = person.avatarImage;
+        cell.textLabel.text = person.name;
         return cell;
     }
     return nil;
@@ -73,7 +73,9 @@
     commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
      forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.gameSetup.playerNames removeObjectAtIndex:indexPath.row];
+        if (indexPath.row < [self.gameSetup.persons count]) {
+            [self.gameSetup.persons removeObjectAtIndex:indexPath.row];
+        }
         [self.tableView reloadData];
     }   
 }
@@ -87,10 +89,10 @@
 - (void)tableView:(UITableView *)tableView
     moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
            toIndexPath:(NSIndexPath *)toIndexPath {
-    if (fromIndexPath.section == toIndexPath.section) {
-        NSString *playerName = self.gameSetup.playerNames[fromIndexPath.row];
-        [self.gameSetup.playerNames removeObjectAtIndex:fromIndexPath.row];
-        [self.gameSetup.playerNames insertObject:playerName atIndex:toIndexPath.row];
+    if (fromIndexPath.section == toIndexPath.section && fromIndexPath.row != toIndexPath.row) {
+        MafiaPerson *person = self.gameSetup.persons[fromIndexPath.row];
+        [self.gameSetup.persons removeObjectAtIndex:fromIndexPath.row];
+        [self.gameSetup.persons insertObject:person atIndex:toIndexPath.row];
         [self.tableView reloadData];
     }
 }
@@ -104,16 +106,14 @@
 }
 
 
-#pragma mark - MafiaAddPlayerControllerDelegate
+#pragma mark - MafiaAddPersonControllerDelegate
 
 
-- (void)addPlayerController:(UIViewController *)controller
-       didAddPlayerWithName:(NSString *)name
-                avatarImage:(UIImage *)avatarImage {
-    if (name != nil) {
-        [self.gameSetup.playerNames addObject:name];
+- (void)addPersonController:(UIViewController *)controller didAddPersonOrNil:(MafiaPerson *)person {
+    if (person != nil) {
+        [self.gameSetup.persons addObject:person];
     }
-    // TODO: save player avatar image.
+    // TODO: save person (name and avatar image).
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tableView reloadData];
 }
@@ -123,10 +123,10 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"AddPlayer"]) {
+    if ([segue.identifier isEqualToString:@"AddPerson"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        MafiaAddPlayerController *addPlayerController = navigationController.viewControllers[0];
-        addPlayerController.delegate = self;
+        MafiaAddPersonController *addPersonController = navigationController.viewControllers[0];
+        addPersonController.delegate = self;
     }
 }
 
@@ -135,7 +135,7 @@
 
 
 - (void)addBarButtonItemTapped:(id)sender {
-    [self performSegueWithIdentifier:@"AddPlayer" sender:sender];
+    [self performSegueWithIdentifier:@"AddPerson" sender:sender];
 }
 
 

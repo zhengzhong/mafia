@@ -16,11 +16,11 @@
 
 /*!
  * Initializes the player list.
- * @param playerNames  an array of player names.
- * @param isTwoHanded  whether the game is in two-handed mode. If yes, for each player name, two
- *                     players will be added (for left hand and right hand, respectively).
+ * @param persons  an array of persons.
+ * @param isTwoHanded  whether the game is in two-handed mode. If yes, for each person, two players
+ *                     will be added (for left hand and right hand, respectively).
  */
-- (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded
+- (instancetype)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded
     NS_DESIGNATED_INITIALIZER;
 
 /*!

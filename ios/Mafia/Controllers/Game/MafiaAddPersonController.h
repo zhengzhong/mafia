@@ -5,20 +5,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class MafiaPerson;
 
-@protocol MafiaAddPlayerControllerDelegate <NSObject>
 
-- (void)addPlayerController:(UIViewController *)controller
-       didAddPlayerWithName:(NSString *)name
-                avatarImage:(UIImage *)avatarImage;
+@protocol MafiaAddPersonControllerDelegate <NSObject>
+
+- (void)addPersonController:(UIViewController *)controller didAddPersonOrNil:(MafiaPerson *)person;
 
 @end
 
 
-@interface MafiaAddPlayerController : UIViewController <UITextFieldDelegate>
+@interface MafiaAddPersonController : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) UIImage *avatarImage;
-@property (weak, nonatomic) id<MafiaAddPlayerControllerDelegate> delegate;
+@property (weak, nonatomic) id<MafiaAddPersonControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIImageView *playerAvatarImageView;
 @property (strong, nonatomic) IBOutlet UITextField *playerNameField;

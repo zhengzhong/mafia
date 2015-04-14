@@ -10,9 +10,9 @@
 @implementation MafiaGameSetup
 
 
-- (id)init {
+- (instancetype)init {
     if (self = [super init]) {
-        _playerNames = [NSMutableArray arrayWithCapacity:20];
+        _persons = [NSMutableArray arrayWithCapacity:20];
         _isTwoHanded = YES;
         _isAutonomic = NO;
         _roleSettings = [@{
@@ -29,9 +29,9 @@
 }
 
 
-- (void)addPlayerName:(NSString *)playerName {
-    if (![self.playerNames containsObject:playerName]) {
-        [self.playerNames addObject:playerName];
+- (void)addPerson:(MafiaPerson *)person {
+    if (person != nil && ![self.persons containsObject:person]) {
+        [self.persons addObject:person];
     }
 }
 
@@ -46,7 +46,7 @@
 }
 
 
-- (NSInteger)numberOfPlayersRequired {
+- (NSInteger)numberOfPersonsRequired {
     NSInteger numberOfRoles = 0;
     for (MafiaRole *role in self.roleSettings) {
         numberOfRoles += [self.roleSettings[role] intValue];
@@ -56,7 +56,7 @@
 
 
 - (BOOL)isValid {
-    return ([self.playerNames count] >= [self numberOfPlayersRequired]);
+    return ([self.persons count] >= [self numberOfPersonsRequired]);
 }
 
 

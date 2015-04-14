@@ -6,6 +6,7 @@
 #import "MafiaGame.h"
 #import "MafiaAction.h"
 #import "MafiaGameSetup.h"
+#import "MafiaPerson.h"
 #import "MafiaPlayer.h"
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
@@ -27,10 +28,10 @@
 @implementation MafiaGame
 
 
-- (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded {
+- (instancetype)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded {
     MafiaGameSetup *gameSetup = [[MafiaGameSetup alloc] init];
-    for (NSString *playerName in playerNames) {
-        [gameSetup addPlayerName:playerName];
+    for (MafiaPerson *person in persons) {
+        [gameSetup addPerson:person];
     }
     gameSetup.isTwoHanded = isTwoHanded;
     return [self initWithGameSetup:gameSetup];
@@ -41,8 +42,8 @@
     NSAssert([gameSetup isValid], @"Game setup is invalid.");
     if (self = [super init]) {
         _gameSetup = gameSetup;
-        _playerList = [[MafiaPlayerList alloc] initWithPlayerNames:gameSetup.playerNames
-                                                       isTwoHanded:gameSetup.isTwoHanded];
+        _playerList = [[MafiaPlayerList alloc] initWithPersons:gameSetup.persons
+                                                   isTwoHanded:gameSetup.isTwoHanded];
     }
     return self;
 }

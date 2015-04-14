@@ -13,7 +13,7 @@
 @property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *startButton;
-@property (strong, nonatomic) IBOutlet UILabel *numberOfPlayersLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numberOfPersonsLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *twoHandedSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *autonomicSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *numberOfKillersLabel;

@@ -5,12 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class MafiaPerson;
 @class MafiaRole;
 
 @interface MafiaGameSetup : NSObject
 
-/// An array of player names.
-@property (readonly, strong, nonatomic) NSMutableArray *playerNames;
+/// An array of persons.
+@property (readonly, strong, nonatomic) NSMutableArray *persons;
 
 /// Whether the game is using two-handed mode.
 @property (assign, nonatomic) BOOL isTwoHanded;
@@ -21,13 +22,13 @@
 /// Settings of roles: key is the role, value is the number of actors for the role.
 @property (readonly, strong, nonatomic) NSMutableDictionary *roleSettings;
 
-- (void)addPlayerName:(NSString *)playerName;
+- (void)addPerson:(MafiaPerson *)person;
 
 - (NSInteger)numberOfActorsForRole:(MafiaRole *)role;
 
 - (void)setNumberOfActors:(NSInteger)numberOfActors forRole:(MafiaRole *)role;
 
-- (NSInteger)numberOfPlayersRequired;
+- (NSInteger)numberOfPersonsRequired;
 
 - (BOOL)isValid;
 

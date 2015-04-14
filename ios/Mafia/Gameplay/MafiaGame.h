@@ -21,7 +21,7 @@
 @property (readonly, assign, nonatomic) NSInteger actionIndex;
 @property (readonly, copy, nonatomic) NSString *winner;
 
-- (instancetype)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded;
+- (instancetype)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded;
 
 - (instancetype)initWithGameSetup:(MafiaGameSetup *)gameSetup
     NS_DESIGNATED_INITIALIZER;

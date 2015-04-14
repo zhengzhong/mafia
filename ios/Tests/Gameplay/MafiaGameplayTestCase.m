@@ -13,17 +13,27 @@
 
 - (void)setUp {
     [super setUp];
-    NSArray *playerNames = @[
-        @"Killer 1", @"Killer 2", @"Detective 1", @"Detective 2",
-        @"Assassin", @"Guardian", @"Doctor", @"Traitor", @"Undercover",
-        @"Civilian 1", @"Civilian 2", @"Civilian 3", @"Civilian 4",
+    NSArray *persons = @[
+        [MafiaPerson personWithName:@"Killer_1" avatarImage:nil],
+        [MafiaPerson personWithName:@"Killer_2" avatarImage:nil],
+        [MafiaPerson personWithName:@"Detective_1" avatarImage:nil],
+        [MafiaPerson personWithName:@"Detective_2" avatarImage:nil],
+        [MafiaPerson personWithName:@"Assassin" avatarImage:nil],
+        [MafiaPerson personWithName:@"Guardian" avatarImage:nil],
+        [MafiaPerson personWithName:@"Doctor" avatarImage:nil],
+        [MafiaPerson personWithName:@"Traitor" avatarImage:nil],
+        [MafiaPerson personWithName:@"Undercover" avatarImage:nil],
+        [MafiaPerson personWithName:@"Civilian_1" avatarImage:nil],
+        [MafiaPerson personWithName:@"Civilian_2" avatarImage:nil],
+        [MafiaPerson personWithName:@"Civilian_3" avatarImage:nil],
+        [MafiaPerson personWithName:@"Civilian_4" avatarImage:nil],
     ];
-    self.playerList = [[MafiaPlayerList alloc] initWithPlayerNames:playerNames isTwoHanded:NO];
+    self.playerList = [[MafiaPlayerList alloc] initWithPersons:persons isTwoHanded:NO];
     self.assassin = [self.playerList playerWithName:@"Assassin" handSide:MafiaHandSideBoth];
-    self.killer1 = [self.playerList playerWithName:@"Killer 1" handSide:MafiaHandSideBoth];
-    self.killer2 = [self.playerList playerWithName:@"Killer 2" handSide:MafiaHandSideBoth];
-    self.detective1 = [self.playerList playerWithName:@"Detective 1" handSide:MafiaHandSideBoth];
-    self.detective1 = [self.playerList playerWithName:@"Detective 2" handSide:MafiaHandSideBoth];
+    self.killer1 = [self.playerList playerWithName:@"Killer_1" handSide:MafiaHandSideBoth];
+    self.killer2 = [self.playerList playerWithName:@"Killer_2" handSide:MafiaHandSideBoth];
+    self.detective1 = [self.playerList playerWithName:@"Detective_1" handSide:MafiaHandSideBoth];
+    self.detective1 = [self.playerList playerWithName:@"Detective_2" handSide:MafiaHandSideBoth];
     self.guardian = [self.playerList playerWithName:@"Guardian" handSide:MafiaHandSideBoth];
     self.doctor = [self.playerList playerWithName:@"Doctor" handSide:MafiaHandSideBoth];
     self.traitor = [self.playerList playerWithName:@"Traitor" handSide:MafiaHandSideBoth];

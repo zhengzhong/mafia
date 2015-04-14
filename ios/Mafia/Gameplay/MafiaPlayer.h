@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class MafiaPerson;
 @class MafiaRole;
 
 
@@ -21,8 +22,8 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
  */
 @interface MafiaPlayer : NSObject
 
-/// The name of the person who controls this player.
-@property (readonly, copy, nonatomic) NSString *name;
+/// The person who controls this player.
+@property (readonly, strong, nonatomic) MafiaPerson *person;
 
 /// The hand side of the person who controls this player.
 @property (readonly, assign, nonatomic) MafiaHandSide handSide;
@@ -45,9 +46,9 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
 /// A set of roles, indicating that in the current round, which roles have selected this player.
 @property (strong, nonatomic) NSMutableSet *currentRoleTags;
 
-+ (instancetype)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide;
++ (instancetype)playerWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide;
 
-- (instancetype)initWithName:(NSString *)name handSide:(MafiaHandSide)handSide
+- (instancetype)initWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide
     NS_DESIGNATED_INITIALIZER;
 
 /*!

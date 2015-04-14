@@ -35,9 +35,16 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gameSetup = [[MafiaGameSetup alloc] init];
-    NSArray *playerNames = @[ @"雯雯", @"狼尼", @"小何", @"大叔", @"青青", @"老妖", ];
-    for (NSString *playerName in playerNames) {
-        [self.gameSetup addPlayerName:playerName];
+    NSArray *persons = @[
+        [MafiaPerson personWithName:@"雯雯" avatarImage:[UIImage imageNamed:@"avatar_wenwen.png"]],
+        [MafiaPerson personWithName:@"狼尼" avatarImage:[UIImage imageNamed:@"avatar_langni.png"]],
+        [MafiaPerson personWithName:@"小何" avatarImage:[UIImage imageNamed:@"avatar_xiaohe.png"]],
+        [MafiaPerson personWithName:@"大叔" avatarImage:[UIImage imageNamed:@"avatar_dashu.png"]],
+        [MafiaPerson personWithName:@"青青" avatarImage:[UIImage imageNamed:@"avatar_qingqing.png"]],
+        [MafiaPerson personWithName:@"老妖" avatarImage:[UIImage imageNamed:@"avatar_laoyao.png"]],
+    ];
+    for (MafiaPerson *person in persons) {
+        [self.gameSetup addPerson:person];
     }
     self.gameSetup.isTwoHanded = YES;
 }
@@ -131,7 +138,7 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 - (void)mafia_refreshUI {
     self.startButton.enabled = [self.gameSetup isValid];
-    self.numberOfPlayersLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup.playerNames count])];
+    self.numberOfPersonsLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup.persons count])];
     self.twoHandedSwitch.on = self.gameSetup.isTwoHanded;
     self.autonomicSwitch.on = self.gameSetup.isAutonomic;
     self.numberOfKillersLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup numberOfActorsForRole:[MafiaRole killer]])];

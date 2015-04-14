@@ -4,6 +4,7 @@
 //
 
 #import "MafiaPlayer.h"
+#import "MafiaPerson.h"
 #import "MafiaRole.h"
 
 
@@ -13,14 +14,14 @@
 #pragma mark - Factory Method and Initializer
 
 
-+ (instancetype)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide {
-    return [[self alloc] initWithName:name handSide:handSide];
++ (instancetype)playerWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide {
+    return [[self alloc] initWithPerson:person handSide:handSide];
 }
 
 
-- (instancetype)initWithName:(NSString *)name handSide:(MafiaHandSide)handSide {
+- (instancetype)initWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide {
     if (self = [super init]) {
-        _name = [name copy];
+        _person = person;
         _handSide = handSide;
         _role = nil;
         _previousRoleTags = [[NSMutableSet alloc] initWithCapacity:10];
@@ -49,9 +50,9 @@
             break;
     }
     if (handSideString == nil) {
-        return self.name;
+        return self.person.name;
     } else {
-        return [NSString stringWithFormat:@"%@:%@", self.name, handSideString];
+        return [NSString stringWithFormat:@"%@:%@", self.person.name, handSideString];
     }
 }
 

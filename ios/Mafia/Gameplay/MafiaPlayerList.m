@@ -4,6 +4,7 @@
 //
 
 #import "MafiaPlayerList.h"
+#import "MafiaPerson.h"
 #import "MafiaPlayer.h"
 #import "MafiaRole.h"
 
@@ -11,15 +12,15 @@
 @implementation MafiaPlayerList
 
 
-- (id)initWithPlayerNames:(NSArray *)playerNames isTwoHanded:(BOOL)isTwoHanded {
+- (id)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded {
     if (self = [super init]) {
-        NSMutableArray *players = [NSMutableArray arrayWithCapacity:[playerNames count] * 2];
-        for (NSString *playerName in playerNames) {
+        NSMutableArray *players = [NSMutableArray arrayWithCapacity:[persons count] * 2];
+        for (MafiaPerson *person in persons) {
             if (isTwoHanded) {
-                [players addObject:[MafiaPlayer playerWithName:playerName handSide:MafiaHandSideLeft]];
-                [players addObject:[MafiaPlayer playerWithName:playerName handSide:MafiaHandSideRight]];
+                [players addObject:[MafiaPlayer playerWithPerson:person handSide:MafiaHandSideLeft]];
+                [players addObject:[MafiaPlayer playerWithPerson:person handSide:MafiaHandSideRight]];
             } else {
-                [players addObject:[MafiaPlayer playerWithName:playerName handSide:MafiaHandSideBoth]];
+                [players addObject:[MafiaPlayer playerWithPerson:person handSide:MafiaHandSideBoth]];
             }
         }
         _players = [players copy];
@@ -53,7 +54,7 @@
 
 - (MafiaPlayer *)playerWithName:(NSString *)name handSide:(MafiaHandSide)handSide {
     for (MafiaPlayer *player in self.players) {
-        if ([player.name isEqualToString:name] && player.handSide == handSide) {
+        if ([player.person.name isEqualToString:name] && player.handSide == handSide) {
             return player;
         }
     }
@@ -63,7 +64,7 @@
 
 - (MafiaPlayer *)twinOfPlayer:(MafiaPlayer *)player {
     for (MafiaPlayer *otherPlayer in self.players) {
-        if ([otherPlayer.name isEqualToString:player.name] && otherPlayer.handSide != player.handSide) {
+        if ([otherPlayer.person isEqualToPerson:player.person] && otherPlayer.handSide != player.handSide) {
             return otherPlayer;
         }
     }
