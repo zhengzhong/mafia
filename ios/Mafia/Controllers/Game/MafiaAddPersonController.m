@@ -4,8 +4,12 @@
 //
 
 #import "MafiaAddPersonController.h"
+#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
+
+
+static const CGFloat kAvatarImageWidth = 160;
 
 
 @interface MafiaAddPersonController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -49,10 +53,11 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    self.avatarImage = info[UIImagePickerControllerEditedImage];
-    if (self.avatarImage == nil) {
-        self.avatarImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *avatarImage = info[UIImagePickerControllerEditedImage];
+    if (avatarImage == nil) {
+        avatarImage = info[UIImagePickerControllerOriginalImage];
     }
+    self.avatarImage = [avatarImage mafia_imageByCroppingToSquareOfLength:kAvatarImageWidth];
     self.playerAvatarImageView.image = self.avatarImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -98,7 +103,6 @@
         self.pickFromPhotoLibraryIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"Pick from Photo Library", nil)];
     }
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
-
 }
 
 
