@@ -9,12 +9,12 @@
 
 
 + (UIColor *)mafia_successColor {
-    return [self colorWithRed:0.27 green:0.53 blue:0.28 alpha:1.0];
+    return [self colorWithRed:0.27f green:0.53f blue:0.28f alpha:1.0f];
 }
 
 
 + (UIColor *)mafia_dangerColor {
-    return [self colorWithRed:0.73 green:0.29 blue:0.28 alpha:1.0];
+    return [self colorWithRed:0.73f green:0.29f blue:0.28f alpha:1.0f];
 }
 
 

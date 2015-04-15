@@ -20,7 +20,7 @@
 @property (copy, nonatomic) NSArray *actions;
 @property (assign, nonatomic) NSInteger round;
 @property (assign, nonatomic) NSInteger actionIndex;
-@property (copy, nonatomic) NSString *winner;
+@property (assign, nonatomic) MafiaWinner winner;
 
 @end
 
@@ -44,6 +44,7 @@
         _gameSetup = gameSetup;
         _playerList = [[MafiaPlayerList alloc] initWithPersons:gameSetup.persons
                                                    isTwoHanded:gameSetup.isTwoHanded];
+        _winner = MafiaWinnerUnknown;
     }
     return self;
 }
@@ -54,24 +55,24 @@
     self.actions = nil;
     self.round = 0;
     self.actionIndex = 0;
-    self.winner = nil;
+    self.winner = MafiaWinnerUnknown;
 }
 
 
 - (BOOL)checkGameOver {
     NSArray *aliveKillers = [self.playerList playersWithRole:[MafiaRole killer] aliveOnly:YES];
     if ([aliveKillers count] == 0) {
-        self.winner = NSLocalizedString(@"Civilian Alignment", nil);
+        self.winner = MafiaWinnerCivilians;
         return YES;
     }
     NSArray *aliveDetectives = [self.playerList playersWithRole:[MafiaRole detective] aliveOnly:YES];
     if ([aliveDetectives count] == 0) {
-        self.winner = NSLocalizedString(@"Killer Alignment", nil);
+        self.winner = MafiaWinnerKillers;
         return YES;
     }
     NSArray *alivePlayers = [self.playerList alivePlayers];
     if ([aliveKillers count] * 2 >= [alivePlayers count]) {
-        self.winner = NSLocalizedString(@"Killer Alignment", nil);
+        self.winner = MafiaWinnerKillers;
         return YES;
     }
     return NO;
@@ -202,14 +203,14 @@
     self.actions = actions;
     self.round = 0;
     self.actionIndex = 0;
-    self.winner = nil;
+    self.winner = MafiaWinnerUnknown;
 }
 
 
 - (MafiaAction *)currentAction {
     NSAssert(self.actionIndex >= 0 && self.actionIndex < [self.actions count],
              @"Invalid action index %@.", @(self.actionIndex));
-    return (self.winner == nil ? self.actions[self.actionIndex] : nil);
+    return (self.winner == MafiaWinnerUnknown ? self.actions[self.actionIndex] : nil);
 }
 
 

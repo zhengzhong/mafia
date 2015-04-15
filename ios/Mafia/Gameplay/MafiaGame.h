@@ -12,6 +12,13 @@
 @class MafiaRole;
 
 
+typedef NS_ENUM(NSInteger, MafiaWinner) {
+    MafiaWinnerUnknown,
+    MafiaWinnerCivilians,
+    MafiaWinnerKillers,
+};
+
+
 @interface MafiaGame : NSObject
 
 @property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
@@ -19,7 +26,7 @@
 @property (readonly, copy, nonatomic) NSArray *actions;
 @property (readonly, assign, nonatomic) NSInteger round;
 @property (readonly, assign, nonatomic) NSInteger actionIndex;
-@property (readonly, copy, nonatomic) NSString *winner;
+@property (readonly, assign, nonatomic) MafiaWinner winner;
 
 - (instancetype)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded;
 

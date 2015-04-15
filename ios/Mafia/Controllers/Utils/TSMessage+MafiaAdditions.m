@@ -53,6 +53,29 @@ static NSString *const kNegativeAnswerImageName = @"InformationNegative";
 }
 
 
++ (void)mafia_showGameResultWithWinner:(MafiaWinner)winner {
+    NSString *title = nil;
+    TSMessageNotificationType type = TSMessageNotificationTypeMessage;
+    switch (winner) {
+        case MafiaWinnerCivilians:
+            title = NSLocalizedString(@"Game over! Civilians Win!", nil);
+            type = TSMessageNotificationTypeSuccess;
+            break;
+        case MafiaWinnerKillers:
+            title = NSLocalizedString(@"Game over! Killers Win!", nil);
+            type = TSMessageNotificationTypeError;
+            break;
+        case MafiaWinnerUnknown:
+            NSAssert(NO, @"Winner should not be MafiaWinnerUnknown when showing game result.");
+            break;
+    }
+    [self mafia_showNotificationWithTitle:title
+                                 subtitle:nil
+                                imageName:nil
+                                     type:type];
+}
+
+
 + (void)mafia_showMessageWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
     [self mafia_showNotificationWithTitle:title
                                  subtitle:subtitle

@@ -5,6 +5,7 @@
 
 #import "MafiaAutonomicGameController.h"
 #import "MafiaAutonomicActionController.h"
+#import "TSMessage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
 
@@ -27,15 +28,6 @@ static NSString *const kSegueStartAction = @"StartAction";
     NSAssert(game.gameSetup.isAutonomic, @"This controller only accepts autonomic game.");
     self.game = game;
     [self.game startGame];
-}
-
-
-#pragma mark - Lifecycle
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
 }
 
 
@@ -102,8 +94,8 @@ static NSString *const kSegueStartAction = @"StartAction";
 - (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller {
     // The current action is complete, and we are about to continue to the next action.
     [self.game continueToNextAction];
-    [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
+    [self mafia_refreshUI];
 }
 
 
@@ -130,6 +122,18 @@ static NSString *const kSegueStartAction = @"StartAction";
         controller.delegate = self;
         [controller setupWithGame:self.game];
     }
+}
+
+
+#pragma mark - Private Methods
+
+
+- (void)mafia_refreshUI {
+    if (self.game.winner != MafiaWinnerUnknown) {
+        self.title = NSLocalizedString(@"Game Over", nil);
+        [TSMessage mafia_showGameResultWithWinner:self.game.winner];
+    }
+    [self.tableView reloadData];
 }
 
 

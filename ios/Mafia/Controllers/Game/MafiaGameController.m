@@ -154,9 +154,8 @@
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Check if game is over.
-    if (self.game.winner != nil) {
-        return nil;
+    if (self.game.winner != MafiaWinnerUnknown) {
+        return nil;  // Game is over, none of the rows are selectable.
     }
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
     MafiaAction *currentAction = [self.game currentAction];
@@ -238,7 +237,6 @@
         // Continue to the next action.
         [self.game continueToNextAction];
         [self.selectedPlayers removeAllObjects];
-        [self mafia_refreshView];
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *numberOfChoicesString = [numberOfChoices
@@ -281,15 +279,16 @@
 
 
 - (void)mafia_refreshView {
-    if ([self.game checkGameOver]) {
-        // Game over.
+    if (self.game.winner != MafiaWinnerUnknown) {
+        // Game is over, winner is known.
         self.title = NSLocalizedString(@"Game Over", nil);
         self.nextBarButtonItem.enabled = NO;
         self.dayNightImageView.image = [UIImage imageNamed:@"action_in_day.png"];
-        self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ Wins!", nil), self.game.winner];
+        self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Game over! %@ Wins!", nil), self.game.winner];
         self.promptLabel.text = nil;
+        [TSMessage mafia_showGameResultWithWinner:self.game.winner];
     } else {
-        // Game ongoing.
+        // Game is still ongoing.
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Round %d", nil), self.game.round];
         self.nextBarButtonItem.enabled = YES;
         MafiaAction *currentAction = [self.game currentAction];

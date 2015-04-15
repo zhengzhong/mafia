@@ -5,7 +5,8 @@
 
 #import "TSMessages/TSMessage.h"
 
-@class MafiaInformation;
+#import "MafiaGameplay.h"
+
 
 /*!
  * Additional methods to show a notification in the game.
@@ -29,6 +30,12 @@
  */
 + (void)mafia_showMessageOfInformation:(MafiaInformation *)information
                               subtitle:(NSString *)subtitle;
+
+/*!
+ * Shows a notification about the game result. The game must be over and there must be a winner.
+ * @param winner  the winner of the game, cannot be MafiaWinnerUnknown.
+ */
++ (void)mafia_showGameResultWithWinner:(MafiaWinner)winner;
 
 /*!
  * Shows a message.
