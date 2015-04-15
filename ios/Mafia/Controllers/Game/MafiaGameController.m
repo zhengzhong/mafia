@@ -239,16 +239,12 @@
         [self.selectedPlayers removeAllObjects];
     } else {
         // Cannot continue to next: wrong number of players selected.
+        NSString *title = NSLocalizedString(@"Invalid Selections", nil);
         NSString *numberOfChoicesString = [numberOfChoices
             formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
                                pluralForm:NSLocalizedString(@"players", nil)];
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Messages", nil)
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        NSString *hintInSubtitle = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
+        [TSMessage mafia_showErrorWithTitle:title subtitle:hintInSubtitle];
     }
     [self mafia_refreshView];
 }
