@@ -13,6 +13,8 @@
 
 static NSString *const kSegueStartAction = @"StartAction";
 
+static NSString *const kActionCellID = @"ActionCell";
+
 
 @interface MafiaAutonomicGameController () <MafiaAuthnomicActionControllerDelegate>
 
@@ -48,7 +50,7 @@ static NSString *const kSegueStartAction = @"StartAction";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row < [self.game.actions count]) {
         MafiaAction *action = self.game.actions[indexPath.row];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActionCell"];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellID forIndexPath:indexPath];
         cell.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: actor photo
         cell.textLabel.text = action.displayName;
         if (action == [self.game currentAction]) {

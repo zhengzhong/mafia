@@ -13,6 +13,7 @@
 
 static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
 
+static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
 
 @implementation MafiaTwoPlayersCell
 
@@ -113,7 +114,7 @@ static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MafiaTwoPlayersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TwoPlayersCell"];
+    MafiaTwoPlayersCell *cell = [tableView dequeueReusableCellWithIdentifier:kTwoPlayersCellID forIndexPath:indexPath];
     NSUInteger playerIndex = indexPath.row * 2;
     MafiaPlayer *player1 = nil;
     if (playerIndex < [self.game.playerList count]) {

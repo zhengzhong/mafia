@@ -11,6 +11,8 @@
 static const NSInteger kMinNumberOfActors = 1;  // Minimal 1 killer or detective.
 static const NSInteger kMaxNumberOfActors = 4;  // Maximal 4 killers or detectives.
 
+static NSString *const kCellID = @"Cell";
+
 
 @implementation MafiaConfigureRoleController
 
@@ -54,7 +56,7 @@ static const NSInteger kMaxNumberOfActors = 4;  // Maximal 4 killers or detectiv
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID forIndexPath:indexPath];
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
     NSInteger numberOfActorsForCell = kMinNumberOfActors + indexPath.row;
     cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", self.role.displayName, @(numberOfActorsForCell)];

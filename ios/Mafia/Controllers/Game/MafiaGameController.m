@@ -12,6 +12,9 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kPlayerCellID = @"PlayerCell";
+
+
 @implementation MafiaGamePlayerCell
 
 
@@ -124,7 +127,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MafiaGamePlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerCell"];
+    MafiaGamePlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
     [cell refreshWithPlayer:player];
     return cell;

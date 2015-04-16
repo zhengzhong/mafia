@@ -8,6 +8,9 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kRoleCellID = @"RoleCell";
+
+
 @implementation MafiaUpdatePlayerRoleController
 
 
@@ -50,7 +53,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RoleCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRoleCellID forIndexPath:indexPath];
     MafiaRole *role = self.roles[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", role.name]];
     cell.textLabel.text = role.displayName;

@@ -9,6 +9,10 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCell";
+static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
+
+
 // ------------------------------------------------------------------------------------------------
 // Custom Cells
 // ------------------------------------------------------------------------------------------------
@@ -110,28 +114,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return [self mafia_tableView:tableView headerCellForRow:indexPath.row];
+        return [self mafia_tableView:tableView headerCellAtIndexPath:indexPath];
     } else {
-        return [self mafia_tableView:tableView targetPlayerCellForRow:indexPath.row];
+        return [self mafia_tableView:tableView targetPlayerCellAtIndexPath:indexPath];
     }
 }
 
 
-- (UITableViewCell *)mafia_tableView:(UITableView *)tableView headerCellForRow:(NSInteger)row {
-    MafiaAutonomicActionHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AutonomicActionHeaderCell"];
+- (UITableViewCell *)mafia_tableView:(UITableView *)tableView headerCellAtIndexPath:(NSIndexPath *)indexPath {
+    MafiaAutonomicActionHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:kAutonomicActionHeaderCellID forIndexPath:indexPath];
     [cell setupWithAction:[self.game currentAction]];
     return cell;
 }
 
 
-- (UITableViewCell *)mafia_tableView:(UITableView *)tableView targetPlayerCellForRow:(NSInteger)row {
-    if (row < [self.game.playerList count]) {
-        MafiaPlayer *player = [self.game.playerList playerAtIndex:row];
+- (UITableViewCell *)mafia_tableView:(UITableView *)tableView targetPlayerCellAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < [self.game.playerList count]) {
+        MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
         MafiaAction *action = [self.game currentAction];
         MafiaRole *role = action.role;
         BOOL selectable = [action isPlayerSelectable:player];
         BOOL selected = [self.selectedPlayers containsObject:player];
-        MafiaTargetPlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TargetPlayerCell"];
+        MafiaTargetPlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kTargetPlayerCellID forIndexPath:indexPath];
         [cell setupWithTargetPlayer:player ofRole:role selectable:selectable selected:selected];
         return cell;
     }

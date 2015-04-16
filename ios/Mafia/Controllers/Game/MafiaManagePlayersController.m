@@ -9,6 +9,9 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kPlayerCellID = @"PlayerCell";
+
+
 @interface MafiaManagePlayersController () <MafiaAddPersonControllerDelegate>
 
 @end
@@ -55,7 +58,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [self.gameSetup.persons count]) {
         MafiaPerson *person = self.gameSetup.persons[indexPath.row];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerCell"];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
         cell.imageView.image = person.avatarImage;
         cell.textLabel.text = person.name;
         return cell;
