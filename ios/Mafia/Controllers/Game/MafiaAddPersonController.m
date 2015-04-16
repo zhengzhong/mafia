@@ -4,6 +4,7 @@
 //
 
 #import "MafiaAddPersonController.h"
+#import "MafiaActionSheet.h"
 #import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
@@ -12,10 +13,7 @@
 static const CGFloat kAvatarImageWidth = 160;
 
 
-@interface MafiaAddPersonController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-
-@property (assign, nonatomic) NSInteger pickFromPhotoLibraryIndex;
-@property (assign, nonatomic) NSInteger takePhotoUsingCameraIndex;
+@interface MafiaAddPersonController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -28,24 +26,6 @@ static const CGFloat kAvatarImageWidth = 160;
     // TODO: adjust scroll view position here, otherwise the initial position would be wrong. Don't know why...
     UIScrollView *scrollView = (UIScrollView *)self.view;
     [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
-}
-
-
-#pragma mark - UIActionSheetDelegate
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != self.pickFromPhotoLibraryIndex && buttonIndex != self.takePhotoUsingCameraIndex) {
-        return;
-    }
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    if (buttonIndex == self.pickFromPhotoLibraryIndex) {
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    } else {
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    picker.delegate = self;
-    [self presentViewController:picker animated:YES completion:nil];
 }
 
 
@@ -89,27 +69,33 @@ static const CGFloat kAvatarImageWidth = 160;
 
 
 - (IBAction)addPhotoButtonTapped:(id)sender {
-    [self.playerNameField resignFirstResponder];  // Make sure keybord is dismissed.
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                 initWithTitle:nil
-                      delegate:self
-             cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-        destructiveButtonTitle:nil
-             otherButtonTitles:nil];
+    // Make sure keybord is dismissed.
+    [self.playerNameField resignFirstResponder];
+    // Prepare an action sheet.
+    MafiaActionSheet *sheet = [MafiaActionSheet sheetWithTitle:nil];
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
+    // Allow user to take a photo using the device camera, if it's available.
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.takePhotoUsingCameraIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"Take Photo", nil)];
+        [sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", nil)
+                            block:^{
+            [self mafia_presentImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+        }];
     }
+    // Allow user to pick an image from photo library, it's available.
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        self.pickFromPhotoLibraryIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"Pick from Photo Library", nil)];
+        [sheet addButtonWithTitle:NSLocalizedString(@"Pick from Photo Library", nil)
+                            block:^{
+            [self mafia_presentImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        }];
     }
-    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    // Show the action sheet.
+    [sheet showInAppKeyWindow];
 }
 
 
 - (IBAction)cancelButtonTapped:(id)sender {
     [self.delegate addPersonController:self didAddPersonOrNil:nil];
 }
-
 
 
 - (IBAction)doneButtonTapped:(id)sender {
@@ -128,6 +114,17 @@ static const CGFloat kAvatarImageWidth = 160;
 
 - (IBAction)backgroundTapped:(id)sender {
     [self.playerNameField resignFirstResponder];  // Dismiss keyboard if necessary.
+}
+
+
+#pragma mark - Private Methods
+
+
+- (void)mafia_presentImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = sourceType;
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 

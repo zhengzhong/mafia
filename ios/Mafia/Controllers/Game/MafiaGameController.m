@@ -6,6 +6,7 @@
 #import "MafiaGameController.h"
 
 #import "MafiaUpdatePlayerController.h"
+#import "MafiaActionSheet.h"
 #import "TSMessage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
@@ -65,11 +66,6 @@
         imageView.image = nil;
     }
 }
-
-@end
-
-
-@interface MafiaGameController () <UIActionSheetDelegate>
 
 @end
 
@@ -181,16 +177,6 @@
 }
 
 
-#pragma mark - UIActionSheetDelegate
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == [actionSheet destructiveButtonIndex]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
-
-
 #pragma mark - Segue
 
 
@@ -251,14 +237,12 @@
 
 
 - (IBAction)resetButtonTapped:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                 initWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)
-                      delegate:self
-             cancelButtonTitle:NSLocalizedString(@"No. Take me back.", nil)
-        destructiveButtonTitle:NSLocalizedString(@"Yes. Reset the game!", nil)
-             otherButtonTitles:nil];
-    // See: http://stackoverflow.com/questions/4447563/last-button-of-actionsheet-does-not-get-clicked
-    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    MafiaActionSheet *sheet = [MafiaActionSheet sheetWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)];
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"No. Take me back.", nil) block:nil];
+    [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"Yes. Reset the game!", nil) block:^{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    [sheet showInAppKeyWindow];
 }
 
 

@@ -5,6 +5,7 @@
 
 #import "MafiaAutonomicGameController.h"
 #import "MafiaAutonomicActionController.h"
+#import "MafiaActionSheet.h"
 #import "TSMessage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
@@ -13,7 +14,7 @@
 static NSString *const kSegueStartAction = @"StartAction";
 
 
-@interface MafiaAutonomicGameController () <UIActionSheetDelegate, MafiaAuthnomicActionControllerDelegate>
+@interface MafiaAutonomicGameController () <MafiaAuthnomicActionControllerDelegate>
 
 @end
 
@@ -77,17 +78,6 @@ static NSString *const kSegueStartAction = @"StartAction";
 }
 
 
-#pragma mark - UIActionSheetDelegate
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // Action sheet is for resetting game.
-    if (buttonIndex == [actionSheet destructiveButtonIndex]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
-
-
 #pragma mark - MafiaAuthnomicActionControllerDelegate
 
 
@@ -103,13 +93,12 @@ static NSString *const kSegueStartAction = @"StartAction";
 
 
 - (IBAction)resetButtonTapped:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                 initWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)
-                      delegate:self
-             cancelButtonTitle:NSLocalizedString(@"No. Take me back.", nil)
-        destructiveButtonTitle:NSLocalizedString(@"Yes. Reset the game!", nil)
-             otherButtonTitles:nil];
-    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    MafiaActionSheet *sheet = [MafiaActionSheet sheetWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)];
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"No. Take me back.", nil) block:nil];
+    [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"Yes. Reset the game!", nil) block:^{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    [sheet showInAppKeyWindow];
 }
 
 

@@ -27,6 +27,7 @@
 		4153792C1ADC35230096B906 /* UIColor+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792B1ADC35230096B906 /* UIColor+MafiaAdditions.m */; };
 		4153792F1ADDA1CB0096B906 /* MafiaPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792E1ADDA1CB0096B906 /* MafiaPerson.m */; };
 		415379321ADDA6100096B906 /* UIImage+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379311ADDA6100096B906 /* UIImage+MafiaAdditions.m */; };
+		415379351AE041C70096B906 /* MafiaActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379341AE041C70096B906 /* MafiaActionSheet.m */; };
 		415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83E165D6EBA00CDB5B2 /* action_in_day.png */; };
 		415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83F165D6EBA00CDB5B2 /* action_in_night.png */; };
 		415CF857165D6EBA00CDB5B2 /* is_just_guarded.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */; };
@@ -141,6 +142,8 @@
 		4153792E1ADDA1CB0096B906 /* MafiaPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaPerson.m; sourceTree = "<group>"; };
 		415379301ADDA6100096B906 /* UIImage+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MafiaAdditions.h"; sourceTree = "<group>"; };
 		415379311ADDA6100096B906 /* UIImage+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MafiaAdditions.m"; sourceTree = "<group>"; };
+		415379331AE041C70096B906 /* MafiaActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaActionSheet.h; sourceTree = "<group>"; };
+		415379341AE041C70096B906 /* MafiaActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaActionSheet.m; sourceTree = "<group>"; };
 		415CF83E165D6EBA00CDB5B2 /* action_in_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_day.png; sourceTree = "<group>"; };
 		415CF83F165D6EBA00CDB5B2 /* action_in_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_night.png; sourceTree = "<group>"; };
 		415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_just_guarded.png; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 		415379261ADC34CD0096B906 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				415379331AE041C70096B906 /* MafiaActionSheet.h */,
+				415379341AE041C70096B906 /* MafiaActionSheet.m */,
 				415379271ADC34F10096B906 /* TSMessage+MafiaAdditions.h */,
 				415379281ADC34F10096B906 /* TSMessage+MafiaAdditions.m */,
 				4153792A1ADC35230096B906 /* UIColor+MafiaAdditions.h */,
@@ -788,6 +793,7 @@
 				414AB51B1AD2F6F8001B913C /* MafiaAddPersonController.m in Sources */,
 				4153792F1ADDA1CB0096B906 /* MafiaPerson.m in Sources */,
 				415379321ADDA6100096B906 /* UIImage+MafiaAdditions.m in Sources */,
+				415379351AE041C70096B906 /* MafiaActionSheet.m in Sources */,
 				415379291ADC34F10096B906 /* TSMessage+MafiaAdditions.m in Sources */,
 				414AB51D1AD2F6F8001B913C /* MafiaGameController.m in Sources */,
 				41A7F3761ACEC8DA0086015F /* MafiaSettleTagsAction.m in Sources */,
