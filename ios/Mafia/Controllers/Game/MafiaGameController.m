@@ -264,7 +264,7 @@
         self.title = NSLocalizedString(@"Game Over", nil);
         self.nextBarButtonItem.enabled = NO;
         self.dayNightImageView.image = [UIImage imageNamed:@"action_in_day.png"];
-        self.actionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Game over! %@ Wins!", nil), self.game.winner];
+        self.actionLabel.text = NSLocalizedString(@"Game Over", nil);
         self.promptLabel.text = nil;
         [TSMessage mafia_showGameResultWithWinner:self.game.winner];
     } else {
