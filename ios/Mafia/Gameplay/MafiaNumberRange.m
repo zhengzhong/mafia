@@ -34,15 +34,13 @@
 }
 
 
-- (NSString *)formattedStringWithSingleForm:(NSString *)singleForm
-                                 pluralForm:(NSString *)pluralForm {
-    NSString *singleOrPluralForm = (self.maxValue <= 1 ? singleForm : pluralForm);
+- (NSString *)string {
     if (self.minValue == self.maxValue) {
-        return [NSString stringWithFormat:@"%@ %@", @(self.minValue), singleOrPluralForm];
+        return [NSString stringWithFormat:@"%@", @(self.minValue)];
     } else {
-        return [NSString stringWithFormat:@"%@ ~ %@ %@", @(self.minValue), @(self.maxValue), singleOrPluralForm];
+        return [NSString stringWithFormat:@"%@ ~ %@", @(self.minValue), @(self.maxValue)];
     }
 }
 
 
-@end  // MafiaNumberRange
+@end

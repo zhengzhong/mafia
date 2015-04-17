@@ -19,7 +19,9 @@
 
 - (BOOL)isNumberInRange:(NSInteger)number;
 
-- (NSString *)formattedStringWithSingleForm:(NSString *)singleForm
-                                 pluralForm:(NSString *)pluralForm;
+/*!
+ * Returns a string representation of this range.
+ */
+- (NSString *)string;
 
-@end  // MafiaNumberRange
+@end

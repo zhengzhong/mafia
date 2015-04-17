@@ -33,10 +33,9 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
     }
     MafiaNumberRange *numberOfChoices = [action numberOfChoices];
     if (numberOfChoices.maxValue > 0) {
-        NSString *numberOfChoicesString = [numberOfChoices
-            formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
-                               pluralForm:NSLocalizedString(@"players", nil)];
-        self.actionPromptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
+        self.actionPromptLabel.text = [NSString stringWithFormat:
+            NSLocalizedString(@"Select %@ player(s)", nil),
+            [numberOfChoices string]];
     } else {
         self.actionPromptLabel.text = NSLocalizedString(@"Click OK to continue", nil);
     }
@@ -217,10 +216,9 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *title = NSLocalizedString(@"Invalid Selections", nil);
-        NSString *numberOfChoicesString = [numberOfChoices
-            formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
-                               pluralForm:NSLocalizedString(@"players", nil)];
-        NSString *hintInSubtitle = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
+        NSString *hintInSubtitle = [NSString stringWithFormat:
+            NSLocalizedString(@"Select %@ player(s)", nil),
+            [numberOfChoices string]];
         [TSMessage mafia_showErrorWithTitle:title subtitle:hintInSubtitle];
     }
     [self.tableView reloadData];

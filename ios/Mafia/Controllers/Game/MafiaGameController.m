@@ -229,10 +229,9 @@ static NSString *const kPlayerCellID = @"PlayerCell";
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *title = NSLocalizedString(@"Invalid Selections", nil);
-        NSString *numberOfChoicesString = [numberOfChoices
-            formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
-                               pluralForm:NSLocalizedString(@"players", nil)];
-        NSString *hintInSubtitle = [NSString stringWithFormat:NSLocalizedString(@"You must select %@", nil), numberOfChoicesString];
+        NSString *hintInSubtitle = [NSString stringWithFormat:
+            NSLocalizedString(@"Select %@ player(s)", nil),
+            [numberOfChoices string]];
         [TSMessage mafia_showErrorWithTitle:title subtitle:hintInSubtitle];
     }
     [self mafia_refreshView];
@@ -280,10 +279,9 @@ static NSString *const kPlayerCellID = @"PlayerCell";
         self.actionLabel.text = [NSString stringWithFormat:@"%@", currentAction];
         if ([currentAction isExecutable]) {
             MafiaNumberRange *numberOfChoices = [self mafia_numberOfChoicesForActon:currentAction];
-            NSString *numberOfChoicesString = [numberOfChoices
-                formattedStringWithSingleForm:NSLocalizedString(@"player", nil)
-                                   pluralForm:NSLocalizedString(@"players", nil)];
-            self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@", nil), numberOfChoicesString];
+            self.promptLabel.text = [NSString stringWithFormat:
+                NSLocalizedString(@"Select %@ player(s)", nil),
+                [numberOfChoices string]];
         } else if (currentAction.role != nil) {
             self.promptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ not available", nil), currentAction.role];
         } else {
