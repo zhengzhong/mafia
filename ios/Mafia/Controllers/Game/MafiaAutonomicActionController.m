@@ -12,6 +12,10 @@
 static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCell";
 static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
+static NSString *const kUnselectableImageName = @"Unselectable";
+static NSString *const kSelectedImageName = @"Selected";
+static NSString *const kUnselectedImageName = @"Unselected";
+
 
 // ------------------------------------------------------------------------------------------------
 // Custom Cells
@@ -52,12 +56,13 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
                      selected:(BOOL)selected {
     self.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
     self.textLabel.text = player.displayName;
-    self.textLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor grayColor]);
-    // TODO: 3-state check image!
-    if (selected) {
-        self.checkImageView.image = [UIImage imageNamed:@"player.png"];
+    self.textLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
+    if (!selectable) {
+        self.checkImageView.image = [UIImage imageNamed:kUnselectableImageName];
+    } else if (selected) {
+        self.checkImageView.image = [UIImage imageNamed:kSelectedImageName];
     } else {
-        self.checkImageView.image = nil;
+        self.checkImageView.image = [UIImage imageNamed:kUnselectedImageName];
     }
 }
 

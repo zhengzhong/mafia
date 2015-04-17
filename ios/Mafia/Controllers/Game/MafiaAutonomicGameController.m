@@ -57,7 +57,7 @@ static NSString *const kActionCellID = @"ActionCell";
             cell.textLabel.textColor = [UIColor blackColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
-            cell.textLabel.textColor = [UIColor grayColor];
+            cell.textLabel.textColor = [UIColor lightGrayColor];
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
         return cell;
