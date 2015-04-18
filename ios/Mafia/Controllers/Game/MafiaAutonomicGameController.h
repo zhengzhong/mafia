@@ -5,7 +5,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class MafiaAction;
 @class MafiaGame;
+
+
+@interface MafiaAutonomicGameActionCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UIImageView *actionImageView;
+@property (strong, nonatomic) IBOutlet UILabel *actionNameLabel;
+
+- (void)setupWithAction:(MafiaAction *)action isCurrent:(BOOL)isCurrent;
+
+@end
+
 
 @interface MafiaAutonomicGameController : UITableViewController
 

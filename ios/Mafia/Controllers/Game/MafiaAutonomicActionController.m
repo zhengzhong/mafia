@@ -9,6 +9,8 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+
 static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCell";
 static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
@@ -25,7 +27,14 @@ static NSString *const kUnselectedImageName = @"Unselected";
 @implementation MafiaAutonomicActionHeaderCell
 
 - (void)setupWithAction:(MafiaAction *)action {
-    self.actorImageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
+    if (action.player != nil) {
+        MafiaPerson *person = action.player.person;
+        self.actorImageView.image = (person.avatarImage != nil ? person.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+    } else {
+        self.actorImageView.image = [UIImage imageNamed:@"player.png"];  // TODO: action image
+    }
+    self.actorImageView.layer.cornerRadius = 5;
+    self.actorImageView.clipsToBounds = YES;
     self.actionNameLabel.text = action.displayName;
     if (action.role != nil) {
         self.actionRoleLabel.text = action.role.displayName;
@@ -54,9 +63,11 @@ static NSString *const kUnselectedImageName = @"Unselected";
                        ofRole:(MafiaRole *)role
                    selectable:(BOOL)selectable
                      selected:(BOOL)selected {
-    self.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: player photo
-    self.textLabel.text = player.displayName;
-    self.textLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
+    self.avatarImageView.image = (player.avatarImage != nil ? player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+    self.avatarImageView.layer.cornerRadius = 5;
+    self.avatarImageView.clipsToBounds = YES;
+    self.nameLabel.text = player.displayName;
+    self.nameLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
     if (!selectable) {
         self.checkImageView.image = [UIImage imageNamed:kUnselectableImageName];
     } else if (selected) {
@@ -153,9 +164,9 @@ static NSString *const kUnselectedImageName = @"Unselected";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: use prototype cells to calculate height! Do NOT repeat what's declared in storyboard!
     if (indexPath.section == 0) {
-        return 108.0;
+        return 132;
     } else {
-        return 44.0;
+        return 65;
     }
 }
 

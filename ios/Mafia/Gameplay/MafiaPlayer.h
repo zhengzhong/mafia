@@ -28,6 +28,12 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
 /// The hand side of the person who controls this player.
 @property (readonly, assign, nonatomic) MafiaHandSide handSide;
 
+/// The name of the person.
+@property (readonly, copy, nonatomic) NSString *name;
+
+/// The avatar image of the person.
+@property (readonly, strong, nonatomic) UIImage *avatarImage;
+
 /// The display name of this player, composed by name and hand side.
 @property (readonly, copy, nonatomic) NSString *displayName;
 

@@ -11,14 +11,17 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+
 static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
 
 static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
 
+
 @implementation MafiaTwoPlayersCell
 
 
-- (void)refreshWithPlayer:(MafiaPlayer *)player1 andPlayer:(MafiaPlayer *)player2 {
+- (void)setupWithPlayer:(MafiaPlayer *)player1 andPlayer:(MafiaPlayer *)player2 {
     self.player1 = player1;
     self.player2 = player2;
     self.isPlayer1Revealed = NO;
@@ -67,9 +70,11 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
             imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", player.role.name]];
             label.text = player.role.displayName;
         } else {
-            imageView.image = [UIImage imageNamed:@"role_unrevealed.png"];  // TODO: use player photo
+            imageView.image = (player.avatarImage != nil ? player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
             label.text = player.displayName;
         }
+        imageView.layer.cornerRadius = 5;
+        imageView.clipsToBounds = YES;
     } else {
         button.enabled = NO;
         button.hidden = YES;
@@ -124,7 +129,7 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
     if (playerIndex + 1 < [self.game.playerList count]) {
         player2 = [self.game.playerList playerAtIndex:(playerIndex + 1)];
     }
-    [cell refreshWithPlayer:player1 andPlayer:player2];
+    [cell setupWithPlayer:player1 andPlayer:player2];
     return cell;
 }
 

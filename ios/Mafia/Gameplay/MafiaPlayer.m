@@ -34,6 +34,20 @@
 #pragma mark - Properties
 
 
+@dynamic name;
+
+- (NSString *)name {
+    return self.person.name;
+}
+
+
+@dynamic avatarImage;
+
+- (UIImage *)avatarImage {
+    return self.person.avatarImage;
+}
+
+
 @dynamic displayName;
 
 - (NSString *)displayName {

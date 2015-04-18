@@ -24,7 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *player2ImageView;
 @property (strong, nonatomic) IBOutlet UILabel *player2Label;
 
-- (void)refreshWithPlayer:(MafiaPlayer *)player1 andPlayer:(MafiaPlayer *)player2;
+- (void)setupWithPlayer:(MafiaPlayer *)player1 andPlayer:(MafiaPlayer *)player2;
 
 - (IBAction)player1ButtonTapped:(id)sender;
 

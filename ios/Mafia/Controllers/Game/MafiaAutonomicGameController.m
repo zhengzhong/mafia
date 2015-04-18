@@ -11,9 +11,44 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+
 static NSString *const kSegueStartAction = @"StartAction";
 
 static NSString *const kActionCellID = @"ActionCell";
+
+
+// ------------------------------------------------------------------------------------------------
+// MafiaAutonomicGameActionCell
+// ------------------------------------------------------------------------------------------------
+
+
+@implementation MafiaAutonomicGameActionCell
+
+- (void)setupWithAction:(MafiaAction *)action isCurrent:(BOOL)isCurrent {
+    if (action.player != nil) {
+        self.actionImageView.image = (action.player.avatarImage != nil ? action.player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+    } else {
+        self.actionImageView.image = [UIImage imageNamed:kAvatarDefaultImageName];  // TODO:
+    }
+    self.actionImageView.layer.cornerRadius = 5;
+    self.actionImageView.clipsToBounds = YES;
+    self.actionNameLabel.text = action.displayName;
+    if (isCurrent) {
+        self.actionNameLabel.textColor = [UIColor blackColor];
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else {
+        self.actionNameLabel.textColor = [UIColor lightGrayColor];
+        self.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
+@end
+
+
+// ------------------------------------------------------------------------------------------------
+// MafiaAutonomicGameController
+// ------------------------------------------------------------------------------------------------
 
 
 @interface MafiaAutonomicGameController () <MafiaAuthnomicActionControllerDelegate>
@@ -50,16 +85,9 @@ static NSString *const kActionCellID = @"ActionCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row < [self.game.actions count]) {
         MafiaAction *action = self.game.actions[indexPath.row];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellID forIndexPath:indexPath];
-        cell.imageView.image = [UIImage imageNamed:@"player.png"];  // TODO: actor photo
-        cell.textLabel.text = action.displayName;
-        if (action == [self.game currentAction]) {
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        } else {
-            cell.textLabel.textColor = [UIColor lightGrayColor];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
+        BOOL isCurrent = (action == [self.game currentAction]);
+        MafiaAutonomicGameActionCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellID forIndexPath:indexPath];
+        [cell setupWithAction:action isCurrent:isCurrent];
         return cell;
     }
     return nil;

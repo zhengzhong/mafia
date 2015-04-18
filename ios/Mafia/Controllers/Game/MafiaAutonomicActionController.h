@@ -33,6 +33,8 @@
 
 @interface MafiaTargetPlayerCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *checkImageView;
 
 - (void)setupWithTargetPlayer:(MafiaPlayer *)player
