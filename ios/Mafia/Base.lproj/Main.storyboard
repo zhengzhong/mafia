@@ -975,7 +975,7 @@
             </objects>
             <point key="canvasLocation" x="1132" y="-1559"/>
         </scene>
-        <!--Add Person-->
+        <!--Add New Player-->
         <scene sceneID="iga-sD-fRB">
             <objects>
                 <viewController id="PZu-XJ-8Yc" customClass="MafiaAddPersonController" sceneMemberID="viewController">
@@ -996,7 +996,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2pN-JC-csC">
                                 <rect key="frame" x="80" y="120" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Add Photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1004,23 +1003,24 @@
                                     <action selector="addPhotoButtonTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="sxo-ww-fvc"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="k9j-kU-qxM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvatarDefault" id="k9j-kU-qxM">
                                 <rect key="frame" x="80" y="120" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" id="37z-4o-QiO">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" textAlignment="center" minimumFontSize="17" id="37z-4o-QiO">
                                 <rect key="frame" x="40" y="300" width="240" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <connections>
+                                    <action selector="playerNameFieldDidChange:" destination="PZu-XJ-8Yc" eventType="editingChanged" id="03D-hM-l6M"/>
                                     <outlet property="delegate" destination="PZu-XJ-8Yc" id="mv8-ko-KOK"/>
                                 </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Person" id="JR9-CJ-9Yf">
+                    <navigationItem key="navigationItem" title="Add New Player" id="JR9-CJ-9Yf">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gs1-L6-KW6">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="PZu-XJ-8Yc" id="V1d-F4-Aaq"/>
@@ -1033,6 +1033,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneButton" destination="0Sb-RG-U3o" id="SlV-mJ-Osw"/>
                         <outlet property="playerAvatarImageView" destination="k9j-kU-qxM" id="ZPB-Gx-ksK"/>
                         <outlet property="playerNameField" destination="37z-4o-QiO" id="Xnb-O5-quK"/>
                     </connections>
@@ -1118,6 +1119,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AvatarDefault" width="64" height="64"/>
         <image name="role_assassin.png" width="32" height="32"/>
         <image name="role_detective.png" width="32" height="32"/>
         <image name="role_doctor.png" width="32" height="32"/>

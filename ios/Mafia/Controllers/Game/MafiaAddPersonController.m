@@ -21,11 +21,19 @@ static const CGFloat kAvatarImageWidth = 160;
 @implementation MafiaAddPersonController
 
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.playerAvatarImageView.layer.cornerRadius = 20;
+    self.playerAvatarImageView.clipsToBounds = YES;
+}
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // TODO: adjust scroll view position here, otherwise the initial position would be wrong. Don't know why...
     UIScrollView *scrollView = (UIScrollView *)self.view;
     [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    [self mafia_refreshUI];
 }
 
 
@@ -66,6 +74,11 @@ static const CGFloat kAvatarImageWidth = 160;
 
 
 #pragma mark - Actions
+
+
+- (IBAction)playerNameFieldDidChange:(id)sender {
+    [self mafia_refreshUI];
+}
 
 
 - (IBAction)addPhotoButtonTapped:(id)sender {
@@ -127,5 +140,10 @@ static const CGFloat kAvatarImageWidth = 160;
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+
+- (void)mafia_refreshUI {
+    NSString *name = [self.playerNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.doneButton.enabled = (name != nil && [name length] > 0);
+}
 
 @end
