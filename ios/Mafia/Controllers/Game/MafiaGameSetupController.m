@@ -18,6 +18,13 @@ static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKille
 static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
 static NSString *const kSegueAssignRoles = @"AssignRoles";
 
+static NSString *const kAvatarWenwenImageName = @"AvatarWenwen";
+static NSString *const kAvatarXiaoheImageName = @"AvatarXiaohe";
+static NSString *const kAvatarLangniImageName = @"AvatarLangni";
+static NSString *const kAvatarDashuImageName = @"AvatarDashu";
+static NSString *const kAvatarQingqingImageName = @"AvatarQingqing";
+static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
+
 
 @interface MafiaGameSetupController ()
 
@@ -36,12 +43,12 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
     [super viewDidLoad];
     self.gameSetup = [[MafiaGameSetup alloc] init];
     NSArray *persons = @[
-        [MafiaPerson personWithName:@"雯雯" avatarImage:[UIImage imageNamed:@"avatar_wenwen.png"]],
-        [MafiaPerson personWithName:@"狼尼" avatarImage:[UIImage imageNamed:@"avatar_langni.png"]],
-        [MafiaPerson personWithName:@"小何" avatarImage:[UIImage imageNamed:@"avatar_xiaohe.png"]],
-        [MafiaPerson personWithName:@"大叔" avatarImage:[UIImage imageNamed:@"avatar_dashu.png"]],
-        [MafiaPerson personWithName:@"青青" avatarImage:[UIImage imageNamed:@"avatar_qingqing.png"]],
-        [MafiaPerson personWithName:@"老妖" avatarImage:[UIImage imageNamed:@"avatar_laoyao.png"]],
+        [MafiaPerson personWithName:@"雯雯" avatarImage:[UIImage imageNamed:kAvatarWenwenImageName]],
+        [MafiaPerson personWithName:@"小何" avatarImage:[UIImage imageNamed:kAvatarXiaoheImageName]],
+        [MafiaPerson personWithName:@"狼尼" avatarImage:[UIImage imageNamed:kAvatarLangniImageName]],
+        [MafiaPerson personWithName:@"大叔" avatarImage:[UIImage imageNamed:kAvatarDashuImageName]],
+        [MafiaPerson personWithName:@"青青" avatarImage:[UIImage imageNamed:kAvatarQingqingImageName]],
+        [MafiaPerson personWithName:@"老妖" avatarImage:[UIImage imageNamed:kAvatarLaoyaoImageName]],
     ];
     for (MafiaPerson *person in persons) {
         [self.gameSetup addPerson:person];

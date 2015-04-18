@@ -6,6 +6,16 @@
 #import <UIKit/UIKit.h>
 
 @class MafiaGameSetup;
+@class MafiaPerson;
+
+@interface MafiaManagePlayersPlayerCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
+- (void)setupWithPerson:(MafiaPerson *)person;
+
+@end
 
 @interface MafiaManagePlayersController : UITableViewController
 

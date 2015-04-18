@@ -11,6 +11,20 @@
 
 static NSString *const kPlayerCellID = @"PlayerCell";
 
+static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+
+
+@implementation MafiaManagePlayersPlayerCell
+
+- (void)setupWithPerson:(MafiaPerson *)person {
+    self.avatarImageView.image = (person.avatarImage != nil ? person.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+    self.avatarImageView.layer.cornerRadius = 5;
+    self.avatarImageView.clipsToBounds = YES;
+    self.nameLabel.text = person.name;
+}
+
+@end
+
 
 @interface MafiaManagePlayersController () <MafiaAddPersonControllerDelegate>
 
@@ -58,9 +72,8 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [self.gameSetup.persons count]) {
         MafiaPerson *person = self.gameSetup.persons[indexPath.row];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
-        cell.imageView.image = person.avatarImage;
-        cell.textLabel.text = person.name;
+        MafiaManagePlayersPlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
+        [cell setupWithPerson:person];
         return cell;
     }
     return nil;
