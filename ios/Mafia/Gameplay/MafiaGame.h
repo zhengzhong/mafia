@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, MafiaWinner) {
 
 @property (readonly, strong, nonatomic) MafiaGameSetup *gameSetup;
 @property (readonly, strong, nonatomic) MafiaPlayerList *playerList;
-@property (readonly, copy, nonatomic) NSArray *actions;
+@property (readonly, copy, nonatomic) NSMutableArray *actions;
 @property (readonly, assign, nonatomic) NSInteger round;
 @property (readonly, assign, nonatomic) NSInteger actionIndex;
 @property (readonly, assign, nonatomic) MafiaWinner winner;

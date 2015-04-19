@@ -17,7 +17,6 @@
 
 @interface MafiaGame ()
 
-@property (copy, nonatomic) NSArray *actions;
 @property (assign, nonatomic) NSInteger round;
 @property (assign, nonatomic) NSInteger actionIndex;
 @property (assign, nonatomic) MafiaWinner winner;
@@ -44,6 +43,7 @@
         _gameSetup = gameSetup;
         _playerList = [[MafiaPlayerList alloc] initWithPersons:gameSetup.persons
                                                    isTwoHanded:gameSetup.isTwoHanded];
+        _actions = [[NSMutableArray alloc] initWithCapacity:20];
         _winner = MafiaWinnerUnknown;
     }
     return self;
@@ -52,7 +52,7 @@
 
 - (void)reset {
     [self.playerList reset];
-    self.actions = nil;
+    [self.actions removeAllObjects];
     self.round = 0;
     self.actionIndex = 0;
     self.winner = MafiaWinnerUnknown;
@@ -169,7 +169,7 @@
 - (void)startGame {
     NSAssert([self isReadyToStart], @"Game is not ready to start.");
     [self.playerList prepareToStart];
-    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:20];
+    [self.actions removeAllObjects];
     if (!self.gameSetup.isAutonomic) {
         // Non-autonomic mode: a judge is required.
         NSArray *specialRolesByActingOrder = @[
@@ -186,7 +186,7 @@
                 MafiaAction *action = [MafiaRoleAction actionWithRole:role
                                                                player:nil
                                                            playerList:self.playerList];
-                [actions addObject:action];
+                [self.actions addObject:action];
             }
         }
     } else {
@@ -195,12 +195,11 @@
             MafiaAction *action = [MafiaRoleAction actionWithRole:player.role
                                                            player:player
                                                        playerList:self.playerList];
-            [actions addObject:action];
+            [self.actions addObject:action];
         }
     }
-    [actions addObject:[MafiaSettleTagsAction actionWithPlayerList:self.playerList]];
-    [actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:self.playerList]];
-    self.actions = actions;
+    [self.actions addObject:[MafiaSettleTagsAction actionWithPlayerList:self.playerList]];
+    [self.actions addObject:[MafiaVoteAndLynchAction actionWithPlayerList:self.playerList]];
     self.round = 0;
     self.actionIndex = 0;
     self.winner = MafiaWinnerUnknown;
@@ -229,7 +228,18 @@
                     MafiaAction *action = object;
                     return (action.player == nil || !action.player.isDead);
                 }];
-            self.actions = [self.actions filteredArrayUsingPredicate:predicate];
+            [self.actions filterUsingPredicate:predicate];
+            // In autonomic mode, assassin action might be transformed to killer action if assassin
+            // has used his chance. So we check if action's role still matches its player's role.
+            for (NSUInteger i = 0; i < [self.actions count]; ++i) {
+                MafiaAction *action = self.actions[i];
+                if (action.player != nil && ![action.player.role isEqualToRole:action.role]) {
+                    MafiaAction *newAction = [MafiaRoleAction actionWithRole:action.player.role
+                                                                      player:action.player
+                                                                  playerList:self.playerList];
+                    [self.actions replaceObjectAtIndex:i withObject:newAction];
+                }
+            }
         }
     }
     return [self currentAction];
