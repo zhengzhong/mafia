@@ -64,7 +64,7 @@
 + (instancetype)undercover {
     return [[self alloc] initWithName:@"undercover"
                           displayName:NSLocalizedString(@"Undercover", nil)
-                            alignment:-3];
+                            alignment:3];
 }
 
 
