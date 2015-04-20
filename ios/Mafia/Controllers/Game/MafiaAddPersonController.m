@@ -10,8 +10,8 @@
 #import "MafiaGameplay.h"
 
 
-static const CGFloat kAvatarImageWidth = 160;
-
+static const CGFloat kAvatarImageDisplayWidth = 160;
+static const CGFloat kAvatarImageWidth = 48;
 
 @interface MafiaAddPersonController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -45,7 +45,7 @@ static const CGFloat kAvatarImageWidth = 160;
     if (avatarImage == nil) {
         avatarImage = info[UIImagePickerControllerOriginalImage];
     }
-    self.avatarImage = [avatarImage mafia_imageByCroppingToSquareOfLength:kAvatarImageWidth];
+    self.avatarImage = [avatarImage mafia_imageByCroppingToSquareOfLength:kAvatarImageDisplayWidth];
     self.playerAvatarImageView.image = self.avatarImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -119,7 +119,8 @@ static const CGFloat kAvatarImageWidth = 160;
     if (name == nil || [name length] == 0) {
         [strongDelegate addPersonController:self didAddPersonOrNil:nil];
     } else {
-        MafiaPerson *person = [MafiaPerson personWithName:name avatarImage:self.avatarImage];
+        UIImage *avatarImage = [self.avatarImage mafia_imageByCroppingToSquareOfLength:kAvatarImageWidth];
+        MafiaPerson *person = [MafiaPerson personWithName:name avatarImage:avatarImage];
         [strongDelegate addPersonController:self didAddPersonOrNil:person];
     }
 }

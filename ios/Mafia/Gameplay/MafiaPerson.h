@@ -6,11 +6,13 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>  // for UIImage
 
+#import "Mantle/Mantle.h"
+
 /**
  * This class represents one physical person. If the game is in two-handed mode, one person will
  * control 2 players, one for each hand side; Otherwise, one person controls one player.
  */
-@interface MafiaPerson : NSObject
+@interface MafiaPerson : MTLModel <MTLJSONSerializing>
 
 /// The name of the person.
 @property (readonly, copy, nonatomic) NSString *name;

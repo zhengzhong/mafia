@@ -30,6 +30,8 @@
 
 + (instancetype)undercover;
 
++ (instancetype)roleWithName:(NSString *)name;
+
 /*!
  * Returns an array of all available roles.
  */

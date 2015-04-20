@@ -5,10 +5,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Mantle/Mantle.h"
+
 @class MafiaPerson;
 @class MafiaRole;
 
-@interface MafiaGameSetup : NSObject
+@interface MafiaGameSetup : MTLModel <MTLJSONSerializing>
 
 /// An array of persons.
 @property (readonly, strong, nonatomic) NSMutableArray *persons;
@@ -31,5 +33,13 @@
 - (NSInteger)numberOfPersonsRequired;
 
 - (BOOL)isValid;
+
+- (BOOL)saveWithName:(NSString *)name;
+
+- (BOOL)saveToRecent;
+
++ (instancetype)loadWithName:(NSString *)name;
+
++ (instancetype)loadFromRecent;
 
 @end

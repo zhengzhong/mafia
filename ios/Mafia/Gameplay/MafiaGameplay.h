@@ -4,6 +4,7 @@
 //
 
 #import "MafiaAction.h"
+#import "MafiaDocuments.h"
 #import "MafiaGame.h"
 #import "MafiaGameSetup.h"
 #import "MafiaInformation.h"

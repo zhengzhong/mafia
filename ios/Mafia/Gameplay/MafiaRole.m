@@ -68,6 +68,16 @@
 }
 
 
++ (instancetype)roleWithName:(NSString *)name {
+    for (MafiaRole *role in [self roles]) {
+        if ([role.name isEqualToString:name]) {
+            return role;
+        }
+    }
+    return nil;
+}
+
+
 + (NSArray *)roles {
     return @[
         [self civilian],
