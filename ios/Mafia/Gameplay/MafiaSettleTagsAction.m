@@ -71,6 +71,7 @@
     [information addDetails:[self mafia_settleKillerTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
     [information addDetails:[self mafia_settleDoctorTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
     [information addDetails:[self mafia_settleIntrospectionTags]];
+    [information addDetails:[self mafia_settleAssassinToKillerTransition]];
     // Construct information message as a summary of the settlement result.
     if ([deadPlayerNames count] == 0) {
         information.message = NSLocalizedString(@"Nobody was dead", nil);
@@ -235,7 +236,19 @@
         [player clearSelectionTagByRole:[MafiaRole traitor]];
         [player clearSelectionTagByRole:[MafiaRole undercover]];
     }
-    return [NSArray arrayWithObjects:nil];
+    return @[];
+}
+
+
+- (NSArray *)mafia_settleAssassinToKillerTransition {
+    // Assassin becomes killer if he has assassined someone.
+    NSArray *assassinedPlayers = [self.playerList playersSelectedBy:[MafiaRole assassin] aliveOnly:NO];
+    if ([assassinedPlayers count] > 0) {
+        for (MafiaPlayer *assassin in [self.playerList playersWithRole:[MafiaRole assassin] aliveOnly:YES]) {
+            assassin.role = [MafiaRole killer];
+        }
+    }
+    return @[];
 }
 
 

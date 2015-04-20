@@ -23,8 +23,6 @@
 
 @interface MafiaAssassinAction : MafiaRoleAction
 
-@property (assign, nonatomic) BOOL isChanceUsed;
-
 @end
 
 
@@ -90,11 +88,7 @@
         };
     });
     Class actionClass = actionClassMappings[role];
-    if (actionClass == nil) {
-        @throw [NSException exceptionWithName:MafiaInvalidActionRoleException
-                                       reason:[NSString stringWithFormat:@"Cannot find action class for role %@.", role]
-                                     userInfo:nil];
-    }
+    NSAssert(actionClass != nil, @"Cannot find action class for role %@.", role);
     return [[actionClass alloc] initWithRole:role player:player playerList:playerList];
 }
 
@@ -164,27 +158,6 @@
 
 - (BOOL)isPlayerSelectable:(MafiaPlayer *)player {
     return !player.isDead;
-}
-
-
-- (void)executeOnPlayer:(MafiaPlayer *)player {
-    NSAssert(!self.isChanceUsed, @"Assassin has already used his chance and cannot execute again.");
-    [super executeOnPlayer:player];
-    self.isChanceUsed = YES;
-}
-
-
-- (MafiaInformation *)endAction {
-    MafiaInformation *information = nil;
-    if (self.isChanceUsed) {
-        // Assassin becomes a killer after using his chance to shoot.
-        for (MafiaPlayer *assassin in [self actors]) {
-            assassin.role = [MafiaRole killer];
-        }
-        information = [MafiaInformation announcementInformation];
-        information.message = NSLocalizedString(@"Assassin used his chance to shoot and became killer.", nil);
-    }
-    return information;
 }
 
 
