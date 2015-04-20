@@ -1,16 +1,21 @@
 PODS:
   - HexColors (2.2.1)
+  - Mantle (2.0):
+    - Mantle/extobjc (= 2.0)
+  - Mantle/extobjc (2.0)
   - MBProgressHUD (0.9.1)
   - TSMessages (0.9.12):
     - HexColors
 
 DEPENDENCIES:
+  - Mantle
   - MBProgressHUD
   - TSMessages
 
 SPEC CHECKSUMS:
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
+  Mantle: 17de73ef929db2234d76fde2aacfb89ab11c61e8
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3
 
-COCOAPODS: 0.36.1
+COCOAPODS: 0.36.3
