@@ -1,0 +1,14 @@
+---
+layout: blog
+title: 更新日志
+---
+
+<div class="page-header">
+  <h1>更新日志 <small>({{ site.posts|size }})</small></h1>
+</div>
+
+<section>
+  {% assign post_list = paginator.posts %}
+  {% include post_list.html %}
+  {% include paginator.html %}
+</section>

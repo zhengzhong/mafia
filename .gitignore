@@ -8,3 +8,7 @@
 *.draft.*
 *.log
 *.py[co]
+
+# Jekyll
+.sass-cache/
+_site/

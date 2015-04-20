@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+// Introduction page style, used in homepage.
+
+@import "site/colors";
+
+@import "mixins";
+
+$intro-content-text-color: if(variable-exists(site-color-primary), $site-color-primary, #333);
+
+$intro-content-text-shadow-blur-radius: 2px;
+$intro-content-text-shadow-color: #fff;
+$intro-content-inverse-text-shadow-color: #666;
+
+$intro-sm-ratio: 0.65;
+$intro-xs-ratio: 0.45;
+
+
+@mixin intro-with-height($height) {
+  margin: -40px 0 40px 0;  // Remove gap between nav and header.
+  position: relative;
+  height: $height;
+  overflow: hidden;
+  white-space: nowrap;
+  @include background-cover;
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    height: $height * $intro-sm-ratio;
+  }
+
+  @media (max-width: 767px) {
+    height: $height * $intro-xs-ratio;
+  }
+
+  .intro-content {
+    position: absolute;
+    top: $height * 0.25;
+    width: 100%;
+    text-align: center;
+    color: $intro-content-text-color;
+    text-shadow: -1px  0   $intro-content-text-shadow-blur-radius $intro-content-text-shadow-color,
+                  0   -1px $intro-content-text-shadow-blur-radius $intro-content-text-shadow-color,
+                  1px  0   $intro-content-text-shadow-blur-radius $intro-content-text-shadow-color,
+                  0    1px $intro-content-text-shadow-blur-radius $intro-content-text-shadow-color,
+                 -1px -1px $intro-content-text-shadow-blur-radius $intro-content-text-shadow-color,
+                  1px  1px $intro-content-text-shadow-blur-radius $intro-content-text-shadow-color;
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      top: $height * $intro-sm-ratio * 0.10;
+    }
+
+    @media (max-width: 767px) {
+      top: $height * $intro-xs-ratio * 0.10;
+    }
+
+    h1 {
+      padding: 10px 0 10px 0;
+      font-size: 350%;
+    }
+
+    h2 {
+      padding-bottom: 10px;
+      font-size: 200%;
+      .glyphicon {
+        font-size: 75%;
+      }
+    }
+
+    .btn {
+      font-size: 200%;
+      text-shadow: none;
+      @include border-radius(10px);
+      .glyphicon {
+        font-size: 75%;
+      }
+    }
+
+    @media (max-width: 767px) {
+      h1 {
+        font-size: 220%;
+      }
+      h2 {
+        font-size: 140%;
+      }
+      .btn {
+        font-size: 150%;
+      }
+    }
+
+  }
+
+  &.intro-inverse .intro-content {
+    color: #fff;
+    text-shadow: -1px  0   $intro-content-text-shadow-blur-radius $intro-content-inverse-text-shadow-color,
+                  0   -1px $intro-content-text-shadow-blur-radius $intro-content-inverse-text-shadow-color,
+                  1px  0   $intro-content-text-shadow-blur-radius $intro-content-inverse-text-shadow-color,
+                  0    1px $intro-content-text-shadow-blur-radius $intro-content-inverse-text-shadow-color,
+                 -1px -1px $intro-content-text-shadow-blur-radius $intro-content-inverse-text-shadow-color,
+                  1px  1px $intro-content-text-shadow-blur-radius $intro-content-inverse-text-shadow-color;
+  }
+
+  .intro-foot {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    @if $height >= 600px { bottom: 40px; } @else { bottom: 30px; }
+
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+  }
+}
+
+
+.intro {
+  @include intro-with-height(700px);
+}
+
+.intro-slim {
+  @include intro-with-height(450px);
+}

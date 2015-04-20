@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.ios-webview {
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  nav#topbar,
+  footer {
+    display: none;
+  }
+}
