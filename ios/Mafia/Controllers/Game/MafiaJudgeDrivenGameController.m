@@ -3,7 +3,7 @@
 //  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
 //
 
-#import "MafiaGameController.h"
+#import "MafiaJudgeDrivenGameController.h"
 
 #import "MafiaUpdatePlayerController.h"
 #import "MafiaActionSheet.h"
@@ -15,7 +15,7 @@
 static NSString *const kPlayerCellID = @"PlayerCell";
 
 
-@implementation MafiaGamePlayerCell
+@implementation MafiaJudgeDrivenGamePlayerCell
 
 
 - (void)refreshWithPlayer:(MafiaPlayer *)player {
@@ -73,7 +73,7 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 @end
 
 
-@implementation MafiaGameController
+@implementation MafiaJudgeDrivenGameController
 
 
 #pragma mark - Lifecycle
@@ -127,7 +127,7 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MafiaGamePlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
+    MafiaJudgeDrivenGamePlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
     [cell refreshWithPlayer:player];
     return cell;

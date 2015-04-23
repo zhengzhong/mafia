@@ -10,7 +10,7 @@
 @class MafiaPlayer;
 
 
-@interface MafiaGamePlayerCell : UITableViewCell
+@interface MafiaJudgeDrivenGamePlayerCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
@@ -21,10 +21,10 @@
 
 - (void)refreshWithPlayer:(MafiaPlayer *)player;
 
-@end  // MafiaGamePlayerCell
+@end  // MafiaJudgeDrivenGamePlayerCell
 
 
-@interface MafiaGameController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MafiaJudgeDrivenGameController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *nextBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIImageView *dayNightImageView;
@@ -42,4 +42,4 @@
 
 - (IBAction)resetButtonTapped:(id)sender;
 
-@end  // MafiaGameController
+@end  // MafiaJudgeDrivenGameController

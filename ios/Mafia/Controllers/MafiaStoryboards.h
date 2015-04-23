@@ -7,6 +7,8 @@
 
 @interface MafiaStoryboards : NSObject
 
++ (id)instantiateJudgeDrivenGameController;
+
 + (id)instantiateAutonomicGameController;
 
 @end

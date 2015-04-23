@@ -6,12 +6,20 @@
 #import "MafiaStoryboards.h"
 
 
-static NSString *const kAutonomicGameStoryboard = @"AutonomicGame";
+static NSString *const kJudgeDrivenGameStoryboard = @"JudgeDrivenGame";
+static NSString *const kJudgeDrivenGameController = @"JudgeDrivenGame";
 
+static NSString *const kAutonomicGameStoryboard = @"AutonomicGame";
 static NSString *const kAutonomicGameController = @"AutonomicGame";
 
 
 @implementation MafiaStoryboards
+
+
++ (id)instantiateJudgeDrivenGameController {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kJudgeDrivenGameStoryboard bundle:nil];
+    return [storyboard instantiateViewControllerWithIdentifier:kJudgeDrivenGameController];
+}
 
 
 + (id)instantiateAutonomicGameController {

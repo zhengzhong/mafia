@@ -15,7 +15,7 @@
 		413FE503166CC93500A5356C /* two_handed.png in Resources */ = {isa = PBXBuildFile; fileRef = 413FE4FE166CC93500A5356C /* two_handed.png */; };
 		414AB51B1AD2F6F8001B913C /* MafiaAddPersonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB50C1AD2F6F8001B913C /* MafiaAddPersonController.m */; };
 		414AB51C1AD2F6F8001B913C /* MafiaConfigureRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB50E1AD2F6F8001B913C /* MafiaConfigureRoleController.m */; };
-		414AB51D1AD2F6F8001B913C /* MafiaGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5101AD2F6F8001B913C /* MafiaGameController.m */; };
+		414AB51D1AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5101AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m */; };
 		414AB51E1AD2F6F8001B913C /* MafiaGameSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5121AD2F6F8001B913C /* MafiaGameSetupController.m */; };
 		414AB5211AD2F6F8001B913C /* MafiaUpdatePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5181AD2F6F8001B913C /* MafiaUpdatePlayerController.m */; };
 		414AB5221AD2F6F8001B913C /* MafiaUpdatePlayerRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB51A1AD2F6F8001B913C /* MafiaUpdatePlayerRoleController.m */; };
@@ -58,6 +58,7 @@
 		416E66D1166D2C610062AE57 /* information_announcement.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66CE166D2C610062AE57 /* information_announcement.png */; };
 		416E66D2166D2C610062AE57 /* information_negative.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66CF166D2C610062AE57 /* information_negative.png */; };
 		416E66D3166D2C610062AE57 /* information_positive.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66D0166D2C610062AE57 /* information_positive.png */; };
+		417D418E1AE9A89B00F0556E /* JudgeDrivenGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417D41901AE9A89B00F0556E /* JudgeDrivenGame.storyboard */; };
 		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
 		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
 		417F09671671001900F44475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
@@ -120,8 +121,8 @@
 		414AB50C1AD2F6F8001B913C /* MafiaAddPersonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAddPersonController.m; sourceTree = "<group>"; };
 		414AB50D1AD2F6F8001B913C /* MafiaConfigureRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaConfigureRoleController.h; sourceTree = "<group>"; };
 		414AB50E1AD2F6F8001B913C /* MafiaConfigureRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaConfigureRoleController.m; sourceTree = "<group>"; };
-		414AB50F1AD2F6F8001B913C /* MafiaGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameController.h; sourceTree = "<group>"; };
-		414AB5101AD2F6F8001B913C /* MafiaGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameController.m; sourceTree = "<group>"; };
+		414AB50F1AD2F6F8001B913C /* MafiaJudgeDrivenGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaJudgeDrivenGameController.h; sourceTree = "<group>"; };
+		414AB5101AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaJudgeDrivenGameController.m; sourceTree = "<group>"; };
 		414AB5111AD2F6F8001B913C /* MafiaGameSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameSetupController.h; sourceTree = "<group>"; };
 		414AB5121AD2F6F8001B913C /* MafiaGameSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameSetupController.m; sourceTree = "<group>"; };
 		414AB5171AD2F6F8001B913C /* MafiaUpdatePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaUpdatePlayerController.h; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		416E66CE166D2C610062AE57 /* information_announcement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_announcement.png; sourceTree = "<group>"; };
 		416E66CF166D2C610062AE57 /* information_negative.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_negative.png; sourceTree = "<group>"; };
 		416E66D0166D2C610062AE57 /* information_positive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_positive.png; sourceTree = "<group>"; };
+		417D418F1AE9A89B00F0556E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/JudgeDrivenGame.storyboard; sourceTree = "<group>"; };
 		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		417F09641671001900F44475 /* MafiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,8 +297,8 @@
 				41D39A821AD9490E00C13084 /* MafiaAutonomicGameController.m */,
 				414AB50D1AD2F6F8001B913C /* MafiaConfigureRoleController.h */,
 				414AB50E1AD2F6F8001B913C /* MafiaConfigureRoleController.m */,
-				414AB50F1AD2F6F8001B913C /* MafiaGameController.h */,
-				414AB5101AD2F6F8001B913C /* MafiaGameController.m */,
+				414AB50F1AD2F6F8001B913C /* MafiaJudgeDrivenGameController.h */,
+				414AB5101AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m */,
 				414AB5111AD2F6F8001B913C /* MafiaGameSetupController.h */,
 				414AB5121AD2F6F8001B913C /* MafiaGameSetupController.m */,
 				4153793C1AE99D3F0096B906 /* MafiaLoadGameSetupController.h */,
@@ -556,6 +558,7 @@
 		41D39A771AD92DBF00C13084 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				417D41901AE9A89B00F0556E /* JudgeDrivenGame.storyboard */,
 				41D39A761AD92D6F00C13084 /* AutonomicGame.storyboard */,
 				41A7F37E1ACED9C70086015F /* Main.storyboard */,
 			);
@@ -687,6 +690,7 @@
 				413FE502166CC93500A5356C /* players.png in Resources */,
 				4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */,
 				413FE503166CC93500A5356C /* two_handed.png in Resources */,
+				417D418E1AE9A89B00F0556E /* JudgeDrivenGame.storyboard in Resources */,
 				41A7F3831ACED9C70086015F /* Main.storyboard in Resources */,
 				416E66D1166D2C610062AE57 /* information_announcement.png in Resources */,
 				416E66D2166D2C610062AE57 /* information_negative.png in Resources */,
@@ -816,7 +820,7 @@
 				415379321ADDA6100096B906 /* UIImage+MafiaAdditions.m in Sources */,
 				415379351AE041C70096B906 /* MafiaActionSheet.m in Sources */,
 				415379291ADC34F10096B906 /* TSMessage+MafiaAdditions.m in Sources */,
-				414AB51D1AD2F6F8001B913C /* MafiaGameController.m in Sources */,
+				414AB51D1AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m in Sources */,
 				41A7F3761ACEC8DA0086015F /* MafiaSettleTagsAction.m in Sources */,
 				4153793E1AE99D3F0096B906 /* MafiaLoadGameSetupController.m in Sources */,
 				415379411AE99E220096B906 /* MafiaAlertView.m in Sources */,
@@ -848,6 +852,14 @@
 				415379201ADAD3E10096B906 /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		417D41901AE9A89B00F0556E /* JudgeDrivenGame.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				417D418F1AE9A89B00F0556E /* Base */,
+			);
+			name = JudgeDrivenGame.storyboard;
 			sourceTree = "<group>";
 		};
 		418A101F16710999003D81C0 /* InfoPlist.strings */ = {
