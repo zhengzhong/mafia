@@ -9,7 +9,7 @@
 @interface MafiaActionSheet () <UIActionSheetDelegate>
 
 @property (strong, nonatomic) UIActionSheet *actionSheet;
-@property (readonly, copy, nonatomic) NSMutableDictionary *blocks;
+@property (readonly, strong, nonatomic) NSMutableDictionary *blocks;
 @property (strong, nonatomic) MafiaActionSheet *selfRetain;
 
 @end

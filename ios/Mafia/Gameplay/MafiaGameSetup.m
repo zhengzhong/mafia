@@ -10,6 +10,8 @@
 #import "NSError+MafiaAdditions.h"
 
 
+static NSString *const kGameSetupFilenamePrefix = @"GameSetup_";
+static NSString *const kGameSetupFilenameSuffix = @".json";
 static NSString *const kGameSetupRecent = @"[Recent]";
 
 
@@ -66,10 +68,10 @@ static NSString *const kGameSetupRecent = @"[Recent]";
 }
 
 
-#pragma mark - Saving/Loading
+#pragma mark - Saving / Loading / Removing / Listing
 
 
-- (BOOL)saveWithName:(NSString *)name {
+- (BOOL)saveGameSetupWithName:(NSString *)name {
     NSString *filename = [[self class] mafia_gameSetupFilenameForName:name];
     NSError *error = nil;
     NSDictionary *dictionary = [MTLJSONAdapter JSONDictionaryFromModel:self error:&error];
@@ -77,12 +79,12 @@ static NSString *const kGameSetupRecent = @"[Recent]";
 }
 
 
-- (BOOL)saveToRecent {
-    return [self saveWithName:kGameSetupRecent];
+- (BOOL)saveToRecentGameSetup {
+    return [self saveGameSetupWithName:kGameSetupRecent];
 }
 
 
-+ (instancetype)loadWithName:(NSString *)name {
++ (instancetype)loadGameSetupWithName:(NSString *)name {
     NSString *filename = [self mafia_gameSetupFilenameForName:name];
     NSDictionary *dictionary = [MafiaDocuments dictionaryWithContentsOfFile:filename];
     NSError *error = nil;
@@ -94,8 +96,29 @@ static NSString *const kGameSetupRecent = @"[Recent]";
 }
 
 
-+ (instancetype)loadFromRecent {
-    return [self loadWithName:kGameSetupRecent];
++ (instancetype)loadFromRecentGameSetup {
+    return [self loadGameSetupWithName:kGameSetupRecent];
+}
+
+
++ (void)removeGameSetupWithName:(NSString *)name {
+    NSString *filename = [self mafia_gameSetupFilenameForName:name];
+    [MafiaDocuments removeItemWithName:filename];
+}
+
+
++ (NSArray *)namesOfSavedGameSetups {
+    NSArray *filenames = [MafiaDocuments filenamesOfDirectoryWithName:nil];
+    NSMutableArray *gameSetupNames = [[NSMutableArray alloc] initWithCapacity:[filenames count]];
+    for (NSString *filename in filenames) {
+        if ([filename hasPrefix:kGameSetupFilenamePrefix] && [filename hasSuffix:kGameSetupFilenameSuffix]) {
+            NSUInteger location = [kGameSetupFilenamePrefix length];
+            NSUInteger length = [filename length] - [kGameSetupFilenameSuffix length] - location;
+            NSString *gameSetupName = [filename substringWithRange:NSMakeRange(location, length)];
+            [gameSetupNames addObject:gameSetupName];
+        }
+    }
+    return gameSetupNames;
 }
 
 
@@ -107,7 +130,7 @@ static NSString *const kGameSetupRecent = @"[Recent]";
     [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     [invalidCharacters removeCharactersInString:@"()[]-_"];  // some allowed symbols...
     name = [[name componentsSeparatedByCharactersInSet:invalidCharacters] componentsJoinedByString:@""];
-    return [NSString stringWithFormat:@"GameSetup_%@.json", name];
+    return [NSString stringWithFormat:@"%@%@%@", kGameSetupFilenamePrefix, name, kGameSetupFilenameSuffix];
 }
 
 

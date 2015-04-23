@@ -30,7 +30,8 @@
 + (NSData *)dataWithContentsOfFile:(NSString *)filename {
     NSString *filepath = [self mafia_localFilepathWithName:filename];
     NSError *error = nil;
-    NSData *data = [NSData dataWithContentsOfFile:filepath options:0 error:&error];
+    NSDataReadingOptions options = (NSDataReadingOptions)0;  // !!!: cast to shut up compiler warning.
+    NSData *data = [NSData dataWithContentsOfFile:filepath options:options error:&error];
     if (error != nil) {
         NSLog(@"Fail to load data from file %@: %@", filename, error);
         return nil;
@@ -46,7 +47,8 @@
         return nil;
     }
     NSError *error = nil;
-    id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    NSJSONReadingOptions options = (NSJSONReadingOptions)0;  // !!!: cast to shut up compiler warning.
+    id object = [NSJSONSerialization JSONObjectWithData:data options:options error:&error];
     if (error != nil) {
         NSLog(@"Fail to load JSON dictionary from file %@: %@", filename, error);
         return nil;
@@ -100,7 +102,8 @@
 
 + (BOOL)saveDictionary:(NSDictionary *)dictionary toFile:(NSString *)filename {
     NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
+    NSJSONWritingOptions options = (NSJSONWritingOptions)0;  // !!!: cast to shut up compiler warning.
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:options error:&error];
     if (error != nil) {
         NSLog(@"Fail to save JSON dictionary to data: %@", error);
         return NO;
@@ -119,13 +122,48 @@
 }
 
 
+#pragma mark - Removing
+
+
++ (BOOL)removeItemWithName:(NSString *)name {
+    NSString *itempath = [self mafia_localFilepathWithName:name];
+    return [[NSFileManager defaultManager] removeItemAtPath:itempath error:nil];
+}
+
+
+#pragma mark - Directory listing
+
+
++ (NSArray *)filenamesOfDirectoryWithName:(NSString *)name {
+    NSString *dirpath = [self mafia_localFilepathWithName:name];
+    NSError *error = nil;
+    NSArray *entries = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirpath error:&error];
+    if (error != nil) {
+        NSLog(@"Fail to list contents in directory %@: %@", name, error);
+        return @[];
+    }
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:
+        ^BOOL(NSString *entry, NSDictionary *bindings) {
+            NSString *filepath = [dirpath stringByAppendingPathComponent:entry];
+            BOOL isDirectory = NO;
+            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filepath isDirectory:&isDirectory];
+            return (fileExists && !isDirectory);
+        }];
+    return [entries filteredArrayUsingPredicate:predicate];
+}
+
+
 #pragma mark - Private
 
 
 + (NSString *)mafia_localFilepathWithName:(NSString *)name {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = paths[0];
-    return [documentsDirectory stringByAppendingPathComponent:name];
+    if ([name length] > 0) {
+        return [documentsDirectory stringByAppendingPathComponent:name];
+    } else {
+        return documentsDirectory;
+    }
 }
 
 

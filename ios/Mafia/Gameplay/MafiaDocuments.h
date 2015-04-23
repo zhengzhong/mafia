@@ -24,4 +24,12 @@
 
 + (BOOL)saveImage:(UIImage *)image toFile:(NSString *)filename;
 
++ (BOOL)removeItemWithName:(NSString *)name;
+
+/*!
+ * Returns an array of NSString objects, each of which identifies a file in the given directory.
+ * If any error occurs, this method returns an empty array.
+ */
++ (NSArray *)filenamesOfDirectoryWithName:(NSString *)name;
+
 @end

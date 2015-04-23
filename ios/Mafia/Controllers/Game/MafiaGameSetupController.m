@@ -8,6 +8,7 @@
 #import "MafiaAssignRolesController.h"
 #import "MafiaConfigureRoleController.h"
 #import "MafiaManagePlayersController.h"
+#import "MafiaAlertView.h"
 
 #import "MafiaGameplay.h"
 #import "UIColor+MafiaAdditions.h"
@@ -130,6 +131,25 @@ static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
 
 - (IBAction)hasUndercoverToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole undercover]];
+}
+
+
+- (IBAction)saveButtonTapped:(id)sender {
+    MafiaAlertView *gameSetupNameAlertView = [MafiaAlertView
+        alertWithTitle:NSLocalizedString(@"Save Game Setup", nil)
+               message:NSLocalizedString(@"Please specify the game setup name", nil)
+                 style:UIAlertViewStylePlainTextInput];
+    [gameSetupNameAlertView setCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
+    [gameSetupNameAlertView
+        setConfirmButtonWithTitle:NSLocalizedString(@"Save", nil)
+        block:^(MafiaAlertView *alertView) {
+            NSString *name = alertView.plainTextField.text;
+            name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([name length] > 0) {
+                [self.gameSetup saveGameSetupWithName:name];
+            }
+        }];
+    [gameSetupNameAlertView show];
 }
 
 

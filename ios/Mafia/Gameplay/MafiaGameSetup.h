@@ -34,12 +34,16 @@
 
 - (BOOL)isValid;
 
-- (BOOL)saveWithName:(NSString *)name;
+- (BOOL)saveGameSetupWithName:(NSString *)name;
 
-- (BOOL)saveToRecent;
+- (BOOL)saveToRecentGameSetup;
 
-+ (instancetype)loadWithName:(NSString *)name;
++ (instancetype)loadGameSetupWithName:(NSString *)name;
 
-+ (instancetype)loadFromRecent;
++ (instancetype)loadFromRecentGameSetup;
+
++ (void)removeGameSetupWithName:(NSString *)name;
+
++ (NSArray *)namesOfSavedGameSetups;
 
 @end

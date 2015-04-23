@@ -38,4 +38,6 @@
 
 - (IBAction)hasUndercoverToggled:(id)sender;
 
+- (IBAction)saveButtonTapped:(id)sender;
+
 @end
