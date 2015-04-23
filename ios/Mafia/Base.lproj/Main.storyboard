@@ -38,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyi-0H-dzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132" y="872"/>
+            <point key="canvasLocation" x="1092" y="812"/>
         </scene>
         <!--About-->
         <scene sceneID="Fd6-78-qSx">
@@ -65,566 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mk0-av-Y09" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="583" y="872"/>
-        </scene>
-        <!--Assign Roles-->
-        <scene sceneID="O9a-8N-TSf">
-            <objects>
-                <tableViewController id="c6u-6r-LBL" customClass="MafiaAssignRolesController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="152" sectionHeaderHeight="22" sectionFooterHeight="22" id="Xvd-7L-TCY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TwoPlayersCell" rowHeight="152" id="U57-JZ-RDA" customClass="MafiaTwoPlayersCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U57-JZ-RDA" id="xgb-RS-z1j">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="205"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" id="fJK-Vf-kbB">
-                                            <rect key="frame" x="16" y="8" width="136" height="136"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZeR-3r-b8S">
-                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="player1ButtonTapped:" destination="U57-JZ-RDA" eventType="touchUpInside" id="sjF-k2-a4Y"/>
-                                                    </connections>
-                                                </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tfz-ij-Qpz">
-                                                    <rect key="frame" x="36" y="24" width="64" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Ne-rn-b9D">
-                                                    <rect key="frame" x="16" y="96" width="104" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <view contentMode="scaleToFill" id="tQ1-JH-qab">
-                                            <rect key="frame" x="166" y="8" width="134" height="136"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lT5-eD-owk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="134" height="136"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="player2ButtonTapped:" destination="U57-JZ-RDA" eventType="touchUpInside" id="2z8-0y-ezm"/>
-                                                    </connections>
-                                                </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="T1J-nC-v2n">
-                                                    <rect key="frame" x="36" y="24" width="64" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="28a-yU-CMZ">
-                                                    <rect key="frame" x="16" y="96" width="104" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="player1Button" destination="ZeR-3r-b8S" id="vhe-U6-5pb"/>
-                                    <outlet property="player1ImageView" destination="tfz-ij-Qpz" id="FDw-aU-SGz"/>
-                                    <outlet property="player1Label" destination="5Ne-rn-b9D" id="Eig-5s-iII"/>
-                                    <outlet property="player2Button" destination="lT5-eD-owk" id="e3p-RI-m5g"/>
-                                    <outlet property="player2ImageView" destination="T1J-nC-v2n" id="Efl-kl-Cjm"/>
-                                    <outlet property="player2Label" destination="28a-yU-CMZ" id="eD2-l2-YCK"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="c6u-6r-LBL" id="EIE-3i-lve"/>
-                            <outlet property="delegate" destination="c6u-6r-LBL" id="yT8-qj-MUU"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Assign Roles" id="ksd-8q-JbN">
-                        <barButtonItem key="backBarButtonItem" title=" " id="vN6-7L-ECd"/>
-                        <barButtonItem key="rightBarButtonItem" title="Start" id="Gmz-hy-4Cv">
-                            <connections>
-                                <action selector="startButtonTapped:" destination="c6u-6r-LBL" id="BCi-Uj-NEn"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="djs-sC-uds" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1132" y="-29"/>
-        </scene>
-        <!--Role-->
-        <scene sceneID="fkw-Ov-xI9">
-            <objects>
-                <tableViewController id="Hef-Te-4C9" customClass="MafiaConfigureRoleController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gGA-wp-XgI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="5PF-Ny-ce7" style="IBUITableViewCellStyleDefault" id="wNW-Zl-teJ">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wNW-Zl-teJ" id="dWT-mr-Ks4">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role x X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5PF-Ny-ce7">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Hef-Te-4C9" id="yAY-bf-e8N"/>
-                            <outlet property="delegate" destination="Hef-Te-4C9" id="7GH-YN-Rvr"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Role" id="pX0-Y6-DG2"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sBQ-S2-FtU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1132" y="-857"/>
-        </scene>
-        <!--Game Setup-->
-        <scene sceneID="Vjn-IC-NYk">
-            <objects>
-                <tableViewController id="g3N-Hx-4Qq" customClass="MafiaGameSetupController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="u1I-65-lJ6">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection headerTitle="Players" id="OHJ-2P-wbh">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Aof-FJ-HQh" detailTextLabel="ZDu-pC-Fzg" style="IBUITableViewCellStyleValue1" id="ubD-Tm-ojU">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ubD-Tm-ojU" id="6dD-J8-zeK">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Players" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aof-FJ-HQh">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="N" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZDu-pC-Fzg">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="gj2-es-Qr1" kind="push" identifier="ManagePlayers" id="M19-nc-1y6"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Options" id="EIg-nc-7Kw">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="SgD-QL-syw" style="IBUITableViewCellStyleDefault" id="pmF-8y-hPr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pmF-8y-hPr" id="HcZ-ve-eHN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Two-Handed Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SgD-QL-syw">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="3Kk-W0-3BG">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="twoHandedToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="lxW-Oc-9CI"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="hRK-WG-FOl" style="IBUITableViewCellStyleDefault" id="wod-5G-fPP">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wod-5G-fPP" id="5Xu-dO-oio">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Autonomic Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hRK-WG-FOl">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Ywm-4b-LiW">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="autonomicToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="fUl-sH-snV"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Role Settings" id="rs2-9Z-qLU">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="M2e-F3-NuT" detailTextLabel="igC-ge-TcW" imageView="PxP-tb-ADs" style="IBUITableViewCellStyleValue1" id="sc4-s8-wvd">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sc4-s8-wvd" id="G9t-wD-PC1">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Number of Killers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M2e-F3-NuT">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="N" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="igC-ge-TcW">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_killer.png" id="PxP-tb-ADs">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Hef-Te-4C9" kind="push" identifier="ConfigureNumberOfKillers" id="f6I-k4-wrl"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="SEy-Yq-154" detailTextLabel="6hC-2x-woc" imageView="JPl-EO-GC5" style="IBUITableViewCellStyleValue1" id="jcu-rD-a1F">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jcu-rD-a1F" id="6ph-GA-ChJ">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Number of Detectives" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SEy-Yq-154">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="N" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6hC-2x-woc">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_detective.png" id="JPl-EO-GC5">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Hef-Te-4C9" kind="push" identifier="ConfigureNumberOfDetectives" id="G4H-ls-vtU"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="JdO-nb-ghL" imageView="A6D-c6-eFS" style="IBUITableViewCellStyleDefault" id="O1W-2m-gHj">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O1W-2m-gHj" id="AsF-qA-DKc">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Has Assassin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JdO-nb-ghL">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="kZ9-dL-Xqc">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="hasAssassinToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="Jsi-Tv-N7C"/>
-                                                    </connections>
-                                                </switch>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_assassin.png" id="A6D-c6-eFS">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="uWj-RY-gjC" imageView="h11-yF-Jmh" style="IBUITableViewCellStyleDefault" id="gZp-EN-vWv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gZp-EN-vWv" id="vuS-t2-L0V">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Has Guardian" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uWj-RY-gjC">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="yjq-i4-erp">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="hasGuardianToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="Fn9-jR-doL"/>
-                                                    </connections>
-                                                </switch>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_guardian.png" id="h11-yF-Jmh">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="hOh-Nl-WsW" imageView="RCR-Sh-uLk" style="IBUITableViewCellStyleDefault" id="eCx-dK-Eqh">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eCx-dK-Eqh" id="QU6-i4-udW">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Has Doctor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hOh-Nl-WsW">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="imA-Si-GKv">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="hasDoctorToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="6o6-4L-SGB"/>
-                                                    </connections>
-                                                </switch>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_doctor.png" id="RCR-Sh-uLk">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="o0P-a4-Qvo" imageView="Ldq-9o-bIo" style="IBUITableViewCellStyleDefault" id="yYr-JN-ONB">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yYr-JN-ONB" id="3cC-Ma-Mch">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Has Traitor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o0P-a4-Qvo">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="gYd-xi-HaQ">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="hasTraitorToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="gh0-Ts-ziX"/>
-                                                    </connections>
-                                                </switch>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_traitor.png" id="Ldq-9o-bIo">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="zMP-8A-V8M" imageView="eiH-1e-PHA" style="IBUITableViewCellStyleDefault" id="N80-sc-xeL">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N80-sc-xeL" id="uLx-vY-o4h">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Has Undercover" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zMP-8A-V8M">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="fm3-4f-VHE">
-                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="hasUndercoverToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="x2O-VJ-8IL"/>
-                                                    </connections>
-                                                </switch>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="role_undercover.png" id="eiH-1e-PHA">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="g3N-Hx-4Qq" id="yE1-cN-Qny"/>
-                            <outlet property="delegate" destination="g3N-Hx-4Qq" id="ap5-um-VvU"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Game Setup" id="lcV-eY-l3Q">
-                        <barButtonItem key="backBarButtonItem" title=" " id="Qpp-WQ-eLc"/>
-                        <barButtonItem key="rightBarButtonItem" title="Go" id="d6O-vX-6sO">
-                            <connections>
-                                <segue destination="c6u-6r-LBL" kind="push" identifier="AssignRoles" id="Bsv-hu-Vgi"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="autonomicSwitch" destination="Ywm-4b-LiW" id="nWP-Dy-5AA"/>
-                        <outlet property="hasAssassinSwitch" destination="kZ9-dL-Xqc" id="9np-82-f4B"/>
-                        <outlet property="hasDoctorSwitch" destination="imA-Si-GKv" id="vea-k4-zKl"/>
-                        <outlet property="hasGuardianSwitch" destination="yjq-i4-erp" id="ryE-mH-tsO"/>
-                        <outlet property="hasTraitorSwitch" destination="gYd-xi-HaQ" id="Ix4-Wg-SGE"/>
-                        <outlet property="hasUndercoverSwitch" destination="fm3-4f-VHE" id="48E-eW-ppe"/>
-                        <outlet property="numberOfDetectivesLabel" destination="6hC-2x-woc" id="3TB-dB-6m9"/>
-                        <outlet property="numberOfKillersLabel" destination="igC-ge-TcW" id="mbQ-TT-SkP"/>
-                        <outlet property="numberOfPersonsLabel" destination="ZDu-pC-Fzg" id="Pns-gc-BgH"/>
-                        <outlet property="startButton" destination="d6O-vX-6sO" id="Odc-Or-v6M"/>
-                        <outlet property="twoHandedSwitch" destination="3Kk-W0-3BG" id="yVM-CF-FZ7"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fmz-gs-EXT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="573" y="-857"/>
-        </scene>
-        <!--Players-->
-        <scene sceneID="0fG-sx-6Hb">
-            <objects>
-                <tableViewController id="gj2-es-Qr1" customClass="MafiaManagePlayersController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="PWa-NE-jaS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="65" id="JF2-Mx-qV7" customClass="MafiaManagePlayersPlayerCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JF2-Mx-qV7" id="cCD-6x-cyo">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="KWI-Yt-5Go">
-                                            <rect key="frame" x="16" y="8" width="48" height="48"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mk2-Z4-csZ">
-                                            <rect key="frame" x="80" y="21" width="224" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="avatarImageView" destination="KWI-Yt-5Go" id="bNa-mA-BO2"/>
-                                    <outlet property="nameLabel" destination="mk2-Z4-csZ" id="UhK-RR-I1h"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="gj2-es-Qr1" id="oya-m8-vtc"/>
-                            <outlet property="delegate" destination="gj2-es-Qr1" id="7Ax-Mo-RWh"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Players" id="G8S-0m-1Az"/>
-                    <connections>
-                        <segue destination="mwA-MP-EZY" kind="modal" identifier="AddPerson" id="e0v-SK-6QS"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XUa-bP-ELM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1132" y="-1559"/>
-        </scene>
-        <!--Add New Player-->
-        <scene sceneID="iga-sD-fRB">
-            <objects>
-                <viewController id="PZu-XJ-8Yc" customClass="MafiaAddPersonController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XQn-Jq-dew" customClass="UIScrollView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cPC-jx-X2i">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backgroundTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="up9-8C-9pG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2pN-JC-csC">
-                                <rect key="frame" x="80" y="120" width="160" height="160"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Photo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addPhotoButtonTapped:" destination="PZu-XJ-8Yc" eventType="touchUpInside" id="sxo-ww-fvc"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvatarDefault" id="k9j-kU-qxM">
-                                <rect key="frame" x="80" y="120" width="160" height="160"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" textAlignment="center" minimumFontSize="17" id="37z-4o-QiO">
-                                <rect key="frame" x="40" y="300" width="240" height="40"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                <connections>
-                                    <action selector="playerNameFieldDidChange:" destination="PZu-XJ-8Yc" eventType="editingChanged" id="03D-hM-l6M"/>
-                                    <outlet property="delegate" destination="PZu-XJ-8Yc" id="mv8-ko-KOK"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add New Player" id="JR9-CJ-9Yf">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gs1-L6-KW6">
-                            <connections>
-                                <action selector="cancelButtonTapped:" destination="PZu-XJ-8Yc" id="V1d-F4-Aaq"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="0Sb-RG-U3o">
-                            <connections>
-                                <action selector="doneButtonTapped:" destination="PZu-XJ-8Yc" id="6px-g8-SXc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="doneButton" destination="0Sb-RG-U3o" id="SlV-mJ-Osw"/>
-                        <outlet property="playerAvatarImageView" destination="k9j-kU-qxM" id="ZPB-Gx-ksK"/>
-                        <outlet property="playerNameField" destination="37z-4o-QiO" id="Xnb-O5-quK"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hgl-y9-4u6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2226" y="-1559"/>
+            <point key="canvasLocation" x="575" y="812"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EgH-hS-u79">
@@ -646,6 +87,33 @@
             <point key="canvasLocation" x="-567" y="411"/>
         </scene>
         <!--Game-->
+        <scene sceneID="Nmu-dq-re2">
+            <objects>
+                <viewController id="rwJ-6C-eOd" customClass="MafiaGameController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3p-cY-OLa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B68-bG-qXr">
+                                <rect key="frame" x="75" y="244" width="171" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create New Game Setup">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewGameSetupButtonTapped:" destination="rwJ-6C-eOd" eventType="touchUpInside" id="6yr-DA-On3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Game" id="WRB-WE-5lr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UnY-rr-inp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="575" y="45"/>
+        </scene>
+        <!--Game-->
         <scene sceneID="0X5-7C-Md1">
             <objects>
                 <navigationController title="Game" automaticallyAdjustsScrollViewInsets="NO" id="6BQ-Yr-g65" sceneMemberID="viewController">
@@ -657,30 +125,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="g3N-Hx-4Qq" kind="relationship" relationship="rootViewController" id="BNj-Q9-LfJ"/>
+                        <segue destination="rwJ-6C-eOd" kind="relationship" relationship="rootViewController" id="OrA-ev-yHl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96y-va-n9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="51" y="-857"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Mqp-nt-qgV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mwA-MP-EZY" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LdA-lv-IfN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="PZu-XJ-8Yc" kind="relationship" relationship="rootViewController" id="Crb-Q0-vGF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s8O-U9-C4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1694" y="-1559"/>
+            <point key="canvasLocation" x="43" y="45"/>
         </scene>
         <!--About-->
         <scene sceneID="OIG-hp-2Hp">
@@ -699,25 +149,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMX-kR-b9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="51" y="872"/>
+            <point key="canvasLocation" x="43" y="812"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="AvatarDefault" width="64" height="64"/>
-        <image name="role_assassin.png" width="32" height="32"/>
-        <image name="role_detective.png" width="32" height="32"/>
-        <image name="role_doctor.png" width="32" height="32"/>
-        <image name="role_guardian.png" width="32" height="32"/>
-        <image name="role_killer.png" width="32" height="32"/>
-        <image name="role_traitor.png" width="32" height="32"/>
-        <image name="role_undercover.png" width="32" height="32"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="G4H-ls-vtU"/>
-    </inferredMetricsTieBreakers>
 </document>
