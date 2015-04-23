@@ -34,7 +34,8 @@
                                      destructiveButtonTitle:nil
                                           otherButtonTitles:nil];
         _blocks = [[NSMutableDictionary alloc] initWithCapacity:5];
-        _selfRetain = self;  // Retain self so the instance will not be deallocated.
+        // Retain self so that the instance will not be deallocated.
+        _selfRetain = self;
     }
     return self;
 }
@@ -101,7 +102,11 @@
     if (block != nil) {
         block();
     }
-    self.selfRetain = nil;  // Break the cyclic reference so that this instance may be deallocated.
+    // Release all blocks: block may hold a strong reference to the instance which holds a strong
+    // reference to this sheet, so we release all blocks to break any potential cyclic reference.
+    [self.blocks removeAllObjects];
+    // Release self to break the cyclic reference, so that this instance may be deallocated.
+    self.selfRetain = nil;
 }
 
 
