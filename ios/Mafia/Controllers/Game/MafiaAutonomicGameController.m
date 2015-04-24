@@ -13,6 +13,7 @@
 
 
 static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+static NSString *const kAvatarGroupImageName = @"AvatarGroup";
 
 static NSString *const kSegueStartAction = @"StartAction";
 
@@ -38,7 +39,7 @@ static NSString *const kActionCellID = @"ActionCell";
         self.actionImageView.image = avatarImage;
     } else {
         // Action does not have a player: must be a multi-player action.
-        self.actionImageView.image = [UIImage imageNamed:kAvatarDefaultImageName];  // TODO:
+        self.actionImageView.image = [UIImage imageNamed:kAvatarGroupImageName];
     }
     self.actionImageView.layer.cornerRadius = 5;
     self.actionImageView.clipsToBounds = YES;

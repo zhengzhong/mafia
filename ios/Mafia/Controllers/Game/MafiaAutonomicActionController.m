@@ -11,6 +11,7 @@
 
 
 static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+static NSString *const kAvatarGroupImageName = @"AvatarGroup";
 
 static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCell";
 static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
@@ -34,7 +35,7 @@ static NSString *const kTagImageName = @"Tag";
         MafiaPerson *person = action.player.person;
         self.actorImageView.image = (person.avatarImage != nil ? person.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
     } else {
-        self.actorImageView.image = [UIImage imageNamed:@"player.png"];  // TODO: action image
+        self.actorImageView.image = [UIImage imageNamed:kAvatarGroupImageName];
     }
     self.actorImageView.layer.cornerRadius = 5;
     self.actorImageView.clipsToBounds = YES;
