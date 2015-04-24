@@ -215,20 +215,20 @@
 
 - (MafiaAction *)continueToNextAction {
     if (![self checkGameOver]) {
-        self.actionIndex = (self.actionIndex + 1) % [self.actions count];
-        if (self.actionIndex == 0) {
-            // We are back to the first action, so we are in a new round.
+        // Find the index of the next available action. In autonomic mode, if an action's player is
+        // dead, the action is skipped.
+        NSInteger nextActionIndex = 0;
+        for (NSInteger i = 1; i <= [self.actions count]; ++i) {
+            nextActionIndex = (self.actionIndex + i) % [self.actions count];
+            MafiaAction *action = self.actions[nextActionIndex];
+            if (action.player == nil || !action.player.isDead) {
+                break;
+            }
+        }
+        NSAssert(nextActionIndex != self.actionIndex, @"Cannot find next available action.");
+        if (nextActionIndex < self.actionIndex) {
+            // We rewind back to a preceding action, so a new round begins.
             ++self.round;
-            // In autonomic mode, each action is associated with a player. If the player is dead,
-            // remove the action for the next round. Note: in non-autonomic mode, even if all
-            // actors of an action are dead, and the action becomes non-executable, it should NOT
-            // be removed, because this information should be kept secret to all players.
-            NSPredicate *predicate = [NSPredicate predicateWithBlock:
-                ^BOOL(id object, NSDictionary *bindings) {
-                    MafiaAction *action = object;
-                    return (action.player == nil || !action.player.isDead);
-                }];
-            [self.actions filterUsingPredicate:predicate];
             // In autonomic mode, assassin action might be transformed to killer action if assassin
             // has used his chance. So we check if action's role still matches its player's role.
             for (NSUInteger i = 0; i < [self.actions count]; ++i) {
@@ -241,6 +241,8 @@
                 }
             }
         }
+        // Update action index.
+        self.actionIndex = nextActionIndex;
     }
     return [self currentAction];
 }
