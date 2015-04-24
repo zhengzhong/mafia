@@ -84,6 +84,14 @@ static NSString *const kNegativeAnswerImageName = @"InformationNegative";
 }
 
 
++ (void)mafia_showSuccessWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
+    [self mafia_showNotificationWithTitle:title
+                                 subtitle:subtitle
+                                imageName:nil
+                                     type:TSMessageNotificationTypeSuccess];
+}
+
+
 + (void)mafia_showErrorWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
     [self mafia_showNotificationWithTitle:title
                                  subtitle:subtitle

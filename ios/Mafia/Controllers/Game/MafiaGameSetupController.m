@@ -7,16 +7,19 @@
 
 #import "MafiaAssignRolesController.h"
 #import "MafiaConfigureRoleController.h"
+#import "MafiaLoadGameSetupController.h"
 #import "MafiaManagePlayersController.h"
 #import "MafiaAlertView.h"
+#import "TSMessage+MafiaAdditions.h"
+#import "UIColor+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
-#import "UIColor+MafiaAdditions.h"
 
 
 static NSString *const kSegueManagePlayers = @"ManagePlayers";
 static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKillers";
 static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
+static NSString *const kSegueLoadGameSetup = @"LoadGameSetup";
 static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 static NSString *const kAvatarWenwenImageName = @"AvatarWenwen";
@@ -27,7 +30,7 @@ static NSString *const kAvatarQingqingImageName = @"AvatarQingqing";
 static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
 
 
-@interface MafiaGameSetupController ()
+@interface MafiaGameSetupController () <MafiaLoadGameSetupControllerDelegate>
 
 @property (readwrite, strong, nonatomic) MafiaGameSetup *gameSetup;
 
@@ -79,6 +82,10 @@ static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
         MafiaConfigureRoleController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
         controller.role = [MafiaRole detective];
+    } else if ([segue.identifier isEqualToString:kSegueLoadGameSetup]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        MafiaLoadGameSetupController *controller = navigationController.viewControllers[0];
+        controller.delegate = self;
     } else if ([segue.identifier isEqualToString:kSegueAssignRoles]) {
         MafiaAssignRolesController *controller = segue.destinationViewController;
         [controller assignRolesRandomlyWithGameSetup:self.gameSetup];
@@ -134,29 +141,59 @@ static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
 }
 
 
-- (IBAction)saveButtonTapped:(id)sender {
-    MafiaAlertView *gameSetupNameAlertView = [MafiaAlertView
-        alertWithTitle:NSLocalizedString(@"Save Game Setup", nil)
-               message:NSLocalizedString(@"Please specify the game setup name", nil)
-                 style:UIAlertViewStylePlainTextInput];
-    [gameSetupNameAlertView setCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
-    [gameSetupNameAlertView
-        setConfirmButtonWithTitle:NSLocalizedString(@"Save", nil)
-        block:^(MafiaAlertView *alertView) {
-            NSString *name = alertView.plainTextField.text;
-            name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            if ([name length] > 0) {
-                [self.gameSetup saveGameSetupWithName:name];
-            }
-        }];
-    [gameSetupNameAlertView show];
-}
-
-
 - (void)mafia_roleSwitch:(UISwitch *)roleSwitch toggledForRole:(MafiaRole *)role {
     NSInteger numberOfActors = (roleSwitch.on ? 1 : 0);
     [self.gameSetup setNumberOfActors:numberOfActors forRole:role];
     [self mafia_refreshUI];
+}
+
+
+#pragma mark - Save / Load Actions
+
+
+- (IBAction)saveButtonTapped:(id)sender {
+    MafiaAlertView *gameSetupNameAlertView = [MafiaAlertView
+                                              alertWithTitle:NSLocalizedString(@"Save Game Setup", nil)
+                                              message:NSLocalizedString(@"Please specify the game setup name", nil)
+                                              style:UIAlertViewStylePlainTextInput];
+    [gameSetupNameAlertView setCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
+    [gameSetupNameAlertView
+     setConfirmButtonWithTitle:NSLocalizedString(@"Save", nil)
+     block:^(MafiaAlertView *alertView) {
+         NSString *name = alertView.plainTextField.text;
+         name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+         // TODO: show error details maybe?
+         if ([name length] > 0) {
+             BOOL success = [self.gameSetup saveGameSetupWithName:name];
+             if (success) {
+                 [TSMessage mafia_showSuccessWithTitle:NSLocalizedString(@"Game setup saved successfully!", nil)
+                                              subtitle:nil];
+             } else {
+                 [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Fail to save game setup.", nil)
+                                              subtitle:nil];
+             }
+         } else {
+             [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Invalid game setup name.", nil)
+                                        subtitle:nil];
+         }
+     }];
+    [gameSetupNameAlertView show];
+}
+
+
+#pragma mark - MafiaLoadGameSetupControllerDelegate
+
+
+- (void)loadGameSetupController:(MafiaLoadGameSetupController *)controller
+               didLoadGameSetup:(MafiaGameSetup *)gameSetup {
+    self.gameSetup = gameSetup;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self mafia_refreshUI];
+}
+
+
+- (void)loadGameSetupControllerDidCancel:(MafiaLoadGameSetupController *)controller {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

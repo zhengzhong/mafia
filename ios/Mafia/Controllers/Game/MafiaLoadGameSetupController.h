@@ -14,11 +14,17 @@
 - (void)loadGameSetupController:(MafiaLoadGameSetupController *)controller
                didLoadGameSetup:(MafiaGameSetup *)gameSetup;
 
+- (void)loadGameSetupControllerDidCancel:(MafiaLoadGameSetupController *)controller;
+
 @end
 
 
 @interface MafiaLoadGameSetupController : UITableViewController
 
 @property (weak, nonatomic) id<MafiaLoadGameSetupControllerDelegate> delegate;
+
+- (IBAction)cancelButtonTapped:(id)sender;
+
+- (IBAction)editButtonTapped:(id)sender;
 
 @end

@@ -38,11 +38,18 @@
 + (void)mafia_showGameResultWithWinner:(MafiaWinner)winner;
 
 /*!
- * Shows a message.
+ * Shows a normal message.
  * @param title  the title of the message.
  * @param subtitle  the subtitle of the message.
  */
 + (void)mafia_showMessageWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
+
+/*!
+ * Shows a success message.
+ * @param title  the title of the message.
+ * @param subtitle  the subtitle of the message.
+ */
++ (void)mafia_showSuccessWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
 
 /*!
  * Shows an error message.

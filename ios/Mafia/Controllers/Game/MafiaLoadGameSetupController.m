@@ -15,6 +15,16 @@ static NSString *const kGameSetupNameCellID = @"GameSetupName";
 
 @property (strong, nonatomic) NSMutableArray *gameSetupNames;
 
+@property (strong, nonatomic) UIBarButtonItem *cancelButton;
+@property (strong, nonatomic) UIBarButtonItem *editButton;
+@property (strong, nonatomic) UIBarButtonItem *doneEditingButton;
+
+- (void)cancelButtonTapped:(id)sender;
+
+- (void)editButtonTapped:(id)sender;
+
+- (void)doneEditingButtonTapped:(id)sender;
+
 @end
 
 
@@ -27,6 +37,21 @@ static NSString *const kGameSetupNameCellID = @"GameSetupName";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gameSetupNames = [[MafiaGameSetup namesOfSavedGameSetups] mutableCopy];
+    // Configure navigation bar buttons manually.
+    self.cancelButton = [[UIBarButtonItem alloc]
+        initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                             target:self
+                             action:@selector(cancelButtonTapped:)];
+    self.editButton = [[UIBarButtonItem alloc]
+        initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                             target:self
+                             action:@selector(editButtonTapped:)];
+    self.doneEditingButton = [[UIBarButtonItem alloc]
+        initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                             target:self
+                             action:@selector(doneEditingButtonTapped:)];
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
+    self.navigationItem.rightBarButtonItem = self.editButton;
 }
 
 
@@ -70,6 +95,32 @@ static NSString *const kGameSetupNameCellID = @"GameSetupName";
         NSString *gameSetupName = self.gameSetupNames[indexPath.row];
         MafiaGameSetup *gameSetup = [MafiaGameSetup loadGameSetupWithName:gameSetupName];
         [self.delegate loadGameSetupController:self didLoadGameSetup:gameSetup];
+    }
+}
+
+
+#pragma mark - Navigation Bar Button Actions
+
+
+- (void)cancelButtonTapped:(id)sender {
+    [self.delegate loadGameSetupControllerDidCancel:self];
+}
+
+
+- (void)editButtonTapped:(id)sender {
+    if (!self.tableView.editing) {
+        [self.tableView setEditing:YES animated:YES];
+        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+        [self.navigationItem setRightBarButtonItem:self.doneEditingButton animated:YES];
+    }
+}
+
+
+- (void)doneEditingButtonTapped:(id)sender {
+    if (self.tableView.editing) {
+        [self.tableView setEditing:NO animated:YES];
+        [self.navigationItem setLeftBarButtonItem:self.cancelButton animated:YES];
+        [self.navigationItem setRightBarButtonItem:self.editButton animated:YES];
     }
 }
 
