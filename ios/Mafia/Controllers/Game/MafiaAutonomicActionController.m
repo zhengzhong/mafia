@@ -18,6 +18,8 @@ static NSString *const kUnselectableImageName = @"Unselectable";
 static NSString *const kSelectedImageName = @"Selected";
 static NSString *const kUnselectedImageName = @"Unselected";
 
+static NSString *const kTagImageName = @"Tag";
+
 
 // ------------------------------------------------------------------------------------------------
 // Custom Cells
@@ -61,19 +63,25 @@ static NSString *const kUnselectedImageName = @"Unselected";
 
 - (void)setupWithTargetPlayer:(MafiaPlayer *)player
                        ofRole:(MafiaRole *)role
-                   selectable:(BOOL)selectable
-                     selected:(BOOL)selected {
+                 isSelectable:(BOOL)isSelectable
+                   isSelected:(BOOL)isSelected
+                  wasSelected:(BOOL)wasSelected {
     self.avatarImageView.image = (player.avatarImage != nil ? player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
     self.avatarImageView.layer.cornerRadius = 5;
     self.avatarImageView.clipsToBounds = YES;
     self.nameLabel.text = player.displayName;
-    self.nameLabel.textColor = (selectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
-    if (!selectable) {
+    self.nameLabel.textColor = (isSelectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
+    if (!isSelectable) {
         self.checkImageView.image = [UIImage imageNamed:kUnselectableImageName];
-    } else if (selected) {
+    } else if (isSelected) {
         self.checkImageView.image = [UIImage imageNamed:kSelectedImageName];
     } else {
         self.checkImageView.image = [UIImage imageNamed:kUnselectedImageName];
+    }
+    if (wasSelected) {
+        self.tagImageView.image = [UIImage imageNamed:kTagImageName];
+    } else {
+        self.tagImageView.image = nil;
     }
 }
 
@@ -148,10 +156,15 @@ static NSString *const kUnselectedImageName = @"Unselected";
         MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
         MafiaAction *action = [self.game currentAction];
         MafiaRole *role = action.role;
-        BOOL selectable = [action isPlayerSelectable:player];
-        BOOL selected = [self.selectedPlayers containsObject:player];
+        BOOL isSelectable = [action isPlayerSelectable:player];
+        BOOL isSelected = [self.selectedPlayers containsObject:player];
+        BOOL wasSelected = [player wasSelectedByRole:action.role];
         MafiaTargetPlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kTargetPlayerCellID forIndexPath:indexPath];
-        [cell setupWithTargetPlayer:player ofRole:role selectable:selectable selected:selected];
+        [cell setupWithTargetPlayer:player
+                             ofRole:role
+                       isSelectable:isSelectable
+                         isSelected:isSelected
+                        wasSelected:wasSelected];
         return cell;
     }
     return nil;

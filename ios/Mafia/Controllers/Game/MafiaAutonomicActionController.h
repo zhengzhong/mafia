@@ -36,11 +36,13 @@
 @property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *checkImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 
 - (void)setupWithTargetPlayer:(MafiaPlayer *)player
                        ofRole:(MafiaRole *)role
-                   selectable:(BOOL)selectable
-                     selected:(BOOL)selected;
+                 isSelectable:(BOOL)isSelectable
+                   isSelected:(BOOL)isSelected
+                  wasSelected:(BOOL)wasSelected;
 
 @end  // MafiaTargetPlayerCell
 

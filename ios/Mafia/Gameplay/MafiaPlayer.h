@@ -83,12 +83,14 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
 - (void)clearSelectionTagByRole:(MafiaRole *)role;
 
 /*!
- * Checks if in the current round, the player is selected by the given role.
+ * Checks if in the current round, the player is selected by the given role. Returns NO if role is
+ * nil.
  */
 - (BOOL)isSelectedByRole:(MafiaRole *)role;
 
 /*!
- * Checks if in previous rounds, the player was selected by the given role.
+ * Checks if in previous rounds, the player was selected by the given role. Returns NO if role is
+ * nil.
  */
 - (BOOL)wasSelectedByRole:(MafiaRole *)role;
 

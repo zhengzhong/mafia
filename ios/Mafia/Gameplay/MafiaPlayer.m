@@ -109,12 +109,12 @@
 
 
 - (BOOL)isSelectedByRole:(MafiaRole *)role {
-    return [self.currentRoleTags containsObject:role];
+    return (role != nil && [self.currentRoleTags containsObject:role]);
 }
 
 
 - (BOOL)wasSelectedByRole:(MafiaRole *)role {
-    return [self.previousRoleTags containsObject:role];
+    return (role != nil && [self.previousRoleTags containsObject:role]);
 }
 
 
