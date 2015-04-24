@@ -96,10 +96,14 @@
 }
 
 
+- (void)updatePreviousRoleTags {
+    [self.previousRoleTags unionSet:self.currentRoleTags];
+}
+
+
 - (void)clearSelectionTagByRole:(MafiaRole *)role {
     if ([self.currentRoleTags containsObject:role]) {
         [self.currentRoleTags removeObject:role];
-        [self.previousRoleTags addObject:role];
     }
 }
 

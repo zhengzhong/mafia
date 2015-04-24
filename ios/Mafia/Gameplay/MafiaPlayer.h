@@ -73,6 +73,11 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
 - (void)selectByRole:(MafiaRole *)role;
 
 /*!
+ * Merges currentRoleTags into previousRoleTags.
+ */
+- (void)updatePreviousRoleTags;
+
+/*!
  * Clears the selection tag from the given role for the current round.
  */
 - (void)clearSelectionTagByRole:(MafiaRole *)role;

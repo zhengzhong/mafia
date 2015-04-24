@@ -63,8 +63,12 @@
 
 
 - (MafiaInformation *)settleTags {
-    MafiaInformation *information = [MafiaInformation announcementInformation];
+    // Update previousRoleTags for all players.
+    for (MafiaPlayer *player in self.playerList) {
+        [player updatePreviousRoleTags];
+    }
     // Settle tags in order, and collect information details.
+    MafiaInformation *information = [MafiaInformation announcementInformation];
     NSMutableArray *deadPlayerNames = [NSMutableArray arrayWithCapacity:4];
     [information addDetails:[self mafia_settleAssassinTagAndSaveDeadPlayerNamesTo:deadPlayerNames]];
     [information addDetails:[self mafia_settleGuardianTag]];
@@ -242,8 +246,16 @@
 
 - (NSArray *)mafia_settleAssassinToKillerTransition {
     // Assassin becomes killer if he has assassined someone.
-    NSArray *assassinedPlayers = [self.playerList playersSelectedBy:[MafiaRole assassin] aliveOnly:NO];
-    if ([assassinedPlayers count] > 0) {
+    // Note: assassin tags should have been removed from player's currentRoleTags, so we need to
+    // check in player's previousRoleTags.
+    BOOL needsTransition = NO;
+    for (MafiaPlayer *player in self.playerList) {
+        if ([player wasSelectedByRole:[MafiaRole assassin]]) {
+            needsTransition = YES;
+            break;
+        }
+    }
+    if (needsTransition) {
         for (MafiaPlayer *assassin in [self.playerList playersWithRole:[MafiaRole assassin] aliveOnly:YES]) {
             assassin.role = [MafiaRole killer];
         }
