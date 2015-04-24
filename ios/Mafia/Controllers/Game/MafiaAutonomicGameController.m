@@ -7,6 +7,7 @@
 #import "MafiaAutonomicActionController.h"
 #import "MafiaActionSheet.h"
 #import "TSMessage+MafiaAdditions.h"
+#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
 
@@ -27,8 +28,16 @@ static NSString *const kActionCellID = @"ActionCell";
 
 - (void)setupWithAction:(MafiaAction *)action isCurrent:(BOOL)isCurrent {
     if (action.player != nil) {
-        self.actionImageView.image = (action.player.avatarImage != nil ? action.player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+        UIImage *avatarImage = action.player.avatarImage;
+        if (avatarImage == nil) {
+            avatarImage = [UIImage imageNamed:kAvatarDefaultImageName];
+        }
+        if (action.player.isDead) {
+            avatarImage = [avatarImage mafia_grayscaledImage];
+        }
+        self.actionImageView.image = avatarImage;
     } else {
+        // Action does not have a player: must be a multi-player action.
         self.actionImageView.image = [UIImage imageNamed:kAvatarDefaultImageName];  // TODO:
     }
     self.actionImageView.layer.cornerRadius = 5;

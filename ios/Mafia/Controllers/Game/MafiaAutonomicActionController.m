@@ -5,6 +5,7 @@
 
 #import "MafiaAutonomicActionController.h"
 #import "TSMessage+MafiaAdditions.h"
+#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
 
@@ -66,7 +67,14 @@ static NSString *const kTagImageName = @"Tag";
                  isSelectable:(BOOL)isSelectable
                    isSelected:(BOOL)isSelected
                   wasSelected:(BOOL)wasSelected {
-    self.avatarImageView.image = (player.avatarImage != nil ? player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+    UIImage *avatarImage = player.avatarImage;
+    if (avatarImage == nil) {
+        avatarImage = [UIImage imageNamed:kAvatarDefaultImageName];
+    }
+    if (player.isDead) {
+        avatarImage = [avatarImage mafia_grayscaledImage];
+    }
+    self.avatarImageView.image = avatarImage;
     self.avatarImageView.layer.cornerRadius = 5;
     self.avatarImageView.clipsToBounds = YES;
     self.nameLabel.text = player.displayName;
