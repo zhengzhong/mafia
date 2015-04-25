@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@import "site/colors";
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+  font-family: "Open Sans","Lucida Grande","Lucida Sans Unicode","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB",微软雅黑,宋体,sans-serif;
+  font-size: 14px;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+section {
+  margin-bottom: 20px;
+  clear: both;
+}
+
+blockquote {
+  font-size: 100%;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.page-header,
+.page-header h1 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.list-inline.list-slim > li {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.affix {
+  top: 20px;
+}
+
+.affix-bottom {
+  position: absolute;
+}
+
+.p {
+  display: block;
+  margin-bottom: 10px;
+}
+
+$btn-hollow-color: if(variable-exists(site-color-primary), $site-color-primary, #666);
+
+.btn.btn-hollow {
+  background-color: rgba(#fff, 0);  // transparent background
+  color: $btn-hollow-color;
+  border: 1px solid $btn-hollow-color;
+  &:hover {
+    color: #fff;
+    background-color: $btn-hollow-color;
+  }
+
+  &.btn-hollow-inverse {
+    color: #fff;
+    border-color: #fff;
+    &:hover {
+      color: $btn-hollow-color;
+      background-color: #fff;
+    }
+  }
+}
+
+hr.half-rule {
+  margin: 20px auto;
+  width: 100px;
+}
+
+.text-lg {
+  font-size: 120%;
+}
+
+.text-xxl {
+  font-size: 400%;
+}
+
+.fa.fa-dark {
+  color: #333;
+}
+
+// For tablets...
+@media (min-width: 768px) and (max-width: 991px) {
+  ul, ol {
+    padding-left: 30px;
+  }
+}
+
+// For smart phones...
+@media (max-width: 767px) {
+  ul, ol {
+    padding-left: 20px;
+  }
+}

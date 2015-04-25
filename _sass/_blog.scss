@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+@import "mixins";
+
+.post-list {
+
+  li {
+    padding-bottom: 10px;
+  }
+
+  .date {
+    float: left;
+    width: 80px;
+    padding: 2px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    @include border-radius(4px);
+
+    .month {
+      padding: 4px;
+      background-color: #da4f49;
+      color: #fff;
+      @include border-radius(4px);
+    }
+
+    .day {
+      padding: 4px;
+      font-size: 200%;
+    }
+
+    .year {
+      background-color: #eee;
+      padding: 2px;
+      color: #888;
+      font-weight: normal;
+      @include border-radius(4px);
+    }
+  }
+
+  .head,
+  .body {
+    padding-bottom: 10px;
+    margin-left: 100px;
+  }
+
+  .head h2 {
+    margin: 0 0 10px 0;
+    padding-top: 0;
+    font-size: 140%;
+  }
+
+  .body {
+    color: #888;
+  }
+}
+
+.post {
+
+  .meta {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    h1 {
+      font-size: 200%;
+    }
+    h2 {
+      font-size: 160%;
+    }
+    h3 {
+      font-size: 140%;
+    }
+    img {
+      padding: 5px;
+      margin: 0 5px 5px 0;
+      display: inline-block;
+      max-width: 640px;
+      border: 1px solid #ddd;
+      @include border-radius(5px);
+    }
+
+    // Image styles from "alt" attribute, allowing image styling with markdown:
+    //     ![Some Alt Text, img-md]({{ site.baseurl }}/path/to/image.png)
+
+    img[alt~="img-md"] {
+      max-width: 400px;
+    }
+    img[alt~="img-sm"] {
+      max-width: 200px;
+    }
+    img[alt~="img-xs"] {
+      max-width: 100px;
+    }
+  }
+}

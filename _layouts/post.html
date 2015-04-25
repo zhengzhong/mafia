@@ -1,0 +1,33 @@
+---
+layout: blog
+---
+
+<div class="post">
+
+  <div class="page-header"><h1>{{ page.title }}</h1></div>
+
+  <ul class="list-inline meta">
+    <li class="text-muted">
+      <span class="glyphicon glyphicon-edit"></span>
+      Posted on {{ page.date|date_to_string }}
+      {% if page.last_updated %}
+        , last updated on {{ page.last_updated|date_to_string }}
+      {% endif %}
+    </li>
+    <li>
+      {% for category in site.data.blog.categories %}
+        {% if page.categories contains category.slug %}
+          <a class="label label-primary" href="{{ site.baseurl }}/blog/{{ category.slug }}/">{{ category.text }}</a>
+        {% endif %}
+      {% endfor %}
+      {% for tag in page.tags %}
+        <span class="label label-default">{{ tag }}</span>
+      {% endfor %}
+    </li>
+  </ul>
+
+  <section class="content">
+    {{ content }}
+  </section>
+
+</div>

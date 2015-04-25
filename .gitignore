@@ -1,0 +1,14 @@
+.DS_Store
+*~
+*~.*
+*.bak
+*.bak.*
+*.db
+*.draft
+*.draft.*
+*.log
+*.py[co]
+
+# Jekyll
+.sass-cache/
+_site/

@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+// Bootstrap overrides using site-specific settings:
+//
+// - `site/_colors.scss` defines the site's primary colors.
+// - `site/_extras.scss` defines extra site-specific styles, if any.
+//
+// This file should be the last one to be included in the main CSS file.
+
+@import "site/colors";
+
+@if variable-exists(site-color-primary) and variable-exists(site-color-primary-light) {
+
+  a {
+    color: $site-color-primary-light;
+    &:hover,
+    &:focus {
+      color: $site-color-primary;
+      text-decoration: none;
+    }
+  }
+
+  .pagination {
+    > li {
+      > a,
+      > span {
+        color: $site-color-primary-light;
+        &:hover,
+        &:focus {
+          color: $site-color-primary;
+        }
+      }
+    }
+
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus,
+      > span,
+      > span:hover,
+      > span:focus {
+        background-color: $site-color-primary-light;
+        border-color: $site-color-primary-light;
+      }
+    }
+  }
+
+  a.list-group-item.active {
+    &,
+    &:hover,
+    &:focus {
+      background-color: $site-color-primary-light;
+      border-color: $site-color-primary-light;
+    }
+    > .badge {
+      color: $site-color-primary-light;
+    }
+  }
+
+  .nav-pills > li.active > a {
+    &,
+    &:hover,
+    &:focus {
+      background-color: $site-color-primary-light;
+    }
+    > .badge {
+      color: $site-color-primary-light;
+    }
+  }
+
+  .navbar-inverse {
+
+    background-color: $site-color-primary-light;
+    border-color: $site-color-primary;
+
+    .navbar-nav > .active,
+    .navbar-nav > .open {
+      > a,
+      > a:hover,
+      > a:focus {
+        background-color: $site-color-primary;
+      }
+    }
+
+    .navbar-brand,
+    .navbar-nav > li > a {
+      color: #fff;
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .navbar-nav > .dropdown > a .caret {
+      border-top-color: #fff;
+      border-bottom-color: #fff;
+    }
+  }
+
+  #topbar .navbar-nav > li {
+    > a:hover,
+    > a:focus {
+      background-color: $site-color-primary-light;
+      color: #fff;
+      .text-danger {
+        color: #fff;
+      }
+    }
+  }
+
+  .label-primary {
+    background-color: $site-color-primary-light;
+    &[href]:hover,
+    &[href]:focus {
+      background-color: $site-color-primary;
+    }
+  }
+
+}
+
+@import "site/extras";
