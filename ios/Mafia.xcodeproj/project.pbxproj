@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		073767AB4D5E7B84ED0D12CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
-		413FE4FF166CC93500A5356C /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 413FE4FA166CC93500A5356C /* add.png */; };
-		413FE500166CC93500A5356C /* moon.png in Resources */ = {isa = PBXBuildFile; fileRef = 413FE4FB166CC93500A5356C /* moon.png */; };
-		413FE501166CC93500A5356C /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 413FE4FC166CC93500A5356C /* player.png */; };
-		413FE502166CC93500A5356C /* players.png in Resources */ = {isa = PBXBuildFile; fileRef = 413FE4FD166CC93500A5356C /* players.png */; };
-		413FE503166CC93500A5356C /* two_handed.png in Resources */ = {isa = PBXBuildFile; fileRef = 413FE4FE166CC93500A5356C /* two_handed.png */; };
 		414AB51B1AD2F6F8001B913C /* MafiaAddPersonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB50C1AD2F6F8001B913C /* MafiaAddPersonController.m */; };
 		414AB51C1AD2F6F8001B913C /* MafiaConfigureRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB50E1AD2F6F8001B913C /* MafiaConfigureRoleController.m */; };
 		414AB51D1AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5101AD2F6F8001B913C /* MafiaJudgeDrivenGameController.m */; };
@@ -34,30 +29,14 @@
 		415379411AE99E220096B906 /* MafiaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379401AE99E220096B906 /* MafiaAlertView.m */; };
 		415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83E165D6EBA00CDB5B2 /* action_in_day.png */; };
 		415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83F165D6EBA00CDB5B2 /* action_in_night.png */; };
-		415CF857165D6EBA00CDB5B2 /* is_just_guarded.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */; };
-		415CF858165D6EBA00CDB5B2 /* is_misdiagnosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF841165D6EBA00CDB5B2 /* is_misdiagnosed.png */; };
-		415CF859165D6EBA00CDB5B2 /* is_unguardable.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF842165D6EBA00CDB5B2 /* is_unguardable.png */; };
-		415CF85A165D6EBA00CDB5B2 /* is_voted.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF843165D6EBA00CDB5B2 /* is_voted.png */; };
 		415CF85B165D6EBA00CDB5B2 /* role_civilian.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF844165D6EBA00CDB5B2 /* role_civilian.png */; };
-		415CF85C165D6EBA00CDB5B2 /* role_dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF845165D6EBA00CDB5B2 /* role_dead.png */; };
 		415CF85D165D6EBA00CDB5B2 /* role_detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF846165D6EBA00CDB5B2 /* role_detective.png */; };
 		415CF85E165D6EBA00CDB5B2 /* role_doctor.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF847165D6EBA00CDB5B2 /* role_doctor.png */; };
 		415CF85F165D6EBA00CDB5B2 /* role_guardian.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF848165D6EBA00CDB5B2 /* role_guardian.png */; };
 		415CF860165D6EBA00CDB5B2 /* role_killer.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF849165D6EBA00CDB5B2 /* role_killer.png */; };
 		415CF861165D6EBA00CDB5B2 /* role_traitor.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF84A165D6EBA00CDB5B2 /* role_traitor.png */; };
 		415CF862165D6EBA00CDB5B2 /* role_undercover.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF84B165D6EBA00CDB5B2 /* role_undercover.png */; };
-		415CF863165D6EBA00CDB5B2 /* role_unrevealed.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF84C165D6EBA00CDB5B2 /* role_unrevealed.png */; };
-		415CF866165D6EBA00CDB5B2 /* tag_detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF84F165D6EBA00CDB5B2 /* tag_detective.png */; };
-		415CF867165D6EBA00CDB5B2 /* tag_doctor.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF850165D6EBA00CDB5B2 /* tag_doctor.png */; };
-		415CF868165D6EBA00CDB5B2 /* tag_guardian.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF851165D6EBA00CDB5B2 /* tag_guardian.png */; };
-		415CF869165D6EBA00CDB5B2 /* tag_killer.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF852165D6EBA00CDB5B2 /* tag_killer.png */; };
-		415CF86A165D6EBA00CDB5B2 /* tag_traitor.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF853165D6EBA00CDB5B2 /* tag_traitor.png */; };
-		415CF86B165D6EBA00CDB5B2 /* tag_undercover.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF854165D6EBA00CDB5B2 /* tag_undercover.png */; };
-		415CF87A165D9CF400CDB5B2 /* game_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF878165D9CF400CDB5B2 /* game_background.png */; };
 		415CF87B165D9CF400CDB5B2 /* role_assassin.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF879165D9CF400CDB5B2 /* role_assassin.png */; };
-		416E66D1166D2C610062AE57 /* information_announcement.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66CE166D2C610062AE57 /* information_announcement.png */; };
-		416E66D2166D2C610062AE57 /* information_negative.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66CF166D2C610062AE57 /* information_negative.png */; };
-		416E66D3166D2C610062AE57 /* information_positive.png in Resources */ = {isa = PBXBuildFile; fileRef = 416E66D0166D2C610062AE57 /* information_positive.png */; };
 		417D418E1AE9A89B00F0556E /* JudgeDrivenGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417D41901AE9A89B00F0556E /* JudgeDrivenGame.storyboard */; };
 		417D41931AE9AA9700F0556E /* GameSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417D41951AE9AA9700F0556E /* GameSetup.storyboard */; };
 		417D41981AE9AB2700F0556E /* MafiaGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417D41971AE9AB2700F0556E /* MafiaGameController.m */; };
@@ -87,18 +66,12 @@
 		41A7F3821ACED9C70086015F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A7F37C1ACED9C70086015F /* LaunchScreen.xib */; };
 		41A7F3831ACED9C70086015F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A7F37E1ACED9C70086015F /* Main.storyboard */; };
 		41A7F3841ACED9C70086015F /* MafiaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A7F3811ACED9C70086015F /* MafiaAppDelegate.m */; };
-		41B32509166F548500E9D509 /* guide.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B32508166F548500E9D509 /* guide.png */; };
-		41B3250F166F579E00E9D509 /* gameplay.zh.html in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250D166F579E00E9D509 /* gameplay.zh.html */; };
-		41B32510166F579E00E9D509 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 41B3250E166F579E00E9D509 /* style.css */; };
-		41B32515166F70C700E9D509 /* is_dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B32514166F70C700E9D509 /* is_dead.png */; };
-		41B5A623166E120B009F8CAE /* information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B5A622166E120B009F8CAE /* information_background.png */; };
 		41D39A6E1AD86BA300C13084 /* MafiaRoleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A6D1AD86BA300C13084 /* MafiaRoleAction.m */; };
 		41D39A711AD9057B00C13084 /* MafiaAssignRolesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A701AD9057B00C13084 /* MafiaAssignRolesController.m */; };
 		41D39A741AD92D6F00C13084 /* AutonomicGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41D39A761AD92D6F00C13084 /* AutonomicGame.storyboard */; };
 		41D39A801AD9438200C13084 /* MafiaStoryboards.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A7F1AD9438200C13084 /* MafiaStoryboards.m */; };
 		41D39A831AD9490E00C13084 /* MafiaAutonomicGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A821AD9490E00C13084 /* MafiaAutonomicGameController.m */; };
 		41D39A8C1AD963ED00C13084 /* MafiaAutonomicActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A8B1AD963ED00C13084 /* MafiaAutonomicActionController.m */; };
-		41E9AC9C1660D542006AC42D /* tag_assassin.png in Resources */ = {isa = PBXBuildFile; fileRef = 41E9AC9B1660D542006AC42D /* tag_assassin.png */; };
 		4823281113C325BD01987A33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -114,11 +87,6 @@
 
 /* Begin PBXFileReference section */
 		3DD82BAEF1DEADBA2969E45E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		413FE4FA166CC93500A5356C /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
-		413FE4FB166CC93500A5356C /* moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moon.png; sourceTree = "<group>"; };
-		413FE4FC166CC93500A5356C /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
-		413FE4FD166CC93500A5356C /* players.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = players.png; sourceTree = "<group>"; };
-		413FE4FE166CC93500A5356C /* two_handed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = two_handed.png; sourceTree = "<group>"; };
 		414AB50B1AD2F6F8001B913C /* MafiaAddPersonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAddPersonController.h; sourceTree = "<group>"; };
 		414AB50C1AD2F6F8001B913C /* MafiaAddPersonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAddPersonController.m; sourceTree = "<group>"; };
 		414AB50D1AD2F6F8001B913C /* MafiaConfigureRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaConfigureRoleController.h; sourceTree = "<group>"; };
@@ -161,30 +129,14 @@
 		415379401AE99E220096B906 /* MafiaAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAlertView.m; sourceTree = "<group>"; };
 		415CF83E165D6EBA00CDB5B2 /* action_in_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_day.png; sourceTree = "<group>"; };
 		415CF83F165D6EBA00CDB5B2 /* action_in_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_night.png; sourceTree = "<group>"; };
-		415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_just_guarded.png; sourceTree = "<group>"; };
-		415CF841165D6EBA00CDB5B2 /* is_misdiagnosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_misdiagnosed.png; sourceTree = "<group>"; };
-		415CF842165D6EBA00CDB5B2 /* is_unguardable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_unguardable.png; sourceTree = "<group>"; };
-		415CF843165D6EBA00CDB5B2 /* is_voted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_voted.png; sourceTree = "<group>"; };
 		415CF844165D6EBA00CDB5B2 /* role_civilian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_civilian.png; sourceTree = "<group>"; };
-		415CF845165D6EBA00CDB5B2 /* role_dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_dead.png; sourceTree = "<group>"; };
 		415CF846165D6EBA00CDB5B2 /* role_detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_detective.png; sourceTree = "<group>"; };
 		415CF847165D6EBA00CDB5B2 /* role_doctor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_doctor.png; sourceTree = "<group>"; };
 		415CF848165D6EBA00CDB5B2 /* role_guardian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_guardian.png; sourceTree = "<group>"; };
 		415CF849165D6EBA00CDB5B2 /* role_killer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_killer.png; sourceTree = "<group>"; };
 		415CF84A165D6EBA00CDB5B2 /* role_traitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_traitor.png; sourceTree = "<group>"; };
 		415CF84B165D6EBA00CDB5B2 /* role_undercover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_undercover.png; sourceTree = "<group>"; };
-		415CF84C165D6EBA00CDB5B2 /* role_unrevealed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_unrevealed.png; sourceTree = "<group>"; };
-		415CF84F165D6EBA00CDB5B2 /* tag_detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_detective.png; sourceTree = "<group>"; };
-		415CF850165D6EBA00CDB5B2 /* tag_doctor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_doctor.png; sourceTree = "<group>"; };
-		415CF851165D6EBA00CDB5B2 /* tag_guardian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_guardian.png; sourceTree = "<group>"; };
-		415CF852165D6EBA00CDB5B2 /* tag_killer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_killer.png; sourceTree = "<group>"; };
-		415CF853165D6EBA00CDB5B2 /* tag_traitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_traitor.png; sourceTree = "<group>"; };
-		415CF854165D6EBA00CDB5B2 /* tag_undercover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_undercover.png; sourceTree = "<group>"; };
-		415CF878165D9CF400CDB5B2 /* game_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_background.png; sourceTree = "<group>"; };
 		415CF879165D9CF400CDB5B2 /* role_assassin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_assassin.png; sourceTree = "<group>"; };
-		416E66CE166D2C610062AE57 /* information_announcement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_announcement.png; sourceTree = "<group>"; };
-		416E66CF166D2C610062AE57 /* information_negative.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_negative.png; sourceTree = "<group>"; };
-		416E66D0166D2C610062AE57 /* information_positive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_positive.png; sourceTree = "<group>"; };
 		417D418F1AE9A89B00F0556E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/JudgeDrivenGame.storyboard; sourceTree = "<group>"; };
 		417D41941AE9AA9700F0556E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GameSetup.storyboard; sourceTree = "<group>"; };
 		417D41961AE9AB2700F0556E /* MafiaGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameController.h; sourceTree = "<group>"; };
@@ -232,11 +184,6 @@
 		41A7F37F1ACED9C70086015F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41A7F3801ACED9C70086015F /* MafiaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAppDelegate.h; sourceTree = "<group>"; };
 		41A7F3811ACED9C70086015F /* MafiaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAppDelegate.m; sourceTree = "<group>"; };
-		41B32508166F548500E9D509 /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
-		41B3250D166F579E00E9D509 /* gameplay.zh.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = gameplay.zh.html; sourceTree = "<group>"; };
-		41B3250E166F579E00E9D509 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		41B32514166F70C700E9D509 /* is_dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = is_dead.png; sourceTree = "<group>"; };
-		41B5A622166E120B009F8CAE /* information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_background.png; sourceTree = "<group>"; };
 		41D39A6C1AD86BA300C13084 /* MafiaRoleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaRoleAction.h; sourceTree = "<group>"; };
 		41D39A6D1AD86BA300C13084 /* MafiaRoleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaRoleAction.m; sourceTree = "<group>"; };
 		41D39A6F1AD9057B00C13084 /* MafiaAssignRolesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAssignRolesController.h; sourceTree = "<group>"; };
@@ -248,7 +195,6 @@
 		41D39A821AD9490E00C13084 /* MafiaAutonomicGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAutonomicGameController.m; sourceTree = "<group>"; };
 		41D39A8A1AD963ED00C13084 /* MafiaAutonomicActionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAutonomicActionController.h; sourceTree = "<group>"; };
 		41D39A8B1AD963ED00C13084 /* MafiaAutonomicActionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAutonomicActionController.m; sourceTree = "<group>"; };
-		41E9AC9B1660D542006AC42D /* tag_assassin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_assassin.png; sourceTree = "<group>"; };
 		6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -353,33 +299,14 @@
 			children = (
 				415CF83E165D6EBA00CDB5B2 /* action_in_day.png */,
 				415CF83F165D6EBA00CDB5B2 /* action_in_night.png */,
-				415CF878165D9CF400CDB5B2 /* game_background.png */,
-				416E66CE166D2C610062AE57 /* information_announcement.png */,
-				41B5A622166E120B009F8CAE /* information_background.png */,
-				416E66CF166D2C610062AE57 /* information_negative.png */,
-				416E66D0166D2C610062AE57 /* information_positive.png */,
-				41B32514166F70C700E9D509 /* is_dead.png */,
-				415CF840165D6EBA00CDB5B2 /* is_just_guarded.png */,
-				415CF841165D6EBA00CDB5B2 /* is_misdiagnosed.png */,
-				415CF842165D6EBA00CDB5B2 /* is_unguardable.png */,
-				415CF843165D6EBA00CDB5B2 /* is_voted.png */,
 				415CF879165D9CF400CDB5B2 /* role_assassin.png */,
 				415CF844165D6EBA00CDB5B2 /* role_civilian.png */,
-				415CF845165D6EBA00CDB5B2 /* role_dead.png */,
 				415CF846165D6EBA00CDB5B2 /* role_detective.png */,
 				415CF847165D6EBA00CDB5B2 /* role_doctor.png */,
 				415CF848165D6EBA00CDB5B2 /* role_guardian.png */,
 				415CF849165D6EBA00CDB5B2 /* role_killer.png */,
 				415CF84A165D6EBA00CDB5B2 /* role_traitor.png */,
 				415CF84B165D6EBA00CDB5B2 /* role_undercover.png */,
-				415CF84C165D6EBA00CDB5B2 /* role_unrevealed.png */,
-				41E9AC9B1660D542006AC42D /* tag_assassin.png */,
-				415CF84F165D6EBA00CDB5B2 /* tag_detective.png */,
-				415CF850165D6EBA00CDB5B2 /* tag_doctor.png */,
-				415CF851165D6EBA00CDB5B2 /* tag_guardian.png */,
-				415CF852165D6EBA00CDB5B2 /* tag_killer.png */,
-				415CF853165D6EBA00CDB5B2 /* tag_traitor.png */,
-				415CF854165D6EBA00CDB5B2 /* tag_undercover.png */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -439,7 +366,6 @@
 		41857F691652D9FF00EE800D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				41B3250C166F577A00E9D509 /* HTML */,
 				41857F701652DAAB00EE800D /* Images */,
 			);
 			path = Resources;
@@ -460,7 +386,6 @@
 			isa = PBXGroup;
 			children = (
 				415CF83D165D6E9700CDB5B2 /* Game */,
-				4197E9CB166CC89800D01D34 /* Icons */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -492,19 +417,6 @@
 				41857F6A1652DA2D00EE800D /* Supporting Files */,
 			);
 			path = Mafia;
-			sourceTree = "<group>";
-		};
-		4197E9CB166CC89800D01D34 /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				413FE4FA166CC93500A5356C /* add.png */,
-				41B32508166F548500E9D509 /* guide.png */,
-				413FE4FB166CC93500A5356C /* moon.png */,
-				413FE4FC166CC93500A5356C /* player.png */,
-				413FE4FD166CC93500A5356C /* players.png */,
-				413FE4FE166CC93500A5356C /* two_handed.png */,
-			);
-			path = Icons;
 			sourceTree = "<group>";
 		};
 		41A7F3571ACEC8900086015F /* Controllers */ = {
@@ -551,15 +463,6 @@
 				41A7F36D1ACEC8DA0086015F /* MafiaVoteAndLynchAction.m */,
 			);
 			path = Gameplay;
-			sourceTree = "<group>";
-		};
-		41B3250C166F577A00E9D509 /* HTML */ = {
-			isa = PBXGroup;
-			children = (
-				41B3250D166F579E00E9D509 /* gameplay.zh.html */,
-				41B3250E166F579E00E9D509 /* style.css */,
-			);
-			path = HTML;
 			sourceTree = "<group>";
 		};
 		41D39A771AD92DBF00C13084 /* Storyboards */ = {
@@ -669,12 +572,7 @@
 				415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */,
 				41D39A741AD92D6F00C13084 /* AutonomicGame.storyboard in Resources */,
 				415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */,
-				415CF857165D6EBA00CDB5B2 /* is_just_guarded.png in Resources */,
-				415CF858165D6EBA00CDB5B2 /* is_misdiagnosed.png in Resources */,
-				415CF859165D6EBA00CDB5B2 /* is_unguardable.png in Resources */,
-				415CF85A165D6EBA00CDB5B2 /* is_voted.png in Resources */,
 				415CF85B165D6EBA00CDB5B2 /* role_civilian.png in Resources */,
-				415CF85C165D6EBA00CDB5B2 /* role_dead.png in Resources */,
 				417D41931AE9AA9700F0556E /* GameSetup.storyboard in Resources */,
 				415CF85D165D6EBA00CDB5B2 /* role_detective.png in Resources */,
 				415CF85E165D6EBA00CDB5B2 /* role_doctor.png in Resources */,
@@ -682,33 +580,11 @@
 				415CF860165D6EBA00CDB5B2 /* role_killer.png in Resources */,
 				415CF861165D6EBA00CDB5B2 /* role_traitor.png in Resources */,
 				415CF862165D6EBA00CDB5B2 /* role_undercover.png in Resources */,
-				415CF863165D6EBA00CDB5B2 /* role_unrevealed.png in Resources */,
-				415CF866165D6EBA00CDB5B2 /* tag_detective.png in Resources */,
-				415CF867165D6EBA00CDB5B2 /* tag_doctor.png in Resources */,
-				415CF868165D6EBA00CDB5B2 /* tag_guardian.png in Resources */,
-				415CF869165D6EBA00CDB5B2 /* tag_killer.png in Resources */,
-				415CF86A165D6EBA00CDB5B2 /* tag_traitor.png in Resources */,
-				415CF86B165D6EBA00CDB5B2 /* tag_undercover.png in Resources */,
-				415CF87A165D9CF400CDB5B2 /* game_background.png in Resources */,
 				41A7F3821ACED9C70086015F /* LaunchScreen.xib in Resources */,
 				415CF87B165D9CF400CDB5B2 /* role_assassin.png in Resources */,
-				41E9AC9C1660D542006AC42D /* tag_assassin.png in Resources */,
-				413FE4FF166CC93500A5356C /* add.png in Resources */,
-				413FE500166CC93500A5356C /* moon.png in Resources */,
-				413FE501166CC93500A5356C /* player.png in Resources */,
-				413FE502166CC93500A5356C /* players.png in Resources */,
 				4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */,
-				413FE503166CC93500A5356C /* two_handed.png in Resources */,
 				417D418E1AE9A89B00F0556E /* JudgeDrivenGame.storyboard in Resources */,
 				41A7F3831ACED9C70086015F /* Main.storyboard in Resources */,
-				416E66D1166D2C610062AE57 /* information_announcement.png in Resources */,
-				416E66D2166D2C610062AE57 /* information_negative.png in Resources */,
-				416E66D3166D2C610062AE57 /* information_positive.png in Resources */,
-				41B5A623166E120B009F8CAE /* information_background.png in Resources */,
-				41B32509166F548500E9D509 /* guide.png in Resources */,
-				41B3250F166F579E00E9D509 /* gameplay.zh.html in Resources */,
-				41B32510166F579E00E9D509 /* style.css in Resources */,
-				41B32515166F70C700E9D509 /* is_dead.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

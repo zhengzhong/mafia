@@ -4,10 +4,14 @@
 //
 
 #import "MafiaUpdatePlayerController.h"
-
 #import "MafiaUpdatePlayerRoleController.h"
 
 #import "MafiaGameplay.h"
+
+
+// ------------------------------------------------------------------------------------------------
+// MafiaPlayerStatus
+// ------------------------------------------------------------------------------------------------
 
 
 @implementation MafiaPlayerStatus
@@ -38,6 +42,10 @@
 @end  //  MafiaPlayerStatus
 
 
+// ------------------------------------------------------------------------------------------------
+// MafiaPlayerStatusCell
+// ------------------------------------------------------------------------------------------------
+
 
 @implementation MafiaPlayerStatusCell
 
@@ -55,6 +63,18 @@
 
 
 @end  // MafiaPlayerStatusCell
+
+
+// ------------------------------------------------------------------------------------------------
+// MafiaUpdatePlayerController
+// ------------------------------------------------------------------------------------------------
+
+
+static NSString *const kDeadImageName = @"Dead";
+static NSString *const kJustGuardedImageName = @"JustGuarded";
+static NSString *const kMisdiagnosedImageName = @"Misdiagnosed";
+static NSString *const kUnguardableImageName = @"Unguardable";
+static NSString *const kVotedImageName = @"Voted";
 
 
 @interface MafiaUpdatePlayerController () <MafiaUpdatePlayerRoleControllerDelegate>
@@ -102,27 +122,27 @@
     self.role = player.role;
     self.deadStatus = [MafiaPlayerStatus
         statusWithName:NSLocalizedString(@"Dead?", nil)
-             imageName:@"is_dead.png"
+             imageName:kDeadImageName
                    key:@"isDead"
                  value:player.isDead];
     self.misdiagnosedStatus = [MafiaPlayerStatus
         statusWithName:NSLocalizedString(@"Misdiagnosed?", nil)
-             imageName:@"is_misdiagnosed.png"
+             imageName:kMisdiagnosedImageName
                    key:@"isMisdiagnosed"
                  value:player.isMisdiagnosed];
     self.justGuardedStatus = [MafiaPlayerStatus
         statusWithName:NSLocalizedString(@"Just Guarded?", nil)
-             imageName:@"is_just_guarded.png"
+             imageName:kJustGuardedImageName
                    key:@"isJustGuarded"
                  value:player.isJustGuarded];
     self.unguardableStatus = [MafiaPlayerStatus
         statusWithName:NSLocalizedString(@"Unguardable?", nil)
-             imageName:@"is_unguardable.png"
+             imageName:kUnguardableImageName
                    key:@"isUnguardable"
                  value:player.isUnguardable];
     self.votedStatus = [MafiaPlayerStatus
         statusWithName:NSLocalizedString(@"Voted?", nil)
-             imageName:@"is_voted.png"
+             imageName:kVotedImageName
                    key:@"isVoted"
                  value:player.isVoted];
 }
