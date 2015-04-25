@@ -16,10 +16,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *roleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *roleImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *checkImageView;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *statusImageViews;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tagImageViews;
 
-- (void)refreshWithPlayer:(MafiaPlayer *)player;
+- (void)setupWithPlayer:(MafiaPlayer *)player isSelected:(BOOL)isSelected;
 
 @end  // MafiaJudgeDrivenGamePlayerCell
 

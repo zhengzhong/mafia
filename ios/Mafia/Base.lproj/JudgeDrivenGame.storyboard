@@ -13,92 +13,92 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="dfC-GY-PKj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="22" sectionFooterHeight="22" id="dfC-GY-PKj">
                                 <rect key="frame" x="0.0" y="170" width="320" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="145" id="1eK-oM-ZyZ" customClass="MafiaJudgeDrivenGamePlayerCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="130" id="1eK-oM-ZyZ" customClass="MafiaJudgeDrivenGamePlayerCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1eK-oM-ZyZ" id="qej-1t-hfH">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WxN-pg-8za">
-                                                    <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvatarDefault" id="WxN-pg-8za">
+                                                    <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iwq-Sr-70t">
-                                                    <rect key="frame" x="78" y="8" width="194" height="21"/>
+                                                    <rect key="frame" x="78" y="8" width="138" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Selected" id="xdo-Ez-D90">
+                                                    <rect key="frame" x="224" y="8" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FtZ-G2-fUr">
-                                                    <rect key="frame" x="78" y="37" width="232" height="18"/>
+                                                    <rect key="frame" x="78" y="38" width="170" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="P2J-h8-BhO">
+                                                    <rect key="frame" x="256" y="8" width="48" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="eHh-kl-0AA">
-                                                    <rect key="frame" x="8" y="80" width="24" height="24"/>
+                                                    <rect key="frame" x="16" y="64" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FUw-z5-W3E">
-                                                    <rect key="frame" x="40" y="80" width="24" height="24"/>
+                                                    <rect key="frame" x="48" y="64" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wtv-Fo-dtC">
-                                                    <rect key="frame" x="72" y="80" width="24" height="24"/>
+                                                    <rect key="frame" x="80" y="64" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2bk-rS-DTM">
-                                                    <rect key="frame" x="104" y="80" width="24" height="24"/>
+                                                    <rect key="frame" x="112" y="64" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="c0R-8X-Vev">
-                                                    <rect key="frame" x="136" y="80" width="24" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vlc-fd-N61">
-                                                    <rect key="frame" x="168" y="80" width="24" height="24"/>
+                                                    <rect key="frame" x="144" y="64" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pTy-x7-6N5">
-                                                    <rect key="frame" x="8" y="112" width="24" height="24"/>
+                                                    <rect key="frame" x="16" y="96" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4Ol-7O-ua3">
-                                                    <rect key="frame" x="40" y="112" width="24" height="24"/>
+                                                    <rect key="frame" x="48" y="96" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mXq-Gf-8Aa">
-                                                    <rect key="frame" x="72" y="112" width="24" height="24"/>
+                                                    <rect key="frame" x="80" y="96" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="x4Y-tC-uO0">
-                                                    <rect key="frame" x="104" y="112" width="24" height="24"/>
+                                                    <rect key="frame" x="112" y="96" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XWy-fL-dhV">
-                                                    <rect key="frame" x="136" y="112" width="24" height="24"/>
+                                                    <rect key="frame" x="144" y="96" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yMU-Di-HGS">
-                                                    <rect key="frame" x="168" y="112" width="24" height="24"/>
+                                                    <rect key="frame" x="176" y="96" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="P2J-h8-BhO">
-                                                    <rect key="frame" x="254" y="80" width="56" height="56"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pVI-Sn-HMV">
-                                                    <rect key="frame" x="280" y="8" width="30" height="30"/>
+                                                    <rect key="frame" x="256" y="64" width="48" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="...">
+                                                    <state key="normal" title="Edit">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -109,6 +109,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImageView" destination="WxN-pg-8za" id="MaV-3s-Iv7"/>
+                                            <outlet property="checkImageView" destination="xdo-Ez-D90" id="kIO-Kd-JIK"/>
                                             <outlet property="nameLabel" destination="iwq-Sr-70t" id="hdI-7e-iY4"/>
                                             <outlet property="roleImageView" destination="P2J-h8-BhO" id="dsg-KQ-nT5"/>
                                             <outlet property="roleLabel" destination="FtZ-G2-fUr" id="2rg-zw-o87"/>
@@ -123,7 +124,6 @@
                                             <outletCollection property="statusImageViews" destination="wtv-Fo-dtC" id="2TK-rM-Wi5"/>
                                             <outletCollection property="statusImageViews" destination="2bk-rS-DTM" id="5YB-1k-wMN"/>
                                             <outletCollection property="statusImageViews" destination="c0R-8X-Vev" id="wWe-tX-g0i"/>
-                                            <outletCollection property="statusImageViews" destination="Vlc-fd-N61" id="noN-DN-PXu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -438,6 +438,10 @@
             <point key="canvasLocation" x="679" y="-517"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AvatarDefault" width="64" height="64"/>
+        <image name="Selected" width="24" height="24"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

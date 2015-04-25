@@ -8,60 +8,96 @@
 #import "MafiaUpdatePlayerController.h"
 #import "MafiaActionSheet.h"
 #import "TSMessage+MafiaAdditions.h"
+#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
 
 
+static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
+
+static NSString *const kSelectedImageName = @"Selected";
+
+static NSString *const kDeadImageName = @"Dead";
+static NSString *const kJustGuardedImageName = @"JustGuarded";
+static NSString *const kMisdiagnosedImageName = @"Misdiagnosed";
+static NSString *const kUnguardableImageName = @"Unguardable";
+static NSString *const kVotedImageName = @"Voted";
+
 static NSString *const kPlayerCellID = @"PlayerCell";
+
+
+// ------------------------------------------------------------------------------------------------
+// MafiaJudgeDrivenGamePlayerCell
+// ------------------------------------------------------------------------------------------------
 
 
 @implementation MafiaJudgeDrivenGamePlayerCell
 
 
-- (void)refreshWithPlayer:(MafiaPlayer *)player {
-    // Refresh player information.
-    self.avatarImageView.image = nil;  // TODO:
+- (void)setupWithPlayer:(MafiaPlayer *)player isSelected:(BOOL)isSelected {
+    // Avatar image.
+    UIImage *avatarImage = player.avatarImage;
+    if (avatarImage == nil) {
+        avatarImage = [UIImage imageNamed:kAvatarDefaultImageName];
+    }
+    if (player.isDead) {
+        avatarImage = [avatarImage mafia_grayscaledImage];
+    }
+    self.avatarImageView.image = avatarImage;
+    self.avatarImageView.layer.cornerRadius = 5;
+    self.avatarImageView.clipsToBounds = YES;
+
+    // Player information.
     self.nameLabel.text = player.displayName;
     self.roleLabel.text = player.role.displayName;
-    NSString *roleImageName = nil;
-    if (player.isDead) {
-        roleImageName = @"role_dead.png";
-    } else {
-        roleImageName = [NSString stringWithFormat:@"role_%@.png", player.role.name];
-    }
+    NSString *roleImageName = [NSString stringWithFormat:@"role_%@.png", player.role.name];
     self.roleImageView.image = [UIImage imageNamed:roleImageName];
-    // Refresh status.
+
+    // Selected?
+    if (isSelected) {
+        self.checkImageView.image = [UIImage imageNamed:kSelectedImageName];
+    } else {
+        self.checkImageView.image = nil;
+    }
+
+    // Player status.
     NSUInteger statusIndex = 0;
+    if (player.isDead) {
+        UIImageView *imageView = self.statusImageViews[statusIndex];
+        imageView.image = [UIImage imageNamed:kDeadImageName];
+        ++statusIndex;
+    }
     if (player.isMisdiagnosed) {
         UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:@"is_misdiagnosed.png"];
+        imageView.image = [UIImage imageNamed:kMisdiagnosedImageName];
         ++statusIndex;
     }
     if (player.isJustGuarded) {
         UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:@"is_just_guarded.png"];
+        imageView.image = [UIImage imageNamed:kJustGuardedImageName];
         ++statusIndex;
     }
     if (player.isUnguardable) {
         UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:@"is_unguardable.png"];
+        imageView.image = [UIImage imageNamed:kUnguardableImageName];
         ++statusIndex;
     }
     if (player.isVoted) {
         UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:@"is_voted.png"];
+        imageView.image = [UIImage imageNamed:kVotedImageName];
         ++statusIndex;
     }
     for (NSUInteger i = statusIndex; i < [self.statusImageViews count]; ++i) {
         UIImageView *imageView = self.statusImageViews[i];
         imageView.image = nil;
     }
-    // Refresh tags.
+
+    // Current role tags.
     NSUInteger tagIndex = 0;
     for (MafiaRole *taggedByRole in player.currentRoleTags) {
-        NSString *tagImageName = [NSString stringWithFormat:@"tag_%@.png", taggedByRole.name];
+        NSString *roleTagImageName = [NSString stringWithFormat:@"role_%@.png", taggedByRole.name];
         UIImageView *imageView = self.tagImageViews[tagIndex];
-        imageView.image = [UIImage imageNamed:tagImageName];
+        imageView.image = [UIImage imageNamed:roleTagImageName];
         ++tagIndex;
     }
     for (NSUInteger i = tagIndex; i < [self.tagImageViews count]; ++i) {
@@ -71,6 +107,11 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 }
 
 @end
+
+
+// ------------------------------------------------------------------------------------------------
+// MafiaJudgeDrivenGameController
+// ------------------------------------------------------------------------------------------------
 
 
 @implementation MafiaJudgeDrivenGameController
@@ -129,27 +170,13 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MafiaJudgeDrivenGamePlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-    [cell refreshWithPlayer:player];
+    BOOL isSelected = [self.selectedPlayers containsObject:player];
+    [cell setupWithPlayer:player isSelected:isSelected];
     return cell;
 }
 
 
 #pragma mark - UITableViewDelegate
-
-
-// Note: Setting backgrund color of a cell must be done in this delegate method.
-// See: http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewCell_Class/Reference/Reference.html
-// TODO: use a check mark to indicate a player is selected.
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-    if ([self.selectedPlayers containsObject:player]) {
-        cell.backgroundColor = [UIColor colorWithRed:0.87 green:0.94 blue:0.84 alpha:1.0];
-    } else if (player.isDead) {
-        cell.backgroundColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0];
-    } else {
-        cell.backgroundColor = [UIColor whiteColor];
-    }
-}
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
