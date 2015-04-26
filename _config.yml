@@ -1,4 +1,5 @@
 name: 'Mafia'
+baseurl: /mafia
 markdown: kramdown
 highlighter: pygments
 exclude: ['Rakefile', 'README.md', 'config.rb', '*.bat', '*.bak', 'scripts']
