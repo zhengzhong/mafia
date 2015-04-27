@@ -1,6 +1,36 @@
 @charset "UTF-8";
 
-.ios-webview {
+body {
+  code {
+    background-color: transparent;
+    color: #666;
+  }
+
+  .alert-info {
+    background-color: #eee;
+    border-color: #ddd;
+    color: #080;
+  }
+}
+
+// Styles for website.
+body.mafia {
+  background: url('../img/body_bg.jpg');
+
+  nav#topbar {
+    background-color: transparent;
+    border-color: transparent;
+    .navbar-nav > .active > a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
+      background-color: transparent;
+      color: #f14e32;
+    }
+  }
+}
+
+// Styles for iOS Web View.
+body.ios-webview {
 
   margin-top: 20px;
   margin-bottom: 20px;
