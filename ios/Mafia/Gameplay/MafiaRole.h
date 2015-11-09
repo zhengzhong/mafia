@@ -37,6 +37,8 @@
  */
 + (NSArray *)roles;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /*!
  * Designated initializer. This initializer should not be used externally.
  */

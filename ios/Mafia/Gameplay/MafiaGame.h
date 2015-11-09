@@ -28,10 +28,11 @@ typedef NS_ENUM(NSInteger, MafiaWinner) {
 @property (readonly, assign, nonatomic) NSInteger actionIndex;
 @property (readonly, assign, nonatomic) MafiaWinner winner;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (instancetype)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded;
 
-- (instancetype)initWithGameSetup:(MafiaGameSetup *)gameSetup
-    NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithGameSetup:(MafiaGameSetup *)gameSetup NS_DESIGNATED_INITIALIZER;
 
 - (void)reset;
 

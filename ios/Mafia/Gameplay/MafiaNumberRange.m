@@ -19,6 +19,13 @@
 }
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue {
     NSAssert(maxValue >= minValue, @"Invalid minValue/maxValue in number range.");
     if (self = [super init]) {

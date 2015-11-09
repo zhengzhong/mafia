@@ -35,6 +35,8 @@ FOUNDATION_EXPORT NSString *const MafiaInvalidActionRoleException;
 /// The display name of this action.
 @property (readonly, copy, nonatomic) NSString *displayName;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /*!
  * Initializes an action. The given role must match the action subclass.
  * @param role  the role of this action, must match the action subclass.

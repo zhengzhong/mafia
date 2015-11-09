@@ -16,7 +16,14 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 @implementation MafiaAction
 
 
-#pragma mark - Initializer
+#pragma mark - Init
+
+
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
 
 
 - (instancetype)initWithRole:(MafiaRole *)role

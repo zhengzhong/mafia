@@ -14,6 +14,8 @@
 
 + (instancetype)numberRangeWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (instancetype)initWithMinValue:(NSInteger)minValue maxValue:(NSInteger)maxValue
     NS_DESIGNATED_INITIALIZER;
 

@@ -26,6 +26,13 @@
 }
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithTitle:(NSString *)title {
     if (self = [super init]) {
         _actionSheet = [[UIActionSheet alloc] initWithTitle:title

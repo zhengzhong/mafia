@@ -19,6 +19,13 @@
 }
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide {
     if (self = [super init]) {
         _person = person;

@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger, MafiaHandSide) {
 
 + (instancetype)playerWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (instancetype)initWithPerson:(MafiaPerson *)person handSide:(MafiaHandSide)handSide
     NS_DESIGNATED_INITIALIZER;
 

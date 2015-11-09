@@ -37,6 +37,8 @@ typedef void (^MafiaAlertViewBlock)(MafiaAlertView *alertView);
                        message:(NSString *)message
                          style:(UIAlertViewStyle)style;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (instancetype)initWithTitle:(NSString *)title
                       message:(NSString *)message
                         style:(UIAlertViewStyle)style

@@ -32,8 +32,9 @@ typedef NS_ENUM(NSInteger, MafiaInformationKind) {
  */
 + (instancetype)informationWithAnswer:(BOOL)answer;
 
-- (instancetype)initWithKind:(MafiaInformationKind)kind
-    NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithKind:(MafiaInformationKind)kind NS_DESIGNATED_INITIALIZER;
 
 - (void)addDetails:(NSArray *)details;
 

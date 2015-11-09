@@ -14,6 +14,8 @@
 
 @property (readonly, copy, nonatomic) NSArray *players;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /*!
  * Initializes the player list.
  * @param persons  an array of persons.

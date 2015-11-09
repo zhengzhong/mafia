@@ -41,6 +41,13 @@
 }
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithTitle:(NSString *)title
                       message:(NSString *)message
                         style:(UIAlertViewStyle)style {

@@ -12,6 +12,13 @@
 @implementation MafiaPlayerList
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (id)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded {
     if (self = [super init]) {
         NSMutableArray *players = [NSMutableArray arrayWithCapacity:[persons count] * 2];

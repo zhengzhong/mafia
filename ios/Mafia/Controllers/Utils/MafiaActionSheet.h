@@ -22,6 +22,8 @@ typedef void (^V5MafiaActionSheetBlock)();
  */
 + (instancetype)sheetWithTitle:(NSString *)title;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /*!
  * Initializes an action sheet.
  * @param title  The title of the action sheet, may be nil.

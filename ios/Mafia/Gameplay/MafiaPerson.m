@@ -15,6 +15,13 @@
 }
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithName:(NSString *)name avatarImage:(UIImage *)avatarImage {
     if (self = [super init]) {
         _name = [name copy];
@@ -75,7 +82,7 @@
         reverseBlock:^(UIImage *image, BOOL *success, NSError **error) {
             // Transform from an image to a (base64-encoded) string.
             NSData *data = UIImagePNGRepresentation(image);
-            NSString *string = [data base64EncodedStringWithOptions:0];
+            NSString *string = [data base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0];
             if (string == nil) {
                 *success = NO;
                 NSString *errorDescription = @"Fail to convert image to base64-encoded string";

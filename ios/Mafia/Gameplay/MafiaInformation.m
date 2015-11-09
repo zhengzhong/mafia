@@ -23,6 +23,13 @@
 }
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithKind:(MafiaInformationKind)kind {
     if (self = [super init]) {
         _kind = kind;

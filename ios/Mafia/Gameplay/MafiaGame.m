@@ -27,6 +27,13 @@
 @implementation MafiaGame
 
 
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unavailable"
+                                 userInfo:nil];
+}
+
+
 - (instancetype)initWithPersons:(NSArray *)persons isTwoHanded:(BOOL)isTwoHanded {
     MafiaGameSetup *gameSetup = [[MafiaGameSetup alloc] init];
     for (MafiaPerson *person in persons) {
