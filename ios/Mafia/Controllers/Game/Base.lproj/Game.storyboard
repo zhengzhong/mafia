@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--Game-->
+        <scene sceneID="Nmu-dq-re2">
+            <objects>
+                <viewController id="rwJ-6C-eOd" customClass="MafiaGameController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DQa-Sf-QVI"/>
+                        <viewControllerLayoutGuide type="bottom" id="pEM-Bs-8Br"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w3p-cY-OLa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B68-bG-qXr">
+                                <rect key="frame" x="20" y="84" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="mbw-Tx-a88"/>
+                                </constraints>
+                                <state key="normal" title="New Game">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewGameSetupButtonTapped:" destination="rwJ-6C-eOd" eventType="touchUpInside" id="6yr-DA-On3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="B68-bG-qXr" secondAttribute="trailing" constant="20" id="8Sq-VA-bPe"/>
+                            <constraint firstItem="B68-bG-qXr" firstAttribute="top" secondItem="DQa-Sf-QVI" secondAttribute="bottom" constant="20" id="Qwp-ou-zjP"/>
+                            <constraint firstItem="B68-bG-qXr" firstAttribute="leading" secondItem="w3p-cY-OLa" secondAttribute="leading" constant="20" id="vz9-Na-Z14"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Game" id="WRB-WE-5lr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UnY-rr-inp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="830" y="47"/>
+        </scene>
+        <!--Game-->
+        <scene sceneID="0X5-7C-Md1">
+            <objects>
+                <navigationController storyboardIdentifier="GameNavigationController" title="Game" automaticallyAdjustsScrollViewInsets="NO" id="6BQ-Yr-g65" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Game" id="2Ne-M8-RPY"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FZE-RO-b6I">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rwJ-6C-eOd" kind="relationship" relationship="rootViewController" id="OrA-ev-yHl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="96y-va-n9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="80.625" y="47.535211267605632"/>
+        </scene>
+    </scenes>
+</document>
