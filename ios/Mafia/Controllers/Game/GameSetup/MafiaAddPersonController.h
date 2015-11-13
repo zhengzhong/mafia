@@ -15,7 +15,7 @@
 @end
 
 
-@interface MafiaAddPersonController : UIViewController <UITextFieldDelegate>
+@interface MafiaAddPersonController : UIViewController
 
 @property (strong, nonatomic) UIImage *avatarImage;
 @property (weak, nonatomic) id<MafiaAddPersonControllerDelegate> delegate;

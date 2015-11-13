@@ -15,13 +15,6 @@
 }
 
 
-- (instancetype)init {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Unavailable"
-                                 userInfo:nil];
-}
-
-
 - (instancetype)initWithName:(NSString *)name avatarImage:(UIImage *)avatarImage {
     if (self = [super init]) {
         _name = [name copy];

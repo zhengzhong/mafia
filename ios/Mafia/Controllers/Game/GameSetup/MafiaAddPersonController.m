@@ -28,15 +28,6 @@ static const CGFloat kAvatarImageWidth = 48;
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    // TODO: adjust scroll view position here, otherwise the initial position would be wrong. Don't know why...
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
-    [self mafia_refreshUI];
-}
-
-
 #pragma mark - UIImagePickerControllerDelegate
 
 
@@ -53,23 +44,6 @@ static const CGFloat kAvatarImageWidth = 48;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - UITextFieldDelegate
-
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    // Scroll the view up so that the text field will not be hidden by the keyboard.
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    [scrollView setContentOffset:CGPointMake(0, 120) animated:YES];
-}
-
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    // Scroll the view back.
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 

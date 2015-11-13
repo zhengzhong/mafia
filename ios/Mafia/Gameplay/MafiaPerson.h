@@ -22,10 +22,7 @@
 
 + (instancetype)personWithName:(NSString *)name avatarImage:(UIImage *)avatarImage;
 
-- (instancetype)init NS_UNAVAILABLE;
-
-- (instancetype)initWithName:(NSString *)name avatarImage:(UIImage *)avatarImage
-    NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithName:(NSString *)name avatarImage:(UIImage *)avatarImage;
 
 - (BOOL)isEqualToPerson:(MafiaPerson *)otherPerson;
 
