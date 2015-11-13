@@ -10,10 +10,9 @@
 #import "TSMessage+MafiaAdditions.h"
 #import "UIImage+MafiaAdditions.h"
 
+#import "MafiaAssets.h"
 #import "MafiaGameplay.h"
 
-
-static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
 
 static NSString *const kSelectedImageName = @"Selected";
 
@@ -38,7 +37,7 @@ static NSString *const kPlayerCellID = @"PlayerCell";
     // Avatar image.
     UIImage *avatarImage = player.avatarImage;
     if (avatarImage == nil) {
-        avatarImage = [UIImage imageNamed:kAvatarDefaultImageName];
+        avatarImage = [MafiaAssets imageOfAvatar:MafiaAvatarDefault];
     }
     if (player.isDead) {
         avatarImage = [avatarImage mafia_grayscaledImage];

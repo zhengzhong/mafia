@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "AvatarXiaohe.png"
+      "filename" : "avatar_wenwen_64pt.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "AvatarXiaohe@2x.png"
+      "filename" : "avatar_wenwen_64pt_2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "AvatarXiaohe@3x.png"
+      "filename" : "avatar_wenwen_64pt_3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

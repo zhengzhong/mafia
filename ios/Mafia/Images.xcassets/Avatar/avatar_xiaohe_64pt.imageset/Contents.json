@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "AvatarGroup.png"
+      "filename" : "avatar_xiaohe_64pt.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "AvatarGroup@2x.png"
+      "filename" : "avatar_xiaohe_64pt_2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "AvatarGroup@3x.png"
+      "filename" : "avatar_xiaohe_64pt_3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

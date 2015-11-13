@@ -9,6 +9,9 @@
 #import "MafiaConfigureRoleController.h"
 #import "MafiaLoadGameSetupController.h"
 #import "MafiaManagePlayersController.h"
+
+#import "MafiaAssets.h"
+
 #import "MafiaAlertView.h"
 #import "TSMessage+MafiaAdditions.h"
 #import "UIColor+MafiaAdditions.h"
@@ -21,13 +24,6 @@ static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKille
 static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
 static NSString *const kSegueLoadGameSetup = @"LoadGameSetup";
 static NSString *const kSegueAssignRoles = @"AssignRoles";
-
-static NSString *const kAvatarWenwenImageName = @"AvatarWenwen";
-static NSString *const kAvatarXiaoheImageName = @"AvatarXiaohe";
-static NSString *const kAvatarLangniImageName = @"AvatarLangni";
-static NSString *const kAvatarDashuImageName = @"AvatarDashu";
-static NSString *const kAvatarQingqingImageName = @"AvatarQingqing";
-static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
 
 
 @interface MafiaGameSetupController () <MafiaLoadGameSetupControllerDelegate>
@@ -47,12 +43,12 @@ static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
     [super viewDidLoad];
     self.gameSetup = [[MafiaGameSetup alloc] init];
     NSArray *persons = @[
-        [MafiaPerson personWithName:@"雯雯" avatarImage:[UIImage imageNamed:kAvatarWenwenImageName]],
-        [MafiaPerson personWithName:@"小何" avatarImage:[UIImage imageNamed:kAvatarXiaoheImageName]],
-        [MafiaPerson personWithName:@"狼尼" avatarImage:[UIImage imageNamed:kAvatarLangniImageName]],
-        [MafiaPerson personWithName:@"大叔" avatarImage:[UIImage imageNamed:kAvatarDashuImageName]],
-        [MafiaPerson personWithName:@"青青" avatarImage:[UIImage imageNamed:kAvatarQingqingImageName]],
-        [MafiaPerson personWithName:@"老妖" avatarImage:[UIImage imageNamed:kAvatarLaoyaoImageName]],
+        [MafiaPerson personWithName:@"雯雯" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarWenwen]],
+        [MafiaPerson personWithName:@"小何" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarXiaohe]],
+        [MafiaPerson personWithName:@"狼尼" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLangni]],
+        [MafiaPerson personWithName:@"大叔" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarDashu]],
+        [MafiaPerson personWithName:@"青青" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarQingqing]],
+        [MafiaPerson personWithName:@"老妖" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLaoyao]],
     ];
     for (MafiaPerson *person in persons) {
         [self.gameSetup addPerson:person];
@@ -74,21 +70,34 @@ static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
     if ([segue.identifier isEqualToString:kSegueManagePlayers]) {
         MafiaManagePlayersController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
-    } else if ([segue.identifier isEqualToString:kSegueConfigureNumberOfKillers]) {
+        return;
+    }
+
+    if ([segue.identifier isEqualToString:kSegueConfigureNumberOfKillers]) {
         MafiaConfigureRoleController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
         controller.role = [MafiaRole killer];
-    } else if ([segue.identifier isEqualToString:kSegueConfigureNumberOfDetectives]) {
+        return;
+    }
+
+    if ([segue.identifier isEqualToString:kSegueConfigureNumberOfDetectives]) {
         MafiaConfigureRoleController *controller = segue.destinationViewController;
         controller.gameSetup = self.gameSetup;
         controller.role = [MafiaRole detective];
-    } else if ([segue.identifier isEqualToString:kSegueLoadGameSetup]) {
+        return;
+    }
+
+    if ([segue.identifier isEqualToString:kSegueLoadGameSetup]) {
         UINavigationController *navigationController = segue.destinationViewController;
         MafiaLoadGameSetupController *controller = navigationController.viewControllers[0];
         controller.delegate = self;
-    } else if ([segue.identifier isEqualToString:kSegueAssignRoles]) {
+        return;
+    }
+
+    if ([segue.identifier isEqualToString:kSegueAssignRoles]) {
         MafiaAssignRolesController *controller = segue.destinationViewController;
         [controller assignRolesRandomlyWithGameSetup:self.gameSetup];
+        return;
     }
 }
 
@@ -148,7 +157,7 @@ static NSString *const kAvatarLaoyaoImageName = @"AvatarLaoyao";
 }
 
 
-#pragma mark - Save / Load Actions
+#pragma mark - Save / Load
 
 
 - (IBAction)saveButtonTapped:(id)sender {

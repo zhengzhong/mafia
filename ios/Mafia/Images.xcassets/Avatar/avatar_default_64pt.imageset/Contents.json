@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "AvatarQingqing.png"
+      "filename" : "avatar_default_64pt.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "AvatarQingqing@2x.png"
+      "filename" : "avatar_default_64pt_2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "AvatarQingqing@3x.png"
+      "filename" : "avatar_default_64pt_3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

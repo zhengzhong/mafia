@@ -4,17 +4,14 @@
 //
 
 #import "MafiaGameController.h"
-#import "MafiaGameSetupController.h"
-#import "MafiaStoryboards.h"
+#import "MafiaGameSetupStoryboards.h"
 
 
 @implementation MafiaGameController
 
-
 - (IBAction)createNewGameSetupButtonTapped:(id)sender {
-    MafiaGameSetupController *controller = [MafiaStoryboards instantiateGameSetupController];
+    UIViewController *controller = [MafiaGameSetupStoryboards gameSetupController];
     [self.navigationController pushViewController:controller animated:YES];
 }
-
 
 @end

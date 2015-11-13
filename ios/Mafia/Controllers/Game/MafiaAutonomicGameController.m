@@ -9,11 +9,10 @@
 #import "TSMessage+MafiaAdditions.h"
 #import "UIImage+MafiaAdditions.h"
 
+#import "MafiaAssets.h"
+
 #import "MafiaGameplay.h"
 
-
-static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
-static NSString *const kAvatarGroupImageName = @"AvatarGroup";
 
 static NSString *const kSegueStartAction = @"StartAction";
 
@@ -31,15 +30,15 @@ static NSString *const kActionCellID = @"ActionCell";
     if (action.player != nil) {
         UIImage *avatarImage = action.player.avatarImage;
         if (avatarImage == nil) {
-            avatarImage = [UIImage imageNamed:kAvatarDefaultImageName];
+            avatarImage = [MafiaAssets imageOfAvatar:MafiaAvatarDefault];
         }
         if (action.player.isDead) {
             avatarImage = [avatarImage mafia_grayscaledImage];
         }
         self.actionImageView.image = avatarImage;
     } else {
-        // Action does not have a player: must be a multi-player action.
-        self.actionImageView.image = [UIImage imageNamed:kAvatarGroupImageName];
+        // Action does not have a player.
+        self.actionImageView.image = [MafiaAssets imageOfAvatar:MafiaAvatarInfo];
     }
     self.actionImageView.layer.cornerRadius = 5;
     self.actionImageView.clipsToBounds = YES;

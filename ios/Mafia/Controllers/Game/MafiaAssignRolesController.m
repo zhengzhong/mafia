@@ -8,10 +8,10 @@
 #import "MafiaJudgeDrivenGameController.h"
 #import "MafiaStoryboards.h"
 
+#import "MafiaAssets.h"
+
 #import "MafiaGameplay.h"
 
-
-static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
 
 static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
 
@@ -70,7 +70,7 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
             imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", player.role.name]];
             label.text = player.role.displayName;
         } else {
-            imageView.image = (player.avatarImage != nil ? player.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+            imageView.image = (player.avatarImage != nil ? player.avatarImage : [MafiaAssets imageOfAvatar:MafiaAvatarDefault]);
             label.text = player.displayName;
         }
         imageView.layer.cornerRadius = 5;

@@ -6,18 +6,18 @@
 #import "MafiaManagePlayersController.h"
 #import "MafiaAddPersonController.h"
 
+#import "MafiaAssets.h"
+
 #import "MafiaGameplay.h"
 
 
 static NSString *const kPlayerCellID = @"PlayerCell";
 
-static NSString *const kAvatarDefaultImageName = @"AvatarDefault";
-
 
 @implementation MafiaManagePlayersPlayerCell
 
 - (void)setupWithPerson:(MafiaPerson *)person {
-    self.avatarImageView.image = (person.avatarImage != nil ? person.avatarImage : [UIImage imageNamed:kAvatarDefaultImageName]);
+    self.avatarImageView.image = (person.avatarImage != nil ? person.avatarImage : [MafiaAssets imageOfAvatar:MafiaAvatarDefault]);
     self.avatarImageView.layer.cornerRadius = 5;
     self.avatarImageView.clipsToBounds = YES;
     self.nameLabel.text = person.name;
