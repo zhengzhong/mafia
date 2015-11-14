@@ -17,21 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pBi-Of-3aj">
-                                <rect key="frame" x="16" y="80" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="Yyg-YD-Bs1"/>
-                                    <constraint firstAttribute="height" constant="48" id="d3O-7E-FPZ"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Action" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRu-v6-0iF">
-                                <rect key="frame" x="72" y="80" width="508" height="21"/>
+                                <rect key="frame" x="20" y="80" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="112" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dfC-GY-PKj">
-                                <rect key="frame" x="0.0" y="148" width="600" height="452"/>
+                                <rect key="frame" x="0.0" y="146" width="600" height="454"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" id="1eK-oM-ZyZ" customClass="MafiaJudgeDrivenGamePlayerCell">
@@ -57,7 +50,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Selected" translatesAutoresizingMaskIntoConstraints="NO" id="xdo-Ez-D90">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="xdo-Ez-D90">
                                                     <rect key="frame" x="488" y="8" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="PbI-q4-oHh"/>
@@ -237,26 +230,24 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prompt of current action" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVb-oD-g5y">
-                                <rect key="frame" x="72" y="109" width="508" height="17"/>
+                                <rect key="frame" x="20" y="109" width="560" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="VRu-v6-0iF" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" constant="20" id="3oz-T1-hbt"/>
                             <constraint firstItem="dfC-GY-PKj" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" id="7Jr-lm-h70"/>
-                            <constraint firstItem="dfC-GY-PKj" firstAttribute="top" secondItem="pBi-Of-3aj" secondAttribute="bottom" constant="20" id="AA8-gb-XfO"/>
                             <constraint firstItem="fPS-w4-scQ" firstAttribute="top" secondItem="dfC-GY-PKj" secondAttribute="bottom" id="EYk-0A-W2b"/>
-                            <constraint firstItem="pBi-Of-3aj" firstAttribute="top" secondItem="Ugd-el-6O2" secondAttribute="bottom" constant="16" id="ZSc-lC-EM7"/>
-                            <constraint firstItem="TVb-oD-g5y" firstAttribute="leading" secondItem="pBi-Of-3aj" secondAttribute="trailing" constant="8" id="aYJ-dt-8Mb"/>
+                            <constraint firstItem="TVb-oD-g5y" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" constant="20" id="NKu-ag-v7i"/>
                             <constraint firstAttribute="trailing" secondItem="TVb-oD-g5y" secondAttribute="trailing" constant="20" id="azE-xo-cci"/>
                             <constraint firstAttribute="trailing" secondItem="dfC-GY-PKj" secondAttribute="trailing" id="bah-ue-Uxj"/>
                             <constraint firstItem="TVb-oD-g5y" firstAttribute="top" secondItem="VRu-v6-0iF" secondAttribute="bottom" constant="8" id="dPN-JH-L5I"/>
-                            <constraint firstItem="pBi-Of-3aj" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" constant="16" id="fQi-2b-BrP"/>
                             <constraint firstAttribute="trailing" secondItem="VRu-v6-0iF" secondAttribute="trailing" constant="20" id="fll-38-BCS"/>
-                            <constraint firstItem="VRu-v6-0iF" firstAttribute="leading" secondItem="pBi-Of-3aj" secondAttribute="trailing" constant="8" id="gZ3-jp-fcQ"/>
                             <constraint firstItem="VRu-v6-0iF" firstAttribute="top" secondItem="Ugd-el-6O2" secondAttribute="bottom" constant="16" id="kfw-l8-iol"/>
+                            <constraint firstItem="dfC-GY-PKj" firstAttribute="top" secondItem="TVb-oD-g5y" secondAttribute="bottom" constant="20" id="mFs-wo-P9M"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Game" id="b2K-Cw-oFN">
@@ -273,7 +264,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="actionLabel" destination="VRu-v6-0iF" id="65s-gQ-Xhl"/>
-                        <outlet property="dayNightImageView" destination="pBi-Of-3aj" id="65z-L8-jpi"/>
                         <outlet property="nextBarButtonItem" destination="PyJ-IH-bxQ" id="azC-VH-xxi"/>
                         <outlet property="playersTableView" destination="dfC-GY-PKj" id="cnF-sc-TuL"/>
                         <outlet property="promptLabel" destination="TVb-oD-g5y" id="eMi-4D-jPx"/>
@@ -631,8 +621,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Selected" width="24" height="24"/>
         <image name="avatar_default_64pt" width="64" height="64"/>
+        <image name="selected_24pt" width="24" height="24"/>
         <image name="status_dead_24pt" width="24" height="24"/>
         <image name="status_just_guarded_24pt" width="24" height="24"/>
         <image name="status_misdiagnosed_24pt" width="24" height="24"/>

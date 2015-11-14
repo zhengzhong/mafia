@@ -18,8 +18,6 @@
 		415379381AE5AD780096B906 /* MafiaDocuments.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379371AE5AD780096B906 /* MafiaDocuments.m */; };
 		4153793B1AE5AD860096B906 /* NSError+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153793A1AE5AD860096B906 /* NSError+MafiaAdditions.m */; };
 		415379411AE99E220096B906 /* MafiaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379401AE99E220096B906 /* MafiaAlertView.m */; };
-		415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83E165D6EBA00CDB5B2 /* action_in_day.png */; };
-		415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83F165D6EBA00CDB5B2 /* action_in_night.png */; };
 		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
 		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
 		417F09671671001900F44475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
@@ -102,8 +100,6 @@
 		4153793A1AE5AD860096B906 /* NSError+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MafiaAdditions.m"; sourceTree = "<group>"; };
 		4153793F1AE99E220096B906 /* MafiaAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAlertView.h; sourceTree = "<group>"; };
 		415379401AE99E220096B906 /* MafiaAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAlertView.m; sourceTree = "<group>"; };
-		415CF83E165D6EBA00CDB5B2 /* action_in_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_day.png; sourceTree = "<group>"; };
-		415CF83F165D6EBA00CDB5B2 /* action_in_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_night.png; sourceTree = "<group>"; };
 		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		417F09641671001900F44475 /* MafiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,15 +255,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		415CF83D165D6E9700CDB5B2 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				415CF83E165D6EBA00CDB5B2 /* action_in_day.png */,
-				415CF83F165D6EBA00CDB5B2 /* action_in_night.png */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
 		417F098A1671076200F44475 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				418A73BA1ACEA0BA00A652D2 /* Mafia */,
-				41857F691652D9FF00EE800D /* Resources */,
 				417F098A1671076200F44475 /* Tests */,
 				41857F451652D5A600EE800D /* Frameworks */,
 				41857F431652D5A600EE800D /* Products */,
@@ -321,14 +307,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		41857F691652D9FF00EE800D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				41857F701652DAAB00EE800D /* Images */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		41857F6A1652DA2D00EE800D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,14 +316,6 @@
 				41857F6E1652DAA200EE800D /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		41857F701652DAAB00EE800D /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				415CF83D165D6E9700CDB5B2 /* Game */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		418A102516710C08003D81C0 /* Gameplay */ = {
@@ -573,8 +543,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				418A72FA1AC9570400A652D2 /* Images.xcassets in Resources */,
-				415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */,
-				415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */,
 				41EDC4F21BF5B1B3003AAC39 /* GameSetup.storyboard in Resources */,
 				41EDC51A1BF760FA003AAC39 /* JudgeDrivenGame.storyboard in Resources */,
 				41A7F3821ACED9C70086015F /* LaunchScreen.xib in Resources */,
