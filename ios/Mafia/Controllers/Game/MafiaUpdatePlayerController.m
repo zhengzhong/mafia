@@ -6,6 +6,7 @@
 #import "MafiaUpdatePlayerController.h"
 #import "MafiaUpdatePlayerRoleController.h"
 
+#import "MafiaAssets.h"
 #import "MafiaGameplay.h"
 
 
@@ -104,7 +105,7 @@ static NSString *const kVotedImageName = @"Voted";
     self.unguardableStatusCell.status = self.unguardableStatus;
     self.votedStatusCell.status = self.votedStatus;
     // Refresh cells.
-    self.roleCell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
+    self.roleCell.imageView.image = [MafiaAssets imageOfRole:self.role];
     self.roleCell.textLabel.text = self.role.displayName;
     [self.deadStatusCell refresh];
     [self.misdiagnosedStatusCell refresh];

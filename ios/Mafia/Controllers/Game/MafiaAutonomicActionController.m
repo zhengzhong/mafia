@@ -41,7 +41,7 @@ static NSString *const kTagImageName = @"Tag";
     self.actionNameLabel.text = action.displayName;
     if (action.role != nil) {
         self.actionRoleLabel.text = action.role.displayName;
-        self.actionRoleImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", action.role.name]];
+        self.actionRoleImageView.image = [MafiaAssets imageOfRole:action.role];
     } else {
         // TODO:
         self.actionRoleLabel.text = nil;

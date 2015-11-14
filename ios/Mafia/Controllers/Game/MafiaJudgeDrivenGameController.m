@@ -49,8 +49,7 @@ static NSString *const kPlayerCellID = @"PlayerCell";
     // Player information.
     self.nameLabel.text = player.displayName;
     self.roleLabel.text = player.role.displayName;
-    NSString *roleImageName = [NSString stringWithFormat:@"role_%@.png", player.role.name];
-    self.roleImageView.image = [UIImage imageNamed:roleImageName];
+    self.roleImageView.image = [MafiaAssets imageOfRole:player.role];
 
     // Selected?
     if (isSelected) {
@@ -94,9 +93,8 @@ static NSString *const kPlayerCellID = @"PlayerCell";
     // Current role tags.
     NSUInteger tagIndex = 0;
     for (MafiaRole *taggedByRole in player.currentRoleTags) {
-        NSString *roleTagImageName = [NSString stringWithFormat:@"role_%@.png", taggedByRole.name];
         UIImageView *imageView = self.tagImageViews[tagIndex];
-        imageView.image = [UIImage imageNamed:roleTagImageName];
+        imageView.image = [MafiaAssets imageOfRole:taggedByRole];
         ++tagIndex;
     }
     for (NSUInteger i = tagIndex; i < [self.tagImageViews count]; ++i) {

@@ -5,6 +5,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class MafiaRole;
+
 
 typedef NS_ENUM(NSInteger, MafiaColorStyle) {
     MafiaColorStylePrimary,
@@ -38,6 +40,8 @@ typedef NS_ENUM(NSInteger, MafiaIcon) {
 + (UIColor *)colorOfStyle:(MafiaColorStyle)colorStyle;
 
 + (UIImage *)imageOfAvatar:(MafiaAvatar)avatar;
+
++ (UIImage *)imageOfRole:(MafiaRole *)role;
 
 + (UIImage *)imageOfIcon:(MafiaIcon)icon;
 

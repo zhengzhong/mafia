@@ -67,7 +67,7 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
         imageView.hidden = NO;
         label.hidden = NO;
         if (isRevealed) {
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", player.role.name]];
+            imageView.image = [MafiaAssets imageOfRole:player.role];
             label.text = player.role.displayName;
         } else {
             imageView.image = (player.avatarImage != nil ? player.avatarImage : [MafiaAssets imageOfAvatar:MafiaAvatarDefault]);

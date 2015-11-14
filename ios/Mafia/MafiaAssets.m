@@ -4,6 +4,7 @@
 //
 
 #import "MafiaAssets.h"
+#import "MafiaRole.h"
 
 
 @implementation MafiaAssets
@@ -54,6 +55,29 @@
     return [UIImage imageNamed:avatarImageName];
 }
 
+
++ (UIImage *)imageOfRole:(MafiaRole *)role {
+    static NSDictionary *roleImageNames = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        roleImageNames = @{
+            [MafiaRole civilian]: @"role_civilian_64pt",
+            [MafiaRole assassin]: @"role_assassin_64pt",
+            [MafiaRole guardian]: @"role_guardian_64pt",
+            [MafiaRole killer]: @"role_killer_64pt",
+            [MafiaRole detective]: @"role_policeman_64pt",
+            [MafiaRole doctor]: @"role_doctor_64pt",
+            [MafiaRole traitor]: @"role_traitor_64pt",
+            [MafiaRole undercover]: @"role_undercover_64pt",
+        };
+    });
+    NSString *roleImageName = roleImageNames[role];
+    if (roleImageName == nil) {
+        NSLog(@"Fail to find image name for role: %@", role);
+        return nil;
+    }
+    return [UIImage imageNamed:roleImageName];
+}
 
 
 + (UIImage *)imageOfIcon:(MafiaIcon)icon {

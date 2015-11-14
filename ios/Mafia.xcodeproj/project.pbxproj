@@ -24,14 +24,6 @@
 		415379411AE99E220096B906 /* MafiaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379401AE99E220096B906 /* MafiaAlertView.m */; };
 		415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83E165D6EBA00CDB5B2 /* action_in_day.png */; };
 		415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83F165D6EBA00CDB5B2 /* action_in_night.png */; };
-		415CF85B165D6EBA00CDB5B2 /* role_civilian.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF844165D6EBA00CDB5B2 /* role_civilian.png */; };
-		415CF85D165D6EBA00CDB5B2 /* role_detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF846165D6EBA00CDB5B2 /* role_detective.png */; };
-		415CF85E165D6EBA00CDB5B2 /* role_doctor.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF847165D6EBA00CDB5B2 /* role_doctor.png */; };
-		415CF85F165D6EBA00CDB5B2 /* role_guardian.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF848165D6EBA00CDB5B2 /* role_guardian.png */; };
-		415CF860165D6EBA00CDB5B2 /* role_killer.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF849165D6EBA00CDB5B2 /* role_killer.png */; };
-		415CF861165D6EBA00CDB5B2 /* role_traitor.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF84A165D6EBA00CDB5B2 /* role_traitor.png */; };
-		415CF862165D6EBA00CDB5B2 /* role_undercover.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF84B165D6EBA00CDB5B2 /* role_undercover.png */; };
-		415CF87B165D9CF400CDB5B2 /* role_assassin.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF879165D9CF400CDB5B2 /* role_assassin.png */; };
 		417D418E1AE9A89B00F0556E /* JudgeDrivenGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417D41901AE9A89B00F0556E /* JudgeDrivenGame.storyboard */; };
 		417D41981AE9AB2700F0556E /* MafiaGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417D41971AE9AB2700F0556E /* MafiaGameController.m */; };
 		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
@@ -125,14 +117,6 @@
 		415379401AE99E220096B906 /* MafiaAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAlertView.m; sourceTree = "<group>"; };
 		415CF83E165D6EBA00CDB5B2 /* action_in_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_day.png; sourceTree = "<group>"; };
 		415CF83F165D6EBA00CDB5B2 /* action_in_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_night.png; sourceTree = "<group>"; };
-		415CF844165D6EBA00CDB5B2 /* role_civilian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_civilian.png; sourceTree = "<group>"; };
-		415CF846165D6EBA00CDB5B2 /* role_detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_detective.png; sourceTree = "<group>"; };
-		415CF847165D6EBA00CDB5B2 /* role_doctor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_doctor.png; sourceTree = "<group>"; };
-		415CF848165D6EBA00CDB5B2 /* role_guardian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_guardian.png; sourceTree = "<group>"; };
-		415CF849165D6EBA00CDB5B2 /* role_killer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_killer.png; sourceTree = "<group>"; };
-		415CF84A165D6EBA00CDB5B2 /* role_traitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_traitor.png; sourceTree = "<group>"; };
-		415CF84B165D6EBA00CDB5B2 /* role_undercover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_undercover.png; sourceTree = "<group>"; };
-		415CF879165D9CF400CDB5B2 /* role_assassin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = role_assassin.png; sourceTree = "<group>"; };
 		417D418F1AE9A89B00F0556E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/JudgeDrivenGame.storyboard; sourceTree = "<group>"; };
 		417D41961AE9AB2700F0556E /* MafiaGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameController.h; sourceTree = "<group>"; };
 		417D41971AE9AB2700F0556E /* MafiaGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameController.m; sourceTree = "<group>"; };
@@ -211,6 +195,7 @@
 		41EDC5031BF5C71B003AAC39 /* MafiaConfigureRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaConfigureRoleController.m; sourceTree = "<group>"; };
 		41EDC5041BF5C71B003AAC39 /* MafiaLoadGameSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaLoadGameSetupController.h; sourceTree = "<group>"; };
 		41EDC5051BF5C71B003AAC39 /* MafiaLoadGameSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaLoadGameSetupController.m; sourceTree = "<group>"; };
+		41EDC50A1BF754FC003AAC39 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -310,14 +295,6 @@
 			children = (
 				415CF83E165D6EBA00CDB5B2 /* action_in_day.png */,
 				415CF83F165D6EBA00CDB5B2 /* action_in_night.png */,
-				415CF879165D9CF400CDB5B2 /* role_assassin.png */,
-				415CF844165D6EBA00CDB5B2 /* role_civilian.png */,
-				415CF846165D6EBA00CDB5B2 /* role_detective.png */,
-				415CF847165D6EBA00CDB5B2 /* role_doctor.png */,
-				415CF848165D6EBA00CDB5B2 /* role_guardian.png */,
-				415CF849165D6EBA00CDB5B2 /* role_killer.png */,
-				415CF84A165D6EBA00CDB5B2 /* role_traitor.png */,
-				415CF84B165D6EBA00CDB5B2 /* role_undercover.png */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -349,6 +326,7 @@
 				41857F451652D5A600EE800D /* Frameworks */,
 				41857F431652D5A600EE800D /* Products */,
 				1E08E00C85CF99A7425F4566 /* Pods */,
+				41EDC50A1BF754FC003AAC39 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -606,16 +584,8 @@
 				41EDC4E91BF496E7003AAC39 /* Game.storyboard in Resources */,
 				41D39A741AD92D6F00C13084 /* AutonomicGame.storyboard in Resources */,
 				415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */,
-				415CF85B165D6EBA00CDB5B2 /* role_civilian.png in Resources */,
-				415CF85D165D6EBA00CDB5B2 /* role_detective.png in Resources */,
-				415CF85E165D6EBA00CDB5B2 /* role_doctor.png in Resources */,
-				415CF85F165D6EBA00CDB5B2 /* role_guardian.png in Resources */,
-				415CF860165D6EBA00CDB5B2 /* role_killer.png in Resources */,
 				41EDC4F21BF5B1B3003AAC39 /* GameSetup.storyboard in Resources */,
-				415CF861165D6EBA00CDB5B2 /* role_traitor.png in Resources */,
-				415CF862165D6EBA00CDB5B2 /* role_undercover.png in Resources */,
 				41A7F3821ACED9C70086015F /* LaunchScreen.xib in Resources */,
-				415CF87B165D9CF400CDB5B2 /* role_assassin.png in Resources */,
 				41EDC4E11BF494EC003AAC39 /* About.storyboard in Resources */,
 				4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */,
 				417D418E1AE9A89B00F0556E /* JudgeDrivenGame.storyboard in Resources */,

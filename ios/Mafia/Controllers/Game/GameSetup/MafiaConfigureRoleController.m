@@ -5,6 +5,7 @@
 
 #import "MafiaConfigureRoleController.h"
 
+#import "MafiaAssets.h"
 #import "MafiaGameplay.h"
 
 
@@ -57,7 +58,7 @@ static NSString *const kCellID = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID forIndexPath:indexPath];
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"role_%@.png", self.role.name]];
+    cell.imageView.image = [MafiaAssets imageOfRole:self.role];
     NSInteger numberOfActorsForCell = kMinNumberOfActors + indexPath.row;
     cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", self.role.displayName, @(numberOfActorsForCell)];
     if (numberOfActorsForCell == self.numberOfActors) {
