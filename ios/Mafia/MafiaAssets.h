@@ -54,6 +54,14 @@ typedef NS_ENUM(NSInteger, MafiaIcon) {
 
 + (UIImage *)imageOfStatus:(MafiaStatus)status;
 
++ (UIImage *)imageOfSelected;
+
++ (UIImage *)imageOfUnselected;
+
++ (UIImage *)imageOfUnselectable;
+
++ (UIImage *)imageOfTag;
+
 + (UIImage *)imageOfIcon:(MafiaIcon)icon;
 
 + (void)imageView:(UIImageView *)imageView setIcon:(MafiaIcon)icon colorStyle:(MafiaColorStyle)colorStyle;

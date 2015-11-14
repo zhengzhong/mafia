@@ -12,13 +12,6 @@
 #import "UIView+MafiaAdditions.h"
 
 
-static NSString *const kUnselectableImageName = @"Unselectable";
-static NSString *const kSelectedImageName = @"Selected";
-static NSString *const kUnselectedImageName = @"Unselected";
-
-static NSString *const kTagImageName = @"Tag";
-
-
 @implementation MafiaAutonomicActionHeaderCell
 
 - (void)setupWithAction:(MafiaAction *)action {
@@ -77,14 +70,14 @@ static NSString *const kTagImageName = @"Tag";
     self.nameLabel.text = player.displayName;
     self.nameLabel.textColor = (isSelectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
     if (!isSelectable) {
-        self.checkImageView.image = [UIImage imageNamed:kUnselectableImageName];
+        self.checkImageView.image = [MafiaAssets imageOfUnselectable];
     } else if (isSelected) {
-        self.checkImageView.image = [UIImage imageNamed:kSelectedImageName];
+        self.checkImageView.image = [MafiaAssets imageOfSelected];
     } else {
-        self.checkImageView.image = [UIImage imageNamed:kUnselectedImageName];
+        self.checkImageView.image = [MafiaAssets imageOfUnselected];
     }
     if (wasSelected) {
-        self.tagImageView.image = [UIImage imageNamed:kTagImageName];
+        self.tagImageView.image = [MafiaAssets imageOfTag];
     } else {
         self.tagImageView.image = nil;
     }

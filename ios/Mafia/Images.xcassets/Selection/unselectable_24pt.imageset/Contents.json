@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Unselectable.png"
+      "filename" : "unselectable_24pt.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Unselectable@2x.png"
+      "filename" : "unselectable_24pt_2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Unselectable@3x.png"
+      "filename" : "unselectable_24pt_3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

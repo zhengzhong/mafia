@@ -101,6 +101,26 @@
 }
 
 
++ (UIImage *)imageOfSelected {
+    return [UIImage imageNamed:@"selected_24pt"];
+}
+
+
++ (UIImage *)imageOfUnselected {
+    return [UIImage imageNamed:@"unselected_24pt"];
+}
+
+
++ (UIImage *)imageOfUnselectable {
+    return [UIImage imageNamed:@"unselectable_24pt"];
+}
+
+
++ (UIImage *)imageOfTag {
+    return [UIImage imageNamed:@"tag_24pt"];
+}
+
+
 + (UIImage *)imageOfIcon:(MafiaIcon)icon {
     static NSDictionary *iconNames = nil;
     static dispatch_once_t onceToken;

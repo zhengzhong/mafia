@@ -15,19 +15,7 @@
 #import "UIView+MafiaAdditions.h"
 
 
-static NSString *const kSelectedImageName = @"Selected";
-
-static NSString *const kDeadImageName = @"Dead";
-static NSString *const kJustGuardedImageName = @"JustGuarded";
-static NSString *const kMisdiagnosedImageName = @"Misdiagnosed";
-static NSString *const kUnguardableImageName = @"Unguardable";
-static NSString *const kVotedImageName = @"Voted";
-
-static NSString *const kPlayerCellID = @"PlayerCell";
-
-
 @implementation MafiaJudgeDrivenGamePlayerCell
-
 
 - (void)setupWithPlayer:(MafiaPlayer *)player isSelected:(BOOL)isSelected {
     // Avatar image.
@@ -49,9 +37,9 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 
     // Selected?
     if (isSelected) {
-        self.checkImageView.image = [UIImage imageNamed:kSelectedImageName];
+        self.checkImageView.image = [MafiaAssets imageOfSelected];
     } else {
-        self.checkImageView.image = nil;
+        self.checkImageView.image = [MafiaAssets imageOfUnselected];
     }
 
     // Player status.
@@ -91,6 +79,8 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 
 static NSString *const kStoryboard = @"JudgeDrivenGame";
 static NSString *const kControllerID = @"JudgeDrivenGame";
+
+static NSString *const kPlayerCellID = @"PlayerCell";
 
 
 @implementation MafiaJudgeDrivenGameController
