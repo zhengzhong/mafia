@@ -19,6 +19,10 @@
 #import "MafiaGameplay.h"
 
 
+static NSString *const kStoryboard = @"GameSetup";
+static NSString *const kControllerID = @"GameSetup";
+
+
 static NSString *const kSegueManagePlayers = @"ManagePlayers";
 static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKillers";
 static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
@@ -34,6 +38,15 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 
 @implementation MafiaGameSetupController
+
+
+#pragma mark - Storyboard
+
+
++ (instancetype)controller {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboard bundle:nil];
+    return [storyboard instantiateViewControllerWithIdentifier:kControllerID];
+}
 
 
 #pragma mark - Lifecycle

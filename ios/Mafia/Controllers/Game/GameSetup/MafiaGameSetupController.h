@@ -40,4 +40,6 @@
 
 - (IBAction)saveButtonTapped:(id)sender;
 
++ (instancetype)controller;
+
 @end

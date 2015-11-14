@@ -10,8 +10,11 @@
 #import "UIImage+MafiaAdditions.h"
 
 #import "MafiaAssets.h"
-
 #import "MafiaGameplay.h"
+
+
+static NSString *const kStoryboard = @"AutonomicGame";
+static NSString *const kControllerID = @"AutonomicGame";
 
 
 static NSString *const kSegueStartAction = @"StartAction";
@@ -66,6 +69,15 @@ static NSString *const kActionCellID = @"ActionCell";
 
 
 @implementation MafiaAutonomicGameController
+
+
+#pragma mark - Storyboard
+
+
++ (instancetype)controller {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboard bundle:nil];
+    return [storyboard instantiateViewControllerWithIdentifier:kControllerID];
+}
 
 
 #pragma mark - Public Methods

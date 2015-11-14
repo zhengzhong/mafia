@@ -95,7 +95,20 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 // ------------------------------------------------------------------------------------------------
 
 
+static NSString *const kStoryboard = @"JudgeDrivenGame";
+static NSString *const kControllerID = @"JudgeDrivenGame";
+
+
 @implementation MafiaJudgeDrivenGameController
+
+
+#pragma mark - Storyboard
+
+
++ (instancetype)controller {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboard bundle:nil];
+    return [storyboard instantiateViewControllerWithIdentifier:kControllerID];
+}
 
 
 #pragma mark - Lifecycle

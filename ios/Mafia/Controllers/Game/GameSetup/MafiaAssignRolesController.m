@@ -6,8 +6,7 @@
 #import "MafiaAssignRolesController.h"
 #import "MafiaAutonomicGameController.h"
 #import "MafiaJudgeDrivenGameController.h"
-#import "MafiaJudgeDrivenGameStoryboards.h"
-#import "MafiaStoryboards.h"
+#import "MafiaAutonomicGameController.h"
 
 #import "MafiaAssets.h"
 
@@ -142,12 +141,12 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
     if ([self.game isReadyToStart]) {
         if (!self.game.gameSetup.isAutonomic) {
             // Judge-driven game.
-            MafiaJudgeDrivenGameController *controller = [MafiaJudgeDrivenGameStoryboards judgeDrivenGameController];
+            MafiaJudgeDrivenGameController *controller = [MafiaJudgeDrivenGameController controller];
             [controller startGame:self.game];
             [self.navigationController pushViewController:controller animated:YES];
         } else {
             // Autonomic game.
-            MafiaAutonomicGameController *controller = [MafiaStoryboards instantiateAutonomicGameController];
+            MafiaAutonomicGameController *controller = [MafiaAutonomicGameController controller];
             [controller startGame:self.game];
             [self.navigationController pushViewController:controller animated:YES];
         }

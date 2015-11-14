@@ -27,4 +27,6 @@
 
 - (IBAction)resetButtonTapped:(id)sender;
 
++ (instancetype)controller;
+
 @end

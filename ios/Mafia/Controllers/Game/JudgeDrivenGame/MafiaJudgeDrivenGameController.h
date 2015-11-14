@@ -50,4 +50,6 @@
 
 - (IBAction)resetButtonTapped:(id)sender;
 
-@end  // MafiaJudgeDrivenGameController
++ (instancetype)controller;
+
+@end
