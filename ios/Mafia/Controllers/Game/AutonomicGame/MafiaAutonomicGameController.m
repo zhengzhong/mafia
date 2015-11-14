@@ -80,6 +80,18 @@ static NSString *const kActionCellID = @"ActionCell";
 }
 
 
+#pragma mark - Lifecycle
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Enable auto-sizing table view cell.
+    self.tableView.estimatedRowHeight = 65;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+
 #pragma mark - Public Methods
 
 

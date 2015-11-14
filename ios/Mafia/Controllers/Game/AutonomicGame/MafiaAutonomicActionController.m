@@ -104,7 +104,7 @@ static NSString *const kTagImageName = @"Tag";
 @implementation MafiaAutonomicActionController
 
 
-#pragma mark - Public Methods
+#pragma mark - Public
 
 
 - (void)setupWithGame:(MafiaGame *)game {
@@ -119,8 +119,13 @@ static NSString *const kTagImageName = @"Tag";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Player must complete the action. There's no way back.
     self.navigationItem.hidesBackButton = YES;
+
+    // Enable auto-sizing table view cell.
+    self.tableView.estimatedRowHeight = 65;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 
@@ -180,16 +185,6 @@ static NSString *const kTagImageName = @"Tag";
 
 
 #pragma mark - UITableViewDelegate
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: use prototype cells to calculate height! Do NOT repeat what's declared in storyboard!
-    if (indexPath.section == 0) {
-        return 132;
-    } else {
-        return 65;
-    }
-}
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
