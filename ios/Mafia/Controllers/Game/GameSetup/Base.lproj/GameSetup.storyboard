@@ -405,6 +405,9 @@
                                                 <constraint firstItem="AG3-fU-BgJ" firstAttribute="leading" secondItem="oQ6-kX-geS" secondAttribute="trailing" constant="15" id="rqR-hc-9ju"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Hef-Te-4C9" kind="show" identifier="ConfigureNumberOfDetectives" id="PNK-zE-uYD"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="O1W-2m-gHj">
                                         <rect key="frame" x="0.0" y="356" width="600" height="44"/>
@@ -889,4 +892,7 @@
         <image name="role_traitor_64pt" width="64" height="64"/>
         <image name="role_undercover_64pt" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="PNK-zE-uYD"/>
+    </inferredMetricsTieBreakers>
 </document>
