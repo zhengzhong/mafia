@@ -12,6 +12,7 @@
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "UIView+MafiaAdditions.h"
 
 
 static NSString *const kSelectedImageName = @"Selected";
@@ -23,11 +24,6 @@ static NSString *const kUnguardableImageName = @"Unguardable";
 static NSString *const kVotedImageName = @"Voted";
 
 static NSString *const kPlayerCellID = @"PlayerCell";
-
-
-// ------------------------------------------------------------------------------------------------
-// MafiaJudgeDrivenGamePlayerCell
-// ------------------------------------------------------------------------------------------------
 
 
 @implementation MafiaJudgeDrivenGamePlayerCell
@@ -43,13 +39,13 @@ static NSString *const kPlayerCellID = @"PlayerCell";
         avatarImage = [avatarImage mafia_grayscaledImage];
     }
     self.avatarImageView.image = avatarImage;
-    self.avatarImageView.layer.cornerRadius = 5;
-    self.avatarImageView.clipsToBounds = YES;
+    [self.avatarImageView mafia_makeRoundCornersWithBorder:NO];
 
-    // Player information.
+    // Player information: name and role.
     self.nameLabel.text = player.displayName;
     self.roleLabel.text = player.role.displayName;
     self.roleImageView.image = [MafiaAssets imageOfRole:player.role];
+    [self.roleImageView mafia_makeRoundCornersWithBorder:NO];
 
     // Selected?
     if (isSelected) {
@@ -90,8 +86,6 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 @end
 
 
-// ------------------------------------------------------------------------------------------------
-// MafiaJudgeDrivenGameController
 // ------------------------------------------------------------------------------------------------
 
 

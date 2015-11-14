@@ -8,10 +8,12 @@
 #import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
+#import "UIView+MafiaAdditions.h"
 
 
 static const CGFloat kAvatarImageDisplayWidth = 160;
 static const CGFloat kAvatarImageWidth = 48;
+
 
 @interface MafiaAddPersonController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -23,8 +25,8 @@ static const CGFloat kAvatarImageWidth = 48;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.playerAvatarImageView.layer.cornerRadius = 20;
-    self.playerAvatarImageView.clipsToBounds = YES;
+    [self.playerAvatarImageView mafia_makeRoundCornersWithBorder:NO];
+    [self.playerNameField mafia_makeUnderline];
 }
 
 

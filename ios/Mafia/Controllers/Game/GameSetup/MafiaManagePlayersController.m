@@ -7,8 +7,8 @@
 #import "MafiaAddPersonController.h"
 
 #import "MafiaAssets.h"
-
 #import "MafiaGameplay.h"
+#import "UIView+MafiaAdditions.h"
 
 
 static NSString *const kPlayerCellID = @"PlayerCell";
@@ -17,9 +17,12 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 @implementation MafiaManagePlayersPlayerCell
 
 - (void)setupWithPerson:(MafiaPerson *)person {
-    self.avatarImageView.image = (person.avatarImage != nil ? person.avatarImage : [MafiaAssets imageOfAvatar:MafiaAvatarDefault]);
-    self.avatarImageView.layer.cornerRadius = 5;
-    self.avatarImageView.clipsToBounds = YES;
+    if (person.avatarImage != nil) {
+        self.avatarImageView.image = person.avatarImage;
+    } else {
+        self.avatarImageView.image = [MafiaAssets imageOfAvatar:MafiaAvatarDefault];
+    }
+    [self.avatarImageView mafia_makeRoundCornersWithBorder:NO];
     self.nameLabel.text = person.name;
 }
 

@@ -11,20 +11,7 @@
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
-
-
-static NSString *const kStoryboard = @"AutonomicGame";
-static NSString *const kControllerID = @"AutonomicGame";
-
-
-static NSString *const kSegueStartAction = @"StartAction";
-
-static NSString *const kActionCellID = @"ActionCell";
-
-
-// ------------------------------------------------------------------------------------------------
-// MafiaAutonomicGameActionCell
-// ------------------------------------------------------------------------------------------------
+#import "UIView+MafiaAdditions.h"
 
 
 @implementation MafiaAutonomicGameActionCell
@@ -43,8 +30,8 @@ static NSString *const kActionCellID = @"ActionCell";
         // Action does not have a player.
         self.actionImageView.image = [MafiaAssets imageOfAvatar:MafiaAvatarInfo];
     }
-    self.actionImageView.layer.cornerRadius = 5;
-    self.actionImageView.clipsToBounds = YES;
+    [self.actionImageView mafia_makeRoundCornersWithBorder:NO];
+
     self.actionNameLabel.text = action.displayName;
     if (isCurrent) {
         self.actionNameLabel.textColor = [UIColor blackColor];
@@ -59,8 +46,15 @@ static NSString *const kActionCellID = @"ActionCell";
 
 
 // ------------------------------------------------------------------------------------------------
-// MafiaAutonomicGameController
-// ------------------------------------------------------------------------------------------------
+
+
+static NSString *const kStoryboard = @"AutonomicGame";
+static NSString *const kControllerID = @"AutonomicGame";
+
+
+static NSString *const kSegueStartAction = @"StartAction";
+
+static NSString *const kActionCellID = @"ActionCell";
 
 
 @interface MafiaAutonomicGameController () <MafiaAuthnomicActionControllerDelegate>

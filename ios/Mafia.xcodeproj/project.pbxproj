@@ -64,6 +64,7 @@
 		41EDC52F1BF788BD003AAC39 /* AutonomicGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EDC5311BF788BD003AAC39 /* AutonomicGame.storyboard */; };
 		41EDC5341BF78936003AAC39 /* MafiaAutonomicActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5331BF78936003AAC39 /* MafiaAutonomicActionController.m */; };
 		41EDC5371BF79515003AAC39 /* MafiaRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5361BF79515003AAC39 /* MafiaRootController.m */; };
+		41EDC53E1BF7A856003AAC39 /* UIView+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC53D1BF7A856003AAC39 /* UIView+MafiaAdditions.m */; };
 		4823281113C325BD01987A33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +180,8 @@
 		41EDC5331BF78936003AAC39 /* MafiaAutonomicActionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAutonomicActionController.m; sourceTree = "<group>"; };
 		41EDC5351BF79515003AAC39 /* MafiaRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaRootController.h; sourceTree = "<group>"; };
 		41EDC5361BF79515003AAC39 /* MafiaRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaRootController.m; sourceTree = "<group>"; };
+		41EDC53C1BF7A856003AAC39 /* UIView+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MafiaAdditions.h"; sourceTree = "<group>"; };
+		41EDC53D1BF7A856003AAC39 /* UIView+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MafiaAdditions.m"; sourceTree = "<group>"; };
 		6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -371,6 +374,7 @@
 				41A7F37E1ACED9C70086015F /* Main.storyboard */,
 				41A7F3571ACEC8900086015F /* Controllers */,
 				41A7F3581ACEC8B10086015F /* Gameplay */,
+				41EDC5381BF7A802003AAC39 /* Views */,
 				41857F6A1652DA2D00EE800D /* Supporting Files */,
 			);
 			path = Mafia;
@@ -466,6 +470,15 @@
 				41EDC52C1BF788AB003AAC39 /* MafiaAutonomicGameController.m */,
 			);
 			path = AutonomicGame;
+			sourceTree = "<group>";
+		};
+		41EDC5381BF7A802003AAC39 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				41EDC53C1BF7A856003AAC39 /* UIView+MafiaAdditions.h */,
+				41EDC53D1BF7A856003AAC39 /* UIView+MafiaAdditions.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -675,6 +688,7 @@
 				415379321ADDA6100096B906 /* UIImage+MafiaAdditions.m in Sources */,
 				41EDC5061BF5C71B003AAC39 /* MafiaAddPersonController.m in Sources */,
 				41EDC5151BF758C0003AAC39 /* MafiaUpdatePlayerController.m in Sources */,
+				41EDC53E1BF7A856003AAC39 /* UIView+MafiaAdditions.m in Sources */,
 				415379351AE041C70096B906 /* MafiaActionSheet.m in Sources */,
 				415379291ADC34F10096B906 /* TSMessage+MafiaAdditions.m in Sources */,
 				41A7F3761ACEC8DA0086015F /* MafiaSettleTagsAction.m in Sources */,

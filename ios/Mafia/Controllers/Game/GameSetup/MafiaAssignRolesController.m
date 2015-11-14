@@ -9,8 +9,8 @@
 #import "MafiaAutonomicGameController.h"
 
 #import "MafiaAssets.h"
-
 #import "MafiaGameplay.h"
+#import "UIView+MafiaAdditions.h"
 
 
 static NSString *const kSegueStartJudgeDrivenGame = @"StartJudgeDrivenGame";
@@ -73,8 +73,7 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
             imageView.image = (player.avatarImage != nil ? player.avatarImage : [MafiaAssets imageOfAvatar:MafiaAvatarDefault]);
             label.text = player.displayName;
         }
-        imageView.layer.cornerRadius = 5;
-        imageView.clipsToBounds = YES;
+        [imageView mafia_makeRoundCornersWithBorder:NO];
     } else {
         button.enabled = NO;
         button.hidden = YES;

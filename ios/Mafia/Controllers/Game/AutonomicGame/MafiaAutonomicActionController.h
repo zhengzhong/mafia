@@ -13,11 +13,6 @@
 @class MafiaRole;
 
 
-// ------------------------------------------------------------------------------------------------
-// Custom Cells
-// ------------------------------------------------------------------------------------------------
-
-
 @interface MafiaAutonomicActionHeaderCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *actorImageView;
@@ -28,7 +23,7 @@
 
 - (void)setupWithAction:(MafiaAction *)action;
 
-@end  // MafiaAutonomicActionHeaderCell
+@end
 
 
 @interface MafiaTargetPlayerCell : UITableViewCell
@@ -44,11 +39,9 @@
                    isSelected:(BOOL)isSelected
                   wasSelected:(BOOL)wasSelected;
 
-@end  // MafiaTargetPlayerCell
+@end
 
 
-// ------------------------------------------------------------------------------------------------
-// MafiaAutonomicActionController
 // ------------------------------------------------------------------------------------------------
 
 
@@ -76,4 +69,4 @@
 
 - (IBAction)doneButtonTapped:(id)sender;
 
-@end  // MafiaAutonomicActionController
+@end

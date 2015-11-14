@@ -8,12 +8,9 @@
 #import "UIImage+MafiaAdditions.h"
 
 #import "MafiaAssets.h"
-
 #import "MafiaGameplay.h"
+#import "UIView+MafiaAdditions.h"
 
-
-static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCell";
-static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
 static NSString *const kUnselectableImageName = @"Unselectable";
 static NSString *const kSelectedImageName = @"Selected";
@@ -22,23 +19,23 @@ static NSString *const kUnselectedImageName = @"Unselected";
 static NSString *const kTagImageName = @"Tag";
 
 
-// ------------------------------------------------------------------------------------------------
-// Custom Cells
-// ------------------------------------------------------------------------------------------------
-
-
 @implementation MafiaAutonomicActionHeaderCell
 
 - (void)setupWithAction:(MafiaAction *)action {
     if (action.player != nil) {
         MafiaPerson *person = action.player.person;
-        self.actorImageView.image = (person.avatarImage != nil ? person.avatarImage : [MafiaAssets imageOfAvatar:MafiaAvatarDefault]);
+        if (person.avatarImage != nil) {
+            self.actorImageView.image = person.avatarImage;
+        } else {
+            self.actorImageView.image = [MafiaAssets imageOfAvatar:MafiaAvatarDefault];
+        }
     } else {
         self.actorImageView.image = [MafiaAssets imageOfAvatar:MafiaAvatarInfo];
     }
-    self.actorImageView.layer.cornerRadius = 5;
-    self.actorImageView.clipsToBounds = YES;
+    [self.actorImageView mafia_makeRoundCornersWithBorder:NO];
+
     self.actionNameLabel.text = action.displayName;
+
     if (action.role != nil) {
         self.actionRoleLabel.text = action.role.displayName;
         self.actionRoleImageView.image = [MafiaAssets imageOfRole:action.role];
@@ -47,11 +44,11 @@ static NSString *const kTagImageName = @"Tag";
         self.actionRoleLabel.text = nil;
         self.actionRoleImageView.image = nil;
     }
+    [self.actionRoleImageView mafia_makeRoundCornersWithBorder:NO];
+
     MafiaNumberRange *numberOfChoices = [action numberOfChoices];
     if (numberOfChoices.maxValue > 0) {
-        self.actionPromptLabel.text = [NSString stringWithFormat:
-            NSLocalizedString(@"Select %@ player(s)", nil),
-            [numberOfChoices string]];
+        self.actionPromptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@ player(s)", nil), [numberOfChoices string]];
     } else {
         self.actionPromptLabel.text = NSLocalizedString(@"Click OK to continue", nil);
     }
@@ -75,8 +72,8 @@ static NSString *const kTagImageName = @"Tag";
         avatarImage = [avatarImage mafia_grayscaledImage];
     }
     self.avatarImageView.image = avatarImage;
-    self.avatarImageView.layer.cornerRadius = 5;
-    self.avatarImageView.clipsToBounds = YES;
+    [self.avatarImageView mafia_makeRoundCornersWithBorder:NO];
+
     self.nameLabel.text = player.displayName;
     self.nameLabel.textColor = (isSelectable ? [UIColor blackColor] : [UIColor lightGrayColor]);
     if (!isSelectable) {
@@ -97,8 +94,10 @@ static NSString *const kTagImageName = @"Tag";
 
 
 // ------------------------------------------------------------------------------------------------
-// MafiaAutonomicActionController
-// ------------------------------------------------------------------------------------------------
+
+
+static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCell";
+static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
 
 @implementation MafiaAutonomicActionController
