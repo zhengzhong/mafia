@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YO2-1c-AbH">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -8,17 +8,17 @@
         <!--Gameplay-->
         <scene sceneID="TaS-mp-fhu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="uLx-O2-8iE" customClass="MafiaGameplayWebPageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameplayWebPageController" automaticallyAdjustsScrollViewInsets="NO" id="uLx-O2-8iE" customClass="MafiaGameplayWebPageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c25-cM-zbR"/>
                         <viewControllerLayoutGuide type="bottom" id="tfn-iH-g0E"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7aa-l4-uYN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3PB-am-y9K">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="uLx-O2-8iE" id="OyP-Es-fkl"/>
@@ -55,65 +55,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyi-0H-dzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1583" y="857"/>
+            <point key="canvasLocation" x="2278" y="893"/>
         </scene>
-        <!--About-->
-        <scene sceneID="Fd6-78-qSx">
+        <!--Navigation Controller-->
+        <scene sceneID="r7Q-IE-qV1">
             <objects>
-                <viewController id="7aS-ih-nRB" customClass="MafiaAboutController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="caP-RX-6Rb"/>
-                        <viewControllerLayoutGuide type="bottom" id="WB5-4Q-xCb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="15r-5x-W5D">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M88-k3-t1j">
-                                <rect key="frame" x="20" y="86" width="560" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="UDC-B1-thJ"/>
-                                </constraints>
-                                <state key="normal" title="Gameplay">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="uLx-O2-8iE" kind="show" id="3aj-Fu-tPB"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="M88-k3-t1j" secondAttribute="trailing" constant="20" id="Y7e-E4-3sS"/>
-                            <constraint firstItem="M88-k3-t1j" firstAttribute="top" secondItem="caP-RX-6Rb" secondAttribute="bottom" constant="22" id="YqN-x4-brA"/>
-                            <constraint firstItem="M88-k3-t1j" firstAttribute="leading" secondItem="15r-5x-W5D" secondAttribute="leading" constant="20" id="nvW-aL-UOT"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="About" id="Fkh-SU-wcu"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mk0-av-Y09" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="836" y="857"/>
-        </scene>
-        <!--About-->
-        <scene sceneID="OIG-hp-2Hp">
-            <objects>
-                <navigationController storyboardIdentifier="AboutNavigationController" title="About" automaticallyAdjustsScrollViewInsets="NO" id="6Ho-mU-8Xd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="About" id="yha-eo-prU"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YO2-1c-AbH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wqB-WJ-HAs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CFe-L6-dZs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="7aS-ih-nRB" kind="relationship" relationship="rootViewController" id="L9f-83-92H"/>
+                        <segue destination="uLx-O2-8iE" kind="relationship" relationship="rootViewController" id="RUq-py-4vg"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vMX-kR-b9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yex-yV-myB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="80.625" y="857.74647887323943"/>
+            <point key="canvasLocation" x="1466" y="893"/>
         </scene>
     </scenes>
 </document>

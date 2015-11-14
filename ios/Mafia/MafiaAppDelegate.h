@@ -5,7 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MafiaAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface MafiaAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

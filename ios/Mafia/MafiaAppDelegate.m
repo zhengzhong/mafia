@@ -5,30 +5,11 @@
 
 #import "MafiaAppDelegate.h"
 
-#import "MafiaGameStoryboard.h"
-#import "MafiaAboutStoryboard.h"
-
-
-@interface MafiaAppDelegate ()
-
-@property (strong, nonatomic) UITabBarController *tabBarController;  // The (typed) root controller.
-
-@end
-
 
 @implementation MafiaAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.tabBarController = (UITabBarController *)self.window.rootViewController;
-    self.tabBarController.viewControllers = @[
-        [MafiaGameStoryboard rootNavigationController],
-        [MafiaAboutStoryboard rootNavigationController],
-    ];
-    self.tabBarController.selectedViewController = self.tabBarController.viewControllers[0];
-    self.tabBarController.delegate = self;
-    
-    // Customize appearance globally.
     [self mafia_customizeApplicationAppearance];
     return YES;
 }
@@ -61,17 +42,6 @@
 }
 
 
-#pragma mark - UITabBarControllerDelegate
-
-
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    // If user tapped a tab bar button whose associated view controller is the same as the
-    // currently selected one, do nothing. When the selected view controller is a navigation
-    // controller, this prevents it from popping to root view controller.
-    return (tabBarController.selectedViewController != viewController);
-}
-
-
 #pragma mark - Private
 
 
@@ -82,8 +52,6 @@
     }];
     // TODO: [[UITabBar appearance] setTintColor:...];
 }
-
-
 
 
 @end

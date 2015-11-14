@@ -6,10 +6,24 @@
 #import "MafiaGameplayWebPageController.h"
 
 
+static NSString *const kStoryboard = @"About";
+static NSString *const kControllerID = @"GameplayWebPageController";
+
+
 static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/disclaimer/";  // TODO: change URL.
 
 
 @implementation MafiaGameplayWebPageController
+
+
+#pragma mark - Storyboard
+
+
++ (instancetype)controller {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboard bundle:nil];
+    MafiaGameplayWebPageController *controller = [storyboard instantiateViewControllerWithIdentifier:kControllerID];
+    return controller;
+}
 
 
 #pragma mark - Lifecycle

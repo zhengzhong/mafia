@@ -13,4 +13,6 @@
 
 - (IBAction)refreshButtonTapped:(id)sender;
 
++ (instancetype)controller;
+
 @end

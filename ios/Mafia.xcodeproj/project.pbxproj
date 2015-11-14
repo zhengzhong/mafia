@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		073767AB4D5E7B84ED0D12CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
 		414AB5291AD4523A001B913C /* MafiaGameplayWebPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */; };
-		414AB52F1AD47A99001B913C /* MafiaAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB52E1AD47A99001B913C /* MafiaAboutController.m */; };
 		4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4153791F1ADAD31F0096B906 /* Localizable.strings */; };
 		415379291ADC34F10096B906 /* TSMessage+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379281ADC34F10096B906 /* TSMessage+MafiaAdditions.m */; };
 		4153792C1ADC35230096B906 /* UIColor+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792B1ADC35230096B906 /* UIColor+MafiaAdditions.m */; };
@@ -21,7 +20,6 @@
 		415379411AE99E220096B906 /* MafiaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379401AE99E220096B906 /* MafiaAlertView.m */; };
 		415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83E165D6EBA00CDB5B2 /* action_in_day.png */; };
 		415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */ = {isa = PBXBuildFile; fileRef = 415CF83F165D6EBA00CDB5B2 /* action_in_night.png */; };
-		417D41981AE9AB2700F0556E /* MafiaGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417D41971AE9AB2700F0556E /* MafiaGameController.m */; };
 		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
 		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
 		417F09671671001900F44475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
@@ -49,10 +47,7 @@
 		41A7F3831ACED9C70086015F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A7F37E1ACED9C70086015F /* Main.storyboard */; };
 		41A7F3841ACED9C70086015F /* MafiaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A7F3811ACED9C70086015F /* MafiaAppDelegate.m */; };
 		41D39A6E1AD86BA300C13084 /* MafiaRoleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D39A6D1AD86BA300C13084 /* MafiaRoleAction.m */; };
-		41EDC4E01BF4934C003AAC39 /* MafiaAboutStoryboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC4DE1BF4934C003AAC39 /* MafiaAboutStoryboard.m */; };
 		41EDC4E11BF494EC003AAC39 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EDC4E31BF494EC003AAC39 /* About.storyboard */; };
-		41EDC4E61BF495E5003AAC39 /* MafiaGameStoryboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC4E51BF495E5003AAC39 /* MafiaGameStoryboard.m */; };
-		41EDC4E91BF496E7003AAC39 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EDC4EB1BF496E7003AAC39 /* Game.storyboard */; };
 		41EDC4F21BF5B1B3003AAC39 /* GameSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EDC4F41BF5B1B3003AAC39 /* GameSetup.storyboard */; };
 		41EDC4F71BF5B31C003AAC39 /* MafiaGameSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC4F61BF5B31C003AAC39 /* MafiaGameSetupController.m */; };
 		41EDC4FA1BF5B3B8003AAC39 /* MafiaAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC4F91BF5B3B8003AAC39 /* MafiaAssets.m */; };
@@ -68,6 +63,7 @@
 		41EDC52E1BF788AB003AAC39 /* MafiaAutonomicGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC52C1BF788AB003AAC39 /* MafiaAutonomicGameController.m */; };
 		41EDC52F1BF788BD003AAC39 /* AutonomicGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EDC5311BF788BD003AAC39 /* AutonomicGame.storyboard */; };
 		41EDC5341BF78936003AAC39 /* MafiaAutonomicActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5331BF78936003AAC39 /* MafiaAutonomicActionController.m */; };
+		41EDC5371BF79515003AAC39 /* MafiaRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5361BF79515003AAC39 /* MafiaRootController.m */; };
 		4823281113C325BD01987A33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -85,8 +81,6 @@
 		3DD82BAEF1DEADBA2969E45E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		414AB5271AD4523A001B913C /* MafiaGameplayWebPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameplayWebPageController.h; sourceTree = "<group>"; };
 		414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameplayWebPageController.m; sourceTree = "<group>"; };
-		414AB52D1AD47A99001B913C /* MafiaAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAboutController.h; sourceTree = "<group>"; };
-		414AB52E1AD47A99001B913C /* MafiaAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAboutController.m; sourceTree = "<group>"; };
 		4153791A1ADAD1900096B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4153791E1ADAD31F0096B906 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		415379201ADAD3E10096B906 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -109,8 +103,6 @@
 		415379401AE99E220096B906 /* MafiaAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAlertView.m; sourceTree = "<group>"; };
 		415CF83E165D6EBA00CDB5B2 /* action_in_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_day.png; sourceTree = "<group>"; };
 		415CF83F165D6EBA00CDB5B2 /* action_in_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_in_night.png; sourceTree = "<group>"; };
-		417D41961AE9AB2700F0556E /* MafiaGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameController.h; sourceTree = "<group>"; };
-		417D41971AE9AB2700F0556E /* MafiaGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameController.m; sourceTree = "<group>"; };
 		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		417F09641671001900F44475 /* MafiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,12 +148,7 @@
 		41A7F3811ACED9C70086015F /* MafiaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAppDelegate.m; sourceTree = "<group>"; };
 		41D39A6C1AD86BA300C13084 /* MafiaRoleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaRoleAction.h; sourceTree = "<group>"; };
 		41D39A6D1AD86BA300C13084 /* MafiaRoleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaRoleAction.m; sourceTree = "<group>"; };
-		41EDC4DD1BF4934C003AAC39 /* MafiaAboutStoryboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAboutStoryboard.h; sourceTree = "<group>"; };
-		41EDC4DE1BF4934C003AAC39 /* MafiaAboutStoryboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAboutStoryboard.m; sourceTree = "<group>"; };
 		41EDC4E21BF494EC003AAC39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
-		41EDC4E41BF495E5003AAC39 /* MafiaGameStoryboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameStoryboard.h; sourceTree = "<group>"; };
-		41EDC4E51BF495E5003AAC39 /* MafiaGameStoryboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameStoryboard.m; sourceTree = "<group>"; };
-		41EDC4EA1BF496E7003AAC39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Game.storyboard; sourceTree = "<group>"; };
 		41EDC4F31BF5B1B3003AAC39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GameSetup.storyboard; sourceTree = "<group>"; };
 		41EDC4F51BF5B31C003AAC39 /* MafiaGameSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameSetupController.h; sourceTree = "<group>"; };
 		41EDC4F61BF5B31C003AAC39 /* MafiaGameSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameSetupController.m; sourceTree = "<group>"; };
@@ -190,6 +177,8 @@
 		41EDC5301BF788BD003AAC39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AutonomicGame.storyboard; sourceTree = "<group>"; };
 		41EDC5321BF78936003AAC39 /* MafiaAutonomicActionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAutonomicActionController.h; sourceTree = "<group>"; };
 		41EDC5331BF78936003AAC39 /* MafiaAutonomicActionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAutonomicActionController.m; sourceTree = "<group>"; };
+		41EDC5351BF79515003AAC39 /* MafiaRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaRootController.h; sourceTree = "<group>"; };
+		41EDC5361BF79515003AAC39 /* MafiaRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaRootController.m; sourceTree = "<group>"; };
 		6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,13 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				41EDC5291BF788AB003AAC39 /* AutonomicGame */,
-				41EDC4EB1BF496E7003AAC39 /* Game.storyboard */,
 				41EDC4EC1BF5B19C003AAC39 /* GameSetup */,
 				41EDC50B1BF7583B003AAC39 /* JudgeDrivenGame */,
-				417D41961AE9AB2700F0556E /* MafiaGameController.h */,
-				417D41971AE9AB2700F0556E /* MafiaGameController.m */,
-				41EDC4E41BF495E5003AAC39 /* MafiaGameStoryboard.h */,
-				41EDC4E51BF495E5003AAC39 /* MafiaGameStoryboard.m */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -249,10 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				41EDC4E31BF494EC003AAC39 /* About.storyboard */,
-				414AB52D1AD47A99001B913C /* MafiaAboutController.h */,
-				414AB52E1AD47A99001B913C /* MafiaAboutController.m */,
-				41EDC4DD1BF4934C003AAC39 /* MafiaAboutStoryboard.h */,
-				41EDC4DE1BF4934C003AAC39 /* MafiaAboutStoryboard.m */,
 				414AB5271AD4523A001B913C /* MafiaGameplayWebPageController.h */,
 				414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */,
 			);
@@ -388,9 +368,9 @@
 				418A72F91AC9570400A652D2 /* Images.xcassets */,
 				41A7F37C1ACED9C70086015F /* LaunchScreen.xib */,
 				4153791F1ADAD31F0096B906 /* Localizable.strings */,
+				41A7F37E1ACED9C70086015F /* Main.storyboard */,
 				41A7F3571ACEC8900086015F /* Controllers */,
 				41A7F3581ACEC8B10086015F /* Gameplay */,
-				41D39A771AD92DBF00C13084 /* Storyboards */,
 				41857F6A1652DA2D00EE800D /* Supporting Files */,
 			);
 			path = Mafia;
@@ -399,6 +379,8 @@
 		41A7F3571ACEC8900086015F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				41EDC5351BF79515003AAC39 /* MafiaRootController.h */,
+				41EDC5361BF79515003AAC39 /* MafiaRootController.m */,
 				414AB5231AD44D28001B913C /* About */,
 				414AB50A1AD2F6CD001B913C /* Game */,
 				415379261ADC34CD0096B906 /* Utils */,
@@ -438,14 +420,6 @@
 				41A7F36D1ACEC8DA0086015F /* MafiaVoteAndLynchAction.m */,
 			);
 			path = Gameplay;
-			sourceTree = "<group>";
-		};
-		41D39A771AD92DBF00C13084 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				41A7F37E1ACED9C70086015F /* Main.storyboard */,
-			);
-			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		41EDC4EC1BF5B19C003AAC39 /* GameSetup */ = {
@@ -587,7 +561,6 @@
 			files = (
 				418A72FA1AC9570400A652D2 /* Images.xcassets in Resources */,
 				415CF855165D6EBA00CDB5B2 /* action_in_day.png in Resources */,
-				41EDC4E91BF496E7003AAC39 /* Game.storyboard in Resources */,
 				415CF856165D6EBA00CDB5B2 /* action_in_night.png in Resources */,
 				41EDC4F21BF5B1B3003AAC39 /* GameSetup.storyboard in Resources */,
 				41EDC51A1BF760FA003AAC39 /* JudgeDrivenGame.storyboard in Resources */,
@@ -682,13 +655,12 @@
 				4153792C1ADC35230096B906 /* UIColor+MafiaAdditions.m in Sources */,
 				41A7F36E1ACEC8DA0086015F /* MafiaAction.m in Sources */,
 				41857F6F1652DAA200EE800D /* main.m in Sources */,
-				414AB52F1AD47A99001B913C /* MafiaAboutController.m in Sources */,
 				4153793B1AE5AD860096B906 /* NSError+MafiaAdditions.m in Sources */,
 				41EDC5081BF5C71B003AAC39 /* MafiaConfigureRoleController.m in Sources */,
 				41A7F3731ACEC8DA0086015F /* MafiaPlayer.m in Sources */,
 				41A7F3721ACEC8DA0086015F /* MafiaNumberRange.m in Sources */,
 				41EDC5141BF758C0003AAC39 /* MafiaJudgeDrivenGameController.m in Sources */,
-				417D41981AE9AB2700F0556E /* MafiaGameController.m in Sources */,
+				41EDC5371BF79515003AAC39 /* MafiaRootController.m in Sources */,
 				41EDC5091BF5C71B003AAC39 /* MafiaLoadGameSetupController.m in Sources */,
 				41EDC52E1BF788AB003AAC39 /* MafiaAutonomicGameController.m in Sources */,
 				41D39A6E1AD86BA300C13084 /* MafiaRoleAction.m in Sources */,
@@ -711,8 +683,6 @@
 				415379381AE5AD780096B906 /* MafiaDocuments.m in Sources */,
 				41EDC4FA1BF5B3B8003AAC39 /* MafiaAssets.m in Sources */,
 				41A7F3711ACEC8DA0086015F /* MafiaInformation.m in Sources */,
-				41EDC4E01BF4934C003AAC39 /* MafiaAboutStoryboard.m in Sources */,
-				41EDC4E61BF495E5003AAC39 /* MafiaGameStoryboard.m in Sources */,
 				41EDC5341BF78936003AAC39 /* MafiaAutonomicActionController.m in Sources */,
 				41A7F36F1ACEC8DA0086015F /* MafiaGame.m in Sources */,
 				41A7F3771ACEC8DA0086015F /* MafiaVoteAndLynchAction.m in Sources */,
@@ -780,14 +750,6 @@
 				41EDC4E21BF494EC003AAC39 /* Base */,
 			);
 			name = About.storyboard;
-			sourceTree = "<group>";
-		};
-		41EDC4EB1BF496E7003AAC39 /* Game.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				41EDC4EA1BF496E7003AAC39 /* Base */,
-			);
-			name = Game.storyboard;
 			sourceTree = "<group>";
 		};
 		41EDC4F41BF5B1B3003AAC39 /* GameSetup.storyboard */ = {
