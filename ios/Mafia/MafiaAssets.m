@@ -85,7 +85,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         iconNames = @{
-            @(MafiaIconDummy): @"ic_dummy",
+            @(MafiaIconDummy): @"Dead",
         };
     });
 

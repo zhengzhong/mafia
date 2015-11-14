@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Misdiagnosed.png"
+      "filename" : "status_voted_24pt.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Misdiagnosed@2x.png"
+      "filename" : "status_voted_24pt_2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Misdiagnosed@3x.png"
+      "filename" : "status_voted_24pt_3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {
