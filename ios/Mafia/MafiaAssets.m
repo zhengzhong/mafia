@@ -20,7 +20,7 @@
             @(MafiaColorStyleSuccess): [UIColor colorWithRed:0.359f green:0.719f blue:0.359f alpha:1.0],  // #5CB85C
             @(MafiaColorStyleWarning): [UIColor colorWithRed:0.938f green:0.676f blue:0.305f alpha:1.0],  // #F0AD4E
             @(MafiaColorStyleDanger): [UIColor colorWithRed:0.848f green:0.324f blue:0.309f alpha:1.0],   // #D9534F
-            @(MafiaColorStyleMuted): [UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0],
+            @(MafiaColorStyleMuted): [UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0],
         };
     });
     UIColor *color = styledColors[@(colorStyle)];
@@ -77,6 +77,27 @@
         return nil;
     }
     return [UIImage imageNamed:roleImageName];
+}
+
+
++ (UIImage *)imageOfStatus:(MafiaStatus)status {
+    static NSDictionary *statusImageNames = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        statusImageNames = @{
+            @(MafiaStatusJustGuarded): @"status_just_guarded_24pt",
+            @(MafiaStatusUnguardable): @"status_unguardable_24pt",
+            @(MafiaStatusMisdiagnosed): @"status_misdiagnosed_24pt",
+            @(MafiaStatusVoted): @"status_voted_24pt",
+            @(MafiaStatusDead): @"status_dead_24pt",
+        };
+    });
+    NSString *imageName = statusImageNames[@(status)];
+    if (imageName == nil) {
+        NSLog(@"Fail to find image name for status: %@", @(status));
+        return nil;
+    }
+    return [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 

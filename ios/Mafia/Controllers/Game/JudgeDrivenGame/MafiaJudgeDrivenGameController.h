@@ -14,15 +14,22 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *roleLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *roleImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *checkImageView;
-@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *statusImageViews;
+
+@property (strong, nonatomic) IBOutlet UIImageView *roleImageView;
+@property (strong, nonatomic) IBOutlet UILabel *roleLabel;
+
+@property (strong, nonatomic) IBOutlet UIImageView *justGuardedImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *unguardableImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *misdiagnosedImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *votedImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *deadImageView;
+
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tagImageViews;
 
 - (void)setupWithPlayer:(MafiaPlayer *)player isSelected:(BOOL)isSelected;
 
-@end  // MafiaJudgeDrivenGamePlayerCell
+@end
 
 
 @interface MafiaJudgeDrivenGameController : UIViewController <UITableViewDelegate, UITableViewDataSource>

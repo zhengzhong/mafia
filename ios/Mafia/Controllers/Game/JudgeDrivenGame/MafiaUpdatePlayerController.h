@@ -11,22 +11,12 @@
 
 @interface MafiaPlayerStatus : NSObject
 
-@property (readonly, copy, nonatomic) NSString *name;
-@property (readonly, copy, nonatomic) NSString *imageName;
 @property (readonly, copy, nonatomic) NSString *key;
 @property (assign, nonatomic) BOOL value;
 
-+ (instancetype)statusWithName:(NSString *)name
-                     imageName:(NSString *)imageName
-                           key:(NSString *)key
-                         value:(BOOL)value;
+- (instancetype)initWithKey:(NSString *)key value:(BOOL)value;
 
-- (instancetype)initWithName:(NSString *)name
-                   imageName:(NSString *)imageName
-                         key:(NSString *)key
-                       value:(BOOL)value;
-
-@end  // MafiaPlayerStatus
+@end
 
 
 @interface MafiaPlayerStatusCell : UITableViewCell
@@ -39,7 +29,10 @@
 
 - (void)refresh;
 
-@end  // MafiaPlayerStatusCell
+@end
+
+
+// ------------------------------------------------------------------------------------------------
 
 
 @interface MafiaUpdatePlayerController : UITableViewController
@@ -47,18 +40,18 @@
 @property (strong, nonatomic) MafiaPlayer *player;
 
 @property (strong, nonatomic) MafiaRole *role;
-@property (strong, nonatomic) MafiaPlayerStatus *deadStatus;
-@property (strong, nonatomic) MafiaPlayerStatus *misdiagnosedStatus;
 @property (strong, nonatomic) MafiaPlayerStatus *justGuardedStatus;
 @property (strong, nonatomic) MafiaPlayerStatus *unguardableStatus;
+@property (strong, nonatomic) MafiaPlayerStatus *misdiagnosedStatus;
 @property (strong, nonatomic) MafiaPlayerStatus *votedStatus;
+@property (strong, nonatomic) MafiaPlayerStatus *deadStatus;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *roleCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *deadStatusCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *misdiagnosedStatusCell;
 @property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *justGuardedStatusCell;
 @property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *unguardableStatusCell;
+@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *misdiagnosedStatusCell;
 @property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *votedStatusCell;
+@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *deadStatusCell;
 
 - (void)loadPlayer:(MafiaPlayer *)player;
 
@@ -66,4 +59,4 @@
 
 - (IBAction)doneButtonTapped:(id)sender;
 
-@end  // MafiaUpdatePlayerController
+@end

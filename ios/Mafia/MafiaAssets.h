@@ -30,6 +30,15 @@ typedef NS_ENUM(NSInteger, MafiaAvatar) {
 };
 
 
+typedef NS_ENUM(NSInteger, MafiaStatus) {
+    MafiaStatusJustGuarded,
+    MafiaStatusUnguardable,
+    MafiaStatusMisdiagnosed,
+    MafiaStatusVoted,
+    MafiaStatusDead,
+};
+
+
 typedef NS_ENUM(NSInteger, MafiaIcon) {
     MafiaIconDummy,
 };
@@ -42,6 +51,8 @@ typedef NS_ENUM(NSInteger, MafiaIcon) {
 + (UIImage *)imageOfAvatar:(MafiaAvatar)avatar;
 
 + (UIImage *)imageOfRole:(MafiaRole *)role;
+
++ (UIImage *)imageOfStatus:(MafiaStatus)status;
 
 + (UIImage *)imageOfIcon:(MafiaIcon)icon;
 

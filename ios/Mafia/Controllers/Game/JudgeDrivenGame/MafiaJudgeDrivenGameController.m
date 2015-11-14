@@ -59,36 +59,20 @@ static NSString *const kPlayerCellID = @"PlayerCell";
     }
 
     // Player status.
-    NSUInteger statusIndex = 0;
-    if (player.isDead) {
-        UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:kDeadImageName];
-        ++statusIndex;
-    }
-    if (player.isMisdiagnosed) {
-        UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:kMisdiagnosedImageName];
-        ++statusIndex;
-    }
-    if (player.isJustGuarded) {
-        UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:kJustGuardedImageName];
-        ++statusIndex;
-    }
-    if (player.isUnguardable) {
-        UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:kUnguardableImageName];
-        ++statusIndex;
-    }
-    if (player.isVoted) {
-        UIImageView *imageView = self.statusImageViews[statusIndex];
-        imageView.image = [UIImage imageNamed:kVotedImageName];
-        ++statusIndex;
-    }
-    for (NSUInteger i = statusIndex; i < [self.statusImageViews count]; ++i) {
-        UIImageView *imageView = self.statusImageViews[i];
-        imageView.image = nil;
-    }
+    self.justGuardedImageView.image = [MafiaAssets imageOfStatus:MafiaStatusJustGuarded];
+    self.unguardableImageView.image = [MafiaAssets imageOfStatus:MafiaStatusUnguardable];
+    self.misdiagnosedImageView.image = [MafiaAssets imageOfStatus:MafiaStatusMisdiagnosed];
+    self.votedImageView.image = [MafiaAssets imageOfStatus:MafiaStatusVoted];
+    self.deadImageView.image = [MafiaAssets imageOfStatus:MafiaStatusDead];
+
+    UIColor *activeColor = [MafiaAssets colorOfStyle:MafiaColorStyleDanger];
+    UIColor *inactiveColor = [MafiaAssets colorOfStyle:MafiaColorStyleMuted];
+
+    self.justGuardedImageView.tintColor = (player.isJustGuarded ? activeColor : inactiveColor);
+    self.unguardableImageView.tintColor = (player.isUnguardable ? activeColor : inactiveColor);
+    self.misdiagnosedImageView.tintColor = (player.isMisdiagnosed ? activeColor : inactiveColor);
+    self.votedImageView.tintColor = (player.isVoted ? activeColor : inactiveColor);
+    self.deadImageView.tintColor = (player.isDead ? activeColor : inactiveColor);
 
     // Current role tags.
     NSUInteger tagIndex = 0;

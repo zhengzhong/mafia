@@ -10,72 +10,33 @@
 #import "MafiaGameplay.h"
 
 
-// ------------------------------------------------------------------------------------------------
-// MafiaPlayerStatus
-// ------------------------------------------------------------------------------------------------
-
-
 @implementation MafiaPlayerStatus
 
-
-+ (instancetype)statusWithName:(NSString *)name
-                     imageName:(NSString *)imageName
-                           key:(NSString *)key
-                         value:(BOOL)value {
-    return [[self alloc] initWithName:name imageName:imageName key:key value:value];
-}
-
-
-- (instancetype)initWithName:(NSString *)name
-                   imageName:(NSString *)imageName
-                         key:(NSString *)key
-                       value:(BOOL)value {
+- (instancetype)initWithKey:(NSString *)key value:(BOOL)value {
     if (self = [super init]) {
-        _name = [name copy];
-        _imageName = [imageName copy];
         _key = [key copy];
         _value = value;
     }
     return self;
 }
 
-
-@end  //  MafiaPlayerStatus
-
-
-// ------------------------------------------------------------------------------------------------
-// MafiaPlayerStatusCell
-// ------------------------------------------------------------------------------------------------
+@end
 
 
 @implementation MafiaPlayerStatusCell
-
 
 - (IBAction)switchToggled:(id)sender {
     self.status.value = self.valueSwitch.on;
 }
 
-
 - (void)refresh {
-    self.imageView.image = [UIImage imageNamed:self.status.imageName];
-    self.textLabel.text = self.status.name;
     self.valueSwitch.on = self.status.value;
 }
 
-
-@end  // MafiaPlayerStatusCell
+@end
 
 
 // ------------------------------------------------------------------------------------------------
-// MafiaUpdatePlayerController
-// ------------------------------------------------------------------------------------------------
-
-
-static NSString *const kDeadImageName = @"Dead";
-static NSString *const kJustGuardedImageName = @"JustGuarded";
-static NSString *const kMisdiagnosedImageName = @"Misdiagnosed";
-static NSString *const kUnguardableImageName = @"Unguardable";
-static NSString *const kVotedImageName = @"Voted";
 
 
 @interface MafiaUpdatePlayerController () <MafiaUpdatePlayerRoleControllerDelegate>
@@ -98,54 +59,36 @@ static NSString *const kVotedImageName = @"Voted";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title = self.player.displayName;
+
     // Bind statuses to cells.
-    self.deadStatusCell.status = self.deadStatus;
-    self.misdiagnosedStatusCell.status = self.misdiagnosedStatus;
     self.justGuardedStatusCell.status = self.justGuardedStatus;
     self.unguardableStatusCell.status = self.unguardableStatus;
+    self.misdiagnosedStatusCell.status = self.misdiagnosedStatus;
     self.votedStatusCell.status = self.votedStatus;
+    self.deadStatusCell.status = self.deadStatus;
+
     // Refresh cells.
     self.roleCell.imageView.image = [MafiaAssets imageOfRole:self.role];
     self.roleCell.textLabel.text = self.role.displayName;
-    [self.deadStatusCell refresh];
-    [self.misdiagnosedStatusCell refresh];
     [self.justGuardedStatusCell refresh];
     [self.unguardableStatusCell refresh];
+    [self.misdiagnosedStatusCell refresh];
     [self.votedStatusCell refresh];
+    [self.deadStatusCell refresh];
 }
 
 
-#pragma mark - Public Methods
+#pragma mark - Public
 
 
 - (void)loadPlayer:(MafiaPlayer *)player {
     self.player = player;
     self.role = player.role;
-    self.deadStatus = [MafiaPlayerStatus
-        statusWithName:NSLocalizedString(@"Dead?", nil)
-             imageName:kDeadImageName
-                   key:@"isDead"
-                 value:player.isDead];
-    self.misdiagnosedStatus = [MafiaPlayerStatus
-        statusWithName:NSLocalizedString(@"Misdiagnosed?", nil)
-             imageName:kMisdiagnosedImageName
-                   key:@"isMisdiagnosed"
-                 value:player.isMisdiagnosed];
-    self.justGuardedStatus = [MafiaPlayerStatus
-        statusWithName:NSLocalizedString(@"Just Guarded?", nil)
-             imageName:kJustGuardedImageName
-                   key:@"isJustGuarded"
-                 value:player.isJustGuarded];
-    self.unguardableStatus = [MafiaPlayerStatus
-        statusWithName:NSLocalizedString(@"Unguardable?", nil)
-             imageName:kUnguardableImageName
-                   key:@"isUnguardable"
-                 value:player.isUnguardable];
-    self.votedStatus = [MafiaPlayerStatus
-        statusWithName:NSLocalizedString(@"Voted?", nil)
-             imageName:kVotedImageName
-                   key:@"isVoted"
-                 value:player.isVoted];
+    self.justGuardedStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isJustGuarded" value:player.isJustGuarded];
+    self.unguardableStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isUnguardable" value:player.isUnguardable];
+    self.misdiagnosedStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isMisdiagnosed" value:player.isMisdiagnosed];
+    self.votedStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isVoted" value:player.isVoted];
+    self.deadStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isDead" value:player.isDead];
 }
 
 
@@ -172,11 +115,11 @@ static NSString *const kVotedImageName = @"Voted";
 - (IBAction)doneButtonTapped:(id)sender {
     self.player.role = self.role;
     NSArray *statuses = @[
-        self.deadStatus,
-        self.misdiagnosedStatus,
         self.justGuardedStatus,
         self.unguardableStatus,
+        self.misdiagnosedStatus,
         self.votedStatus,
+        self.deadStatus,
     ];
     for (MafiaPlayerStatus *status in statuses) {
         [self.player setValue:@(status.value) forKey:status.key];
