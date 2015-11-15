@@ -64,6 +64,7 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
     if (player != nil) {
         button.enabled = YES;
         button.hidden = NO;
+        [button mafia_makeRoundCornersWithBorder:YES];
         imageView.hidden = NO;
         label.hidden = NO;
         if (isRevealed) {

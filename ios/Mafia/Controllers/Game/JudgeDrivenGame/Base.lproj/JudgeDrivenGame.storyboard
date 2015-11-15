@@ -235,11 +235,23 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xA-Zy-ODw" userLabel="Separator">
+                                <rect key="frame" x="0.0" y="145" width="600" height="1"/>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="rhE-aX-C4r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="VRu-v6-0iF" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" constant="20" id="3oz-T1-hbt"/>
+                            <constraint firstAttribute="trailing" secondItem="9xA-Zy-ODw" secondAttribute="trailing" id="4bY-yO-htR"/>
                             <constraint firstItem="dfC-GY-PKj" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" id="7Jr-lm-h70"/>
+                            <constraint firstItem="9xA-Zy-ODw" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" id="8nA-Wi-4DN"/>
                             <constraint firstItem="fPS-w4-scQ" firstAttribute="top" secondItem="dfC-GY-PKj" secondAttribute="bottom" id="EYk-0A-W2b"/>
                             <constraint firstItem="TVb-oD-g5y" firstAttribute="leading" secondItem="0lj-cC-77k" secondAttribute="leading" constant="20" id="NKu-ag-v7i"/>
                             <constraint firstAttribute="trailing" secondItem="TVb-oD-g5y" secondAttribute="trailing" constant="20" id="azE-xo-cci"/>
@@ -248,6 +260,7 @@
                             <constraint firstAttribute="trailing" secondItem="VRu-v6-0iF" secondAttribute="trailing" constant="20" id="fll-38-BCS"/>
                             <constraint firstItem="VRu-v6-0iF" firstAttribute="top" secondItem="Ugd-el-6O2" secondAttribute="bottom" constant="16" id="kfw-l8-iol"/>
                             <constraint firstItem="dfC-GY-PKj" firstAttribute="top" secondItem="TVb-oD-g5y" secondAttribute="bottom" constant="20" id="mFs-wo-P9M"/>
+                            <constraint firstItem="dfC-GY-PKj" firstAttribute="top" secondItem="9xA-Zy-ODw" secondAttribute="bottom" id="oHu-1J-Ex4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Game" id="b2K-Cw-oFN">
