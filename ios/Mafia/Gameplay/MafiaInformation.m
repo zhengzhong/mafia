@@ -10,14 +10,14 @@
 
 
 + (instancetype)announcementInformation {
-    return [[self alloc] initWithKind:MafiaInformationKindAnnouncement];
+    return [[self alloc] initWithInformationType:MafiaInformationTypeAnnouncement];
 }
 
 
 + (instancetype)informationWithAnswer:(BOOL)answer {
-    MafiaInformationKind kind = (answer ? MafiaInformationKindPositiveAnswer : MafiaInformationKindNegativeAnswer);
+    MafiaInformationType type = (answer ? MafiaInformationTypePositiveAnswer : MafiaInformationTypeNegativeAnswer);
     NSString *message = (answer ? NSLocalizedString(@"The answer is YES!", nil) : NSLocalizedString(@"The answer is NO!", nil));
-    MafiaInformation *information = [[self alloc] initWithKind:kind];
+    MafiaInformation *information = [[self alloc] initWithInformationType:type];
     information.message = message;
     return information;
 }
@@ -30,9 +30,9 @@
 }
 
 
-- (instancetype)initWithKind:(MafiaInformationKind)kind {
+- (instancetype)initWithInformationType:(MafiaInformationType)type {
     if (self = [super init]) {
-        _kind = kind;
+        _type = type;
         _details = [[NSMutableArray alloc] initWithCapacity:4];
     }
     return self;
@@ -44,4 +44,4 @@
 }
 
 
-@end  // MafiaMessage
+@end

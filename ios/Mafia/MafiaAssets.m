@@ -23,6 +23,7 @@
             @(MafiaColorStyleMuted): [UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0],
         };
     });
+
     UIColor *color = styledColors[@(colorStyle)];
     if (color == nil) {
         NSLog(@"Fail to find color for style: %@", @(colorStyle));
@@ -47,12 +48,13 @@
             @(MafiaAvatarInfo): @"avatar_info_64pt",
         };
     });
-    NSString *avatarImageName = avatarImageNames[@(avatar)];
-    if (avatarImageName == nil) {
+
+    NSString *imageName = avatarImageNames[@(avatar)];
+    if (imageName == nil) {
         NSLog(@"Fail to find image name for avatar: %@", @(avatar));
         return nil;
     }
-    return [UIImage imageNamed:avatarImageName];
+    return [UIImage imageNamed:imageName];
 }
 
 
@@ -71,12 +73,13 @@
             [MafiaRole undercover]: @"role_undercover_64pt",
         };
     });
-    NSString *roleImageName = roleImageNames[role];
-    if (roleImageName == nil) {
+
+    NSString *imageName = roleImageNames[role];
+    if (imageName == nil) {
         NSLog(@"Fail to find image name for role: %@", role);
         return nil;
     }
-    return [UIImage imageNamed:roleImageName];
+    return [UIImage imageNamed:imageName];
 }
 
 
@@ -92,12 +95,28 @@
             @(MafiaStatusDead): @"status_dead_24pt",
         };
     });
+
     NSString *imageName = statusImageNames[@(status)];
     if (imageName == nil) {
         NSLog(@"Fail to find image name for status: %@", @(status));
         return nil;
     }
     return [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
+
++ (UIImage *)imageOfAnnouncement {
+    return [UIImage imageNamed:@"information_announcement_24pt"];
+}
+
+
++ (UIImage *)imageOfPositiveAnswer {
+    return [UIImage imageNamed:@"information_positive_answer_24pt"];
+}
+
+
++ (UIImage *)imageOfNegativeAnswer {
+    return [UIImage imageNamed:@"information_negative_answer_24pt"];
 }
 
 
@@ -142,11 +161,6 @@
 + (void)imageView:(UIImageView *)imageView setIcon:(MafiaIcon)icon colorStyle:(MafiaColorStyle)colorStyle {
     imageView.image = [self imageOfIcon:icon];
     imageView.tintColor = [self colorOfStyle:colorStyle];
-}
-
-
-+ (UIImage *)defaultUserAvatar {
-    return [UIImage imageNamed:@"default_user_avatar_80pt"];
 }
 
 

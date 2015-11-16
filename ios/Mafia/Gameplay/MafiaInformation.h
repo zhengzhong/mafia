@@ -6,10 +6,10 @@
 #import <Foundation/Foundation.h>
 
 
-typedef NS_ENUM(NSInteger, MafiaInformationKind) {
-    MafiaInformationKindAnnouncement,
-    MafiaInformationKindPositiveAnswer,
-    MafiaInformationKindNegativeAnswer,
+typedef NS_ENUM(NSInteger, MafiaInformationType) {
+    MafiaInformationTypeAnnouncement,
+    MafiaInformationTypePositiveAnswer,
+    MafiaInformationTypeNegativeAnswer,
 };
 
 
@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, MafiaInformationKind) {
  */
 @interface MafiaInformation : NSObject
 
-@property (readonly, assign, nonatomic) MafiaInformationKind kind;
+@property (readonly, assign, nonatomic) MafiaInformationType type;
 @property (copy, nonatomic) NSString *message;
 @property (copy, nonatomic) NSMutableArray *details;
 
@@ -34,8 +34,8 @@ typedef NS_ENUM(NSInteger, MafiaInformationKind) {
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (instancetype)initWithKind:(MafiaInformationKind)kind NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithInformationType:(MafiaInformationType)type NS_DESIGNATED_INITIALIZER;
 
 - (void)addDetails:(NSArray *)details;
 
-@end  // MafiaInformation
+@end

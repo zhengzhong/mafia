@@ -58,14 +58,4 @@
  */
 + (void)mafia_showErrorWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
 
-/*!
- * Shows a notification with default configurations for the game.
- *
- * This method is called by all the other methods.
- */
-+ (void)mafia_showNotificationWithTitle:(NSString *)title
-                               subtitle:(NSString *)subtitle
-                              imageName:(NSString *)imageName
-                                   type:(TSMessageNotificationType)type;
-
 @end

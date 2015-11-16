@@ -5,12 +5,11 @@
 
 #import "TSMessage+MafiaAdditions.h"
 
+#import "MafiaAssets.h"
 #import "MafiaGameplay.h"
 
 
-static NSString *const kAnnouncementImageName = @"InformationAnnouncement";
-static NSString *const kPositiveAnswerImageName = @"InformationPositive";
-static NSString *const kNegativeAnswerImageName = @"InformationNegative";
+static const NSTimeInterval kMessageDuration = 30;  // be long enough!
 
 
 @implementation TSMessage (MafiaAdditions)
@@ -30,26 +29,23 @@ static NSString *const kNegativeAnswerImageName = @"InformationNegative";
                               subtitle:(NSString *)subtitle {
     NSAssert(information != nil, @"Information to show should not be nil.");
     NSString *title = information.message;
-    NSString *imageName = nil;
+    UIImage *image = nil;
     TSMessageNotificationType type = TSMessageNotificationTypeMessage;
-    switch (information.kind) {
-        case MafiaInformationKindAnnouncement:
-            imageName = kAnnouncementImageName;
+    switch (information.type) {
+        case MafiaInformationTypeAnnouncement:
+            image = [MafiaAssets imageOfAnnouncement];
             type = TSMessageNotificationTypeMessage;
             break;
-        case MafiaInformationKindPositiveAnswer:
-            imageName = kPositiveAnswerImageName;
+        case MafiaInformationTypePositiveAnswer:
+            image = [MafiaAssets imageOfPositiveAnswer];
             type = TSMessageNotificationTypeSuccess;
             break;
-        case MafiaInformationKindNegativeAnswer:
-            imageName = kNegativeAnswerImageName;
+        case MafiaInformationTypeNegativeAnswer:
+            image = [MafiaAssets imageOfNegativeAnswer];
             type = TSMessageNotificationTypeError;
             break;
     }
-    [self mafia_showNotificationWithTitle:title
-                               subtitle:subtitle
-                              imageName:imageName
-                                   type:type];
+    [self mafia_showNotificationWithTitle:title subtitle:subtitle image:image type:type];
 }
 
 
@@ -69,48 +65,38 @@ static NSString *const kNegativeAnswerImageName = @"InformationNegative";
             NSAssert(NO, @"Winner should not be MafiaWinnerUnknown when showing game result.");
             break;
     }
-    [self mafia_showNotificationWithTitle:title
-                                 subtitle:nil
-                                imageName:nil
-                                     type:type];
+    [self mafia_showNotificationWithTitle:title subtitle:nil image:nil type:type];
 }
 
 
 + (void)mafia_showMessageWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
-    [self mafia_showNotificationWithTitle:title
-                                 subtitle:subtitle
-                                imageName:nil
-                                     type:TSMessageNotificationTypeMessage];
+    [self mafia_showNotificationWithTitle:title subtitle:subtitle image:nil type:TSMessageNotificationTypeMessage];
 }
 
 
 + (void)mafia_showSuccessWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
-    [self mafia_showNotificationWithTitle:title
-                                 subtitle:subtitle
-                                imageName:nil
-                                     type:TSMessageNotificationTypeSuccess];
+    [self mafia_showNotificationWithTitle:title subtitle:subtitle image:nil type:TSMessageNotificationTypeSuccess];
 }
 
 
 + (void)mafia_showErrorWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
-    [self mafia_showNotificationWithTitle:title
-                                 subtitle:subtitle
-                                imageName:nil
-                                     type:TSMessageNotificationTypeError];
+    [self mafia_showNotificationWithTitle:title subtitle:subtitle image:nil type:TSMessageNotificationTypeError];
 }
+
+
+#pragma mark - Private
 
 
 + (void)mafia_showNotificationWithTitle:(NSString *)title
                                subtitle:(NSString *)subtitle
-                              imageName:(NSString *)imageName
+                                  image:(UIImage *)image
                                    type:(TSMessageNotificationType)type {
-    UIImage *image = (imageName != nil ? [UIImage imageNamed:imageName] : nil);
     [self showNotificationInViewController:[self defaultViewController]
                                      title:title
                                   subtitle:subtitle
                                      image:image
                                       type:type
-                                  duration:TSMessageNotificationDurationAutomatic
+                                  duration:kMessageDuration
                                   callback:nil
                                buttonTitle:nil
                             buttonCallback:nil
