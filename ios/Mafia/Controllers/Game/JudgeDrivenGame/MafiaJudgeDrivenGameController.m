@@ -16,7 +16,7 @@
 
 @implementation MafiaJudgeDrivenGamePlayerCell
 
-- (void)setupWithPlayer:(MafiaPlayer *)player isSelected:(BOOL)isSelected {
+- (void)setupWithPlayer:(MafiaPlayer *)player isSelectable:(BOOL)isSelectable isSelected:(BOOL)isSelected {
     // Avatar image.
     UIImage *avatarImage = player.avatarImage;
     if (avatarImage == nil) {
@@ -34,8 +34,10 @@
     self.roleImageView.image = [MafiaAssets imageOfRole:player.role];
     [self.roleImageView mafia_makeRoundCornersWithBorder:NO];
 
-    // Selected?
-    if (isSelected) {
+    // Selectable and selected status.
+    if (!isSelectable) {
+        self.checkImageView.image = [MafiaAssets imageOfUnselectable];
+    } else if (isSelected) {
         self.checkImageView.image = [MafiaAssets imageOfSelected];
     } else {
         self.checkImageView.image = [MafiaAssets imageOfUnselected];
@@ -82,6 +84,15 @@ static NSString *const kControllerID = @"JudgeDrivenGame";
 
 static NSString *const kPlayerCellID = @"PlayerCell";
 
+static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
+
+
+@interface MafiaJudgeDrivenGameController ()
+
+@property (strong, nonatomic) MafiaPlayer *playerToUpdate;
+
+@end
+
 
 @implementation MafiaJudgeDrivenGameController
 
@@ -112,6 +123,13 @@ static NSString *const kPlayerCellID = @"PlayerCell";
     // See: http://stackoverflow.com/questions/19091737/
     //
     // self.automaticallyAdjustsScrollViewInsets = NO;
+
+    // Add long-press gesture support, which will enter "edit" mode of the selected player.
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc]
+        initWithTarget:self
+                action:@selector(mafia_handleLongPress:)];
+    gestureRecognizer.minimumPressDuration = 2;  // 2 seconds.
+    [self.playersTableView addGestureRecognizer:gestureRecognizer];
 }
 
 
@@ -121,7 +139,7 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 }
 
 
-#pragma mark - Public Methods
+#pragma mark - Public
 
 
 - (void)startGame:(MafiaGame *)game {
@@ -135,11 +153,6 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 #pragma mark - UITableViewDataSource
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.game.playerList count];
 }
@@ -148,8 +161,10 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MafiaJudgeDrivenGamePlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerCellID forIndexPath:indexPath];
     MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
+    MafiaAction *currentAction = [self.game currentAction];
+    BOOL isSelectable = [currentAction isPlayerSelectable:player];
     BOOL isSelected = [self.selectedPlayers containsObject:player];
-    [cell setupWithPlayer:player isSelected:isSelected];
+    [cell setupWithPlayer:player isSelectable:isSelectable isSelected:isSelected];
     return cell;
 }
 
@@ -189,20 +204,8 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"UpdatePlayer"]) {
-        // Find out the indexPath of the cell within which the button is tapped.
-        // Go through the view hierarchy from the sender view, until UITableViewCell.
-        UIView *currentView = sender;
-        while (currentView != nil && ![currentView isKindOfClass:[UITableViewCell class]]) {
-            currentView = currentView.superview;
-        }
-        NSAssert([currentView isKindOfClass:[UITableViewCell class]], @"Unable to find UITableViewCell from sender view.");
-        UITableViewCell *cell = (UITableViewCell *) currentView;
-        NSIndexPath *indexPath = [self.playersTableView indexPathForCell:cell];
-        // Set the related player to destination view controller.
-        MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
-        MafiaUpdatePlayerController *controller = segue.destinationViewController;
-        [controller loadPlayer:player];
+    if ([segue.identifier isEqualToString:kUpdatePlayerSegueID]) {
+        [self mafia_prepareViewControllerWithPlayerToUpdate:segue.destinationViewController];
     }
 }
 
@@ -269,6 +272,51 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 #pragma mark - Private
 
 
+/// Handles long-press gesture on a table view cell: enter "edit" mode of the selected player.
+-(void)mafia_handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state != UIGestureRecognizerStateEnded) {
+        return;
+    }
+
+    CGPoint point = [gestureRecognizer locationInView:self.playersTableView];
+    NSIndexPath *indexPath = [self.playersTableView indexPathForRowAtPoint:point];
+    if (indexPath == nil) {
+        NSLog(@"Long press on the players table view but not on a row.");
+        return;
+    }
+
+    MafiaPlayer *player = [self.game.playerList playerAtIndex:indexPath.row];
+    UIAlertController *alertController = [UIAlertController
+        alertControllerWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Update player %@?", nil), player.displayName]
+                         message:nil
+                  preferredStyle:UIAlertControllerStyleActionSheet];
+
+    void (^updatePlayerBlock)(UIAlertAction *) = ^(UIAlertAction *action) {
+        self.playerToUpdate = player;  // Remember the player for `prepareForSegue:sender:`.
+        [self performSegueWithIdentifier:kUpdatePlayerSegueID sender:self];
+    };
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil)
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:updatePlayerBlock];
+    [alertController addAction:yesAction];
+
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil)
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alertController addAction:noAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+
+- (void)mafia_prepareViewControllerWithPlayerToUpdate:(MafiaUpdatePlayerController *)controller {
+    [controller loadPlayer:self.playerToUpdate];
+    // TODO: after a player is updated, he may become unselectable, but will still be in the
+    // selected players array in this view controller. This is inconsistent and will cause an
+    // assertion error. We must find a way to handle this (via delegation)!
+}
+
+
 - (MafiaNumberRange *)mafia_numberOfChoicesForActon:(MafiaAction *)action {
     if ([action isExecutable]) {
         return [action numberOfChoices];
@@ -283,7 +331,6 @@ static NSString *const kPlayerCellID = @"PlayerCell";
         // Game is over, winner is known.
         self.title = NSLocalizedString(@"Game Over", nil);
         self.nextBarButtonItem.enabled = NO;
-        self.dayNightImageView.image = [UIImage imageNamed:@"action_in_day.png"];
         self.actionLabel.text = NSLocalizedString(@"Game Over", nil);
         self.promptLabel.text = nil;
         [TSMessage mafia_showGameResultWithWinner:self.game.winner];
@@ -292,8 +339,6 @@ static NSString *const kPlayerCellID = @"PlayerCell";
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Round %d", nil), self.game.round];
         self.nextBarButtonItem.enabled = YES;
         MafiaAction *currentAction = [self.game currentAction];
-        self.dayNightImageView.image = [UIImage imageNamed:
-            (currentAction.role != nil ? @"action_in_night.png" : @"action_in_day.png")];
         self.actionLabel.text = [NSString stringWithFormat:@"%@", currentAction];
         if ([currentAction isExecutable]) {
             MafiaNumberRange *numberOfChoices = [self mafia_numberOfChoicesForActon:currentAction];

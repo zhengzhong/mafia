@@ -27,7 +27,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tagImageViews;
 
-- (void)setupWithPlayer:(MafiaPlayer *)player isSelected:(BOOL)isSelected;
+- (void)setupWithPlayer:(MafiaPlayer *)player isSelectable:(BOOL)isSelectable isSelected:(BOOL)isSelected;
 
 @end
 
@@ -35,7 +35,6 @@
 @interface MafiaJudgeDrivenGameController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *nextBarButtonItem;
-@property (strong, nonatomic) IBOutlet UIImageView *dayNightImageView;
 @property (strong, nonatomic) IBOutlet UILabel *actionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *promptLabel;
 @property (strong, nonatomic) IBOutlet UITableView *playersTableView;
