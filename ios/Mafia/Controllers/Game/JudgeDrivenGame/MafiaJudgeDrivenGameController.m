@@ -63,6 +63,7 @@
     for (MafiaRole *taggedByRole in player.currentRoleTags) {
         UIImageView *imageView = self.tagImageViews[tagIndex];
         imageView.image = [MafiaAssets imageOfRole:taggedByRole];
+        [imageView mafia_makeRoundCornersWithBorder:NO];
         ++tagIndex;
     }
     for (NSUInteger i = tagIndex; i < [self.tagImageViews count]; ++i) {
