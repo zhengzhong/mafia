@@ -68,20 +68,25 @@
 
 - (BOOL)checkGameOver {
     NSArray *aliveKillers = [self.playerList playersWithRole:[MafiaRole killer] aliveOnly:YES];
-    if ([aliveKillers count] == 0) {
+    NSArray *aliveAssassins = [self.playerList playersWithRole:[MafiaRole assassin] aliveOnly:YES];
+    if ([aliveKillers count] == 0 && [aliveAssassins count] == 0) {
         self.winner = MafiaWinnerCivilians;
         return YES;
     }
+
     NSArray *aliveDetectives = [self.playerList playersWithRole:[MafiaRole detective] aliveOnly:YES];
-    if ([aliveDetectives count] == 0) {
+    NSArray *aliveUndercovers = [self.playerList playersWithRole:[MafiaRole undercover] aliveOnly:YES];
+    if ([aliveDetectives count] == 0 && [aliveUndercovers count] == 0) {
         self.winner = MafiaWinnerKillers;
         return YES;
     }
+
     NSArray *alivePlayers = [self.playerList alivePlayers];
     if ([aliveKillers count] * 2 >= [alivePlayers count]) {
         self.winner = MafiaWinnerKillers;
         return YES;
     }
+
     return NO;
 }
 
