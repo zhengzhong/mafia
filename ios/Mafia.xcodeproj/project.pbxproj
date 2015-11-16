@@ -11,13 +11,10 @@
 		414AB5291AD4523A001B913C /* MafiaGameplayWebPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */; };
 		4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4153791F1ADAD31F0096B906 /* Localizable.strings */; };
 		415379291ADC34F10096B906 /* TSMessage+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379281ADC34F10096B906 /* TSMessage+MafiaAdditions.m */; };
-		4153792C1ADC35230096B906 /* UIColor+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792B1ADC35230096B906 /* UIColor+MafiaAdditions.m */; };
 		4153792F1ADDA1CB0096B906 /* MafiaPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792E1ADDA1CB0096B906 /* MafiaPerson.m */; };
 		415379321ADDA6100096B906 /* UIImage+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379311ADDA6100096B906 /* UIImage+MafiaAdditions.m */; };
-		415379351AE041C70096B906 /* MafiaActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379341AE041C70096B906 /* MafiaActionSheet.m */; };
 		415379381AE5AD780096B906 /* MafiaDocuments.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379371AE5AD780096B906 /* MafiaDocuments.m */; };
 		4153793B1AE5AD860096B906 /* NSError+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153793A1AE5AD860096B906 /* NSError+MafiaAdditions.m */; };
-		415379411AE99E220096B906 /* MafiaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415379401AE99E220096B906 /* MafiaAlertView.m */; };
 		417F09151670ECA100F44475 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09131670ECA100F44475 /* AddressBook.framework */; };
 		417F09161670ECA100F44475 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417F09141670ECA100F44475 /* AddressBookUI.framework */; };
 		417F09671671001900F44475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41857F461652D5A600EE800D /* UIKit.framework */; };
@@ -86,20 +83,14 @@
 		415379221ADAD5770096B906 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		415379271ADC34F10096B906 /* TSMessage+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TSMessage+MafiaAdditions.h"; sourceTree = "<group>"; };
 		415379281ADC34F10096B906 /* TSMessage+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TSMessage+MafiaAdditions.m"; sourceTree = "<group>"; };
-		4153792A1ADC35230096B906 /* UIColor+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MafiaAdditions.h"; sourceTree = "<group>"; };
-		4153792B1ADC35230096B906 /* UIColor+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MafiaAdditions.m"; sourceTree = "<group>"; };
 		4153792D1ADDA1CA0096B906 /* MafiaPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaPerson.h; sourceTree = "<group>"; };
 		4153792E1ADDA1CB0096B906 /* MafiaPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaPerson.m; sourceTree = "<group>"; };
 		415379301ADDA6100096B906 /* UIImage+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MafiaAdditions.h"; sourceTree = "<group>"; };
 		415379311ADDA6100096B906 /* UIImage+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MafiaAdditions.m"; sourceTree = "<group>"; };
-		415379331AE041C70096B906 /* MafiaActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaActionSheet.h; sourceTree = "<group>"; };
-		415379341AE041C70096B906 /* MafiaActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaActionSheet.m; sourceTree = "<group>"; };
 		415379361AE5AD780096B906 /* MafiaDocuments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaDocuments.h; sourceTree = "<group>"; };
 		415379371AE5AD780096B906 /* MafiaDocuments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaDocuments.m; sourceTree = "<group>"; };
 		415379391AE5AD860096B906 /* NSError+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MafiaAdditions.h"; sourceTree = "<group>"; };
 		4153793A1AE5AD860096B906 /* NSError+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MafiaAdditions.m"; sourceTree = "<group>"; };
-		4153793F1AE99E220096B906 /* MafiaAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAlertView.h; sourceTree = "<group>"; };
-		415379401AE99E220096B906 /* MafiaAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAlertView.m; sourceTree = "<group>"; };
 		417F09131670ECA100F44475 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		417F09141670ECA100F44475 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		417F09641671001900F44475 /* MafiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MafiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,14 +232,8 @@
 		415379261ADC34CD0096B906 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				415379331AE041C70096B906 /* MafiaActionSheet.h */,
-				415379341AE041C70096B906 /* MafiaActionSheet.m */,
-				4153793F1AE99E220096B906 /* MafiaAlertView.h */,
-				415379401AE99E220096B906 /* MafiaAlertView.m */,
 				415379271ADC34F10096B906 /* TSMessage+MafiaAdditions.h */,
 				415379281ADC34F10096B906 /* TSMessage+MafiaAdditions.m */,
-				4153792A1ADC35230096B906 /* UIColor+MafiaAdditions.h */,
-				4153792B1ADC35230096B906 /* UIColor+MafiaAdditions.m */,
 				415379301ADDA6100096B906 /* UIImage+MafiaAdditions.h */,
 				415379311ADDA6100096B906 /* UIImage+MafiaAdditions.m */,
 			);
@@ -633,7 +618,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4153792C1ADC35230096B906 /* UIColor+MafiaAdditions.m in Sources */,
 				41A7F36E1ACEC8DA0086015F /* MafiaAction.m in Sources */,
 				41857F6F1652DAA200EE800D /* main.m in Sources */,
 				4153793B1AE5AD860096B906 /* NSError+MafiaAdditions.m in Sources */,
@@ -657,10 +641,8 @@
 				41EDC5061BF5C71B003AAC39 /* MafiaAddPersonController.m in Sources */,
 				41EDC5151BF758C0003AAC39 /* MafiaUpdatePlayerController.m in Sources */,
 				41EDC53E1BF7A856003AAC39 /* UIView+MafiaAdditions.m in Sources */,
-				415379351AE041C70096B906 /* MafiaActionSheet.m in Sources */,
 				415379291ADC34F10096B906 /* TSMessage+MafiaAdditions.m in Sources */,
 				41A7F3761ACEC8DA0086015F /* MafiaSettleTagsAction.m in Sources */,
-				415379411AE99E220096B906 /* MafiaAlertView.m in Sources */,
 				41EDC5161BF758C0003AAC39 /* MafiaUpdatePlayerRoleController.m in Sources */,
 				415379381AE5AD780096B906 /* MafiaDocuments.m in Sources */,
 				41EDC4FA1BF5B3B8003AAC39 /* MafiaAssets.m in Sources */,

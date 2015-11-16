@@ -5,7 +5,6 @@
 
 #import "MafiaAutonomicGameController.h"
 #import "MafiaAutonomicActionController.h"
-#import "MafiaActionSheet.h"
 #import "TSMessage+MafiaAdditions.h"
 #import "UIImage+MafiaAdditions.h"
 
@@ -150,12 +149,25 @@ static NSString *const kActionCellID = @"ActionCell";
 
 
 - (IBAction)resetButtonTapped:(id)sender {
-    MafiaActionSheet *sheet = [MafiaActionSheet sheetWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)];
-    [sheet setCancelButtonWithTitle:NSLocalizedString(@"No. Take me back.", nil) block:nil];
-    [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"Yes. Reset the game!", nil) block:^{
+    UIAlertController *alertController = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Are you sure to reset game?", nil)
+                         message:nil
+                  preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No. Take me back!", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+
+    void (^resetGameBlock)(UIAlertAction *) = ^(UIAlertAction *action) {
         [self.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    [sheet showInAppKeyWindow];
+    };
+    UIAlertAction *resetGameAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes. Reset the game!", nil)
+                                                              style:UIAlertActionStyleDestructive
+                                                            handler:resetGameBlock];
+    [alertController addAction:resetGameAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

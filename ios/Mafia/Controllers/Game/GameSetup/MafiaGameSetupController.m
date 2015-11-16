@@ -11,12 +11,9 @@
 #import "MafiaManagePlayersController.h"
 
 #import "MafiaAssets.h"
-
-#import "MafiaAlertView.h"
-#import "TSMessage+MafiaAdditions.h"
-#import "UIColor+MafiaAdditions.h"
-
 #import "MafiaGameplay.h"
+
+#import "TSMessage+MafiaAdditions.h"
 
 
 static NSString *const kStoryboard = @"GameSetup";
@@ -174,32 +171,44 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 
 - (IBAction)saveButtonTapped:(id)sender {
-    MafiaAlertView *gameSetupNameAlertView = [MafiaAlertView
-                                              alertWithTitle:NSLocalizedString(@"Save Game Setup", nil)
-                                              message:NSLocalizedString(@"Please specify the game setup name", nil)
-                                              style:UIAlertViewStylePlainTextInput];
-    [gameSetupNameAlertView setCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
-    [gameSetupNameAlertView
-     setConfirmButtonWithTitle:NSLocalizedString(@"Save", nil)
-     block:^(MafiaAlertView *alertView) {
-         NSString *name = alertView.plainTextField.text;
-         name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-         // TODO: show error details maybe?
-         if ([name length] > 0) {
-             BOOL success = [self.gameSetup saveGameSetupWithName:name];
-             if (success) {
-                 [TSMessage mafia_showSuccessWithTitle:NSLocalizedString(@"Game setup saved successfully!", nil)
-                                              subtitle:nil];
-             } else {
-                 [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Fail to save game setup.", nil)
-                                              subtitle:nil];
-             }
-         } else {
-             [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Invalid game setup name.", nil)
-                                        subtitle:nil];
-         }
-     }];
-    [gameSetupNameAlertView show];
+    UIAlertController *alertController = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Save Game Setup", nil)
+                         message:NSLocalizedString(@"Please specify the game setup name", nil)
+                  preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"Game setup name", nil);
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+
+    void (^saveGameSetupBlock)(UIAlertAction *) = ^(UIAlertAction *action) {
+        NSString *name = alertController.textFields[0].text;
+        name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        // TODO: show error details maybe?
+        if ([name length] == 0) {
+            [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Invalid game setup name.", nil)
+                                       subtitle:nil];
+            return;
+        }
+
+        BOOL success = [self.gameSetup saveGameSetupWithName:name];
+        if (success) {
+            [TSMessage mafia_showSuccessWithTitle:NSLocalizedString(@"Game setup saved successfully!", nil)
+                                         subtitle:nil];
+        } else {
+            [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Fail to save game setup.", nil)
+                                       subtitle:nil];
+        }
+    };
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Save", nil)
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:saveGameSetupBlock];
+    [alertController addAction:okAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

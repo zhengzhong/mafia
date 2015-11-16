@@ -4,7 +4,6 @@
 //
 
 #import "MafiaAddPersonController.h"
-#import "MafiaActionSheet.h"
 #import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
@@ -58,27 +57,42 @@ static const CGFloat kAvatarImageWidth = 48;
 
 
 - (IBAction)addPhotoButtonTapped:(id)sender {
-    // Make sure keybord is dismissed.
-    [self.playerNameField resignFirstResponder];
-    // Prepare an action sheet.
-    MafiaActionSheet *sheet = [MafiaActionSheet sheetWithTitle:nil];
-    [sheet setCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
+    [self.view endEditing:NO];
+
+    UIAlertController *alertController = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Add a photo for the player", nil)
+                         message:nil
+                  preferredStyle:UIAlertControllerStyleActionSheet];
+
     // Allow user to take a photo using the device camera, if it's available.
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", nil)
-                            block:^{
-            [self mafia_presentImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
-        }];
+        UIAlertAction *takePhotoAction = [UIAlertAction
+            actionWithTitle:NSLocalizedString(@"Take a Photo", nil)
+            style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction *action) {
+                [self mafia_presentImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+            }];
+        [alertController addAction:takePhotoAction];
     }
+
     // Allow user to pick an image from photo library, it's available.
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Pick from Photo Library", nil)
-                            block:^{
-            [self mafia_presentImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        }];
+        UIAlertAction *pickPhotoAction = [UIAlertAction
+            actionWithTitle:NSLocalizedString(@"Pick from Photo Library", nil)
+            style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction *action) {
+                [self mafia_presentImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            }];
+        [alertController addAction:pickPhotoAction];
     }
-    // Show the action sheet.
-    [sheet showInAppKeyWindow];
+
+    // Allow user to cancel.
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
