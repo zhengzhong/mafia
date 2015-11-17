@@ -8,8 +8,12 @@
 
 @interface MafiaRootController : UIViewController
 
-- (IBAction)newGameButtonTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *startNewGameButton;
+@property (strong, nonatomic) IBOutlet UIButton *viewGameplayButton;
+@property (strong, nonatomic) IBOutlet UIImageView *foregroundImageView;
 
-- (IBAction)gameplayButtonTapped:(id)sender;
+- (IBAction)startNewGameButtonTapped:(id)sender;
+
+- (IBAction)viewGameplayButtonTapped:(id)sender;
 
 @end

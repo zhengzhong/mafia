@@ -7,20 +7,27 @@
 #import "MafiaGameSetupController.h"
 #import "MafiaGameplayWebPageController.h"
 
+#import "UIView+MafiaAdditions.h"
+
 
 @implementation MafiaRootController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Mafia", nil);
+    [self.startNewGameButton setTitle:NSLocalizedString(@"New Game", nil) forState:UIControlStateNormal];
+    [self.viewGameplayButton setTitle:NSLocalizedString(@"Gameplay", nil) forState:UIControlStateNormal];
+    [self.startNewGameButton mafia_makeRoundCornersWithBorder:YES];
+    [self.viewGameplayButton mafia_makeRoundCornersWithBorder:YES];
+    [self.view bringSubviewToFront:self.foregroundImageView];
 }
 
-- (IBAction)newGameButtonTapped:(id)sender {
+- (IBAction)startNewGameButtonTapped:(id)sender {
     UIViewController *controller = [MafiaGameSetupController controller];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (IBAction)gameplayButtonTapped:(id)sender {
+- (IBAction)viewGameplayButtonTapped:(id)sender {
     UIViewController *controller = [MafiaGameplayWebPageController controller];
     [self.navigationController pushViewController:controller animated:YES];
 }

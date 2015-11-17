@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Mafia-->
@@ -18,31 +19,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACF-gY-IWq">
-                                <rect key="frame" x="20" y="84" width="560" height="30"/>
-                                <state key="normal" title="New Game"/>
+                                <rect key="frame" x="149" y="322" width="100" height="48"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="tnC-8A-ebx"/>
+                                    <constraint firstAttribute="width" constant="100" id="zc7-mf-Hoe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="newGameButtonTapped:" destination="Zmt-UN-ZGS" eventType="touchUpInside" id="K46-qw-nqW"/>
+                                    <action selector="startNewGameButtonTapped:" destination="Zmt-UN-ZGS" eventType="touchUpInside" id="stA-XH-xMG"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="couples" translatesAutoresizingMaskIntoConstraints="NO" id="4WV-od-zHU">
+                                <rect key="frame" x="183" y="130" width="235" height="470"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4WV-od-zHU" secondAttribute="height" multiplier="1:2" id="5o3-Tq-lQi"/>
+                                    <constraint firstAttribute="height" constant="470" id="IBC-Tz-mnl"/>
+                                    <constraint firstAttribute="width" secondItem="4WV-od-zHU" secondAttribute="height" multiplier="1:2" id="Uto-XM-qiU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5o3-Tq-lQi"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEx-2H-ddC">
-                                <rect key="frame" x="20" y="134" width="560" height="30"/>
-                                <state key="normal" title="Gameplay"/>
+                                <rect key="frame" x="338" y="442" width="100" height="48"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="PNi-VD-FJV"/>
+                                    <constraint firstAttribute="height" constant="48" id="gEf-xe-F5V"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Gameplay">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="gameplayButtonTapped:" destination="Zmt-UN-ZGS" eventType="touchUpInside" id="ax0-1K-RBp"/>
+                                    <action selector="viewGameplayButtonTapped:" destination="Zmt-UN-ZGS" eventType="touchUpInside" id="kMc-KU-2Ac"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="rEx-2H-ddC" secondAttribute="trailing" constant="20" id="74d-6d-0PY"/>
-                            <constraint firstItem="ACF-gY-IWq" firstAttribute="top" secondItem="ILa-B8-WaS" secondAttribute="bottom" constant="20" id="E8m-xI-a5U"/>
-                            <constraint firstItem="rEx-2H-ddC" firstAttribute="leading" secondItem="UMe-7Y-e04" secondAttribute="leading" constant="20" id="IgR-FJ-f95"/>
-                            <constraint firstItem="rEx-2H-ddC" firstAttribute="top" secondItem="ACF-gY-IWq" secondAttribute="bottom" constant="20" id="OYX-s3-Nd2"/>
-                            <constraint firstItem="ACF-gY-IWq" firstAttribute="leading" secondItem="UMe-7Y-e04" secondAttribute="leading" constant="20" id="Wsv-hW-GlD"/>
-                            <constraint firstAttribute="trailing" secondItem="ACF-gY-IWq" secondAttribute="trailing" constant="20" id="oLc-XK-YRs"/>
+                            <constraint firstItem="4WV-od-zHU" firstAttribute="centerX" secondItem="UMe-7Y-e04" secondAttribute="centerX" id="2bm-uD-ll9"/>
+                            <constraint firstItem="tVl-nb-rFj" firstAttribute="top" secondItem="ACF-gY-IWq" secondAttribute="bottom" constant="230" id="7Ai-Uy-VqQ"/>
+                            <constraint firstItem="rEx-2H-ddC" firstAttribute="leading" secondItem="4WV-od-zHU" secondAttribute="trailing" constant="-80" id="DEE-tR-zTJ"/>
+                            <constraint firstItem="tVl-nb-rFj" firstAttribute="top" secondItem="4WV-od-zHU" secondAttribute="bottom" id="Fux-e2-uLl"/>
+                            <constraint firstItem="tVl-nb-rFj" firstAttribute="top" secondItem="rEx-2H-ddC" secondAttribute="bottom" constant="110" id="g90-hg-Ou3"/>
+                            <constraint firstItem="4WV-od-zHU" firstAttribute="leading" secondItem="ACF-gY-IWq" secondAttribute="trailing" constant="-66" id="mNR-NX-BrG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Mafia" id="6yE-sf-u0M"/>
+                    <connections>
+                        <outlet property="foregroundImageView" destination="4WV-od-zHU" id="6YW-ym-82b"/>
+                        <outlet property="startNewGameButton" destination="ACF-gY-IWq" id="UV0-ek-Fux"/>
+                        <outlet property="viewGameplayButton" destination="rEx-2H-ddC" id="m5H-Ta-eu3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0L-lz-yae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -67,4 +102,7 @@
             <point key="canvasLocation" x="-533" y="434"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="couples" width="240" height="480"/>
+    </resources>
 </document>
