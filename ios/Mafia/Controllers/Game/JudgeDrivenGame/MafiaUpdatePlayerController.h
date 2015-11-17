@@ -9,25 +9,26 @@
 @class MafiaRole;
 
 
-@interface MafiaPlayerStatus : NSObject
+@interface MafiaUpdatePlayerRoleCell : UITableViewCell
 
-@property (readonly, copy, nonatomic) NSString *key;
-@property (assign, nonatomic) BOOL value;
+@property (strong, nonatomic) MafiaRole *role;
 
-- (instancetype)initWithKey:(NSString *)key value:(BOOL)value;
+- (void)setupWithRole:(MafiaRole *)role;
 
 @end
 
 
-@interface MafiaPlayerStatusCell : UITableViewCell
+@interface MafiaUpdatePlayerStatusCell : UITableViewCell
 
-@property (strong, nonatomic) MafiaPlayerStatus *status;
+@property (strong, nonatomic) MafiaPlayer *player;
+@property (copy, nonatomic) NSString *statusKey;
+@property (assign, nonatomic) BOOL statusValue;
 
 @property (strong, nonatomic) IBOutlet UISwitch *valueSwitch;
 
-- (IBAction)switchToggled:(id)sender;
+- (void)setupWithPlayer:(MafiaPlayer *)player statusKey:(NSString *)statusKey;
 
-- (void)refresh;
+- (IBAction)switchToggled:(id)sender;
 
 @end
 
@@ -35,25 +36,29 @@
 // ------------------------------------------------------------------------------------------------
 
 
+@class MafiaUpdatePlayerController;
+
+@protocol MafiaUpdatePlayerControllerDelegate <NSObject>
+
+- (void)updatePlayerController:(MafiaUpdatePlayerController *)controller didUpdatePlayer:(MafiaPlayer *)player;
+
+@end
+
+
 @interface MafiaUpdatePlayerController : UITableViewController
 
 @property (strong, nonatomic) MafiaPlayer *player;
+@property (strong, nonatomic) MafiaRole *updatedRole;
+@property (weak, nonatomic) id<MafiaUpdatePlayerControllerDelegate> delegate;
 
-@property (strong, nonatomic) MafiaRole *role;
-@property (strong, nonatomic) MafiaPlayerStatus *justGuardedStatus;
-@property (strong, nonatomic) MafiaPlayerStatus *unguardableStatus;
-@property (strong, nonatomic) MafiaPlayerStatus *misdiagnosedStatus;
-@property (strong, nonatomic) MafiaPlayerStatus *votedStatus;
-@property (strong, nonatomic) MafiaPlayerStatus *deadStatus;
+@property (strong, nonatomic) IBOutlet MafiaUpdatePlayerRoleCell *roleCell;
+@property (strong, nonatomic) IBOutlet MafiaUpdatePlayerStatusCell *justGuardedStatusCell;
+@property (strong, nonatomic) IBOutlet MafiaUpdatePlayerStatusCell *unguardableStatusCell;
+@property (strong, nonatomic) IBOutlet MafiaUpdatePlayerStatusCell *misdiagnosedStatusCell;
+@property (strong, nonatomic) IBOutlet MafiaUpdatePlayerStatusCell *votedStatusCell;
+@property (strong, nonatomic) IBOutlet MafiaUpdatePlayerStatusCell *deadStatusCell;
 
-@property (strong, nonatomic) IBOutlet UITableViewCell *roleCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *justGuardedStatusCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *unguardableStatusCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *misdiagnosedStatusCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *votedStatusCell;
-@property (strong, nonatomic) IBOutlet MafiaPlayerStatusCell *deadStatusCell;
-
-- (void)loadPlayer:(MafiaPlayer *)player;
+- (void)setupWithPlayer:(MafiaPlayer *)player;
 
 - (IBAction)cancelButtonTapped:(id)sender;
 

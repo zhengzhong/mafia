@@ -282,7 +282,7 @@
                         <sections>
                             <tableViewSection headerTitle="Role" id="JGt-6M-o4W">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="DJl-6A-ZvG" style="IBUITableViewCellStyleDefault" id="K6E-G9-ygR">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="DJl-6A-ZvG" style="IBUITableViewCellStyleDefault" id="K6E-G9-ygR" customClass="MafiaUpdatePlayerRoleCell">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6E-G9-ygR" id="ZLY-uQ-G9r">
@@ -306,7 +306,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Status" id="WNB-ey-3yb">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zAi-gE-k95" customClass="MafiaPlayerStatusCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zAi-gE-k95" customClass="MafiaUpdatePlayerStatusCell">
                                         <rect key="frame" x="0.0" y="201" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zAi-gE-k95" id="rua-1N-gM1">
@@ -348,7 +348,7 @@
                                             <outlet property="valueSwitch" destination="pOo-4m-Fnl" id="6Yn-bo-tLh"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0eS-w9-ApR" customClass="MafiaPlayerStatusCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0eS-w9-ApR" customClass="MafiaUpdatePlayerStatusCell">
                                         <rect key="frame" x="0.0" y="245" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0eS-w9-ApR" id="DgR-qm-dAb">
@@ -390,7 +390,7 @@
                                             <outlet property="valueSwitch" destination="bES-vY-FdJ" id="vd5-UL-aCh"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0Sd-S9-BhI" customClass="MafiaPlayerStatusCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0Sd-S9-BhI" customClass="MafiaUpdatePlayerStatusCell">
                                         <rect key="frame" x="0.0" y="289" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Sd-S9-BhI" id="hiC-Jr-WCR">
@@ -432,7 +432,7 @@
                                             <outlet property="valueSwitch" destination="4Ql-kQ-GxV" id="rze-zv-3OM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="klq-Iw-VxZ" customClass="MafiaPlayerStatusCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="klq-Iw-VxZ" customClass="MafiaUpdatePlayerStatusCell">
                                         <rect key="frame" x="0.0" y="333" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="klq-Iw-VxZ" id="hlT-MF-QOS">
@@ -474,7 +474,7 @@
                                             <outlet property="valueSwitch" destination="9Yz-w3-MqU" id="UWD-kJ-M2F"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dUy-8r-3WB" customClass="MafiaPlayerStatusCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dUy-8r-3WB" customClass="MafiaUpdatePlayerStatusCell">
                                         <rect key="frame" x="0.0" y="377" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dUy-8r-3WB" id="b8e-xQ-0cn">

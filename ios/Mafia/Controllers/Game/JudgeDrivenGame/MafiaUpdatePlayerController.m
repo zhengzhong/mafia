@@ -10,27 +10,28 @@
 #import "MafiaGameplay.h"
 
 
-@implementation MafiaPlayerStatus
+@implementation MafiaUpdatePlayerRoleCell
 
-- (instancetype)initWithKey:(NSString *)key value:(BOOL)value {
-    if (self = [super init]) {
-        _key = [key copy];
-        _value = value;
-    }
-    return self;
+- (void)setupWithRole:(MafiaRole *)role {
+    self.role = role;
+    self.imageView.image = [MafiaAssets imageOfRole:role];
+    self.textLabel.text = role.displayName;
 }
 
 @end
 
 
-@implementation MafiaPlayerStatusCell
+@implementation MafiaUpdatePlayerStatusCell
 
-- (IBAction)switchToggled:(id)sender {
-    self.status.value = self.valueSwitch.on;
+- (void)setupWithPlayer:(MafiaPlayer *)player statusKey:(NSString *)statusKey {
+    self.player = player;
+    self.statusKey = statusKey;
+    self.statusValue = [[self.player valueForKey:self.statusKey] boolValue];
+    self.valueSwitch.on = self.statusValue;
 }
 
-- (void)refresh {
-    self.valueSwitch.on = self.status.value;
+- (IBAction)switchToggled:(id)sender {
+    self.statusValue = self.valueSwitch.on;
 }
 
 @end
@@ -59,36 +60,21 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title = self.player.displayName;
-
-    // Bind statuses to cells.
-    self.justGuardedStatusCell.status = self.justGuardedStatus;
-    self.unguardableStatusCell.status = self.unguardableStatus;
-    self.misdiagnosedStatusCell.status = self.misdiagnosedStatus;
-    self.votedStatusCell.status = self.votedStatus;
-    self.deadStatusCell.status = self.deadStatus;
-
-    // Refresh cells.
-    self.roleCell.imageView.image = [MafiaAssets imageOfRole:self.role];
-    self.roleCell.textLabel.text = self.role.displayName;
-    [self.justGuardedStatusCell refresh];
-    [self.unguardableStatusCell refresh];
-    [self.misdiagnosedStatusCell refresh];
-    [self.votedStatusCell refresh];
-    [self.deadStatusCell refresh];
+    [self.roleCell setupWithRole:self.updatedRole];
+    [self.justGuardedStatusCell setupWithPlayer:self.player statusKey:@"isJustGuarded"];
+    [self.unguardableStatusCell setupWithPlayer:self.player statusKey:@"isUnguardable"];
+    [self.misdiagnosedStatusCell setupWithPlayer:self.player statusKey:@"isMisdiagnosed"];
+    [self.votedStatusCell setupWithPlayer:self.player statusKey:@"isVoted"];
+    [self.deadStatusCell setupWithPlayer:self.player statusKey:@"isDead"];
 }
 
 
 #pragma mark - Public
 
 
-- (void)loadPlayer:(MafiaPlayer *)player {
+- (void)setupWithPlayer:(MafiaPlayer *)player {
     self.player = player;
-    self.role = player.role;
-    self.justGuardedStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isJustGuarded" value:player.isJustGuarded];
-    self.unguardableStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isUnguardable" value:player.isUnguardable];
-    self.misdiagnosedStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isMisdiagnosed" value:player.isMisdiagnosed];
-    self.votedStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isVoted" value:player.isVoted];
-    self.deadStatus = [[MafiaPlayerStatus alloc] initWithKey:@"isDead" value:player.isDead];
+    self.updatedRole = player.role;
 }
 
 
@@ -98,7 +84,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"UpdatePlayerRole"]) {
         MafiaUpdatePlayerRoleController *controller = segue.destinationViewController;
-        [controller setRole:self.role];
+        [controller setRole:self.updatedRole];
         controller.delegate = self;
     }
 }
@@ -113,17 +99,13 @@
 
 
 - (IBAction)doneButtonTapped:(id)sender {
-    self.player.role = self.role;
-    NSArray *statuses = @[
-        self.justGuardedStatus,
-        self.unguardableStatus,
-        self.misdiagnosedStatus,
-        self.votedStatus,
-        self.deadStatus,
-    ];
-    for (MafiaPlayerStatus *status in statuses) {
-        [self.player setValue:@(status.value) forKey:status.key];
-    }
+    self.player.role = self.updatedRole;
+    self.player.isJustGuarded = self.justGuardedStatusCell.statusValue;
+    self.player.isUnguardable = self.unguardableStatusCell.statusValue;
+    self.player.isMisdiagnosed = self.misdiagnosedStatusCell.statusValue;
+    self.player.isVoted = self.votedStatusCell.statusValue;
+    self.player.isDead = self.deadStatusCell.statusValue;
+    [self.delegate updatePlayerController:self didUpdatePlayer:self.player];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -132,7 +114,7 @@
 
 
 - (void)updatePlayerRoleController:(UIViewController *)controller didUpdateRole:(MafiaRole *)role {
-    self.role = role;
+    self.updatedRole = role;
 }
 
 

@@ -4,14 +4,14 @@
 //
 
 #import "MafiaJudgeDrivenGameController.h"
-
 #import "MafiaUpdatePlayerController.h"
-#import "TSMessage+MafiaAdditions.h"
-#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+
+#import "TSMessage+MafiaAdditions.h"
 #import "UIView+MafiaAdditions.h"
+#import "UIImage+MafiaAdditions.h"
 
 
 @implementation MafiaJudgeDrivenGamePlayerCell
@@ -87,7 +87,7 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
 
 
-@interface MafiaJudgeDrivenGameController ()
+@interface MafiaJudgeDrivenGameController () <MafiaUpdatePlayerControllerDelegate>
 
 @property (strong, nonatomic) MafiaPlayer *playerToUpdate;
 
@@ -112,17 +112,6 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
-    // Remove extra top padding of the players table view. Note: the auto adjustment of scroll
-    // view's content inset takes care of both navigation bar and tab bar. Once disabled, we need
-    // to ensure the top and the bottom manually.
-    //
-    // The following code is not necessary as it's already done in storyboard: in controller's
-    // "Attributes" introspector / Layout, uncheck: Adjust Scroll View Insets.
-    //
-    // We can do this because the players table view happens to be the first subview.
-    // See: http://stackoverflow.com/questions/19091737/
-    //
-    // self.automaticallyAdjustsScrollViewInsets = NO;
 
     // Add long-press gesture support, which will enter "edit" mode of the selected player.
     UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc]
@@ -200,6 +189,21 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
 }
 
 
+#pragma mark - MafiaUpdatePlayerControllerDelegate
+
+
+- (void)updatePlayerController:(MafiaUpdatePlayerController *)controller didUpdatePlayer:(MafiaPlayer *)player {
+    // If the updated player is currently selected, he may become unselectable, and should be unselected.
+    if (![self.selectedPlayers containsObject:player]) {
+        return;
+    }
+    MafiaAction *currentAction = [self.game currentAction];
+    if (![currentAction isPlayerSelectable:player]) {
+        [self.selectedPlayers removeObject:player];
+    }
+}
+
+
 #pragma mark - Segue
 
 
@@ -269,7 +273,7 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
 }
 
 
-#pragma mark - Private
+#pragma mark - Private: Update Player
 
 
 /// Handles long-press gesture on a table view cell: enter "edit" mode of the selected player.
@@ -310,11 +314,12 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
 
 
 - (void)mafia_prepareViewControllerWithPlayerToUpdate:(MafiaUpdatePlayerController *)controller {
-    [controller loadPlayer:self.playerToUpdate];
-    // TODO: after a player is updated, he may become unselectable, but will still be in the
-    // selected players array in this view controller. This is inconsistent and will cause an
-    // assertion error. We must find a way to handle this (via delegation)!
+    [controller setupWithPlayer:self.playerToUpdate];
+    controller.delegate = self;
 }
+
+
+#pragma mark - Private
 
 
 - (MafiaNumberRange *)mafia_numberOfChoicesForActon:(MafiaAction *)action {
