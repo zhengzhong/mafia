@@ -83,6 +83,31 @@
 }
 
 
++ (UIImage *)smallImageOfRole:(MafiaRole *)role {
+    static NSDictionary *roleImageNames = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        roleImageNames = @{
+            [MafiaRole civilian]: @"role_civilian_32pt",
+            [MafiaRole assassin]: @"role_assassin_32pt",
+            [MafiaRole guardian]: @"role_guardian_32pt",
+            [MafiaRole killer]: @"role_killer_32pt",
+            [MafiaRole detective]: @"role_policeman_32pt",
+            [MafiaRole doctor]: @"role_doctor_32pt",
+            [MafiaRole traitor]: @"role_traitor_32pt",
+            [MafiaRole undercover]: @"role_undercover_32pt",
+        };
+    });
+    
+    NSString *imageName = roleImageNames[role];
+    if (imageName == nil) {
+        NSLog(@"Fail to find image name for role: %@", role);
+        return nil;
+    }
+    return [UIImage imageNamed:imageName];
+}
+
+
 + (UIImage *)imageOfStatus:(MafiaStatus)status {
     static NSDictionary *statusImageNames = nil;
     static dispatch_once_t onceToken;

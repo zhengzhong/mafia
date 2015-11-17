@@ -63,7 +63,7 @@
     NSUInteger tagIndex = 0;
     for (MafiaRole *taggedByRole in player.currentRoleTags) {
         UIImageView *imageView = self.tagImageViews[tagIndex];
-        imageView.image = [MafiaAssets imageOfRole:taggedByRole];
+        imageView.image = [MafiaAssets smallImageOfRole:taggedByRole];
         [imageView mafia_makeRoundCornersWithBorder:NO];
         ++tagIndex;
     }

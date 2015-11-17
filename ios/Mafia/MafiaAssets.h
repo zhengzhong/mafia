@@ -52,6 +52,8 @@ typedef NS_ENUM(NSInteger, MafiaIcon) {
 
 + (UIImage *)imageOfRole:(MafiaRole *)role;
 
++ (UIImage *)smallImageOfRole:(MafiaRole *)role;
+
 + (UIImage *)imageOfStatus:(MafiaStatus)status;
 
 + (UIImage *)imageOfSelected;

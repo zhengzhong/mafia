@@ -328,7 +328,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_killer_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="if7-ix-MPY">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_killer_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="if7-ix-MPY">
                                                     <rect key="frame" x="15" y="6" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="Lv5-XM-qjK"/>
@@ -372,7 +372,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_policeman_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="oQ6-kX-geS">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_policeman_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="oQ6-kX-geS">
                                                     <rect key="frame" x="15" y="6" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="41X-qq-QOi"/>
@@ -416,7 +416,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_assassin_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="6zg-il-IWT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_assassin_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="6zg-il-IWT">
                                                     <rect key="frame" x="15" y="5" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="HXP-4L-Qls"/>
@@ -454,7 +454,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_guardian_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="7NP-DD-zPw">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_guardian_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="7NP-DD-zPw">
                                                     <rect key="frame" x="15" y="5" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="UvZ-KC-V7D"/>
@@ -492,7 +492,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_doctor_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="sOe-4S-GWt">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_doctor_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="sOe-4S-GWt">
                                                     <rect key="frame" x="15" y="5" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="My2-WM-tpo"/>
@@ -530,7 +530,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_traitor_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-kS-Nwq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_traitor_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-kS-Nwq">
                                                     <rect key="frame" x="15" y="5" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="RGf-DO-fL8"/>
@@ -568,7 +568,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_undercover_64pt" translatesAutoresizingMaskIntoConstraints="NO" id="4oy-tr-htg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_undercover_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="4oy-tr-htg">
                                                     <rect key="frame" x="15" y="5" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="60M-sv-K9c"/>
@@ -884,13 +884,13 @@
     </scenes>
     <resources>
         <image name="avatar_default_64pt" width="64" height="64"/>
-        <image name="role_assassin_64pt" width="64" height="64"/>
-        <image name="role_doctor_64pt" width="64" height="64"/>
-        <image name="role_guardian_64pt" width="64" height="64"/>
-        <image name="role_killer_64pt" width="64" height="64"/>
-        <image name="role_policeman_64pt" width="64" height="64"/>
-        <image name="role_traitor_64pt" width="64" height="64"/>
-        <image name="role_undercover_64pt" width="64" height="64"/>
+        <image name="role_assassin_32pt" width="32" height="32"/>
+        <image name="role_doctor_32pt" width="32" height="32"/>
+        <image name="role_guardian_32pt" width="32" height="32"/>
+        <image name="role_killer_32pt" width="32" height="32"/>
+        <image name="role_policeman_32pt" width="32" height="32"/>
+        <image name="role_traitor_32pt" width="32" height="32"/>
+        <image name="role_undercover_32pt" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PNK-zE-uYD"/>

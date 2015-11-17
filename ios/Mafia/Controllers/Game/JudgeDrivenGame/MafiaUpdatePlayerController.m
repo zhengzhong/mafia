@@ -14,7 +14,7 @@
 
 - (void)setupWithRole:(MafiaRole *)role {
     self.role = role;
-    self.imageView.image = [MafiaAssets imageOfRole:role];
+    self.imageView.image = [MafiaAssets smallImageOfRole:role];
     self.textLabel.text = role.displayName;
 }
 

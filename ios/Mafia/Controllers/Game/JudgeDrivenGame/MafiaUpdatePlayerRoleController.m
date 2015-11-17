@@ -43,11 +43,6 @@ static NSString *const kRoleCellID = @"RoleCell";
 #pragma mark - UITableViewDataSource
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.roles count];
 }
@@ -56,7 +51,7 @@ static NSString *const kRoleCellID = @"RoleCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRoleCellID forIndexPath:indexPath];
     MafiaRole *role = self.roles[indexPath.row];
-    cell.imageView.image = [MafiaAssets imageOfRole:role];
+    cell.imageView.image = [MafiaAssets smallImageOfRole:role];
     cell.textLabel.text = role.displayName;
     cell.accessoryType = ([role isEqualToRole:self.selectedRole] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
     return cell;
