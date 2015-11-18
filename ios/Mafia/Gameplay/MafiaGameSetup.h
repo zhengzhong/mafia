@@ -24,6 +24,8 @@
 /// Settings of roles: key is the role, value is the number of actors for the role.
 @property (readonly, strong, nonatomic) NSMutableDictionary *roleSettings;
 
+@property (copy, nonatomic) NSDate *date;
+
 - (void)addPerson:(MafiaPerson *)person;
 
 - (NSInteger)numberOfActorsForRole:(MafiaRole *)role;
@@ -34,13 +36,13 @@
 
 - (BOOL)isValid;
 
-- (BOOL)saveGameSetupWithName:(NSString *)name;
+- (BOOL)saveWithName:(NSString *)name;
 
-- (BOOL)saveToRecentGameSetup;
+- (BOOL)saveAsRecent;
 
-+ (instancetype)loadGameSetupWithName:(NSString *)name;
++ (instancetype)loadWithName:(NSString *)name;
 
-+ (instancetype)loadFromRecentGameSetup;
++ (instancetype)loadRecent;
 
 + (void)removeGameSetupWithName:(NSString *)name;
 

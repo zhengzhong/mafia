@@ -32,6 +32,7 @@ static NSString *const kGameSetupRecent = @"[Recent]";
             [MafiaRole traitor]: @1,
             [MafiaRole undercover]: @0,
         } mutableCopy];
+        _date = [NSDate date];
     }
     return self;
 }
@@ -71,7 +72,7 @@ static NSString *const kGameSetupRecent = @"[Recent]";
 #pragma mark - Saving / Loading / Removing / Listing
 
 
-- (BOOL)saveGameSetupWithName:(NSString *)name {
+- (BOOL)saveWithName:(NSString *)name {
     NSString *filename = [[self class] mafia_gameSetupFilenameForName:name];
     NSError *error = nil;
     NSDictionary *dictionary = [MTLJSONAdapter JSONDictionaryFromModel:self error:&error];
@@ -79,25 +80,29 @@ static NSString *const kGameSetupRecent = @"[Recent]";
 }
 
 
-- (BOOL)saveToRecentGameSetup {
-    return [self saveGameSetupWithName:kGameSetupRecent];
+- (BOOL)saveAsRecent {
+    return [self saveWithName:kGameSetupRecent];
 }
 
 
-+ (instancetype)loadGameSetupWithName:(NSString *)name {
++ (instancetype)loadWithName:(NSString *)name {
     NSString *filename = [self mafia_gameSetupFilenameForName:name];
     NSDictionary *dictionary = [MafiaDocuments dictionaryWithContentsOfFile:filename];
     NSError *error = nil;
     MafiaGameSetup *gameSetup = [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dictionary error:&error];
-    if (error != nil) {
+    if (gameSetup == nil || error != nil) {
         NSLog(@"Fail to load game setup from file: %@", error);
     }
     return gameSetup;
 }
 
 
-+ (instancetype)loadFromRecentGameSetup {
-    return [self loadGameSetupWithName:kGameSetupRecent];
++ (instancetype)loadRecent {
+    MafiaGameSetup *gameSetup = [self loadWithName:kGameSetupRecent];
+    if (gameSetup == nil) {
+        gameSetup = [[self alloc] init];
+    }
+    return gameSetup;
 }
 
 
@@ -143,12 +148,32 @@ static NSString *const kGameSetupRecent = @"[Recent]";
         @"isTwoHanded": @"is_two_handed",
         @"isAutonomic": @"is_autonomic",
         @"roleSettings": @"role_settings",
+        @"date": @"date",
     };
 }
 
 
 + (NSValueTransformer *)personsJSONTransformer {
     return [MTLJSONAdapter arrayTransformerWithModelClass:[MafiaPerson class]];
+}
+
+
++ (NSValueTransformer *)dateJSONTransformer {
+    static NSDateFormatter *dateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
+    });
+
+    return [MTLValueTransformer
+        transformerUsingForwardBlock:^id(NSString *dateString, BOOL *success, NSError **error) {
+            return [dateFormatter dateFromString:dateString];
+        }
+        reverseBlock:^id(NSDate *date, BOOL *success, NSError **error) {
+            return [dateFormatter stringFromDate:date];
+        }];
 }
 
 

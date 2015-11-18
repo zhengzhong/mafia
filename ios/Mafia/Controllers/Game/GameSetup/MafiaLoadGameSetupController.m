@@ -93,7 +93,7 @@ static NSString *const kGameSetupNameCellID = @"GameSetupName";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [self.gameSetupNames count]) {
         NSString *gameSetupName = self.gameSetupNames[indexPath.row];
-        MafiaGameSetup *gameSetup = [MafiaGameSetup loadGameSetupWithName:gameSetupName];
+        MafiaGameSetup *gameSetup = [MafiaGameSetup loadWithName:gameSetupName];
         [self.delegate loadGameSetupController:self didLoadGameSetup:gameSetup];
     }
 }

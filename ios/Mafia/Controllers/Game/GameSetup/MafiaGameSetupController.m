@@ -51,7 +51,7 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gameSetup = [[MafiaGameSetup alloc] init];
+    self.gameSetup = [MafiaGameSetup loadRecent];
     NSArray *persons = @[
         [MafiaPerson personWithName:@"雯雯" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarWenwen]],
         [MafiaPerson personWithName:@"小何" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarXiaohe]],
@@ -105,6 +105,7 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
     }
 
     if ([segue.identifier isEqualToString:kSegueAssignRoles]) {
+        [self.gameSetup saveAsRecent];
         MafiaAssignRolesController *controller = segue.destinationViewController;
         [controller assignRolesRandomlyWithGameSetup:self.gameSetup];
         return;
@@ -187,14 +188,14 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
     void (^saveGameSetupBlock)(UIAlertAction *) = ^(UIAlertAction *action) {
         NSString *name = alertController.textFields[0].text;
         name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        // TODO: show error details maybe?
         if ([name length] == 0) {
             [TSMessage mafia_showErrorWithTitle:NSLocalizedString(@"Invalid game setup name.", nil)
                                        subtitle:nil];
             return;
         }
 
-        BOOL success = [self.gameSetup saveGameSetupWithName:name];
+        self.gameSetup.date = [NSDate date];
+        BOOL success = [self.gameSetup saveWithName:name];
         if (success) {
             [TSMessage mafia_showSuccessWithTitle:NSLocalizedString(@"Game setup saved successfully!", nil)
                                          subtitle:nil];
@@ -218,8 +219,11 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 - (void)loadGameSetupController:(MafiaLoadGameSetupController *)controller
                didLoadGameSetup:(MafiaGameSetup *)gameSetup {
     self.gameSetup = gameSetup;
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self mafia_refreshUI];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [TSMessage mafia_showSuccessWithTitle:NSLocalizedString(@"Game setup loaded successfully!", nil)
+                                     subtitle:nil];
+        [self mafia_refreshUI];
+    }];
 }
 
 
