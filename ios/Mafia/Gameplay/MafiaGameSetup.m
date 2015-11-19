@@ -98,11 +98,7 @@ static NSString *const kGameSetupRecent = @"[Recent]";
 
 
 + (instancetype)loadRecent {
-    MafiaGameSetup *gameSetup = [self loadWithName:kGameSetupRecent];
-    if (gameSetup == nil) {
-        gameSetup = [[self alloc] init];
-    }
-    return gameSetup;
+    return [self loadWithName:kGameSetupRecent];
 }
 
 

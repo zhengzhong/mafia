@@ -52,18 +52,21 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gameSetup = [MafiaGameSetup loadRecent];
-    NSArray *persons = @[
-        [MafiaPerson personWithName:@"雯雯" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarWenwen]],
-        [MafiaPerson personWithName:@"小何" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarXiaohe]],
-        [MafiaPerson personWithName:@"狼尼" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLangni]],
-        [MafiaPerson personWithName:@"大叔" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarDashu]],
-        [MafiaPerson personWithName:@"青青" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarQingqing]],
-        [MafiaPerson personWithName:@"老妖" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLaoyao]],
-    ];
-    for (MafiaPerson *person in persons) {
-        [self.gameSetup addPerson:person];
+    if (self.gameSetup == nil) {
+        self.gameSetup = [[MafiaGameSetup alloc] init];
+        NSArray *persons = @[
+            [MafiaPerson personWithName:@"雯雯" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarWenwen]],
+            [MafiaPerson personWithName:@"小何" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarXiaohe]],
+            [MafiaPerson personWithName:@"狼尼" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLangni]],
+            [MafiaPerson personWithName:@"大叔" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarDashu]],
+            [MafiaPerson personWithName:@"青青" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarQingqing]],
+            [MafiaPerson personWithName:@"老妖" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLaoyao]],
+        ];
+        for (MafiaPerson *person in persons) {
+            [self.gameSetup addPerson:person];
+        }
+        self.gameSetup.isTwoHanded = YES;
     }
-    self.gameSetup.isTwoHanded = YES;
 }
 
 
