@@ -48,8 +48,11 @@ NSString *const MafiaInvalidActionRoleException = @"MafiaInvalidActionRole";
 @dynamic displayName;
 
 - (NSString *)displayName {
-    NSString *prefix = (self.player != nil ? self.player.displayName : self.role.displayName);
-    return [NSString stringWithFormat:NSLocalizedString(@"%@ Action", nil), prefix];
+    if (self.player != nil) {
+        return self.player.displayName;
+    } else {
+        return self.role.displayName;
+    }
 }
 
 
