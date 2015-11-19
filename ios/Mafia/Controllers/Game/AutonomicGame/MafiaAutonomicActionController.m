@@ -228,22 +228,20 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
             }
         }
         MafiaInformation *information = [action endAction];
-        NSString *hintInSubtitle = NSLocalizedString(@"Tap \"Done\" button on the top-left to continue.", nil);
+        NSString *hint = NSLocalizedString(@"Tap \"Done\" button on the top-left to continue.", nil);
         if (information != nil) {
-            [TSMessage mafia_showMessageOfInformation:information subtitle:hintInSubtitle];
+            [TSMessage mafia_showMessageOfInformation:information subtitle:hint];
         } else {
             NSString *title = NSLocalizedString(@"Action Completed", nil);
-            [TSMessage mafia_showMessageWithTitle:title subtitle:hintInSubtitle];
+            [TSMessage mafia_showMessageWithTitle:title subtitle:hint];
         }
         self.isActionCompleted = YES;
         [self mafia_refreshBarButtonItems];
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *title = NSLocalizedString(@"Invalid Selections", nil);
-        NSString *hintInSubtitle = [NSString stringWithFormat:
-            NSLocalizedString(@"Select %@ player(s)", nil),
-            [numberOfChoices string]];
-        [TSMessage mafia_showErrorWithTitle:title subtitle:hintInSubtitle];
+        NSString *hint = [NSString stringWithFormat:NSLocalizedString(@"Select %@ player(s)", nil), [numberOfChoices string]];
+        [TSMessage mafia_showErrorWithTitle:title subtitle:hint];
     }
     [self.tableView reloadData];
 }

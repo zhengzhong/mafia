@@ -221,6 +221,7 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
     if ([self.game checkGameOver]) {
         return;  // Do nothing if game is over.
     }
+
     MafiaAction *currentAction = [self.game currentAction];
     MafiaNumberRange *numberOfChoices = [self mafia_numberOfChoicesForActon:currentAction];
     if ([numberOfChoices isNumberInRange:[self.selectedPlayers count]]) {
@@ -234,6 +235,8 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
         MafiaInformation *information = [currentAction endAction];
         if (information != nil) {
             [TSMessage mafia_showMessageAndDetailsOfInformation:information];
+        } else {
+            [TSMessage mafia_showMessageWithTitle:NSLocalizedString(@"Action Completed", nil) subtitle:nil];
         }
         // Continue to the next action.
         [self.game continueToNextAction];
@@ -241,11 +244,10 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
     } else {
         // Cannot continue to next: wrong number of players selected.
         NSString *title = NSLocalizedString(@"Invalid Selections", nil);
-        NSString *hintInSubtitle = [NSString stringWithFormat:
-            NSLocalizedString(@"Select %@ player(s)", nil),
-            [numberOfChoices string]];
-        [TSMessage mafia_showErrorWithTitle:title subtitle:hintInSubtitle];
+        NSString *hint = [NSString stringWithFormat:NSLocalizedString(@"Select %@ player(s)", nil), [numberOfChoices string]];
+        [TSMessage mafia_showErrorWithTitle:title subtitle:hint];
     }
+
     [self mafia_refreshView];
 }
 
