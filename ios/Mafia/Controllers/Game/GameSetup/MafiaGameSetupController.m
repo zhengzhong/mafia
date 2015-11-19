@@ -61,6 +61,7 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
             [MafiaPerson personWithName:@"大叔" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarDashu]],
             [MafiaPerson personWithName:@"青青" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarQingqing]],
             [MafiaPerson personWithName:@"老妖" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarLaoyao]],
+            [MafiaPerson personWithName:@"郑导" avatarImage:[MafiaAssets imageOfAvatar:MafiaAvatarZhengdao]],
         ];
         for (MafiaPerson *person in persons) {
             [self.gameSetup addPerson:person];

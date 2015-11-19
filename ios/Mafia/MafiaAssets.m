@@ -45,6 +45,7 @@
             @(MafiaAvatarDashu): @"avatar_dashu_64pt",
             @(MafiaAvatarQingqing): @"avatar_qingqing_64pt",
             @(MafiaAvatarLaoyao): @"avatar_laoyao_64pt",
+            @(MafiaAvatarZhengdao): @"avatar_zhengdao_64pt",
             @(MafiaAvatarInfo): @"avatar_info_64pt",
         };
     });

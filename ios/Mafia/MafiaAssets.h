@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, MafiaAvatar) {
     MafiaAvatarDashu,
     MafiaAvatarQingqing,
     MafiaAvatarLaoyao,
+    MafiaAvatarZhengdao,
     MafiaAvatarInfo,
 };
 
