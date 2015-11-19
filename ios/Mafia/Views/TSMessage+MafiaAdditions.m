@@ -9,9 +9,6 @@
 #import "MafiaGameplay.h"
 
 
-static const NSTimeInterval kMessageDuration = 30;  // be long enough!
-
-
 @implementation TSMessage (MafiaAdditions)
 
 
@@ -96,11 +93,11 @@ static const NSTimeInterval kMessageDuration = 30;  // be long enough!
                                   subtitle:subtitle
                                      image:image
                                       type:type
-                                  duration:kMessageDuration
+                                  duration:TSMessageNotificationDurationAutomatic
                                   callback:nil
                                buttonTitle:nil
                             buttonCallback:nil
-                                atPosition:TSMessageNotificationPositionTop
+                                atPosition:TSMessageNotificationPositionNavBarOverlay
                       canBeDismissedByUser:YES];
 }
 
