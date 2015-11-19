@@ -131,11 +131,6 @@
 }
 
 
-+ (UIImage *)imageOfAnnouncement {
-    return [UIImage imageNamed:@"information_announcement_24pt"];
-}
-
-
 + (UIImage *)imageOfPositiveAnswer {
     return [UIImage imageNamed:@"information_positive_answer_24pt"];
 }

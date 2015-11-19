@@ -16,7 +16,7 @@
 
 + (instancetype)informationWithAnswer:(BOOL)answer {
     MafiaInformationType type = (answer ? MafiaInformationTypePositiveAnswer : MafiaInformationTypeNegativeAnswer);
-    NSString *message = (answer ? NSLocalizedString(@"The answer is YES!", nil) : NSLocalizedString(@"The answer is NO!", nil));
+    NSString *message = (answer ? NSLocalizedString(@"YES!", nil) : NSLocalizedString(@"NO!", nil));
     MafiaInformation *information = [[self alloc] initWithInformationType:type];
     information.message = message;
     return information;

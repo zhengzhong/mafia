@@ -65,8 +65,6 @@ typedef NS_ENUM(NSInteger, MafiaIcon) {
 
 + (UIImage *)imageOfTag;
 
-+ (UIImage *)imageOfAnnouncement;
-
 + (UIImage *)imageOfPositiveAnswer;
 
 + (UIImage *)imageOfNegativeAnswer;

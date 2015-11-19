@@ -30,7 +30,7 @@
     TSMessageNotificationType type = TSMessageNotificationTypeMessage;
     switch (information.type) {
         case MafiaInformationTypeAnnouncement:
-            image = [MafiaAssets imageOfAnnouncement];
+            image = nil;
             type = TSMessageNotificationTypeMessage;
             break;
         case MafiaInformationTypePositiveAnswer:
