@@ -372,14 +372,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_policeman_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="oQ6-kX-geS">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_detective_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="oQ6-kX-geS">
                                                     <rect key="frame" x="15" y="6" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="41X-qq-QOi"/>
                                                         <constraint firstAttribute="width" constant="32" id="GNu-T9-gdw"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Policemen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AG3-fU-BgJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Detectives" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AG3-fU-BgJ">
                                                     <rect key="frame" x="62" y="12" width="475" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -885,10 +885,10 @@
     <resources>
         <image name="avatar_default_64pt" width="64" height="64"/>
         <image name="role_assassin_32pt" width="32" height="32"/>
+        <image name="role_detective_32pt" width="32" height="32"/>
         <image name="role_doctor_32pt" width="32" height="32"/>
         <image name="role_guardian_32pt" width="32" height="32"/>
         <image name="role_killer_32pt" width="32" height="32"/>
-        <image name="role_policeman_32pt" width="32" height="32"/>
         <image name="role_traitor_32pt" width="32" height="32"/>
         <image name="role_undercover_32pt" width="32" height="32"/>
     </resources>
