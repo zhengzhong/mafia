@@ -43,7 +43,7 @@
     if (numberOfChoices.maxValue > 0) {
         self.actionPromptLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Select %@ player(s)", nil), [numberOfChoices string]];
     } else {
-        self.actionPromptLabel.text = NSLocalizedString(@"Click OK to continue", nil);
+        self.actionPromptLabel.text = NSLocalizedString(@"Tap OK to continue", nil);
     }
 }
 

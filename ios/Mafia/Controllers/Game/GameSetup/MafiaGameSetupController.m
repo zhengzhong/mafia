@@ -178,7 +178,7 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 - (IBAction)saveButtonTapped:(id)sender {
     UIAlertController *alertController = [UIAlertController
         alertControllerWithTitle:NSLocalizedString(@"Save Game Setup", nil)
-                         message:NSLocalizedString(@"Please specify the game setup name", nil)
+                         message:nil
                   preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = NSLocalizedString(@"Game setup name", nil);
