@@ -5,11 +5,11 @@
 
 #import "MafiaAutonomicGameController.h"
 #import "MafiaAutonomicActionController.h"
-#import "TSMessage+MafiaAdditions.h"
-#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "TSMessage+MafiaAdditions.h"
+#import "UIImage+MafiaAdditions.h"
 #import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 

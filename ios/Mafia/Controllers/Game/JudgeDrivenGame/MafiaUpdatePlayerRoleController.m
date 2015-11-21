@@ -8,6 +8,8 @@
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
 
+#import "UINavigationItem+MafiaBackTitle.h"
+
 
 static NSString *const kRoleCellID = @"RoleCell";
 
@@ -20,6 +22,7 @@ static NSString *const kRoleCellID = @"RoleCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
     self.navigationItem.hidesBackButton = YES;
 }
 

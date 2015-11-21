@@ -4,11 +4,11 @@
 //
 
 #import "MafiaAutonomicActionController.h"
-#import "TSMessage+MafiaAdditions.h"
-#import "UIImage+MafiaAdditions.h"
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "TSMessage+MafiaAdditions.h"
+#import "UIImage+MafiaAdditions.h"
 #import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
@@ -112,6 +112,7 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
     self.navigationItem.hidesBackButton = YES;  // Player must complete the action. There's no way back.
 
     // Enable auto-sizing table view cell.

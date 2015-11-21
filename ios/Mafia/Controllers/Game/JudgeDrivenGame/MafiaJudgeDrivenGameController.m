@@ -11,6 +11,7 @@
 
 #import "TSMessage+MafiaAdditions.h"
 #import "UIImage+MafiaAdditions.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -111,6 +112,7 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
     self.navigationItem.hidesBackButton = YES;
 
     // Add long-press gesture support, which will enter "edit" mode of the selected player.
