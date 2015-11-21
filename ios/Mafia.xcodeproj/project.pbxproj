@@ -81,6 +81,8 @@
 		412E505C1C00D4100099574B /* MafiaSettleTagsActionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaSettleTagsActionTests.m; sourceTree = "<group>"; };
 		412E505D1C00D4100099574B /* MafiaVoteAndLynchActionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaVoteAndLynchActionTests.m; sourceTree = "<group>"; };
 		412E505E1C00D4100099574B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		412E50661C00D7AB0099574B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		412E50671C00D7D20099574B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		414AB5271AD4523A001B913C /* MafiaGameplayWebPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameplayWebPageController.h; sourceTree = "<group>"; };
 		414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameplayWebPageController.m; sourceTree = "<group>"; };
 		4153791A1ADAD1900096B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 		41857F6A1652DA2D00EE800D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4153791F1ADAD31F0096B906 /* Localizable.strings */,
 				418A73BF1ACEA50900A652D2 /* InfoPlist.strings */,
 				418A73BD1ACEA4E000A652D2 /* Info.plist */,
 				41857F6D1652DAA200EE800D /* Mafia-Prefix.pch */,
@@ -311,7 +314,6 @@
 				4153793A1AE5AD860096B906 /* NSError+MafiaAdditions.m */,
 				418A72F91AC9570400A652D2 /* Images.xcassets */,
 				41A7F37C1ACED9C70086015F /* LaunchScreen.xib */,
-				4153791F1ADAD31F0096B906 /* Localizable.strings */,
 				41A7F37E1ACED9C70086015F /* Main.storyboard */,
 				41A7F3571ACEC8900086015F /* Controllers */,
 				41A7F3581ACEC8B10086015F /* Gameplay */,
@@ -666,6 +668,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				418A73C21ACEA51300A652D2 /* Base */,
+				412E50661C00D7AB0099574B /* en */,
+				412E50671C00D7D20099574B /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
