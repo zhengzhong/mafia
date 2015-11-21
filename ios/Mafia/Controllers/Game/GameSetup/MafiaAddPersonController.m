@@ -7,6 +7,7 @@
 #import "UIImage+MafiaAdditions.h"
 
 #import "MafiaGameplay.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -24,6 +25,7 @@ static const CGFloat kAvatarImageWidth = 48;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
     [self.playerAvatarImageView mafia_makeRoundCornersWithBorder:NO];
     [self.playerNameField mafia_makeUnderline];
 }

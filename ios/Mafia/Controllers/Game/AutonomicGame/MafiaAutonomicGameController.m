@@ -10,6 +10,7 @@
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -78,6 +79,7 @@ static NSString *const kActionCellID = @"ActionCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
 
     // Enable auto-sizing table view cell.
     self.tableView.estimatedRowHeight = 65;

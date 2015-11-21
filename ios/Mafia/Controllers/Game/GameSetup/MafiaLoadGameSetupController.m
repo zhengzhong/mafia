@@ -6,6 +6,7 @@
 #import "MafiaLoadGameSetupController.h"
 
 #import "MafiaGameplay.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 
 
 static NSString *const kGameSetupNameCellID = @"GameSetupName";
@@ -36,7 +37,10 @@ static NSString *const kGameSetupNameCellID = @"GameSetupName";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
+
     self.gameSetupNames = [[MafiaGameSetup namesOfSavedGameSetups] mutableCopy];
+
     // Configure navigation bar buttons manually.
     self.cancelButton = [[UIBarButtonItem alloc]
         initWithBarButtonSystemItem:UIBarButtonSystemItemCancel

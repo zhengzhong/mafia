@@ -9,6 +9,7 @@
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -111,9 +112,7 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Player must complete the action. There's no way back.
-    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.hidesBackButton = YES;  // Player must complete the action. There's no way back.
 
     // Enable auto-sizing table view cell.
     self.tableView.estimatedRowHeight = 65;

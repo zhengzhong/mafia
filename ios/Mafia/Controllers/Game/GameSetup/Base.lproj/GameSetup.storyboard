@@ -625,10 +625,9 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Game Setup" id="lcV-eY-l3Q">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="Qpp-WQ-eLc"/>
-                        <barButtonItem key="rightBarButtonItem" title="Start" id="d6O-vX-6sO">
+                        <barButtonItem key="rightBarButtonItem" title="Start" id="yPF-mU-JxQ">
                             <connections>
-                                <action selector="startButtonTapped:" destination="g3N-Hx-4Qq" id="Ahx-ai-5ZI"/>
+                                <action selector="startButtonTapped:" destination="g3N-Hx-4Qq" id="H5a-Pk-eCw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -653,7 +652,7 @@
                         <outlet property="numberOfPersonsLabel" destination="ZDu-pC-Fzg" id="Pns-gc-BgH"/>
                         <outlet property="personsTitleLabel" destination="Aof-FJ-HQh" id="Y7V-nd-o4f"/>
                         <outlet property="saveGameSetupButton" destination="zoN-va-qSg" id="SdH-9E-J9k"/>
-                        <outlet property="startBarButtonItem" destination="d6O-vX-6sO" id="mnd-KC-LMQ"/>
+                        <outlet property="startBarButtonItem" destination="yPF-mU-JxQ" id="sbB-nm-2fZ"/>
                         <outlet property="twoHandedSwitch" destination="3Kk-W0-3BG" id="yVM-CF-FZ7"/>
                         <outlet property="twoHandedTitleLabel" destination="FbY-pA-0fZ" id="q4W-T2-Kpn"/>
                         <segue destination="c6u-6r-LBL" kind="show" identifier="StartToAssignRoles" id="Cvu-XN-FFG"/>

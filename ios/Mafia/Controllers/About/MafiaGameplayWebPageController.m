@@ -4,6 +4,7 @@
 //
 
 #import "MafiaGameplayWebPageController.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 
 
 static NSString *const kStoryboard = @"About";
@@ -31,6 +32,7 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
     [self mafia_loadWebPage];
 }
 

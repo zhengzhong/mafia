@@ -10,8 +10,8 @@
 #import "MafiaGameplay.h"
 
 #import "TSMessage+MafiaAdditions.h"
-#import "UIView+MafiaAdditions.h"
 #import "UIImage+MafiaAdditions.h"
+#import "UIView+MafiaAdditions.h"
 
 
 @implementation MafiaJudgeDrivenGamePlayerCell

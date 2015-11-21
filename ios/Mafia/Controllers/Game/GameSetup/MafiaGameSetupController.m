@@ -13,6 +13,7 @@
 #import "MafiaGameplay.h"
 
 #import "TSMessage+MafiaAdditions.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -49,6 +50,7 @@ static NSString *const kSegueStartToAssignRoles = @"StartToAssignRoles";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
     self.title = NSLocalizedString(@"Game Setup", nil);
 
     self.gameSetup = [MafiaGameSetup loadRecent];

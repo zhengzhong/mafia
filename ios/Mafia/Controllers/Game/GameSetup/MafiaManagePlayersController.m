@@ -8,6 +8,7 @@
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -42,6 +43,8 @@ static NSString *const kPlayerCellID = @"PlayerCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
+
     // We cannot add multiple buttons to the top bar via storyboard, so we do this manually.
     self.addBarButtonItem = [[UIBarButtonItem alloc]
         initWithBarButtonSystemItem:UIBarButtonSystemItemAdd

@@ -10,6 +10,7 @@
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
+#import "UINavigationItem+MafiaBackTitle.h"
 #import "UIView+MafiaAdditions.h"
 
 
@@ -99,22 +100,22 @@ static NSString *const kTwoPlayersCellID = @"TwoPlayersCell";
 }
 
 
-#pragma mark - UITableViewDataSource
+#pragma mark - Lifecycle
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.navigationItem mafia_clearBackTitle];
 }
+
+
+#pragma mark - UITableViewDataSource
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // For N players, we need to have ceil(N / 2) cells, each cell holds 2 players.
     // Best way to calculate that: http://stackoverflow.com/questions/4926440/
-    if (section == 0) {
-        return ([self.game.playerList count] + 1) / 2;
-    } else {
-        return 0;
-    }
+    return ([self.game.playerList count] + 1) / 2;
 }
 
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		073767AB4D5E7B84ED0D12CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
+		412E50551C00B8950099574B /* UINavigationItem+MafiaBackTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E50541C00B8950099574B /* UINavigationItem+MafiaBackTitle.m */; };
 		414AB5291AD4523A001B913C /* MafiaGameplayWebPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */; };
 		4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4153791F1ADAD31F0096B906 /* Localizable.strings */; };
 		4153792F1ADDA1CB0096B906 /* MafiaPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792E1ADDA1CB0096B906 /* MafiaPerson.m */; };
@@ -74,6 +75,8 @@
 
 /* Begin PBXFileReference section */
 		3DD82BAEF1DEADBA2969E45E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		412E50531C00B8950099574B /* UINavigationItem+MafiaBackTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MafiaBackTitle.h"; sourceTree = "<group>"; };
+		412E50541C00B8950099574B /* UINavigationItem+MafiaBackTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MafiaBackTitle.m"; sourceTree = "<group>"; };
 		414AB5271AD4523A001B913C /* MafiaGameplayWebPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameplayWebPageController.h; sourceTree = "<group>"; };
 		414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaGameplayWebPageController.m; sourceTree = "<group>"; };
 		4153791A1ADAD1900096B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -417,6 +420,8 @@
 				41EDC5401BFA5FFC003AAC39 /* TSMessage+MafiaAdditions.m */,
 				41EDC5411BFA5FFC003AAC39 /* UIImage+MafiaAdditions.h */,
 				41EDC5421BFA5FFC003AAC39 /* UIImage+MafiaAdditions.m */,
+				412E50531C00B8950099574B /* UINavigationItem+MafiaBackTitle.h */,
+				412E50541C00B8950099574B /* UINavigationItem+MafiaBackTitle.m */,
 				41EDC53C1BF7A856003AAC39 /* UIView+MafiaAdditions.h */,
 				41EDC53D1BF7A856003AAC39 /* UIView+MafiaAdditions.m */,
 			);
@@ -620,6 +625,7 @@
 				414AB5291AD4523A001B913C /* MafiaGameplayWebPageController.m in Sources */,
 				41EDC5071BF5C71B003AAC39 /* MafiaAssignRolesController.m in Sources */,
 				41EDC5431BFA5FFC003AAC39 /* TSMessage+MafiaAdditions.m in Sources */,
+				412E50551C00B8950099574B /* UINavigationItem+MafiaBackTitle.m in Sources */,
 				41A7F3701ACEC8DA0086015F /* MafiaGameSetup.m in Sources */,
 				41A7F3841ACED9C70086015F /* MafiaAppDelegate.m in Sources */,
 				41A7F3751ACEC8DA0086015F /* MafiaRole.m in Sources */,
