@@ -238,7 +238,8 @@ static NSString *const kUpdatePlayerSegueID = @"UpdatePlayerSegue";
         if (information != nil) {
             [TSMessage mafia_showMessageAndDetailsOfInformation:information];
         } else {
-            [TSMessage mafia_showMessageWithTitle:NSLocalizedString(@"Action Completed", nil) subtitle:nil];
+            NSString *title = [NSString stringWithFormat:@"%@: %@", currentAction, NSLocalizedString(@"Action Completed", nil)];
+            [TSMessage mafia_showMessageWithTitle:title subtitle:nil];
         }
         // Continue to the next action.
         [self.game continueToNextAction];
