@@ -12,6 +12,7 @@
 		412E50601C00D4100099574B /* MafiaGameplayTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E505B1C00D4100099574B /* MafiaGameplayTestCase.m */; };
 		412E50611C00D4100099574B /* MafiaSettleTagsActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E505C1C00D4100099574B /* MafiaSettleTagsActionTests.m */; };
 		412E50621C00D4100099574B /* MafiaVoteAndLynchActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E505D1C00D4100099574B /* MafiaVoteAndLynchActionTests.m */; };
+		412E50681C00E35B0099574B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A73BF1ACEA50900A652D2 /* InfoPlist.strings */; };
 		414AB5291AD4523A001B913C /* MafiaGameplayWebPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AB5281AD4523A001B913C /* MafiaGameplayWebPageController.m */; };
 		4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4153791F1ADAD31F0096B906 /* Localizable.strings */; };
 		4153792F1ADDA1CB0096B906 /* MafiaPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4153792E1ADDA1CB0096B906 /* MafiaPerson.m */; };
@@ -524,6 +525,7 @@
 				41EDC4E11BF494EC003AAC39 /* About.storyboard in Resources */,
 				41EDC52F1BF788BD003AAC39 /* AutonomicGame.storyboard in Resources */,
 				4153791D1ADAD31F0096B906 /* Localizable.strings in Resources */,
+				412E50681C00E35B0099574B /* InfoPlist.strings in Resources */,
 				41A7F3831ACED9C70086015F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
