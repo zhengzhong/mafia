@@ -6,12 +6,14 @@
 #import "MafiaGameplayWebPageController.h"
 #import "UINavigationItem+MafiaBackTitle.h"
 
+#import "SVProgressHUD.h"
+
 
 static NSString *const kStoryboard = @"About";
 static NSString *const kControllerID = @"GameplayWebPageController";
 
 
-static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/disclaimer/";  // TODO: change URL.
+static const NSString *kGameplayWebPageURLString = @"http://www.zhengzhong.net/mafia/gameplay/";
 
 
 @implementation MafiaGameplayWebPageController
@@ -30,10 +32,27 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
 #pragma mark - Lifecycle
 
 
+- (void)dealloc {
+    self.webView.delegate = nil;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem mafia_clearBackTitle];
+    self.title = NSLocalizedString(@"Loading...", nil);
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self mafia_loadWebPage];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self mafia_stopLoadingWebPage];
 }
 
 
@@ -41,8 +60,9 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
 
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    self.title = NSLocalizedString(@"Loading...", nil);
-    self.refreshBarButtonItem.enabled = NO;
+    if (![SVProgressHUD isVisible]) {
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading...", nil)];
+    }
 }
 
 
@@ -50,8 +70,8 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
     if (webView.loading) {
         return;  // If the web view is still loading content, do nothing.
     }
-    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.refreshBarButtonItem.enabled = YES;
+    self.title = NSLocalizedString(@"Gameplay", nil);
+    [SVProgressHUD dismiss];
 }
 
 
@@ -61,7 +81,7 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
         return;  // If the web view is still loading content, do nothing.
     }
     self.title = NSLocalizedString(@"Error Occurred", nil);
-    self.refreshBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
 }
 
 
@@ -69,10 +89,8 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
 
 
 - (IBAction)refreshButtonTapped:(id)sender {
-    if (!self.refreshBarButtonItem.enabled) {
-        self.refreshBarButtonItem.enabled = YES;
-        [self mafia_loadWebPage];
-    }
+    [self mafia_stopLoadingWebPage];
+    [self mafia_loadWebPage];
 }
 
 
@@ -80,10 +98,19 @@ static const NSString *kGameplayWebPageURLString = @"http://www.newsavour.com/di
 
 
 - (void)mafia_loadWebPage {
+    self.title = NSLocalizedString(@"Loading...", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[kGameplayWebPageURLString copy]];
     NSLog(@"Loading web page from URL: %@", request.URL);
-    [self.webView loadRequest:request];  // ???: Seems UIWebView cannot load a relative URL... Why?
+    [self.webView loadRequest:request];
+}
+
+
+- (void)mafia_stopLoadingWebPage {
+    if (self.webView.loading) {
+        [self.webView stopLoading];
+    }
+    [SVProgressHUD dismiss];
 }
 
 
