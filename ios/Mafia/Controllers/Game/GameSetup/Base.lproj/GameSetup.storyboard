@@ -139,45 +139,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djs-sC-uds" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="-124"/>
-        </scene>
-        <!--Role-->
-        <scene sceneID="fkw-Ov-xI9">
-            <objects>
-                <tableViewController id="Hef-Te-4C9" customClass="MafiaConfigureRoleController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gGA-wp-XgI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="5PF-Ny-ce7" style="IBUITableViewCellStyleDefault" id="wNW-Zl-teJ">
-                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wNW-Zl-teJ" id="dWT-mr-Ks4">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role x X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5PF-Ny-ce7">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Hef-Te-4C9" id="yAY-bf-e8N"/>
-                            <outlet property="delegate" destination="Hef-Te-4C9" id="7GH-YN-Rvr"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Role" id="pX0-Y6-DG2"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sBQ-S2-FtU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1892" y="-906"/>
+            <point key="canvasLocation" x="1832" y="-1620"/>
         </scene>
         <!--Game Setups-->
         <scene sceneID="cx8-cx-qOq">
@@ -215,7 +177,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qD-g0-PfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2634" y="-124"/>
+            <point key="canvasLocation" x="2574" y="-124"/>
         </scene>
         <!--Game Setup-->
         <scene sceneID="Vjn-IC-NYk">
@@ -235,11 +197,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Players" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aof-FJ-HQh">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aof-FJ-HQh">
                                                     <rect key="frame" x="15" y="12" width="53" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="N" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZDu-pC-Fzg">
@@ -295,7 +257,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatic Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fI-sH-bUz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autonomic Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fI-sH-bUz">
                                                     <rect key="frame" x="15" y="12" width="501" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -335,35 +297,34 @@
                                                         <constraint firstAttribute="width" constant="32" id="onF-Xy-EL9"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Killers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCC-i1-Fv1">
-                                                    <rect key="frame" x="62" y="12" width="475" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Killers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCC-i1-Fv1">
+                                                    <rect key="frame" x="62" y="12" width="44" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKp-R3-uJE">
-                                                    <rect key="frame" x="545" y="12" width="40" height="20"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wX9-Dp-Tza">
+                                                    <rect key="frame" x="535" y="7" width="50" height="30"/>
+                                                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="dza-S5-8ZE"/>
+                                                        <constraint firstAttribute="width" constant="50" id="Hkm-ke-bKJ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="x 2"/>
+                                                    <connections>
+                                                        <action selector="numberOfKillersButtonTapped:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="Ipw-Dk-zNl"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="xKp-R3-uJE" firstAttribute="centerY" secondItem="G9t-wD-PC1" secondAttribute="centerY" id="Jh1-U4-ZZ5"/>
-                                                <constraint firstAttribute="trailing" secondItem="xKp-R3-uJE" secondAttribute="trailing" constant="15" id="Rql-P4-6sn"/>
+                                                <constraint firstAttribute="trailing" secondItem="wX9-Dp-Tza" secondAttribute="trailing" constant="15" id="JfH-fg-HnS"/>
+                                                <constraint firstItem="wX9-Dp-Tza" firstAttribute="centerY" secondItem="G9t-wD-PC1" secondAttribute="centerY" id="Xr2-oa-CyK"/>
                                                 <constraint firstItem="if7-ix-MPY" firstAttribute="centerY" secondItem="G9t-wD-PC1" secondAttribute="centerY" id="d4N-SE-MbO"/>
                                                 <constraint firstItem="GCC-i1-Fv1" firstAttribute="leading" secondItem="if7-ix-MPY" secondAttribute="trailing" constant="15" id="khR-uC-dgK"/>
                                                 <constraint firstItem="if7-ix-MPY" firstAttribute="leading" secondItem="G9t-wD-PC1" secondAttribute="leading" constant="15" id="l8m-2R-Nc2"/>
-                                                <constraint firstItem="xKp-R3-uJE" firstAttribute="leading" secondItem="GCC-i1-Fv1" secondAttribute="trailing" constant="8" id="ulK-kc-xMZ"/>
                                                 <constraint firstItem="GCC-i1-Fv1" firstAttribute="centerY" secondItem="G9t-wD-PC1" secondAttribute="centerY" id="wUa-Au-eZC"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Hef-Te-4C9" kind="show" identifier="ConfigureNumberOfKillers" id="f6I-k4-wrl"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="kxR-CQ-VlU">
                                         <rect key="frame" x="0.0" y="312" width="600" height="44"/>
@@ -379,76 +340,37 @@
                                                         <constraint firstAttribute="width" constant="32" id="GNu-T9-gdw"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Detectives" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AG3-fU-BgJ">
-                                                    <rect key="frame" x="62" y="12" width="475" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectives" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AG3-fU-BgJ">
+                                                    <rect key="frame" x="62" y="12" width="78" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ww9-mR-Spm">
-                                                    <rect key="frame" x="545" y="12" width="40" height="20"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ow-1Y-Uc2">
+                                                    <rect key="frame" x="535" y="7" width="50" height="30"/>
+                                                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="Aon-6g-oBm"/>
+                                                        <constraint firstAttribute="width" constant="50" id="cde-AJ-ICH"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="x 2"/>
+                                                    <connections>
+                                                        <action selector="numberOfDetectivesButtonTapped:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="lDM-hM-lev"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="oQ6-kX-geS" firstAttribute="leading" secondItem="T87-0a-MAM" secondAttribute="leading" constant="15" id="9cf-WE-OE8"/>
+                                                <constraint firstAttribute="trailing" secondItem="7ow-1Y-Uc2" secondAttribute="trailing" constant="15" id="Fkw-Va-lyp"/>
                                                 <constraint firstItem="AG3-fU-BgJ" firstAttribute="centerY" secondItem="T87-0a-MAM" secondAttribute="centerY" id="LnT-72-uzU"/>
-                                                <constraint firstItem="ww9-mR-Spm" firstAttribute="centerY" secondItem="T87-0a-MAM" secondAttribute="centerY" id="N9D-iQ-tFy"/>
                                                 <constraint firstItem="oQ6-kX-geS" firstAttribute="centerY" secondItem="T87-0a-MAM" secondAttribute="centerY" id="eex-Vk-SQG"/>
-                                                <constraint firstItem="ww9-mR-Spm" firstAttribute="leading" secondItem="AG3-fU-BgJ" secondAttribute="trailing" constant="8" id="het-ZH-Ngd"/>
-                                                <constraint firstAttribute="trailing" secondItem="ww9-mR-Spm" secondAttribute="trailing" constant="15" id="q1h-a5-dek"/>
+                                                <constraint firstItem="7ow-1Y-Uc2" firstAttribute="centerY" secondItem="T87-0a-MAM" secondAttribute="centerY" id="r1w-M3-1wc"/>
                                                 <constraint firstItem="AG3-fU-BgJ" firstAttribute="leading" secondItem="oQ6-kX-geS" secondAttribute="trailing" constant="15" id="rqR-hc-9ju"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Hef-Te-4C9" kind="show" identifier="ConfigureNumberOfDetectives" id="PNK-zE-uYD"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="O1W-2m-gHj">
-                                        <rect key="frame" x="0.0" y="356" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O1W-2m-gHj" id="AsF-qA-DKc">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_assassin_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="6zg-il-IWT">
-                                                    <rect key="frame" x="15" y="5" width="32" height="32"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="HXP-4L-Qls"/>
-                                                        <constraint firstAttribute="width" constant="32" id="JfJ-Qx-vKy"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Has Assassin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrE-f9-3Aw">
-                                                    <rect key="frame" x="62" y="12" width="466" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZ9-dL-Xqc">
-                                                    <rect key="frame" x="536" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="hasAssassinToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="Jsi-Tv-N7C"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="6zg-il-IWT" firstAttribute="leading" secondItem="AsF-qA-DKc" secondAttribute="leading" constant="15" id="Isz-1F-O4w"/>
-                                                <constraint firstItem="kZ9-dL-Xqc" firstAttribute="leading" secondItem="vrE-f9-3Aw" secondAttribute="trailing" constant="8" id="TLG-oX-mYW"/>
-                                                <constraint firstItem="6zg-il-IWT" firstAttribute="centerY" secondItem="AsF-qA-DKc" secondAttribute="centerY" id="UaN-De-yvL"/>
-                                                <constraint firstItem="kZ9-dL-Xqc" firstAttribute="centerY" secondItem="AsF-qA-DKc" secondAttribute="centerY" id="V23-Ia-BV8"/>
-                                                <constraint firstItem="vrE-f9-3Aw" firstAttribute="centerY" secondItem="AsF-qA-DKc" secondAttribute="centerY" id="cyZ-ne-Kva"/>
-                                                <constraint firstAttribute="trailing" secondItem="kZ9-dL-Xqc" secondAttribute="trailing" constant="15" id="erI-06-T35"/>
-                                                <constraint firstItem="vrE-f9-3Aw" firstAttribute="leading" secondItem="6zg-il-IWT" secondAttribute="trailing" constant="15" id="r3Y-Ir-Rqg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="fd4-cB-F3p">
-                                        <rect key="frame" x="0.0" y="400" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="356" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fd4-cB-F3p" id="Hqp-88-CoE">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -486,7 +408,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="G9Y-OG-bHo">
-                                        <rect key="frame" x="0.0" y="444" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="400" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G9Y-OG-bHo" id="4Yi-ae-0Sb">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -524,7 +446,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="osy-9G-S5v">
-                                        <rect key="frame" x="0.0" y="488" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="444" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="osy-9G-S5v" id="LMW-8a-fQP">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -558,6 +480,44 @@
                                                 <constraint firstItem="gpt-6I-tpd" firstAttribute="leading" secondItem="QBo-kS-Nwq" secondAttribute="trailing" constant="15" id="YJJ-mx-9Rx"/>
                                                 <constraint firstItem="WXt-gN-2SJ" firstAttribute="centerY" secondItem="LMW-8a-fQP" secondAttribute="centerY" id="ela-5L-8kL"/>
                                                 <constraint firstItem="QBo-kS-Nwq" firstAttribute="centerY" secondItem="LMW-8a-fQP" secondAttribute="centerY" id="mXb-6f-IyB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="O1W-2m-gHj">
+                                        <rect key="frame" x="0.0" y="488" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O1W-2m-gHj" id="AsF-qA-DKc">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role_assassin_32pt" translatesAutoresizingMaskIntoConstraints="NO" id="6zg-il-IWT">
+                                                    <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="HXP-4L-Qls"/>
+                                                        <constraint firstAttribute="width" constant="32" id="JfJ-Qx-vKy"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Has Assassin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrE-f9-3Aw">
+                                                    <rect key="frame" x="62" y="12" width="466" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZ9-dL-Xqc">
+                                                    <rect key="frame" x="536" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="hasAssassinToggled:" destination="g3N-Hx-4Qq" eventType="touchUpInside" id="Jsi-Tv-N7C"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6zg-il-IWT" firstAttribute="leading" secondItem="AsF-qA-DKc" secondAttribute="leading" constant="15" id="Isz-1F-O4w"/>
+                                                <constraint firstItem="kZ9-dL-Xqc" firstAttribute="leading" secondItem="vrE-f9-3Aw" secondAttribute="trailing" constant="8" id="TLG-oX-mYW"/>
+                                                <constraint firstItem="6zg-il-IWT" firstAttribute="centerY" secondItem="AsF-qA-DKc" secondAttribute="centerY" id="UaN-De-yvL"/>
+                                                <constraint firstItem="kZ9-dL-Xqc" firstAttribute="centerY" secondItem="AsF-qA-DKc" secondAttribute="centerY" id="V23-Ia-BV8"/>
+                                                <constraint firstItem="vrE-f9-3Aw" firstAttribute="centerY" secondItem="AsF-qA-DKc" secondAttribute="centerY" id="cyZ-ne-Kva"/>
+                                                <constraint firstAttribute="trailing" secondItem="kZ9-dL-Xqc" secondAttribute="trailing" constant="15" id="erI-06-T35"/>
+                                                <constraint firstItem="vrE-f9-3Aw" firstAttribute="leading" secondItem="6zg-il-IWT" secondAttribute="trailing" constant="15" id="r3Y-Ir-Rqg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -666,24 +626,37 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Game Setup" id="lcV-eY-l3Q">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Qpp-WQ-eLc"/>
-                        <barButtonItem key="rightBarButtonItem" title="Go" id="d6O-vX-6sO">
+                        <barButtonItem key="rightBarButtonItem" title="Start" id="d6O-vX-6sO">
                             <connections>
-                                <segue destination="c6u-6r-LBL" kind="show" identifier="AssignRoles" id="Bsv-hu-Vgi"/>
+                                <action selector="startButtonTapped:" destination="g3N-Hx-4Qq" id="Ahx-ai-5ZI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="autonomicSwitch" destination="Ywm-4b-LiW" id="nWP-Dy-5AA"/>
+                        <outlet property="autonomicTitleLabel" destination="6fI-sH-bUz" id="bXq-Kt-KvN"/>
+                        <outlet property="detectivesTitleLabel" destination="AG3-fU-BgJ" id="voP-R5-0V4"/>
                         <outlet property="hasAssassinSwitch" destination="kZ9-dL-Xqc" id="9np-82-f4B"/>
+                        <outlet property="hasAssassinTitleLabel" destination="vrE-f9-3Aw" id="JQl-Xl-chP"/>
                         <outlet property="hasDoctorSwitch" destination="MjZ-g7-6M3" id="7Ry-qL-dOY"/>
+                        <outlet property="hasDoctorTitleLabel" destination="lPv-yJ-ZSx" id="ivJ-mU-XQv"/>
                         <outlet property="hasGuardianSwitch" destination="dk5-ir-X5S" id="vyV-Wa-oy0"/>
+                        <outlet property="hasGuardianTitleLabel" destination="tAl-CI-b0H" id="Zbe-fZ-izl"/>
                         <outlet property="hasTraitorSwitch" destination="WXt-gN-2SJ" id="muz-S2-Ybg"/>
+                        <outlet property="hasTraitorTitleLabel" destination="gpt-6I-tpd" id="HqZ-Qf-o9x"/>
                         <outlet property="hasUndercoverSwitch" destination="4UX-h5-D4i" id="qbD-mN-tIq"/>
-                        <outlet property="numberOfDetectivesLabel" destination="ww9-mR-Spm" id="TkO-OR-8YX"/>
-                        <outlet property="numberOfKillersLabel" destination="xKp-R3-uJE" id="Jfd-Q5-PTf"/>
+                        <outlet property="hasUndercoverTitleLabel" destination="ISy-5b-HZ0" id="rf9-JV-K7V"/>
+                        <outlet property="killersTitleLabel" destination="GCC-i1-Fv1" id="a7n-iG-ejV"/>
+                        <outlet property="loadGameSetupButton" destination="ymC-yz-8HA" id="8vC-A4-Xwg"/>
+                        <outlet property="numberOfDetectivesButton" destination="7ow-1Y-Uc2" id="nvm-gg-H13"/>
+                        <outlet property="numberOfKillersButton" destination="wX9-Dp-Tza" id="ROa-vj-ugd"/>
                         <outlet property="numberOfPersonsLabel" destination="ZDu-pC-Fzg" id="Pns-gc-BgH"/>
-                        <outlet property="startButton" destination="d6O-vX-6sO" id="Odc-Or-v6M"/>
+                        <outlet property="personsTitleLabel" destination="Aof-FJ-HQh" id="Y7V-nd-o4f"/>
+                        <outlet property="saveGameSetupButton" destination="zoN-va-qSg" id="SdH-9E-J9k"/>
+                        <outlet property="startBarButtonItem" destination="d6O-vX-6sO" id="mnd-KC-LMQ"/>
                         <outlet property="twoHandedSwitch" destination="3Kk-W0-3BG" id="yVM-CF-FZ7"/>
+                        <outlet property="twoHandedTitleLabel" destination="FbY-pA-0fZ" id="q4W-T2-Kpn"/>
+                        <segue destination="c6u-6r-LBL" kind="show" identifier="StartToAssignRoles" id="Cvu-XN-FFG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fmz-gs-EXT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -746,7 +719,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUa-bP-ELM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1892" y="-1621"/>
+            <point key="canvasLocation" x="1832" y="-906"/>
         </scene>
         <!--Add New Player-->
         <scene sceneID="iga-sD-fRB">
@@ -824,7 +797,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hgl-y9-4u6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3375" y="-1621"/>
+            <point key="canvasLocation" x="3315" y="-906"/>
         </scene>
         <!--Game-->
         <scene sceneID="0X5-7C-Md1">
@@ -861,7 +834,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8O-U9-C4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2634" y="-1621"/>
+            <point key="canvasLocation" x="2574" y="-906"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Nw-VS-gbK">
@@ -879,7 +852,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oKH-dt-kBS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1892" y="-124"/>
+            <point key="canvasLocation" x="1832" y="-124"/>
         </scene>
     </scenes>
     <resources>
@@ -892,7 +865,4 @@
         <image name="role_traitor_32pt" width="32" height="32"/>
         <image name="role_undercover_32pt" width="32" height="32"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="PNK-zE-uYD"/>
-    </inferredMetricsTieBreakers>
 </document>

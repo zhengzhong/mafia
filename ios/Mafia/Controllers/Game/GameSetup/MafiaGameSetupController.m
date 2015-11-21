@@ -6,7 +6,6 @@
 #import "MafiaGameSetupController.h"
 
 #import "MafiaAssignRolesController.h"
-#import "MafiaConfigureRoleController.h"
 #import "MafiaLoadGameSetupController.h"
 #import "MafiaManagePlayersController.h"
 
@@ -14,6 +13,7 @@
 #import "MafiaGameplay.h"
 
 #import "TSMessage+MafiaAdditions.h"
+#import "UIView+MafiaAdditions.h"
 
 
 static NSString *const kStoryboard = @"GameSetup";
@@ -21,10 +21,8 @@ static NSString *const kControllerID = @"GameSetup";
 
 
 static NSString *const kSegueManagePlayers = @"ManagePlayers";
-static NSString *const kSegueConfigureNumberOfKillers = @"ConfigureNumberOfKillers";
-static NSString *const kSegueConfigureNumberOfDetectives = @"ConfigureNumberOfDetectives";
 static NSString *const kSegueLoadGameSetup = @"LoadGameSetup";
-static NSString *const kSegueAssignRoles = @"AssignRoles";
+static NSString *const kSegueStartToAssignRoles = @"StartToAssignRoles";
 
 
 @interface MafiaGameSetupController () <MafiaLoadGameSetupControllerDelegate>
@@ -51,6 +49,8 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = NSLocalizedString(@"Game Setup", nil);
+
     self.gameSetup = [MafiaGameSetup loadRecent];
     if (self.gameSetup == nil) {
         self.gameSetup = [[MafiaGameSetup alloc] init];
@@ -68,6 +68,26 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
         }
         self.gameSetup.isTwoHanded = YES;
     }
+
+    self.startBarButtonItem.title = NSLocalizedString(@"Start", nil);
+
+    self.personsTitleLabel.text = nil;  // Dynamic content.
+    self.twoHandedTitleLabel.text = NSLocalizedString(@"Two-Handed Mode", nil);
+    self.autonomicTitleLabel.text = NSLocalizedString(@"Autonomic Mode", nil);
+
+    self.killersTitleLabel.text = NSLocalizedString(@"Killers", nil);
+    self.detectivesTitleLabel.text = NSLocalizedString(@"Detectives", nil);
+    self.hasGuardianTitleLabel.text = NSLocalizedString(@"Has Guardian?", nil);
+    self.hasDoctorTitleLabel.text = NSLocalizedString(@"Has Doctor?", nil);
+    self.hasTraitorTitleLabel.text = NSLocalizedString(@"Has Traitor?", nil);
+    self.hasAssassinTitleLabel.text = NSLocalizedString(@"Has Assassin?", nil);
+    self.hasUndercoverTitleLabel.text = NSLocalizedString(@"Has Undercover?", nil);
+
+    [self.numberOfKillersButton mafia_makeRoundCornersWithBorder:YES];
+    [self.numberOfDetectivesButton mafia_makeRoundCornersWithBorder:YES];
+
+    [self.saveGameSetupButton setTitle:NSLocalizedString(@"Save Game Setup", nil) forState:UIControlStateNormal];
+    [self.loadGameSetupButton setTitle:NSLocalizedString(@"Load Game Setup", nil) forState:UIControlStateNormal];
 }
 
 
@@ -86,42 +106,18 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
         controller.gameSetup = self.gameSetup;
         return;
     }
-
-    if ([segue.identifier isEqualToString:kSegueConfigureNumberOfKillers]) {
-        MafiaConfigureRoleController *controller = segue.destinationViewController;
-        controller.gameSetup = self.gameSetup;
-        controller.role = [MafiaRole killer];
-        return;
-    }
-
-    if ([segue.identifier isEqualToString:kSegueConfigureNumberOfDetectives]) {
-        MafiaConfigureRoleController *controller = segue.destinationViewController;
-        controller.gameSetup = self.gameSetup;
-        controller.role = [MafiaRole detective];
-        return;
-    }
-
     if ([segue.identifier isEqualToString:kSegueLoadGameSetup]) {
         UINavigationController *navigationController = segue.destinationViewController;
         MafiaLoadGameSetupController *controller = navigationController.viewControllers[0];
         controller.delegate = self;
         return;
     }
-
-    if ([segue.identifier isEqualToString:kSegueAssignRoles]) {
+    if ([segue.identifier isEqualToString:kSegueStartToAssignRoles]) {
         [self.gameSetup saveAsRecent];
         MafiaAssignRolesController *controller = segue.destinationViewController;
         [controller assignRolesRandomlyWithGameSetup:self.gameSetup];
         return;
     }
-}
-
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:kSegueAssignRoles]) {
-        return [self.gameSetup isValid];
-    }
-    return YES;
 }
 
 
@@ -140,8 +136,25 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 }
 
 
-- (IBAction)hasAssassinToggled:(id)sender {
-    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole assassin]];
+- (IBAction)numberOfKillersButtonTapped:(id)sender {
+    [self mafia_updateNumberOfActorsForRole:[MafiaRole killer]];
+    [self mafia_refreshUI];
+}
+
+
+- (IBAction)numberOfDetectivesButtonTapped:(id)sender {
+    [self mafia_updateNumberOfActorsForRole:[MafiaRole detective]];
+    [self mafia_refreshUI];
+}
+
+
+- (void)mafia_updateNumberOfActorsForRole:(MafiaRole *)role {
+    static const NSInteger kMaxNumberOfActors = 4;
+    NSInteger numberOfActors = [self.gameSetup numberOfActorsForRole:role] + 1;
+    if (numberOfActors > kMaxNumberOfActors) {
+        numberOfActors = 1;
+    }
+    [self.gameSetup setNumberOfActors:numberOfActors forRole:role];
 }
 
 
@@ -160,6 +173,11 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 }
 
 
+- (IBAction)hasAssassinToggled:(id)sender {
+    [self mafia_roleSwitch:sender toggledForRole:[MafiaRole assassin]];
+}
+
+
 - (IBAction)hasUndercoverToggled:(id)sender {
     [self mafia_roleSwitch:sender toggledForRole:[MafiaRole undercover]];
 }
@@ -169,6 +187,17 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
     NSInteger numberOfActors = (roleSwitch.on ? 1 : 0);
     [self.gameSetup setNumberOfActors:numberOfActors forRole:role];
     [self mafia_refreshUI];
+}
+
+
+- (IBAction)startButtonTapped:(id)sender {
+    if ([self.gameSetup isValid]) {
+        [self performSegueWithIdentifier:kSegueStartToAssignRoles sender:self];
+    } else {
+        NSInteger numberOfPersonsRequired = [self.gameSetup numberOfPersonsRequired];
+        NSString *title = [NSString stringWithFormat:NSLocalizedString(@"This game setup requires at least %@ persons.", nil), @(numberOfPersonsRequired)];
+        [TSMessage mafia_showErrorWithTitle:title subtitle:nil];
+    }
 }
 
 
@@ -240,16 +269,33 @@ static NSString *const kSegueAssignRoles = @"AssignRoles";
 
 
 - (void)mafia_refreshUI {
-    self.startButton.enabled = [self.gameSetup isValid];
+    NSMutableArray *personNames = [[NSMutableArray alloc] initWithCapacity:3];
+    for (MafiaPerson *person in self.gameSetup.persons) {
+        if ([personNames count] < 2) {
+            [personNames addObject:person.name];
+        } else {
+            [personNames addObject:@"..."];
+            break;
+        }
+    }
+    self.personsTitleLabel.text = [personNames componentsJoinedByString:@", "];
+
     self.numberOfPersonsLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup.persons count])];
     self.twoHandedSwitch.on = self.gameSetup.isTwoHanded;
     self.autonomicSwitch.on = self.gameSetup.isAutonomic;
-    self.numberOfKillersLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup numberOfActorsForRole:[MafiaRole killer]])];
-    self.numberOfDetectivesLabel.text = [NSString stringWithFormat:@"%@", @([self.gameSetup numberOfActorsForRole:[MafiaRole detective]])];
-    self.hasAssassinSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0);
+
+    NSInteger numberOfKillers = [self.gameSetup numberOfActorsForRole:[MafiaRole killer]];
+    [self.numberOfKillersButton setTitle:[NSString stringWithFormat:@"x %@", @(numberOfKillers)]
+                                forState:UIControlStateNormal];
+
+    NSInteger numberOfDetectives = [self.gameSetup numberOfActorsForRole:[MafiaRole detective]];
+    [self.numberOfDetectivesButton setTitle:[NSString stringWithFormat:@"x %@", @(numberOfDetectives)]
+                                   forState:UIControlStateNormal];
+
     self.hasGuardianSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole guardian]] > 0);
     self.hasDoctorSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole doctor]] > 0);
     self.hasTraitorSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole traitor]] > 0);
+    self.hasAssassinSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole assassin]] > 0);
     self.hasUndercoverSwitch.on = ([self.gameSetup numberOfActorsForRole:[MafiaRole undercover]] > 0);
 }
 

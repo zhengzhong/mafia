@@ -47,7 +47,6 @@
 		41EDC4FD1BF5C652003AAC39 /* MafiaManagePlayersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC4FC1BF5C652003AAC39 /* MafiaManagePlayersController.m */; };
 		41EDC5061BF5C71B003AAC39 /* MafiaAddPersonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC4FF1BF5C71B003AAC39 /* MafiaAddPersonController.m */; };
 		41EDC5071BF5C71B003AAC39 /* MafiaAssignRolesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5011BF5C71B003AAC39 /* MafiaAssignRolesController.m */; };
-		41EDC5081BF5C71B003AAC39 /* MafiaConfigureRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5031BF5C71B003AAC39 /* MafiaConfigureRoleController.m */; };
 		41EDC5091BF5C71B003AAC39 /* MafiaLoadGameSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5051BF5C71B003AAC39 /* MafiaLoadGameSetupController.m */; };
 		41EDC5141BF758C0003AAC39 /* MafiaJudgeDrivenGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC50F1BF758C0003AAC39 /* MafiaJudgeDrivenGameController.m */; };
 		41EDC5151BF758C0003AAC39 /* MafiaUpdatePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5111BF758C0003AAC39 /* MafiaUpdatePlayerController.m */; };
@@ -144,8 +143,6 @@
 		41EDC4FF1BF5C71B003AAC39 /* MafiaAddPersonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAddPersonController.m; sourceTree = "<group>"; };
 		41EDC5001BF5C71B003AAC39 /* MafiaAssignRolesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaAssignRolesController.h; sourceTree = "<group>"; };
 		41EDC5011BF5C71B003AAC39 /* MafiaAssignRolesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaAssignRolesController.m; sourceTree = "<group>"; };
-		41EDC5021BF5C71B003AAC39 /* MafiaConfigureRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaConfigureRoleController.h; sourceTree = "<group>"; };
-		41EDC5031BF5C71B003AAC39 /* MafiaConfigureRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaConfigureRoleController.m; sourceTree = "<group>"; };
 		41EDC5041BF5C71B003AAC39 /* MafiaLoadGameSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaLoadGameSetupController.h; sourceTree = "<group>"; };
 		41EDC5051BF5C71B003AAC39 /* MafiaLoadGameSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MafiaLoadGameSetupController.m; sourceTree = "<group>"; };
 		41EDC50A1BF754FC003AAC39 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -377,8 +374,6 @@
 				41EDC4FF1BF5C71B003AAC39 /* MafiaAddPersonController.m */,
 				41EDC5001BF5C71B003AAC39 /* MafiaAssignRolesController.h */,
 				41EDC5011BF5C71B003AAC39 /* MafiaAssignRolesController.m */,
-				41EDC5021BF5C71B003AAC39 /* MafiaConfigureRoleController.h */,
-				41EDC5031BF5C71B003AAC39 /* MafiaConfigureRoleController.m */,
 				41EDC4F51BF5B31C003AAC39 /* MafiaGameSetupController.h */,
 				41EDC4F61BF5B31C003AAC39 /* MafiaGameSetupController.m */,
 				41EDC5041BF5C71B003AAC39 /* MafiaLoadGameSetupController.h */,
@@ -613,7 +608,6 @@
 				41A7F36E1ACEC8DA0086015F /* MafiaAction.m in Sources */,
 				41857F6F1652DAA200EE800D /* main.m in Sources */,
 				4153793B1AE5AD860096B906 /* NSError+MafiaAdditions.m in Sources */,
-				41EDC5081BF5C71B003AAC39 /* MafiaConfigureRoleController.m in Sources */,
 				41A7F3731ACEC8DA0086015F /* MafiaPlayer.m in Sources */,
 				41A7F3721ACEC8DA0086015F /* MafiaNumberRange.m in Sources */,
 				41EDC5141BF758C0003AAC39 /* MafiaJudgeDrivenGameController.m in Sources */,
