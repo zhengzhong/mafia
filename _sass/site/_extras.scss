@@ -15,7 +15,10 @@ body {
 
 // Styles for website.
 body.mafia {
-  background: url('../img/body_bg.jpg');
+  // For tablet and PC...
+  @media (min-width: 768px) {
+    background: url('../img/body_bg.jpg');
+  }
 
   nav#topbar {
     background-color: transparent;
