@@ -7,3 +7,6 @@
 
 "CFBundleDisplayName" = "杀人指南";
 "CFBundleName" = "杀人指南";
+
+"NSCameraUsageDescription" = "为玩家选择一张照片";
+"NSPhotoLibraryUsageDescription" = "为玩家拍一张照片";

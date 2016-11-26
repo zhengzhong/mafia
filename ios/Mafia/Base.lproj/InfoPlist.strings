@@ -7,3 +7,6 @@
 
 "CFBundleDisplayName" = "Mafia";
 "CFBundleName" = "Mafia";
+
+"NSCameraUsageDescription" = "Pick up a photo for player";
+"NSPhotoLibraryUsageDescription" = "Take a photo for player";
