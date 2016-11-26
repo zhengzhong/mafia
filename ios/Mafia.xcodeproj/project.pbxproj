@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		073767AB4D5E7B84ED0D12CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
 		412E50551C00B8950099574B /* UINavigationItem+MafiaBackTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E50541C00B8950099574B /* UINavigationItem+MafiaBackTitle.m */; };
 		412E50601C00D4100099574B /* MafiaGameplayTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E505B1C00D4100099574B /* MafiaGameplayTestCase.m */; };
 		412E50611C00D4100099574B /* MafiaSettleTagsActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E505C1C00D4100099574B /* MafiaSettleTagsActionTests.m */; };
@@ -60,7 +59,8 @@
 		41EDC53E1BF7A856003AAC39 /* UIView+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC53D1BF7A856003AAC39 /* UIView+MafiaAdditions.m */; };
 		41EDC5431BFA5FFC003AAC39 /* TSMessage+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5401BFA5FFC003AAC39 /* TSMessage+MafiaAdditions.m */; };
 		41EDC5441BFA5FFC003AAC39 /* UIImage+MafiaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDC5421BFA5FFC003AAC39 /* UIImage+MafiaAdditions.m */; };
-		4823281113C325BD01987A33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD82BAEF1DEADBA2969E45E /* libPods.a */; };
+		9901A78D5BC693528E2C3F9F /* libPods-MafiaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D35622340C7C51193C77B8 /* libPods-MafiaTests.a */; };
+		D4EB14ADAFF1388ECED168BB /* libPods-Mafia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C94ACD64602BD7BFF93CA565 /* libPods-Mafia.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3DD82BAEF1DEADBA2969E45E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		10FC23635EBC3133F8EC8EC6 /* Pods-Mafia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mafia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mafia/Pods-Mafia.release.xcconfig"; sourceTree = "<group>"; };
+		2BAF11157AD0BA438221D399 /* Pods-MafiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MafiaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MafiaTests/Pods-MafiaTests.release.xcconfig"; sourceTree = "<group>"; };
 		412E50531C00B8950099574B /* UINavigationItem+MafiaBackTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MafiaBackTitle.h"; sourceTree = "<group>"; };
 		412E50541C00B8950099574B /* UINavigationItem+MafiaBackTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MafiaBackTitle.m"; sourceTree = "<group>"; };
 		412E505A1C00D4100099574B /* MafiaGameplayTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MafiaGameplayTestCase.h; sourceTree = "<group>"; };
@@ -170,8 +171,10 @@
 		41EDC5401BFA5FFC003AAC39 /* TSMessage+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TSMessage+MafiaAdditions.m"; sourceTree = "<group>"; };
 		41EDC5411BFA5FFC003AAC39 /* UIImage+MafiaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MafiaAdditions.h"; sourceTree = "<group>"; };
 		41EDC5421BFA5FFC003AAC39 /* UIImage+MafiaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MafiaAdditions.m"; sourceTree = "<group>"; };
-		6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6D601274D79C1846C2004850 /* Pods-Mafia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mafia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mafia/Pods-Mafia.debug.xcconfig"; sourceTree = "<group>"; };
+		70D35622340C7C51193C77B8 /* libPods-MafiaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MafiaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0066E2971ADE7072CB7714E /* Pods-MafiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MafiaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MafiaTests/Pods-MafiaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C94ACD64602BD7BFF93CA565 /* libPods-Mafia.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Mafia.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +184,7 @@
 			files = (
 				417F09671671001900F44475 /* UIKit.framework in Frameworks */,
 				417F09681671001900F44475 /* Foundation.framework in Frameworks */,
-				4823281113C325BD01987A33 /* libPods.a in Frameworks */,
+				9901A78D5BC693528E2C3F9F /* libPods-MafiaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,18 +197,20 @@
 				41857F4B1652D5A600EE800D /* CoreGraphics.framework in Frameworks */,
 				41857F491652D5A600EE800D /* Foundation.framework in Frameworks */,
 				41857F471652D5A600EE800D /* UIKit.framework in Frameworks */,
-				073767AB4D5E7B84ED0D12CE /* libPods.a in Frameworks */,
+				D4EB14ADAFF1388ECED168BB /* libPods-Mafia.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E08E00C85CF99A7425F4566 /* Pods */ = {
+		166B3A491AC1E2D5979158DF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */,
-				A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */,
+				6D601274D79C1846C2004850 /* Pods-Mafia.debug.xcconfig */,
+				10FC23635EBC3133F8EC8EC6 /* Pods-Mafia.release.xcconfig */,
+				C0066E2971ADE7072CB7714E /* Pods-MafiaTests.debug.xcconfig */,
+				2BAF11157AD0BA438221D399 /* Pods-MafiaTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -263,10 +268,10 @@
 			children = (
 				418A73BA1ACEA0BA00A652D2 /* Mafia */,
 				412E50561C00D4100099574B /* MafiaTests */,
-				1E08E00C85CF99A7425F4566 /* Pods */,
 				41857F431652D5A600EE800D /* Products */,
 				41857F451652D5A600EE800D /* Frameworks */,
 				41EDC50A1BF754FC003AAC39 /* README.md */,
+				166B3A491AC1E2D5979158DF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -287,7 +292,8 @@
 				41857F4A1652D5A600EE800D /* CoreGraphics.framework */,
 				41857F481652D5A600EE800D /* Foundation.framework */,
 				41857F461652D5A600EE800D /* UIKit.framework */,
-				3DD82BAEF1DEADBA2969E45E /* libPods.a */,
+				C94ACD64602BD7BFF93CA565 /* libPods-Mafia.a */,
+				70D35622340C7C51193C77B8 /* libPods-MafiaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -435,11 +441,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 417F09731671001900F44475 /* Build configuration list for PBXNativeTarget "MafiaTests" */;
 			buildPhases = (
-				866D3B512F7E258679019A22 /* Check Pods Manifest.lock */,
+				C6EA62FA40CF0525FC3E6725 /* [CP] Check Pods Manifest.lock */,
 				417F095F1671001900F44475 /* Sources */,
 				417F09601671001900F44475 /* Frameworks */,
 				417F09611671001900F44475 /* Resources */,
-				4168C386B747499899D15046 /* Copy Pods Resources */,
+				9391CDC045E27109B2E9CCB2 /* [CP] Embed Pods Frameworks */,
+				CB4E61D7AEC186BFECDB634F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -455,11 +462,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41857F601652D5A600EE800D /* Build configuration list for PBXNativeTarget "Mafia" */;
 			buildPhases = (
-				EDA68C9497000D6D3A61BADC /* Check Pods Manifest.lock */,
+				3D15F0B795A69E9E134077D9 /* [CP] Check Pods Manifest.lock */,
 				41857F3E1652D5A600EE800D /* Sources */,
 				41857F3F1652D5A600EE800D /* Frameworks */,
 				41857F401652D5A600EE800D /* Resources */,
-				01BEC0078F03E7FFF04D2448 /* Copy Pods Resources */,
+				7AAE7444F96EEB9C7909054A /* [CP] Embed Pods Frameworks */,
+				DF5339FD9C27BA03F53C9C71 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -478,7 +486,7 @@
 			attributes = {
 				CLASSPREFIX = Mafia;
 				LastTestingUpgradeCheck = 0620;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "ZHENG Zhong";
 				TargetAttributes = {
 					41857F411652D5A600EE800D = {
@@ -533,64 +541,94 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01BEC0078F03E7FFF04D2448 /* Copy Pods Resources */ = {
+		3D15F0B795A69E9E134077D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4168C386B747499899D15046 /* Copy Pods Resources */ = {
+		7AAE7444F96EEB9C7909054A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mafia/Pods-Mafia-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		866D3B512F7E258679019A22 /* Check Pods Manifest.lock */ = {
+		9391CDC045E27109B2E9CCB2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MafiaTests/Pods-MafiaTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EDA68C9497000D6D3A61BADC /* Check Pods Manifest.lock */ = {
+		C6EA62FA40CF0525FC3E6725 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB4E61D7AEC186BFECDB634F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MafiaTests/Pods-MafiaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF5339FD9C27BA03F53C9C71 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mafia/Pods-Mafia-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -731,7 +769,7 @@
 /* Begin XCBuildConfiguration section */
 		417F09741671001900F44475 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = C0066E2971ADE7072CB7714E /* Pods-MafiaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MafiaTests/Info.plist;
@@ -743,7 +781,7 @@
 		};
 		417F09751671001900F44475 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 2BAF11157AD0BA438221D399 /* Pods-MafiaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MafiaTests/Info.plist;
@@ -757,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -770,20 +809,24 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mafia/Mafia-Prefix.pch";
@@ -820,6 +863,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -833,18 +877,22 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mafia/Mafia-Prefix.pch";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -875,7 +923,7 @@
 		};
 		41857F611652D5A600EE800D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A3A0FE22C16828C513D48A0 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 6D601274D79C1846C2004850 /* Pods-Mafia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -891,7 +939,7 @@
 		};
 		41857F621652D5A600EE800D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A845D2FFE2A88B7DC63975B0 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 10FC23635EBC3133F8EC8EC6 /* Pods-Mafia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
