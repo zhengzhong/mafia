@@ -63,23 +63,25 @@
     return [MTLValueTransformer
         transformerUsingForwardBlock:^(NSString *string, BOOL *success, NSError **error) {
             // Transform from a (base64-encoded) string to an image.
-            NSData *data = [[NSData alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
-            UIImage *image = [UIImage imageWithData:data];
-            if (image == nil) {
-                *success = NO;
-                NSString *errorDescription = @"Fail to convert base64-encoded string to image";
-                *error = [NSError mafia_errorOfDataPersistenceWithDescription:errorDescription];
+            UIImage *image = nil;
+            if (string != nil && string.length > 0) {
+                NSData *data = [[NSData alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                image = [UIImage imageWithData:data];
+                if (image == nil) {
+                    NSLog(@"Fail to convert base64-encoded string to image.");
+                }
             }
             return image;
         }
         reverseBlock:^(UIImage *image, BOOL *success, NSError **error) {
             // Transform from an image to a (base64-encoded) string.
-            NSData *data = UIImagePNGRepresentation(image);
-            NSString *string = [data base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0];
-            if (string == nil) {
-                *success = NO;
-                NSString *errorDescription = @"Fail to convert image to base64-encoded string";
-                *error = [NSError mafia_errorOfDataPersistenceWithDescription:errorDescription];
+            NSString *string = nil;
+            if (image != nil) {
+                NSData *data = UIImagePNGRepresentation(image);
+                string = [data base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0];
+                if (string == nil) {
+                    NSLog(@"Fail to convert image to base64-encoded string.");
+                }
             }
             return string;
         }];
