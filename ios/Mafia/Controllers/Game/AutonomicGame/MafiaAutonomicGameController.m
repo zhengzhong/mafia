@@ -4,7 +4,7 @@
 //
 
 #import "MafiaAutonomicGameController.h"
-#import "MafiaAutonomicActionController.h"
+#import "MafiaAutonomicAction.h"
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
@@ -51,13 +51,13 @@
 static NSString *const kStoryboard = @"AutonomicGame";
 static NSString *const kControllerID = @"AutonomicGame";
 
-
-static NSString *const kSegueStartAction = @"StartAction";
+static NSString *const kSegueStartNewRoundAction = @"StartNewRoundAction";
+static NSString *const kSegueStartRegularAction = @"StartRegularAction";
 
 static NSString *const kActionCellID = @"ActionCell";
 
 
-@interface MafiaAutonomicGameController () <MafiaAuthnomicActionControllerDelegate>
+@interface MafiaAutonomicGameController () <MafiaAutonomicActionDelegate>
 
 @end
 
@@ -136,7 +136,17 @@ static NSString *const kActionCellID = @"ActionCell";
 }
 
 
-#pragma mark - MafiaAuthnomicActionControllerDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MafiaAction *action = [self.game currentAction];
+    if ([action isKindOfClass:[MafiaNewRoundAction class]]) {
+        [self performSegueWithIdentifier:kSegueStartNewRoundAction sender:self];
+    } else {
+        [self performSegueWithIdentifier:kSegueStartRegularAction sender:self];
+    }
+}
+
+
+#pragma mark - MafiaAutonomicActionControllerDelegate
 
 
 - (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller {
@@ -177,11 +187,9 @@ static NSString *const kActionCellID = @"ActionCell";
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:kSegueStartAction]) {
-        MafiaAutonomicActionController *controller = segue.destinationViewController;
-        controller.delegate = self;
-        [controller setupWithGame:self.game];
-    }
+    UIViewController<MafiaAutonomicAction> *controller = segue.destinationViewController;
+    controller.delegate = self;
+    [controller setupWithGame:self.game];
 }
 
 

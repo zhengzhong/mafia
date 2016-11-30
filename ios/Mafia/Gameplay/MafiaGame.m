@@ -11,6 +11,7 @@
 #import "MafiaPlayerList.h"
 #import "MafiaRole.h"
 #import "MafiaRoleAction.h"
+#import "MafiaNewRoundAction.h"
 #import "MafiaSettleTagsAction.h"
 #import "MafiaVoteAndLynchAction.h"
 
@@ -203,6 +204,7 @@
         }
     } else {
         // Autonomic mode: there is no judge, players act one-by-one.
+        [self.actions addObject:[MafiaNewRoundAction actionWithPlayerList:self.playerList]];
         for (MafiaPlayer *player in self.playerList) {
             MafiaAction *action = [MafiaRoleAction actionWithRole:player.role
                                                            player:player

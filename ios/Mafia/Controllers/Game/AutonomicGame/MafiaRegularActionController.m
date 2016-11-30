@@ -3,7 +3,7 @@
 //  Copyright (c) 2012 ZHENG Zhong. All rights reserved.
 //
 
-#import "MafiaAutonomicActionController.h"
+#import "MafiaRegularActionController.h"
 
 #import "MafiaAssets.h"
 #import "MafiaGameplay.h"
@@ -13,7 +13,7 @@
 #import "UIView+MafiaAdditions.h"
 
 
-@implementation MafiaAutonomicActionHeaderCell
+@implementation MafiaRegularActionHeaderCell
 
 - (void)setupWithAction:(MafiaAction *)action {
     if (action.player != nil) {
@@ -94,7 +94,7 @@ static NSString *const kAutonomicActionHeaderCellID = @"AutonomicActionHeaderCel
 static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
 
-@implementation MafiaAutonomicActionController
+@implementation MafiaRegularActionController
 
 
 #pragma mark - Public
@@ -150,7 +150,7 @@ static NSString *const kTargetPlayerCellID = @"TargetPlayerCell";
 
 
 - (UITableViewCell *)mafia_tableView:(UITableView *)tableView headerCellAtIndexPath:(NSIndexPath *)indexPath {
-    MafiaAutonomicActionHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:kAutonomicActionHeaderCellID forIndexPath:indexPath];
+    MafiaRegularActionHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:kAutonomicActionHeaderCellID forIndexPath:indexPath];
     [cell setupWithAction:[self.game currentAction]];
     return cell;
 }

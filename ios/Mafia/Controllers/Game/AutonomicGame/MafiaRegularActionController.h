@@ -5,6 +5,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MafiaAutonomicAction.h"
+
 @class MafiaAction;
 @class MafiaGame;
 @class MafiaInformation;
@@ -13,7 +15,7 @@
 @class MafiaRole;
 
 
-@interface MafiaAutonomicActionHeaderCell : UITableViewCell
+@interface MafiaRegularActionHeaderCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *actorImageView;
 @property (strong, nonatomic) IBOutlet UILabel *actionNameLabel;
@@ -45,20 +47,13 @@
 // ------------------------------------------------------------------------------------------------
 
 
-@protocol MafiaAuthnomicActionControllerDelegate <NSObject>
-
-- (void)autonomicActionControllerDidCompleteAction:(UIViewController *)controller;
-
-@end
-
-
-@interface MafiaAutonomicActionController : UITableViewController
+@interface MafiaRegularActionController : UITableViewController <MafiaAutonomicAction>
 
 @property (strong, nonatomic) MafiaGame *game;
 @property (strong, nonatomic) NSMutableArray *selectedPlayers;
 @property (assign, nonatomic) BOOL isActionCompleted;
 
-@property (weak, nonatomic) id<MafiaAuthnomicActionControllerDelegate> delegate;
+@property (weak, nonatomic) id<MafiaAutonomicActionDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *okBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButtonItem;

@@ -61,7 +61,6 @@
                                 <connections>
                                     <outlet property="actionImageView" destination="Sos-j3-Bzu" id="Z9N-8K-CJh"/>
                                     <outlet property="actionNameLabel" destination="Cpg-HU-cVK" id="amd-CM-J7l"/>
-                                    <segue destination="gfG-zY-HoV" kind="show" identifier="StartAction" id="2qH-HS-0SA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -79,21 +78,76 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="gfG-zY-HoV" kind="show" identifier="StartRegularAction" id="S7x-6T-sOU"/>
+                        <segue destination="HBM-Vw-3JP" kind="show" identifier="StartNewRoundAction" id="p9I-CB-3fC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7I-Gi-f3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="542" y="141"/>
+            <point key="canvasLocation" x="662" y="141"/>
+        </scene>
+        <!--Mafia New Round Action Controller-->
+        <scene sceneID="7bP-Ul-Fce">
+            <objects>
+                <viewController id="HBM-Vw-3JP" customClass="MafiaNewRoundActionController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UOD-YR-ExY"/>
+                        <viewControllerLayoutGuide type="bottom" id="nvS-8N-QK9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ax1-UQ-bTD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is happening..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3G-ZM-kwe">
+                                <rect key="frame" x="16" y="309" width="343" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="d7h-e8-0cZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7AZ-Zy-TVE">
+                                <rect key="frame" x="16" y="397" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="sYw-Hq-yhs"/>
+                                </constraints>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="startDoneButtonTapped:" destination="HBM-Vw-3JP" eventType="touchUpInside" id="gQl-Vq-hMf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7AZ-Zy-TVE" firstAttribute="top" secondItem="U3G-ZM-kwe" secondAttribute="bottom" constant="40" id="6co-kx-px8"/>
+                            <constraint firstItem="U3G-ZM-kwe" firstAttribute="leading" secondItem="ax1-UQ-bTD" secondAttribute="leading" constant="16" id="MeW-MA-51W"/>
+                            <constraint firstItem="7AZ-Zy-TVE" firstAttribute="leading" secondItem="ax1-UQ-bTD" secondAttribute="leading" constant="16" id="fP2-Pz-YnA"/>
+                            <constraint firstItem="U3G-ZM-kwe" firstAttribute="centerY" secondItem="ax1-UQ-bTD" secondAttribute="centerY" id="fdq-8t-xU9"/>
+                            <constraint firstAttribute="trailing" secondItem="7AZ-Zy-TVE" secondAttribute="trailing" constant="16" id="k9j-sM-unV"/>
+                            <constraint firstAttribute="trailing" secondItem="U3G-ZM-kwe" secondAttribute="trailing" constant="16" id="wAS-ci-pj9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="U3G-ZM-kwe" id="tZw-vu-HP8"/>
+                        <outlet property="startDoneButton" destination="7AZ-Zy-TVE" id="VqZ-bF-2ml"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7K2-BM-VV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1496.8" y="-559.07046476761627"/>
         </scene>
         <!--Player Action-->
         <scene sceneID="OsR-ca-5On">
             <objects>
-                <tableViewController id="gfG-zY-HoV" customClass="MafiaAutonomicActionController" sceneMemberID="viewController">
+                <tableViewController id="gfG-zY-HoV" customClass="MafiaRegularActionController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hyx-JU-2ZY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AutonomicActionHeaderCell" rowHeight="122" id="1cc-9T-SLv" customClass="MafiaAutonomicActionHeaderCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AutonomicActionHeaderCell" rowHeight="122" id="1cc-9T-SLv" customClass="MafiaRegularActionHeaderCell">
                                 <rect key="frame" x="0.0" y="22" width="375" height="122"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cc-9T-SLv" id="XwO-uO-dyh">
@@ -240,7 +294,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4e-kH-Hsp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1256" y="141"/>
+            <point key="canvasLocation" x="1498" y="141"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0mn-LG-qRK">
